@@ -1,0 +1,312 @@
+﻿@model List<AppTutorias.Models.SuperAdmin.Estudiante.horarioTutorias>
+
+
+<div class="container-admin">
+	<img src="~/Content/img/fondo_1.jpg" alt="" width="100%;">
+	<h3>TUTORIAS ESTUDIANTE</h3>
+	<div class="form-carrera">
+		<ul class="list-inline">
+			<li>
+				<label for="">Facultad</label><br />
+				<select name="facultad" id="codigoFacultadCarrera">
+					<option name="facultad" value="FICA">FICA</option>
+				</select>
+			</li>
+			<li>
+				<label for="">Carrera</label><br />
+				<select id="listaCarreras" onchange="listaEstudiantesCarrera()"></select>
+			</li>
+			<li>
+				<label for="">Estudiante</label><br />
+				<select id="listaEstudiantes" onchange="listaMateriasEstudiante()"></select>
+			</li>
+			<li>
+				<label for="">Materia</label><br />
+				<select id="listaMateria" onchange="listaDocentesEstudiante()"></select>
+			</li>
+			<li>
+				<label for="">Docente</label><br />
+				<select id="listaDocentes"></select>
+			</li>
+
+			<br>
+			<li>
+				<label for="">Modulo</label><br />
+				<select id="listaModulos"></select>
+			</li>
+			<li>
+				<label for="">Obligatorio</label><br />
+				<select id="listaObligatorio">
+					<option value="NO">NO</option>
+					<option value="SI">SI</option>
+				</select>
+			</li>
+
+			<li>
+				<label for="">Periodo Academico</label><br />
+				<select id="listaPeriodo"></select>
+			</li>
+
+			<li>
+				<button class="success" onclick="ingresarTutorias()">Ingresar</button>
+			</li>
+		</ul>
+	</div>
+	<div class="table-carrera">
+		<table>
+			<thead>
+				<tr>
+					<th>Matricula</th>
+					<th>Estudiante</th>
+					<th>Cedula Docente</th>
+					<th>Docente</th>
+					<th>Cod Materia</th>
+					<th>Materia</th>
+					<th>Modulo</th>
+					<th>Periodo</th>
+					<th>Estado Obligatorio</th>
+					@*<th>Accion</th>*@
+				</tr>
+			</thead>
+			<tbody id="tablaHorarioTutorias">
+				@foreach (var consulta in Model)
+				{
+					<tr>
+						<td>@consulta.Matricula</td>
+						<td>@consulta.NombreEstudiante</td>
+						<td>@consulta.CedulaDocente</td>
+						<td>@consulta.NombreDocente</td>
+						<td>@consulta.CodigoMateria</td>
+						<td>@consulta.NombreMateria</td>
+						<td>@consulta.Modulo</td>
+						<td>@consulta.CodigoPeriodo</td>
+						<td>@consulta.EstadoObligatorio</td>
+						@*<td><a onclick="eliminarHorarioClasesEstudiantes('@consulta.Id_HorarioTutorias')">Eliminar</a></td>*@
+					</tr>
+				}
+			</tbody>
+
+
+		</table>
+	</div>
+
+
+
+</div>
+
+<script>
+    $(function listaCarreras() {
+
+
+        $.ajax({
+            url: "/SuperAdmin/listaCarreras",
+            type: 'post',
+            datatype: 'application/json',
+            //data: form.serialize(),
+            success: function (listaCarrera) {
+
+                $("#listaCarreras").empty();
+
+
+                var d;
+                var a = 0;
+                for (var i = 0; i < listaCarrera.length; i++) {
+
+
+                    d += '<option ' +
+                        'value="' + listaCarrera[i].CodigoCarrera + '" ' +
+                        '>' + listaCarrera[i].NombreCarrera + '</option>';
+
+                    a++;
+                }
+
+                $("#listaCarreras").append(d)
+
+                listaEstudiantesCarrera();
+            },
+            error: function () {
+
+            }
+        });
+
+    });
+
+    function listaEstudiantesCarrera() {
+        $.ajax({
+            url: "/SuperAdmin/listaEstudiantesCarrera",
+            type: 'post',
+            datatype: 'application/json',
+            data: { CodigoCarrera: $("#listaCarreras").val() },
+            success: function (listaEstudiantes) {
+
+                $("#listaEstudiantes").empty();
+
+
+                var d;
+                var a = 0;
+                for (var i = 0; i < listaEstudiantes.length; i++) {
+
+
+                    d += '<option ' +
+                        'value="' + listaEstudiantes[i].Matricula + '" ' +
+                        '>' + listaEstudiantes[i].Nombre + ' ' + listaEstudiantes[i].NombreDos + ' ' + listaEstudiantes[i].Apellido + ' ' + listaEstudiantes[i].ApellidoDos + '</option>';
+
+                    a++;
+                }
+
+                $("#listaEstudiantes").append(d)
+
+                listaMateriasEstudiante();
+            },
+            error: function () {
+
+            }
+        });
+
+    }
+
+    function listaMateriasEstudiante() {
+        $.ajax({
+            url: "/Admin/listaMateriasEstudiante",
+            type: 'post',
+            data: JSON.stringify({ Matricula: $("#listaEstudiantes").val() }),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (listaMaterias) {
+
+                $("#listaMateria").empty();
+
+
+                var d;
+                var a = 0;
+                for (var i = 0; i < listaMaterias.length; i++) {
+
+
+                    d += '<option ' +
+                        'value="' + listaMaterias[i].CodigoMateria + '" ' +
+                        '>' + listaMaterias[i].NombreMateria+ '</option>';
+
+                    a++;
+                }
+
+                $("#listaMateria").append(d)
+
+                listaDocentesEstudiante();
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+
+
+        function listaDocentesEstudiante(){
+            $.ajax({
+                url: "/Admin/listaDocentesEstudiante",
+                type: 'post',
+                data: JSON.stringify({ Matricula: $("#listaEstudiantes").val(), CodigoMateria: $("#listaMateria").val()}),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (listaDocentes) {
+
+                    $("#listaDocentes").empty();
+
+
+                    var d;
+                    var a = 0;
+                    for (var i = 0; i < listaDocentes.length; i++) {
+
+
+                        d += '<option ' +
+                            'value="' + listaDocentes[i].Cedula + '" ' +
+                            '>' + listaDocentes[i].Nombre + " " + listaDocentes[i].NombreDos + " " + listaDocentes[i].Apellido + " " + listaDocentes[i].ApellidoDos + '</option>';
+
+                        a++;
+                    }
+
+                    $("#listaDocentes").append(d)
+                    listaModulosDocente();
+
+                },
+                error: function () {
+
+                }
+            });
+        }
+
+
+
+        function listaModulosDocente() {
+            $.ajax({
+                url: "/Admin/listaModulosDocente",
+                type: 'post',
+                data: JSON.stringify({ Cedula: $("#listaDocentes").val() }),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (listaModulos) {
+
+                    $("#listaModulos").empty();
+
+
+                    var d;
+                    var a = 0;
+                    for (var i = 0; i < listaModulos.length; i++) {
+
+
+                        d += '<option ' +
+                            'value="' + listaModulos[i].CodigoModulo + '" ' +
+                            '>' + listaModulos[i].CodigoModulo + '</option>';
+
+                        a++;
+                    }
+
+                    $("#listaModulos").append(d)
+
+
+                },
+                error: function () {
+
+                }
+            });
+        }
+
+
+
+        listaPeriodo();
+
+        function listaPeriodo() {
+            $.ajax({
+                url: "/SuperAdmin/listaPeriodo",
+                type: 'post',
+                datatype: 'application/json',
+                success: function (listaPeriodo) {
+
+                    $("#listaPeriodo").empty();
+
+
+                    var d;
+                    var a = 0;
+                    for (var i = 0; i < listaPeriodo.length; i++) {
+
+
+                        d += '<option ' +
+                            'value="' + listaPeriodo[i].CodigoPeriodo + '" ' +
+                            '>' + listaPeriodo[i].NombrePeriodo + '</option>';
+
+                        a++;
+                    }
+
+                    $("#listaPeriodo").append(d)
+
+
+                },
+                error: function () {
+
+                }
+            });
+        }
+
+
+</script>
+

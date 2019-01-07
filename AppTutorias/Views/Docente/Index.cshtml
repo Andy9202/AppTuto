@@ -1,0 +1,186 @@
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Docente/MasterDocente.cshtml";
+}
+
+<style>
+
+
+	.modalLoading {
+		display: flex;
+		z-index: 20;
+		background: rgba(106, 12, 12, 1);
+		height: 800px;
+
+		justify-content: center;
+		align-items: center;
+	}
+
+		.modalLoading div {
+			width: 200px;
+			height: 50px;
+			color: white;
+			text-align: center;
+		}
+
+		.modalLoading span {
+			font-size: 20px;
+		}
+
+	.container-confirmacion {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 20;
+		display: none;
+		width: 100%;
+		height: 800px;
+		justify-content: center;
+		background: rgba(0, 0, 0,0.4);
+	}
+
+		.container-confirmacion div {
+			margin-top: 250px;
+			padding: 15px;
+			background: #fff;
+			width: 300px;
+			height: 100px;
+			color: rgb(41, 41, 41);
+			text-align: center;
+			border: 1px solid #0c0c0c;
+			border-radius: 3px;
+		}
+
+
+
+	.btnSi {
+		border: none;
+		background: none;
+		color: rgb(41, 41, 41);
+		width: 50px;
+	}
+
+		.btnSi:hover {
+			color: #fff;
+			background: rgb(26, 120, 0);
+			border: 1px solid #cdcdcd;
+		}
+
+	.btnNo {
+		border: none;
+		background: none;
+		color: rgb(41, 41, 41);
+		width: 50px;
+	}
+
+		.btnNo:hover {
+			color: #fff;
+			background: rgb(168, 26, 26);
+			border: 1px solid #cdcdcd;
+		}
+
+	#app {
+		width: 100%;
+	}
+
+	.cover-container {
+		background-image: url('/Content/img/docente_cover.jpg');
+	}
+
+	.cover_docente {
+		display: flex;
+		flex-flow:column;
+		text-align:center;
+		padding-top:150px;
+		align-items: center;
+		background: rgba(0, 0, 0, 0.6);
+		width: 100%;
+		height: 650px;
+		padding-left:15px;
+		padding-right:15px;
+		color:#fff;
+	}
+
+
+</style>
+
+<div id="app">
+	<div class="cover-container">
+		<div class="cover_docente">
+			<img src="~/Content/img/logotipo.png" width="200px"/>
+			<h2>¡Bienvenido Docente!</h2>
+			<h3>Este es el sistema de administración de tutorias.</h3>
+			<br />
+			<p>Elige la opcion del menu, para realizar tu actividad el dia de hoy.</p>
+
+		</div>
+	</div>
+</div>
+
+
+
+<script>
+
+	/*Vista perfil docente*/
+
+	function PerfilDocente() {
+
+		mostrarLoading();
+
+		$.ajax({
+			url: "/Docente/PerfilDocente",
+			type: 'post',
+			datatype: 'application/json',
+			success: function (data) {
+
+
+
+				$("#app").html(data);
+
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+	/*ESTUDIANTES VISTA */
+	function vistaEstudiante() {
+
+		mostrarLoading();
+
+		$.ajax({
+			url: "/Docente/EstudiantesDocente",
+			type: 'post',
+			datatype: 'application/json',
+			success: function (data) {
+
+
+
+				$("#app").html(data);
+
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	//modal de carga
+	function mostrarLoading() {
+
+		$('#app').empty();
+
+		$('#app').html(
+			'<div id="modalLoad" class="modalLoading"><div><img src="/Content/img/logotipo.png" alt="" width="97px" /><br /><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></div></div>'
+		);
+
+
+	}
+</script>

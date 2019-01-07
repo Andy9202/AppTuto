@@ -1,0 +1,525 @@
+
+@model AppTutorias.Models.SuperAdmin.Docente.docente
+
+<style>
+	a {
+		cursor: pointer;
+		font-weight: bold;
+		color: #57090C;
+		margin-top: 20px;
+		margin-left: 10px;
+		border-bottom: 1px solid #57090C;
+	}
+
+		a:hover {
+			color: #333;
+		}
+
+
+	button {
+		background-color: #57090C;
+		border: 1px solid #57090C;
+		color: white;
+		cursor: pointer;
+		padding: 7px;
+	}
+
+		button:hover {
+			background-color: white;
+			color: #57090C;
+		}
+
+	select {
+		height: 32px;
+	}
+
+	@@media only screen and (min-width: 769px) {
+
+		.container_datos {
+			margin-top: 20px;
+			width: 800px;
+			padding: 5px;
+			border: 1px solid #bababa;
+			box-shadow: 1px 1px 2px #e2e2e2;
+			margin-bottom: 50px;
+		}
+	}
+
+	.ingreso-horas-docente {
+		padding: 15px;
+	}
+</style>
+
+<!-- TITULO DE BOTON -->
+<div class="title-perfil">
+	<h5>Informacion General</h5>
+</div>
+<br />
+
+<div class="view_perfil">
+
+	<!-- COMPONENTE DATOS DOCENTE -->
+	<div>
+		<h4>Datos Personales</h4>
+		<div class="container_datos">
+			<div>
+				<h4 id="tnombre">@Model.Nombre @Model.NombreDos</h4>
+				<small>Nombre</small>
+			</div>
+			<div>
+				<h4 id="tapellido">@Model.Apellido @Model.ApellidoDos</h4>
+				<small>Apellidos</small>
+			</div>
+			<div>
+				<h4>@Model.Email</h4>
+				<small>Email</small>
+			</div>
+			<div>
+				<h4>@Model.Celular</h4>
+				<small>Celular</small>
+			</div>
+			<div>
+				<h4>@Model.Cedula</h4>
+				<small>Cedula</small>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div class="ingreso-horas-docente">
+	<h4>Ingresar/Eliminar Horas libres</h4>
+	<ul class="list-inline">
+		<li>
+			<ul class="list-inline">
+				<li>
+					<label>Horas Disponibles</label>
+					<br />
+					<select id="horasLibres"></select>
+				</li>
+				<li><button class="success" onclick="ingresarHoraLibre()">Ingresar</button></li>
+
+			</ul>
+		</li>
+		<li>
+			<ul class="list-inline">
+				<li>
+					<label>Horas Disponibles</label>
+					<br />
+					<select id="horasLibresElim"></select>
+				</li>
+				<li><button class="success" onclick="confEliminarHoraLibre()">Elimnar</button></li>
+
+			</ul>
+		</li>
+	</ul><br />
+	<h4>Ingresar/Elim Horas Obligatorias</h4>
+	<ul class="list-inline">
+		<li>
+			<ul>
+				<li>
+					<label>Horas Disponibles</label><br />
+					<select id="horaObligat"></select>
+				</li>
+				<li><button class="success" onclick="ingresarHoraObligatoria()">Ingresar</button></li>
+			</ul>
+
+		</li>
+		<li>
+			<ul>
+				<li>
+					<label>Horas Disponibles</label><br />
+					<select id="horaObligatElim"></select>
+				</li>
+				<li><button class="success" onclick="confEliminarHoraObligatoria()">Eliminar</button></li>
+			</ul>
+		</li>
+	</ul>
+</div><br />
+@*<div>
+		<ul class="list-inline">
+			<li>
+					<a id="verMaterias">Ver Materias</a>
+				</li>
+			<li><a id="verHorario">Ver Horario General</a><br></li>
+		</ul>
+	</div>*@
+
+
+
+<div id="horario" style="padding:15px;">
+</div>
+
+<div id="btnConfirmarHoraLibre" class="container-confirmacion">
+	<div>
+		<h4>¿Está seguro que desea eliminar la hora libre seleccionada?</h4>
+		<br />
+		<button class="btnSi" id="btnSiHoraLibre">SI</button>
+		<button class="btnNo" id="btnNoHoraLibre">NO</button>
+		<br />
+		<span id="loadDeleteHoraLibre" class="loadUpdate"><i class="fas fa-spinner fa-spin"></i> Eliminando...</span>
+
+	</div>
+
+
+</div>
+<div id="btnConfirmarHoraObligatoria" class="container-confirmacion">
+	<div>
+		<h4>¿Está seguro que desea eliminar la hora obligatoria seleccionada?</h4>
+		<br />
+		<button class="btnSi" id="btnSiHoraObligatoria">SI</button>
+		<button class="btnNo" id="btnNoHoraObligatoria">NO</button>
+		<br />
+		<span id="loadDeleteHoraObligatoria" class="loadUpdate"><i class="fas fa-spinner fa-spin"></i> Eliminando...</span>
+
+	</div>
+
+
+</div>
+
+<script>
+
+	$(function () {
+		$('#horario').html(
+			'<tr id="modalLoad" class="loadingTable"><td><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></td></tr>'
+		);
+
+		$.ajax({
+			url: "/Docente/moduloHorario",
+			type: "POST",
+			datatype: 'application/json',
+			success: function (data) {
+
+				$("#horario").html(data);
+
+			},
+			error: function () {
+				alert('algo paso');
+			}
+		});
+
+	});
+
+	$("#verMaterias").on('click', function () {
+		$.ajax({
+			url: "/Docente/moduloMateria",
+			type: "POST",
+			datatype: 'application/json',
+			success: function (data) {
+
+				$("#horario").html(data);
+
+			},
+			error: function () {
+				alert('algo paso');
+			}
+		});
+
+
+	});
+
+	$("#verHorario").on('click', function () {
+
+		$('#horario').html(
+			'<tr id="modalLoad" class="loadingTable"><td><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></td></tr>'
+		);
+
+		$.ajax({
+			url: "/Docente/moduloHorario",
+			type: "POST",
+			datatype: 'application/json',
+			success: function (data) {
+
+				$("#horario").html(data);
+
+			},
+			error: function () {
+				alert('algo paso');
+			}
+		});
+
+
+	});
+
+
+</script>
+
+<script>
+
+	$(function () {
+		listaModulos();
+		listaHorasLibre();
+		listaHorasObligatorias();
+	});
+	function listaModulos() {
+		$.ajax({
+			url: "/Docente/listaModulosDocenteDisponibleAsignacion",
+			type: 'post',
+			datatype: 'application/json',
+			success: function (listaModulos) {
+
+				$("#horaObligat").empty();
+				$("#horasLibres").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaModulos.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaModulos[i].CodigoModulo + '" ' +
+						'>' + listaModulos[i].CodigoModulo + ' ' + listaModulos[i].Dia + ' ' + listaModulos[i].HoraInicio + ' - ' + listaModulos[i].HoraFin + '</option>';
+
+					a++;
+				}
+
+				$("#horaObligat").append(d);
+				$("#horasLibres").append(d);
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+	function listaHorasLibre() {
+		$.ajax({
+			url: "/Docente/listaHorasLibres",
+			type: 'post',
+			datatype: 'application/json',
+			success: function (listaModulos) {
+
+				$("#horasLibresElim").empty();
+
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaModulos.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaModulos[i].CodigoModulo + '" ' +
+						'>' + listaModulos[i].CodigoModulo + ' ' + listaModulos[i].Dia + ' ' + listaModulos[i].HoraInicio + ' - ' + listaModulos[i].HoraFin + '</option>';
+
+					a++;
+				}
+
+				$("#horasLibresElim").append(d);
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+
+	function listaHorasObligatorias() {
+		$.ajax({
+			url: "/Docente/listaHorasObligatorias",
+			type: 'post',
+			datatype: 'application/json',
+			success: function (listaModulos) {
+
+				$("#horaObligatElim").empty();
+
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaModulos.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaModulos[i].CodigoModulo + '" ' +
+						'>' + listaModulos[i].CodigoModulo + ' ' + listaModulos[i].Dia + ' ' + listaModulos[i].HoraInicio + ' - ' + listaModulos[i].HoraFin + '</option>';
+
+					a++;
+				}
+
+				$("#horaObligatElim").append(d);
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+</script>
+
+<script>
+
+	function ingresarHoraLibre() {
+
+		var codigoModulo = $("#horasLibres").val();
+
+		$('#horario').html(
+			'<tr id="modalLoad" class="loadingTable"><td><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></td></tr>'
+		);
+
+		$.ajax({
+			url: "/Docente/ingresarHorasLibres",
+			type: 'post',
+			datatype: 'application/json',
+			data: { CodigoModulo: codigoModulo },
+			success: function (data) {
+
+				$("#horario").html(data);
+				listaModulos();
+				listaHorasLibre();
+				listaHorasObligatorias();
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	function eliminarHoraLibre() {
+
+
+		$('#loadDeleteHoraLibre').css('display', 'flex');
+
+		var codigoModulo = $("#horasLibresElim").val();
+
+		$('#horario').html(
+			'<tr id="modalLoad" class="loadingTable"><td><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></td></tr>'
+		);
+
+		$.ajax({
+			url: "/Docente/eliminarHorasLibres",
+			type: 'post',
+			datatype: 'application/json',
+			data: { CodigoModulo: codigoModulo },
+			success: function (data) {
+
+				$("#horario").html(data);
+				listaModulos();
+				listaHorasLibre();
+				listaHorasObligatorias();
+
+
+				$('#loadDeleteHoraLibre').css('display', 'none');
+				$('#btnConfirmarHoraLibre').css('display', 'none');
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	function ingresarHoraObligatoria() {
+
+
+		var codigoModulo = $("#horaObligat").val();
+
+		$('#horario').html(
+			'<tr id="modalLoad" class="loadingTable"><td><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></td></tr>'
+		);
+
+
+		$.ajax({
+			url: "/Docente/ingresarHorasObligatorias",
+			type: 'post',
+			datatype: 'application/json',
+			data: { CodigoM: codigoModulo },
+			success: function (data) {
+
+
+				$("#horario").html(data);
+				listaModulos();
+				listaHorasLibre();
+				listaHorasObligatorias();
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	function eliminarHoraObligatoria() {
+
+		$('#loadDeleteHoraObligatoria').css('display', 'flex');
+		var codigoModulo = $("#horaObligatElim").val();
+
+		$('#horario').html(
+			'<tr id="modalLoad" class="loadingTable"><td><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></td></tr>'
+		);
+
+
+		$.ajax({
+			url: "/Docente/eliminarHorasObligatorias",
+			type: 'post',
+			datatype: 'application/json',
+			data: { CodigoModulo: codigoModulo },
+			success: function (data) {
+
+
+				$("#horario").html(data);
+				listaModulos();
+				listaHorasLibre();
+				listaHorasObligatorias();
+
+				$('#loadDeleteHoraObligatoria').css('display', 'none');
+				$('#btnConfirmarHoraObligatoria').css('display', 'none');
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	function confEliminarHoraLibre() {
+
+		$('#loadDeleteHoraLibre').css('display', 'none');
+		$('#btnConfirmarHoraLibre').css('display', 'flex');
+
+	}
+
+	function confEliminarHoraObligatoria() {
+
+		$('#loadDeleteHoraObligatoria').css('display', 'none');
+		$('#btnConfirmarHoraObligatoria').css('display', 'flex');
+
+	}
+
+
+	$('#btnSiHoraLibre').on('click', function () {
+		eliminarHoraLibre();
+	});
+
+	$('#btnNoHoraLibre').on('click', function () {
+
+
+		$('#btnConfirmarHoraLibre').css('display', 'none');
+	
+	});
+
+	$('#btnSiHoraObligatoria').on('click', function () {
+		eliminarHoraObligatoria();
+	});
+
+	$('#btnNoHoraObligatoria').on('click', function () {
+
+
+		$('#btnConfirmarHoraObligatoria').css('display', 'none');
+
+	});
+</script>

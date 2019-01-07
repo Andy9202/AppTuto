@@ -1,0 +1,324 @@
+<style>
+
+	.cHorario {
+		width: 100%;
+		overflow-x: scroll;
+	}
+
+	.table-horario {
+		border-collapse: collapse;
+		font-size: 12px;
+		width: 700px;
+	}
+
+		.table-horario thead tr {
+			background: #57090C;
+			color: #fff;
+		}
+
+		.table-horario tbody tr {
+			background: rgb(41, 41, 41);
+			color: #fff;
+		}
+
+		.table-horario th,
+		td {
+			padding: 5px;
+			width: 90px;
+			border: 1px solid rgb(200, 200, 200);
+			text-align: center;
+		}
+
+		.table-horario td:first-child {
+			background: rgb(41, 41, 41);
+			color: #fff;
+		}
+
+	.whiteCel {
+		background: #fff;
+		color: #000000;
+	}
+
+	.greenCel {
+		background: #0c6a00;
+		color: #fff;
+	}
+
+	.redCel {
+		background: #57090C;
+		color: #fff;
+	}
+
+</style>
+
+
+
+
+
+@model List<AppTutorias.Models.Docente.horarioClaseDocente>
+
+@*@{
+
+
+
+		List<AppTutorias.Models.SuperAdmin.Materia.materia> listaMaterias = new List<AppTutorias.Models.SuperAdmin.Materia.materia>();
+
+		string[] dias = new string[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
+
+
+
+		foreach (var materias in Model)
+		{
+
+
+
+			if (listaMaterias.Any(x => x.CodigoMateria == materias.CodigoMateria) == false)
+			{
+
+
+
+				AppTutorias.Models.SuperAdmin.Materia.materia materia = new AppTutorias.Models.SuperAdmin.Materia.materia();
+
+
+				materia.CodigoMateria = materias.CodigoMateria;
+				materia.NombreMateria = materias.NombreMateria;
+
+
+
+				listaMaterias.Add(materia);
+			}
+
+		}
+
+	}*@
+
+@*<!-- CONTAINER TITULAR MATERIAS  -->
+	<div class="title-materias">
+		<h5>Horario</h5>
+	</div>
+	<!-- TARJETAS DIAS -->
+
+
+	@foreach (var dia in dias)
+	{
+		<div class="card-dias">
+			<h3>@dia</h3>
+
+			<div class="card-diario">
+				<div class="header-card-dias">
+					@foreach (var consulta in listaMaterias.Distinct())
+					{
+						foreach (var horarios in Model)
+						{
+
+							if (consulta.CodigoMateria == horarios.CodigoMateria)
+							{
+								if (horarios.Dia == dia)
+								{
+
+									<div>
+										<ul>
+											<li><h4>Codigo</h4></li>
+											<li><h5>@consulta.CodigoMateria</h5></li>
+										</ul>
+									</div>
+									<div>
+										<ul>
+											<li><h4>Materia</h4></li>
+											<li><h5>@consulta.NombreMateria</h5></li>
+											<li><p>@consulta.CodigoFacultad @consulta.CodigoCarrera </p></li>
+										</ul>
+									</div>
+									<div>
+
+										<ul>
+											<li><h4>Horario</h4></li>
+											<li>@horarios.HoraInicio-@horarios.HoraFin</li>
+											<li><b>@horarios.Seccion/@horarios.Paralelo</b></li>
+										</ul>
+
+									</div>
+								}
+							}
+						}
+					}
+				</div>
+			</div>
+		</div>
+	}*@
+
+
+	<div class="cHorario">
+
+		<table class="table-horario" id="tHorario">
+			<thead>
+				<tr>
+
+					<th>Hora</th>
+					<th>Lunes</th>
+					<th>Martes</th>
+					<th>Miercoles</th>
+					<th>Jueves</th>
+					<th>Viernes</th>
+					<th>Sabado</th>
+				</tr>
+			</thead>
+			<tbody id="tableHorario"></tbody>
+		</table>
+	</div>
+
+
+<script>
+
+	$('#tableHorario').empty();
+
+	var d = "";
+	var horarios = ['07:00 - 08:00', '08:05 - 09:05', '09:10 - 10:10', '10:15 - 11:15', '11:20 - 12:20', '12:25 - 13:25',
+		'ALMUERZO', '13:30 - 14:30', '14:35 - 15:35', '15:40 - 16:40', '16:45 - 17:45', '17:50 - 18:50', '18:50 - 19:50', '19:50 - 20:50', '20:50 - 21:50'];
+	for (var i = 0; i < 15; i++) {
+
+		d += '<tr><td>' + horarios[i] + '</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+
+	}
+
+	$('#tableHorario').append(d);
+
+	$('#tableHorario tr:eq(6)').css('background', '#cdcdcd');
+
+</script>
+
+
+
+
+@foreach (var horarios in Model)
+{
+
+	<script>
+	var numeroSeparado;
+	var numero = "@horarios.CodigoModulo".split('');
+	numeroSeparado = numero[1] + numero[2];
+	var modulo = numeroSeparado;
+	modulo = parseInt(numeroSeparado);
+
+
+
+							if('@horarios.Dia' === "Lunes" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 1 + ')').text('@horarios.CodigoMateria-@horarios.Paralelo/@horarios.Aula').addClass('whiteCel');
+							}
+							if ('@horarios.Dia' === "Martes" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 2 + ')').text('@horarios.CodigoMateria-@horarios.Paralelo/@horarios.Aula').addClass('whiteCel');
+						}
+							if ('@horarios.Dia' === "Miercoles" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 3 + ')').text('@horarios.CodigoMateria-@horarios.Paralelo/@horarios.Aula').addClass('whiteCel');
+						}
+							if ('@horarios.Dia' === "Jueves" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 4 + ')').text('@horarios.CodigoMateria-@horarios.Paralelo/@horarios.Aula').addClass('whiteCel');
+						}
+							if ('@horarios.Dia' === "Viernes" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 5 + ')').text('@horarios.CodigoMateria-@horarios.Paralelo/@horarios.Aula').addClass('whiteCel');
+						}
+							if ('@horarios.Dia' === "Sabado" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 6 + ')').text('@horarios.CodigoMateria-@horarios.Paralelo}@horarios.Aula').addClass('whiteCel');
+							}
+
+	</script>
+
+
+
+}
+
+
+
+@foreach (var horarios in (List<AppTutorias.Models.Docente.horarioClaseDocente>)ViewBag.horasLibres)
+{
+
+	<script>
+
+	var numero = "@horarios.CodigoModulo".split('');
+	numeroSeparado = numero[1] + numero[2];
+    modulo = numeroSeparado;
+	modulo = parseInt(numeroSeparado);
+
+
+
+							if('@horarios.Dia' === "Lunes" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 1 + ')').text('@horarios.Aula').addClass('greenCel');
+							}
+							if ('@horarios.Dia' === "Martes" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 2 + ')').text('@horarios.Aula').addClass('greenCel');
+						}
+							if ('@horarios.Dia' === "Miercoles" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 3 + ')').text('@horarios.Aula').addClass('greenCel');
+						}
+							if ('@horarios.Dia' === "Jueves" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 4 + ')').text('@horarios.Aula').addClass('greenCel');
+						}
+							if ('@horarios.Dia' === "Viernes" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 5 + ')').text('@horarios.Aula').addClass('greenCel');
+						}
+							if ('@horarios.Dia' === "Sabado" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 6 + ')').text('@horarios.Aula').addClass('greenCel');
+							}
+
+	</script>
+
+
+
+}
+ 
+
+@foreach (var horarios in (List<AppTutorias.Models.Docente.horarioClaseDocente>)ViewBag.horasObligatorias)
+{
+
+	<script>
+
+	var numero = "@horarios.CodigoModulo".split('');
+	numeroSeparado = numero[1] + numero[2];
+    modulo = numeroSeparado;
+	modulo = parseInt(numeroSeparado);
+
+
+
+							if('@horarios.Dia' === "Lunes" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 1 + ')').text('@horarios.Aula').addClass('redCel');
+							}
+							if ('@horarios.Dia' === "Martes" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 2 + ')').text('@horarios.Aula').addClass('redCel');
+						}
+							if ('@horarios.Dia' === "Miercoles" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 3 + ')').text('@horarios.Aula').addClass('redCel');
+						}
+							if ('@horarios.Dia' === "Jueves" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 4 + ')').text('@horarios.Aula').addClass('redCel');
+						}
+							if ('@horarios.Dia' === "Viernes" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 5 + ')').text('@horarios.Aula').addClass('redCel');
+						}
+							if ('@horarios.Dia' === "Sabado" ){
+
+								$('#tHorario tr:eq(' + modulo + ') td:eq(' + 6 + ')').text('@horarios.Aula').addClass('redCel');
+							}
+
+	</script>
+
+
+
+}
+

@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet"
+		  type="text/css"
+		  media="screen"
+		  href="css/estudiante.css" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,700"
+		  rel="stylesheet" />
+	<link rel="stylesheet"
+		  href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+		  integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+		  crossorigin="anonymous" />
+
+	<link rel="stylesheet" type="text/css" media="screen" href="~/Content/estudiante.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="~/Content/docente.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+	<title>@ViewBag.Title</title>
+</head>
+<body>
+
+	@using Microsoft.Azure.ActiveDirectory.GraphClient
+	@model User
+	<!-- MENU ESTUDIANTE -->
+
+	<div class="container-menu">
+		<span><img src="~/Content/img/udla.png" /></span>
+		<ul id="menu" class="inactive-menu">
+			<li id="btnMenu"><i class="fas fa-bars"></i></li>
+			<li><b>@Model.GivenName @Model.Surname <span style="display:none" id="emailEstudiante">@Model.Mail</span> </b></li>
+			<li id="perfilEstudiante"><a>Perfil</a></li>
+			<li id="horarioEstudiante"><a>Horario</a></li>
+			<li id="tutoriasEstudiante"><a>Tutorias</a> <i style="font-size:14px;" class="fas fa-bell"></i>@*(<span id="pushEstudiante">0</span>)*@</li>
+
+			<li onclick="location.href='@Url.Action("SignOut", "Account")'"><a>Cerrar Sesión</a></li>
+		</ul>
+	</div>
+
+	<!-- MENU ESTUDIANTE -->
+	<div>
+		@RenderBody()
+	</div>
+
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/js")
+	<script src="~/Scripts/jquery.signalR-2.4.0.js"></script>
+	<script src="/signalr/hubs"></script>
+
+
+
+	
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" media="screen" href="~/Content/docente.css" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+	<title>@ViewBag.Title </title>
+	@Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+
+	@using Microsoft.Azure.ActiveDirectory.GraphClient
+	@model User
+	<!-- HEADER -->
+	<div class="header">
+		<div>
+			<h4>Docente: @Model.GivenName @Model.Surname (@Model.Mail)</h4><br />
+
+		</div>
+		<div><img src="~/Content/img/logotipo_positivo.png" width="80px;" alt=""></div>
+	</div>
+	<!-- COMPONENTE MENU DOCENTES -->
+	<div class="nav">
+		<div  onclick="PerfilDocente()" id="tnombreLogin"><i class="fas fa-user-alt"></i> Perfil</div>
+		<div onclick="vistaEstudiante()"><i class="fas fa-users"></i> Mis Estudiantes</div>
+		<div onclick="MensajesDocente()"><i class="fas fa-envelope"></i> Mensajes</div>
+		<div></div>
+		<div onclick="location.href='@Url.Action("SignOut", "Account")'"><i class="fas fa-power-off"></i> Salir</div>
+	</div>
+
+	@RenderBody()
+
+
+
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/js")
+
+	<script>
+		//Notificaciones del docente
+		function MensajesDocente() {
+
+			mostrarLoading();
+
+			$.ajax({
+				url: "/Docente/mensajesEstudiantes",
+				type: 'post',
+				datatype: 'application/json',
+				success: function (data) {
+
+
+
+					$("#app").html(data);
+
+
+
+				},
+				error: function () {
+
+				}
+			});
+		}
+
+	
+
+	</script>
+
+
+</body>
+</html>

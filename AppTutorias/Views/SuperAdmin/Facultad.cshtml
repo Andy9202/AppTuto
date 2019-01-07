@@ -1,0 +1,329 @@
+@model List<AppTutorias.Models.SuperAdmin.facultad>
+
+<style>
+	.loadUpdate {
+		display:none;
+		justify-content:center;
+	}
+</style>
+
+
+<div class="container-admin">
+	<img src="~/Content/img/fondo_1.jpg" alt="" width="100%;">
+	<h3>Facultad</h3>
+	<p>Ingresa, actualiza o elimina las Facultades actuales de la Universidad</p>
+	<br />
+	<div class="form-carrera">
+		<ul class="list-inline">
+			<li>
+				<label for="">Ingrese codigo de la Facultad</label><br />
+				<input type="text" id="codigoFacultad">
+			</li>
+			<li>
+				<label for="">Ingrese Facultad</label><br />
+				<input type="text" id="nombreFacultad">
+			</li>
+			<li>
+				<button onclick="ingresarFacultad()" class="success">Ingresar <i class="fas fa-check"></i></button>
+			</li>
+			<li>
+				<span id="loadInsertFacu" class="loadUpdate" style="color:#fff;"><i class="fas fa-spinner fa-spin"></i> Ingresando...</span>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="table-carrera">
+		<br />
+		<h4>Tabla de Facultades Actuales</h4>
+		<table>
+			<thead>
+				<tr>
+					<th>Cod Facultad</th>
+					<th>Nombre Facultad</th>
+					<th>Accion</th>
+				</tr>
+			</thead>
+			<tbody id="tablaFacultad">
+				@foreach (var consulta in Model)
+				{
+					<tr>
+						<td>@consulta.CodigoFacultad</td>
+						<td>@consulta.NombreFacultad</td>
+						<td><a onclick="confEliminarFacultad(this)" id="@consulta.CodigoFacultad">Eliminar</a></td>
+						<td><a onclick="editarFacultad(this)" id="@consulta.CodigoFacultad">Actualizar</a></td>
+					</tr>
+				}
+			</tbody>
+
+
+		</table>
+	</div>
+
+</div>
+
+<!-- PANEL EDICION DE CAMPOS -->
+<div class="panel-edit" id="editFacultad">
+	<h3><i class="fas fa-pen-square"></i> Editar Facultad</h3>
+	<ul>
+		<li>
+			<label>Codigo Facultad</label>
+			<input type="text" id="codigoFacultadEdit">
+		</li>
+		<li>
+			<label>Nombre Facultad</label>
+			<input type="text" id="nombreFacultadEdit">
+		</li>
+	</ul>
+	<ul class="list-inline  ">
+		<li><button onclick="ingresarEditFacultad()">Aceptar <i class="fas fa-check"></i></button></li>
+		<li><button onclick="btnCerrarEditFacultad()">Cancelar <i class="fas fa-times-circle"></i></button></li>
+	</ul>
+	<br />
+	<div id="loadUpdateFacu" class="loadUpdate">
+		<span><i class="fas fa-spinner fa-spin"></i> Actualizando...</span>
+	</div>
+</div>
+
+
+<div id="btnConfirmar" class="container-confirmacion">
+	<div>
+		<h4>¿Está seguro que desea eliminar la Facultad seleccionado?</h4>
+		<br />
+		<button class="btnSi" id="btnSiFacultad">SI</button>
+		<button class="btnNo" id="btnNoFacultad">NO</button>
+		<br />
+			<span id="loadDeleteFacu" class="loadUpdate"><i class="fas fa-spinner fa-spin"></i> Eliminando...</span>
+
+	</div>
+	
+
+</div>
+
+
+<script>
+
+	///CONFIRMACIONES
+	var cod="";
+	function confEliminarFacultad(codigo) {
+
+		$('#loadDeleteFacu').css('display', 'none');
+
+		$('#btnConfirmar').css('display', 'flex');
+
+		cod = codigo.id;
+
+	}
+
+	$('#btnSiFacultad').on('click', function () {
+
+		eliminarFacultad(cod);
+
+		cod = "";
+	});
+
+	$('#btnNoFacultad').on('click', function () {
+
+		
+		$('#btnConfirmar').css('display', 'none');
+		cod = "";
+	});
+
+
+	///facultad
+
+
+
+	function ingresarFacultad() {
+
+		$('#loadInsertFacu').css('display', 'flex');
+		
+
+		var facultad = {
+			NombreFacultad: $("#nombreFacultad").val(),
+			CodigoFacultad: $("#codigoFacultad").val()
+		};
+
+
+		$.ajax({
+			url: "/SuperAdmin/ingresarFacultad",
+			data: JSON.stringify(facultad),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (listaFacultad) {
+
+				$("#tablaFacultad").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaFacultad.length; i++) {
+
+
+					d += '<tr>' +
+						'<td>' + listaFacultad[i].CodigoFacultad + '</td>' +
+						'<td>' + listaFacultad[i].NombreFacultad + '</td>' +
+						'<td>' + '<a type="button"  onclick="confEliminarFacultad(this)" id="' + listaFacultad[i].CodigoFacultad + '"></i> Eliminar</a>' + '</td>' +
+						'<td>' + '<a type="button"  onclick="editarFacultad(this)" id="' + listaFacultad[i].CodigoFacultad + '"></i> Actualizar</a>' + '</td>' +
+						'</tr>';
+
+					a++;
+				}
+
+
+
+				$("#tablaFacultad").append(d);
+
+				$("#nombreFacultad").val("");
+				$("#codigoFacultad").val("");
+
+				$('#loadInsertFacu').css('display', 'none');
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	function eliminarFacultad(codigo) {
+
+		$('#loadDeleteFacu').css('display', 'flex');
+
+		$.ajax({
+			url: "/SuperAdmin/eliminarFacultad",
+			data: JSON.stringify({ CodigoFacultad: codigo}),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (listaFacultad) {
+
+				$("#tablaFacultad").empty();
+				var d;
+
+
+				var a = 0;
+				for (var i = 0; i < listaFacultad.length; i++) {
+
+
+					d += '<tr>' +
+						'<td>' + listaFacultad[i].CodigoFacultad + '</td>' +
+						'<td>' + listaFacultad[i].NombreFacultad + '</td>' +
+
+						'<td>' + '<a type="button"  onclick="confEliminarFacultad(this)" id="' + listaFacultad[i].CodigoFacultad + '"></i> Eliminar</a>' + '</td>' +
+						'<td>' + '<a type="button" onclick="editarFacultad(this)" id="' + listaFacultad[i].CodigoFacultad + '"></i> Actualizar</a>' + '</td>' +
+						'</tr>';
+
+					a++;
+				}
+
+
+
+				$("#tablaFacultad").append(d);
+
+
+				$('#loadDeleteFacu').css('display', 'none');
+				$('#btnConfirmar').css('display', 'none');
+
+				
+			},
+			error: function () {
+				
+			}
+		});
+	}
+
+
+	function editarFacultad(codigo) {
+
+		$("#editFacultad").css("display", "block");
+
+		$.ajax({
+			url: "/SuperAdmin/editarFacultad",
+			data: JSON.stringify({ CodigoFacultad: codigo.id }),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (facultad) {
+
+
+
+				$("#nombreFacultadEdit").val(facultad.NombreFacultad);
+				$("#codigoFacultadEdit").val(facultad.CodigoFacultad);
+
+			},
+			error: function () {
+
+			}
+		});
+
+
+
+	}
+	//cerrar facultad
+
+	function btnCerrarEditFacultad() {
+		$("#editFacultad").css("display", "none");
+		$("#nombreFacultadEdit").val("");
+		$("#codigoFacultadEdit").val("");
+	}
+
+
+
+	//ingreso edit facultad
+	function ingresarEditFacultad() {
+
+		var facultad = {
+			NombreFacultad: $("#nombreFacultadEdit").val(),
+			CodigoFacultad: $("#codigoFacultadEdit").val()
+		};
+
+		$('#loadUpdateFacu').css('display', 'flex');
+
+		$.ajax({
+			url: "/SuperAdmin/ingresarFacultad",
+			data: JSON.stringify(facultad),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (listaFacultad) {
+
+				$("#tablaFacultad").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaFacultad.length; i++) {
+
+
+					d += '<tr>' +
+						'<td>' + listaFacultad[i].CodigoFacultad + '</td>' +
+						'<td>' + listaFacultad[i].NombreFacultad + '</td>' +
+						'<td>' + '<a type="button"  onclick="confEliminarFacultad(this)" id="' + listaFacultad[i].CodigoFacultad + '"></i> Eliminar</a>' + '</td>' +
+						'<td>' + '<a type="button"  onclick="editarFacultad(this)" id="' + listaFacultad[i].CodigoFacultad + '"></i> Actualizar</a>' + '</td>' +
+						'</tr>';
+
+					a++;
+				}
+
+
+
+				$("#tablaFacultad").append(d);
+				$("#editFacultad").css("display", "none");
+
+				$("#nombreFacultadEdit").val("");
+				$("#codigoFacultadEdit").val("");
+
+				$('#loadUpdateFacu').css('display', 'none');
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+
+
+</script>

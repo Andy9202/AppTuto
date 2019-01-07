@@ -1,0 +1,270 @@
+
+
+@model List<AppTutorias.Models.SuperAdmin.Estudiante.horarioClaseEstudiante>
+
+
+
+<div class="container-admin">
+    <img src="~/Content/img/fondo_1.jpg" alt="" width="100%">
+    <h3>Horaio de Clases General</h3>
+    <div class="form-carrera">
+        <ul class="list-inline">
+            <li>
+                <label for="">Facultad</label><br />
+                <select name="facultad" id="codigoFacultadCarrera">
+                    <option name="facultad" value="FICA">FICA</option>
+                </select>
+            </li>
+            <li>
+                <label for="">Carrera</label><br />
+                <select id="listaCarreras" onchange="listaEstudiantesCarrera()"></select>
+            </li>
+            <li>
+                <label for="">Estudiante</label><br />
+                <select id="listaEstudiantes"></select>
+            </li>
+            <br />
+            <li>
+                <label for="">Docente</label><br />
+                <select id="listaDocentes"></select>
+            </li>
+            <li>
+                <label for="">Modulo</label><br />
+                <select id="listaModulos"></select>
+            </li>
+            <li>
+                <label for="">Paralelo</label><br />
+                <input placeholder="Paralelo" id="seccion" />
+            </li>
+            <li>
+                <label for="">Aula</label><br />
+                <input placeholder="Aula" id="paralelo" />
+            </li>
+
+            <li>
+                <button class="success" onclick="ingresarHorarioClasesEstudiantes()">Ingresar</button>
+            </li>
+        </ul>
+    </div>
+    <div class="table-carrera">
+        <table>
+            <thead>
+                <tr>
+                    <th>Matricula</th>
+                    <th>Estudiante</th>
+                    <th>Materia</th>
+                    <th>Docente</th>
+                    <th>Horario</th>
+                    <th>Periodo</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody id="tablaHorarioClaseEstudiante">
+                @foreach (var consulta in Model)
+                {
+                    <tr>
+                        <td>@consulta.Matricula</td>
+                        <td>@consulta.Estudiante</td>
+                        <td>@consulta.Materia</td>
+                        <td>@consulta.Docente</td>
+                        <td>@consulta.Horario</td>
+                        <td>@consulta.Periodo</td>
+                        <td><a onclick="eliminarHorarioClasesEstudiantes('@consulta.Id_HorarioEstudiante')">Eliminar</a></td>
+                    </tr>
+                }
+            </tbody>
+
+
+        </table>
+    </div>
+
+    <a onclick="repitencia()"><i class="fas fa-angle-right"></i> Repitencia Estudiantes</a>
+    <div id="moduloRepitencia">
+    </div>
+
+</div>
+
+
+
+
+
+<script>
+
+
+
+
+    $(function listaCarreras() {
+
+
+        $.ajax({
+            url: "/SuperAdmin/listaCarreras",
+            type: 'post',
+            datatype: 'application/json',
+            //data: form.serialize(),
+            success: function (listaCarrera) {
+
+                $("#listaCarreras").empty();
+
+
+                var d;
+                var a = 0;
+                for (var i = 0; i < listaCarrera.length; i++) {
+
+
+                    d += '<option ' +
+                        'value="' + listaCarrera[i].CodigoCarrera + '" ' +
+                        '>' + listaCarrera[i].NombreCarrera + '</option>';
+
+                    a++;
+                }
+
+				$("#listaCarreras").append(d);
+
+                listaEstudiantesCarrera();
+            },
+            error: function () {
+
+            }
+        });
+
+    });
+
+    function listaEstudiantesCarrera() {
+        $.ajax({
+            url: "/SuperAdmin/listaEstudiantesCarrera",
+            type: 'post',
+            datatype: 'application/json',
+            data: { CodigoCarrera: $("#listaCarreras").val() },
+            success: function (listaEstudiantes) {
+
+                $("#listaEstudiantes").empty();
+
+
+                var d;
+                var a = 0;
+                for (var i = 0; i < listaEstudiantes.length; i++) {
+
+
+                    d += '<option ' +
+                        'value="' + listaEstudiantes[i].Matricula + '" ' +
+                        '>' + listaEstudiantes[i].Nombre + ' ' + listaEstudiantes[i].NombreDos + ' ' + listaEstudiantes[i].Apellido + ' ' + listaEstudiantes[i].ApellidoDos + '</option>';
+
+                    a++;
+                }
+
+				$("#listaEstudiantes").append(d);
+				listaDocentes();
+
+            },
+            error: function () {
+
+            }
+        });
+
+
+	}
+
+	
+
+
+	function listaDocentes() {
+		$.ajax({
+			url: "/SuperAdmin/listaDocentes",
+			type: 'post',
+			datatype: 'application/json',
+			success: function (listaDocentes) {
+
+				$("#listaDocentes").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaDocentes.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaDocentes[i].Cedula + '" ' +
+						'>' + listaDocentes[i].Nombre + " " + listaDocentes[i].NombreDos + " " + listaDocentes[i].Apellido + " " + listaDocentes[i].ApellidoDos + '</option>';
+
+					a++;
+				}
+
+				$("#listaDocentes").append(d);
+
+
+				listaPeriodo();
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	function listaPeriodo() {
+		$.ajax({
+			url: "/SuperAdmin/listaPeriodo",
+			type: 'post',
+			datatype: 'application/json',
+			success: function (listaPeriodo) {
+
+				$("#listaPeriodo").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaPeriodo.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaPeriodo[i].CodigoPeriodo + '" ' +
+						'>' + listaPeriodo[i].NombrePeriodo + '</option>';
+
+					a++;
+				}
+
+				$("#listaPeriodo").append(d);
+
+
+				listaModulos();
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	function listaModulos() {
+		$.ajax({
+			url: "/SuperAdmin/listaModulos",
+			type: 'post',
+			datatype: 'application/json',
+			success: function (listaModulos) {
+
+				$("#listaModulos").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaModulos.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaModulos[i].CodigoModulo + '" ' +
+						'>' + listaModulos[i].CodigoModulo + '</option>';
+
+					a++;
+				}
+
+				$("#listaModulos").append(d);
+
+				
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+</script>

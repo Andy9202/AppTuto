@@ -1,0 +1,242 @@
+@model List<AppTutorias.Models.SuperAdmin.Estudiante.repitencia>
+
+<style>
+	.loadUpdate {
+		display: none;
+		justify-content: center;
+	}
+</style>
+
+<h3>Estudiante Numero Matricula</h3>
+<p>Ingrese el numero de matricula del estudiante, asignando el numero de matricula el codigo de la materia que el estudiante recibe y el 
+	numero actual de repitencia(matricula) en la cual se encuentra el estudiante.</p>
+<br />
+<div class="form-carrera">
+	<ul class="list-inline">
+
+		<li>
+			<label for="">Matricula</label><br />
+			<input type="text" id="matriculaRepitencia">
+		</li>
+		<li>
+			<label for="">Codigo Materia</label><br />
+			<input type="text" id="codigoMateria">
+		</li>
+
+		<li>
+			<label for="">Numero de Matricula</label><br />
+			<input type="number" id="repitencia">
+		</li>
+
+		<li>
+			<button class="success" onclick="ingresarRepitencia()">Ingresar</button>
+		</li>
+		<li>
+			<span id="loadInsertRepitencia" class="loadUpdate" style="color:#fff;"><i class="fas fa-spinner fa-spin"></i> Ingresando...</span>
+		</li>
+	</ul>
+</div>
+<div class="table-carrera">
+	<br />
+	<h4>Numero de matricula en la cual se encuentra el estudiante con respecto a la materia.</h4>
+	<table>
+		<thead>
+			<tr>
+				<th>Matricula</th>
+				<th>Estudiante</th>
+				<th>Cod Materia</th>
+				<th>Materia</th>
+				<th>Numero Matricula</th>
+
+				<th>Accion</th>
+			</tr>
+		</thead>
+		<tbody id="tablaRepitenciaEstudiante">
+			@foreach (var consulta in Model)
+			{
+				<tr>
+					<td>@consulta.Matricula</td>
+					<td>@consulta.NombreEstudiante</td>
+					<td>@consulta.CodigoMateria</td>
+					<td>@consulta.Materia</td>
+					<td>@consulta.Repitencia</td>
+
+					<td><a onclick="confEliminarRepitencia('@consulta.Matricula','@consulta.CodigoMateria')">Eliminar</a></td>
+				</tr>
+			}
+		</tbody>
+
+
+	</table>
+</div>
+
+
+<div id="btnConfirmarRepitencia" class="container-confirmacion">
+	<div style="height: 110px;">
+		<h4>¿Está seguro que desea eliminar la Repitencia del Estudiante seleccionado?</h4>
+		<br />
+		<button class="btnSi" id="btnSiRepitencia">SI</button>
+		<button class="btnNo" id="btnNoRepitencia">NO</button>
+		<br />
+		<span id="loadDeleteRepitencia" class="loadUpdate"><i class="fas fa-spinner fa-spin"></i> Eliminando...</span>
+
+	</div>
+
+
+</div>
+
+
+<script>
+
+
+	///CONFIRMACIONES
+	var matr = "";
+	var cod = "";
+	function confEliminarRepitencia(matricula, codigo) {
+
+		$('#loadDeleteRepitencia').css('display', 'none');
+		$('#btnConfirmarRepitencia').css('display', 'flex');
+
+		matr = matricula;
+		cod = codigo;
+
+
+	}
+
+	$('#btnSiRepitencia').on('click', function () {
+
+		eliminarRepitencia(matr, cod);
+
+		matr = "";
+		cod = "";
+	});
+
+	$('#btnNoRepitencia').on('click', function () {
+
+
+		$('#btnConfirmarRepitencia').css('display', 'none');
+		matr = "";
+		cod = "";
+	});
+
+
+	//REPITENCIA DLE ESTUDAINTE
+
+	function ingresarRepitencia() {
+
+		$('#loadInsertRepitencia').css('display', 'flex');
+
+		var datosRepitencia = {
+			Matricula: $("#matriculaRepitencia").val(),
+			CodigoMateria: $("#codigoMateria").val(),
+			Repitencia: $("#repitencia").val()
+
+		};
+
+
+		$.ajax({
+			type: "POST",
+			url: "/SuperAdmin/ingresarRepitencia",
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(datosRepitencia),
+			success: function (listaRepitencia) {
+
+
+				$("#tablaRepitenciaEstudiante").empty();
+
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaRepitencia.length; i++) {
+
+					var datos = "'" + listaRepitencia[i].Matricula + "'" + "," + "'" + listaRepitencia[i].CodigoMateria + "'";
+
+					d += '<tr>' +
+						'<td>' + listaRepitencia[i].Matricula + '</td>' +
+						'<td>' + listaRepitencia[i].NombreEstudiante + '</td>' +
+						'<td>' + listaRepitencia[i].CodigoMateria + '</td>' +
+						'<td>' + listaRepitencia[i].Materia + '</td>' +
+						'<td>' + listaRepitencia[i].Repitencia + '</td>' +
+						'<td>' + '<a type="button"  onclick="confEliminarRepitencia(' + datos + ')" ></i> Eliminar</a>' + '</td>' +
+						'</tr>';
+
+					a++;
+				}
+
+
+
+				$("#tablaRepitenciaEstudiante").append(d);
+
+				$("#matriculaRepitencia").val("");
+				$("#codigoMateria").val("");
+				$("#repitencia").val("");
+
+				$('#loadInsertRepitencia').css('display', 'none');
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	function eliminarRepitencia(matricula, codigo) {
+
+		$('#loadDeleteRepitencia').css('display', 'flex');
+
+		var datosRepitencia = {
+			Matricula: matricula,
+			CodigoMateria: codigo
+		};
+
+
+		$.ajax({
+			type: "POST",
+			url: "/SuperAdmin/eliminarRepitencia",
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(datosRepitencia),
+			success: function (listaRepitencia) {
+
+
+				$("#tablaRepitenciaEstudiante").empty();
+
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaRepitencia.length; i++) {
+
+					var datos = "'" + listaRepitencia[i].Matricula + "'" + "," + "'" + listaRepitencia[i].CodigoMateria + "'";
+
+					d += '<tr>' +
+						'<td>' + listaRepitencia[i].Matricula + '</td>' +
+						'<td>' + listaRepitencia[i].NombreEstudiante + '</td>' +
+						'<td>' + listaRepitencia[i].CodigoMateria + '</td>' +
+						'<td>' + listaRepitencia[i].Materia + '</td>' +
+						'<td>' + listaRepitencia[i].Repitencia + '</td>' +
+						'<td>' + '<a type="button"  onclick="confEliminarRepitencia(' + datos + ')" ></i> Eliminar</a>' + '</td>' +
+						'</tr>';
+
+					a++;
+				}
+
+
+
+				$("#tablaRepitenciaEstudiante").append(d);
+
+
+				$('#loadDeleteRepitencia').css('display', 'none');
+				$('#btnConfirmarRepitencia').css('display', 'none');
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+</script>

@@ -1,0 +1,425 @@
+﻿
+<style>
+
+	.container-tutoria-estudiante {
+		overflow-x:auto;
+	}
+	table {
+		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+		margin-top: 20px;
+	}
+
+	td, table {
+		border: 1px solid #ddd;
+		padding: 8px;
+	}
+
+		table tr:hover {
+			background-color: #ddd;
+		}
+
+		table th {
+			padding-top: 12px;
+			padding-bottom: 12px;
+			text-align: left;
+			background-color: #57090C;
+			color: white;
+		}
+
+	.notificacion{
+		color: red;
+	}
+</style>
+
+
+<!-- TUTORIAS ESTUDIANTE -->
+<div class="container-tutoria-estudiante">
+	<div class="title-container">
+		<h3>Tutorias</h3>
+		<h4>
+			No te descuides de tus tutorias, revisa el cronograma constantemente.
+		</h4>
+	</div>
+	<div class="container-tutoria-estudiante">
+		
+			<table>
+				<thead>
+					<tr>
+					
+						<th>Cod Materia</th>
+						<th>Materia</th>
+						<th>Docente</th>
+						<th>Modulo</th>
+						<th>Periodo</th>
+						<th>Estado Obligatorio</th>
+						<th>Fecha</th>
+						<th>Aula</th>
+						@*<th>Accion</th>*@
+					</tr>
+				</thead>
+				<tbody id="tablaHorarioTutorias"></tbody>
+
+
+			</table>
+
+		</div>
+
+		<div class="title-container">
+			<h3>Aprende</h3>
+			<h4>
+				Busca un docente de la materia que deseas recibir una tutoria,
+				programa el dia y la hora que el docente tenga disponible, y espera su
+				confirmacion.
+			</h4>
+		</div>
+
+		<div class="container-solicitud">
+			<div class="solicitud">
+				<h3>SOLICITUD DE TUTORIA</h3>
+				<small>Llena la informacion solicitada</small>
+				<div class="container-materias">
+					<h4>Elige una materia</h4>
+					<select id="listaMateriasEstudiante" onchange="listaDocentesMateria()"></select>
+				</div>
+				<div class="container-docentes">
+					<h4>Elige al docente de tu carrera que tengas mas confianza</h4>
+					<small>
+						Deseas conocer un poco mas de tu docente, selecciona su
+						nombre.
+					</small>
+					<div class="input-docentes" id="contenDocentes">
+
+
+					</div>
+					<div class="horario-docente">
+						<small>Horario de <b><span id="nombreDocente"></span></b></small>
+						<div id="horarioDocente"></div>
+					</div>
+				</div>
+
+				<div class="container-fecha">
+					<h4>Selecciona un modulo, estos modulos estan disponibles para el Docente</h4>
+					<select id="modulosDocente">
+
+					</select>
+				</div>
+				<div>
+					<h4>Fecha de la tutoria</h4>
+					<input type="date" value="@String.Format("{0:yyyy-MM-dd}",DateTime.Now)" id="fechaTutoria"/>
+				</div>
+				<div class="container-mensaje">
+					<h4>
+						Escribe un mensaje explicando el motivo de la tutoria con el tema que
+						tienes problemas.
+					</h4>
+					<textarea id="mensaje"></textarea>
+				</div>
+				<div class="container-button">
+					<button onclick="sendForm()">Enviar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+		<!-- PERFIL ESTUDIANTE -->
+		<script>
+
+
+			var cedulaDocente;
+			$(function tablaHorarioTutoriasEstudiante() {
+
+
+				$.ajax({
+					url: "/Estudiante/listaTutoriasEstudiante",
+					type: "POST",
+					contentType: "application/json;charset=utf-8",
+					dataType: "json",
+					success: function (listaHorariosTutorias) {
+
+						$("#tablaHorarioTutorias").empty();
+
+
+
+						var d;
+						var a = 0;
+						for (var i = 0; i < listaHorariosTutorias.length; i++) {
+
+							var datos = "'" + listaHorariosTutorias[i].Id_HorarioTutorias + "'";
+
+							d += '<tr>' +
+								
+								'<td>' + listaHorariosTutorias[i].CodigoMateria + '</td>' +
+								'<td>' + listaHorariosTutorias[i].NombreMateria + '</td>' +
+								'<td>' + listaHorariosTutorias[i].NombreDocente + '</td>' +
+								'<td>' + listaHorariosTutorias[i].Modulo + '</td>' +
+								'<td>' + listaHorariosTutorias[i].CodigoPeriodo + '</td>' +
+								'<td>' + listaHorariosTutorias[i].EstadoObligatorio + '</td>' +
+								'<td>' + listaHorariosTutorias[i].Fecha + '</td>' +
+								'<td>' + listaHorariosTutorias[i].Aula + '</td>' +
+								+
+								//'<td>' + '<a type="button"  onclick="eliminarHorarioClasesEstudiantes(' + datos + ')" ></i> Eliminar</a>' + '</td>' +
+								'</tr>';
+
+							a++;
+						}
+
+
+
+						$("#tablaHorarioTutorias").append(d);
+
+					},
+					error: function () {
+
+					}
+				});
+			});
+
+
+			///consulta materias del estudainte
+			$(function listaMateriasEstudiante() {
+
+
+				$.ajax({
+					url: "/Estudiante/listaMateriasEstudiante",
+					type: 'post',
+					datatype: 'application/json',
+					//data: form.serialize(),
+					success: function (listaMateria) {
+
+						$("#listaMateriasEstudiante").empty();
+
+
+						var d;
+						var a = 0;
+						for (var i = 0; i < listaMateria.length; i++) {
+
+
+							d += '<option ' +
+								'value="' + listaMateria[i].CodigoMateria + '" ' +
+								'>' + listaMateria[i].NombreMateria + '</option>';
+
+							a++;
+						}
+
+						$("#listaMateriasEstudiante").append(d);
+
+						listaDocentesMateria();
+
+
+					},
+					error: function () {
+
+					}
+				});
+
+			});
+
+			//consulta los docentes que esxisten de cada materia
+
+			function listaDocentesMateria() {
+
+				$.ajax({
+					url: "/Estudiante/listaDocentesMateria",
+					type: 'post',
+					datatype: 'application/json',
+					data: { CodigoMateria: $("#listaMateriasEstudiante").val() },
+					success: function (listaDocentes) {
+
+						$("#contenDocentes").empty();
+
+
+						var d = "";
+						var a = 0;
+						for (var i = 0; i < listaDocentes.length; i++) {
+
+
+							if (a === 0) {
+								d += '<input type="radio" name="docente" id="' + listaDocentes[i].Cedula + '"  checked="checked"/><label for="' + listaDocentes[i].Cedula + '">' +
+									listaDocentes[i].Nombre + '<i class="fas fa-check" ></i ></label >';
+							} else {
+
+								d += '<input type="radio" name="docente" id="' + listaDocentes[i].Cedula + '" /><label  for="' + listaDocentes[i].Cedula + '">' +
+									listaDocentes[i].Nombre + '<i class="fas fa-check" ></i ></label >';
+							}
+
+							a++;
+						}
+
+						$("#contenDocentes").append(d);
+
+						$("input[type='radio']:checked").each(function () {
+							var idVal = $(this).attr("id");
+							$("#nombreDocente").text($("label[for='" + idVal + "']").text());
+
+
+							cedulaDocente = idVal;
+							horarioDocente(idVal);
+							listaModulosDocenteDisponible(idVal);
+							
+						});
+
+
+
+
+
+					},
+					error: function () {
+
+					}
+				});
+
+			}
+
+			//selecciona el docente y realiza las busquedas
+
+		
+			$(document).ready(function () {
+				$('#contenDocentes').change(function () {
+					selected_value = $("input[type='radio']:checked").each(function () {
+						var idVal = $(this).attr("id");
+						$("#nombreDocente").text($("label[for='" + idVal + "']").text());
+
+						cedulaDocente = idVal;
+						horarioDocente(idVal);
+						listaModulosDocenteDisponible(idVal);
+					});
+					
+				});
+			});
+		
+
+			//muestra el horario del docente
+			function horarioDocente(cedula) {
+
+				
+				$.ajax({
+					url: "/Docente/moduloHorarioDocenteConsulta",
+					type: 'post',
+					data: { cedula: cedula },
+						datatype: 'application/json',
+						success: function (data) {
+
+
+
+							$("#horarioDocente").html(data);
+
+
+
+						},
+						error: function () {
+
+						}
+					});
+				
+
+			}
+
+
+			//consulta los modulos disponibles del doncente y estudiante
+
+			function listaModulosDocenteDisponible(cedula) {
+
+				$.ajax({
+					url: "/Estudiante/listaModulosDocenteEstudianteDisponible",
+					type: 'post',
+					datatype: 'application/json',
+					data: { cedula: cedula },
+					success: function (x) {
+
+						$("#modulosDocente").empty();
+
+
+						var d;
+						var a = 0;
+						for (var i = 0; i < x.length; i++) {
+
+
+							d += '<option ' +
+								'value="' + x[i].CodigoModulo + '" ' +
+								'>' + x[i].CodigoModulo + ' ' + x[i].Dia + ': ' + x[i].HoraInicio + ' ' + x[i].HoraFin+ '</option>';
+
+							a++;
+						}
+
+						$("#modulosDocente").append(d);
+
+						
+
+					},
+					error: function () {
+
+					}
+				});
+			}
+
+
+			//ENVIO DE DATOS DEL FORMULARIO
+
+			function sendForm() {
+
+				
+
+				//carga las notificaciones del estudainte
+
+				var notificacion = $.connection.notificaciones;
+
+				notificacion.client.notificacionDocente = function (mensaje) {
+
+			
+
+					alert(mensaje);
+					
+				};
+
+
+				$.connection.hub.start().done(function () {
+
+					datosNotificacion();
+					notificacion.server.mensajeEstudiante();
+					
+					
+
+				});
+
+			}
+
+
+			// notifiacion al docente form datos
+
+			function datosNotificacion() {
+
+				Solicitud = {
+
+					CodigoMateria: $('#listaMateriasEstudiante').val(),
+					Cedula: cedulaDocente,
+					CodigoModulo: $('#modulosDocente').val(),
+					Mensaje: $('#mensaje').val(),
+					Fecha: $('#fechaTutoria').val()
+
+
+				};
+
+				$.ajax({
+					url: "/Estudiante/notificacionEstudiante",
+					type: 'post',
+					data: { Solicitud },
+					datatype: 'application/json',
+					success: function (data) {
+
+							
+						$('#mensaje').val("");
+
+					},
+					error: function () {
+
+					}
+				});
+
+
+			}
+
+		</script>
+
+		

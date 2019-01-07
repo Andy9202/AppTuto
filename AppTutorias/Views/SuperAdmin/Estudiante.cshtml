@@ -1,0 +1,761 @@
+@model List<AppTutorias.Models.SuperAdmin.Estudiante.estudiante>
+
+
+<style>
+	.loadUpdate {
+		display: none;
+		justify-content: center;
+	}
+
+	.input-error {
+		background: #ff0000;
+	}
+
+	.sms-error {
+		color: #ff0000;
+	}
+
+	.loadingTable {
+		display: flex;
+		text-align: center;
+	}
+
+
+</style>
+
+<div class="container-admin">
+	<img src="~/Content/img/fondo_1.jpg" alt="" width="100%;">
+	<h3>Estudiante</h3>
+	<div class="form-carrera">
+		<ul class="list-inline">
+			<li>
+				<label for="">Facultad</label><br />
+				<select name="facultad" id="codigoFacultadCarrera">
+					<option name="facultad" value="FICA">FICA</option>
+				</select>
+			</li>
+			<li>
+				<label for="">Carrera</label><br />
+				<select name="carrera" id="listaCarreras"></select>
+			</li>
+			<li>
+				<label for="">Matricula <span class="sms-error" id="matriculaError"></span></label><br />
+				<input type="number" id="matricula" onkeyup="inputMatricula(this)">
+			</li>
+			<li>
+				<label for="">Primer Nombre <span class="sms-error" id="nombreError"></span></label><br />
+				<input type="text" id="nombre" onkeyup="inputMayuscula(this)">
+			</li>
+			<li>
+				<label for="">Segundo Nombre</label><br />
+				<input type="text" id="nombreDos" onkeyup="inputMayusculaD(this)">
+			</li>
+			<li>
+				<label for="">Apellido Paterno <span class="sms-error" id="apellidoError"></span></label><br />
+				<input type="text" id="apellido" onkeyup="inputMayuscula(this)">
+			</li>
+			<li>
+				<label for="">Apellido Materno</label><br />
+				<input type="text" id="apellidoDos" onkeyup="inputMayusculaD(this)">
+			</li>
+			<li>
+				<label for="">Email <span class="sms-error" id="emailError"></span></label><br />
+				<input type="email" id="email" onkeyup="inputEmail(this)">
+			</li>
+			<li>
+				<label for="">Celular</label><br />
+				<input type="number" id="celular">
+			</li>
+			<li>
+				<button class="success" onclick="ingresarEstudiante()">Ingresar</button>
+			</li>
+			<li>
+				<span id="loadInsertEstudiante" class="loadUpdate" style="color:#fff;"><i class="fas fa-spinner fa-spin"></i> Ingresando...</span>
+			</li>
+		</ul>
+	</div>
+	<br />
+	<div>
+		<form enctype="multipart/form-data" method="post" id="excelData">
+
+
+			<h4>Cargar Estudiantes desde Excel</h4>
+			<input type="file" name="excelFile" id="excelFile" />
+			<input type="submit" value="Cargar Lista" class="success" />
+		</form>
+	</div>
+	<div class="table-carrera">
+		<table>
+			<thead>
+				<tr>
+					<th>Facultad</th>
+					<th>Carera</th>
+					<th>Matricula</th>
+					<th>Nombre</th>
+					<th>Segundo Nombre</th>
+					<th>Apellido Paterno</th>
+					<th>Apellido Materno</th>
+					<th>Email</th>
+					<th>Celular</th>
+					<th>Accion</th>
+				</tr>
+			</thead>
+			<tbody id="tablaEstudiante">
+				@foreach (var consulta in Model)
+				{
+					<tr>
+						<td>FICA</td>
+						<td>@consulta.CodCarrera</td>
+						<td>@consulta.Matricula</td>
+						<td>@consulta.Nombre</td>
+						<td>@consulta.NombreDos</td>
+						<td>@consulta.Apellido</td>
+						<td>@consulta.ApellidoDos</td>
+						<td>@consulta.Email</td>
+						<td>@consulta.Celular</td>
+						<td><a onclick="confEliminarEstudiante(this)" id="@consulta.Matricula">Eliminar</a></td>
+						<td><a onclick="editarEstudiante(this)" id="@consulta.Matricula">Actualizar</a></td>
+					</tr>
+				}
+			</tbody>
+
+
+		</table>
+	</div>
+
+</div>
+
+
+
+<!-- PANEL EDICION DE CAMPOS -->
+<div class="panel-edit" id="editEstudiante">
+	<h3><i class="fas fa-pen-square"></i> Editar Estudiante</h3>
+	<ul>
+		<li>
+			<label>Matricula</label>
+			<input type="number" id="matriculaEdit" onkeyup="inputMatricula(this)">
+		</li>
+
+		<li>
+			<label>Primer Nombre</label>
+			<input type="text" id="nombreEdit" onkeyup="inputMayuscula(this)">
+		</li>
+		<li>
+			<label>Segundo Nombre</label>
+			<input type="text" id="nombreDosEdit" onkeyup="inputMayusculaD(this)">
+		</li>
+		<li>
+			<label>Apellido Paterno</label>
+			<input type="text" id="apellidoEdit" onkeyup="inputMayuscula(this)">
+		</li>
+		<li>
+			<label>Apellido Materno</label>
+			<input type="text" id="apellidoDosEdit" onkeyup="inputMayusculaD(this)">
+		</li>
+		<li>
+			<label>Celular</label>
+			<input type="number" id="celularEdit">
+		</li>
+	</ul>
+	<ul class="list-inline  ">
+		<li><button onclick="ingresarEditEstudiante()">Aceptar <i class="fas fa-check"></i></button></li>
+		<li><button onclick="btnCerrarEditEstudiante()">Cancelar <i class="fas fa-times-circle"></i></button></li>
+	</ul>
+	<br />
+	<div id="loadUpdateEstudiante" class="loadUpdate">
+		<span><i class="fas fa-spinner fa-spin"></i> Actualizando...</span>
+	</div>
+</div>
+
+
+<div id="btnConfirmarEstudiante" class="container-confirmacion">
+	<div>
+		<h4>¿Está seguro que desea eliminar al Estudiante seleccionado?</h4>
+		<br />
+		<button class="btnSi" id="btnSiEstudiante">SI</button>
+		<button class="btnNo" id="btnNoEstudiante">NO</button>
+		<br />
+		<span id="loadDeleteEstudiante" class="loadUpdate"><i class="fas fa-spinner fa-spin"></i> Eliminando...</span>
+
+	</div>
+
+
+</div>
+
+
+
+<script>
+	$(function listaCarreras() {
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaCarreras",
+			type: 'post',
+			datatype: 'application/json',
+			//data: form.serialize(),
+			success: function (listaCarrera) {
+
+				$("#listaCarreras").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaCarrera.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaCarrera[i].CodigoCarrera + '" ' +
+						'>' + listaCarrera[i].NombreCarrera + '</option>';
+
+					a++;
+				}
+
+				$("#listaCarreras").append(d);
+
+
+			},
+			error: function () {
+
+			}
+		});
+
+	});
+</script>
+
+
+
+<script>
+
+	///CONFIRMACIONES
+	var cod = "";
+	function confEliminarEstudiante(codigo) {
+
+		$('#loadDeleteEstudiante').css('display', 'none');
+		$('#btnConfirmarEstudiante').css('display', 'flex');
+
+		cod = codigo.id;
+
+
+	}
+
+	$('#btnSiEstudiante').on('click', function () {
+
+		eliminarEstudiante(cod);
+
+		cod = "";
+	});
+
+	$('#btnNoEstudiante').on('click', function () {
+
+
+		$('#btnConfirmarEstudiante').css('display', 'none');
+		cod = "";
+	});
+
+
+	//ESTUDIANTE
+
+	function ingresarEstudiante() {
+
+		$('#loadInsertEstudiante').css('display', 'flex');
+
+
+		var valido = validarEstudiante();
+
+		if (valido === true) {
+
+			var estudiante = {
+				Nombre: $("#nombre").val(),
+				NombreDos: $("#nombreDos").val(),
+				Apellido: $("#apellido").val(),
+				ApellidoDos: $("#apellidoDos").val(),
+				Email: $("#email").val(),
+				Celular: $("#celular").val(),
+				Matricula: $("#matricula").val(),
+				CodCarrera: $("#listaCarreras").val()
+
+			};
+
+
+			$.ajax({
+				url: "/SuperAdmin/ingresarEstudiante",
+				data: JSON.stringify(estudiante),
+				type: "POST",
+				contentType: "application/json;charset=utf-8",
+				dataType: "json",
+				success: function (listaEstudiante) {
+
+					$("#tablaEstudiante").empty();
+
+
+					var d;
+					var a = 0;
+					for (var i = 0; i < listaEstudiante.length; i++) {
+
+
+						d += '<tr>' +
+							'<td>' + 'FICA' + '</td>' +
+							'<td>' + listaEstudiante[i].CodCarrera + '</td>' +
+							'<td>' + listaEstudiante[i].Matricula + '</td>' +
+							'<td>' + listaEstudiante[i].Nombre + '</td>' +
+							'<td>' + listaEstudiante[i].NombreDos + '</td>' +
+							'<td>' + listaEstudiante[i].Apellido + '</td>' +
+							'<td>' + listaEstudiante[i].ApellidoDos + '</td>' +
+							'<td>' + listaEstudiante[i].Email + '</td>' +
+							'<td>' + listaEstudiante[i].Celular + '</td>' +
+							'<td>' + '<a type="button"  onclick="confEliminarEstudiante(this)" id="' + listaEstudiante[i].Matricula + '"></i> Eliminar</a>' + '</td>' +
+							'<td>' + '<a type="button"  onclick="editarEstudiante(this)" id="' + listaEstudiante[i].Matricula + '"></i> Actualizar</a>' + '</td>' +
+							'</tr>';
+
+						a++;
+					}
+
+					$("#tablaEstudiante").append(d);
+
+					$("#nombre").val("");
+					$("#nombreDos").val("");
+					$("#apellido").val("");
+					$("#apellidoDos").val("");
+					$("#email").val("");
+					$("#celular").val("");
+					$("#matricula").val("");
+
+					$('#loadInsertEstudiante').css('display', 'none');
+
+				},
+				error: function () {
+
+				}
+			});
+		} else {
+			$('#loadInsertEstudiante').css('display', 'none');
+		
+		}
+	}
+
+
+
+
+	function editarEstudiante(codigo) {
+
+		$("#editEstudiante").css("display", "block");
+
+
+
+		$.ajax({
+			url: "/SuperAdmin/editarEstudiante",
+			data: JSON.stringify({ Matricula: codigo.id }),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (estudiante) {
+
+				$("#matriculaEdit").val(estudiante.Matricula);
+				$("#nombreEdit").val(estudiante.Nombre);
+				$("#nombreDosEdit").val(estudiante.NombreDos);
+				$("#apellidoEdit").val(estudiante.Apellido);
+				$("#apellidoDosEdit").val(estudiante.ApellidoDos);
+				$("#emailEdit").val(estudiante.Email);
+				$("#celularEdit").val(estudiante.Celular);
+
+			},
+			error: function () {
+
+			}
+		});
+
+
+
+	}
+
+
+
+	function btnCerrarEditEstudiante() {
+		$("#editEstudiante").css("display", "none");
+
+		$("#matriculaEdit").val("");
+		$("#nombreEdit").val("");
+		$("#nombreDosEdit").val("");
+		$("#apellidoEdit").val("");
+		$("#apellidoDosEdit").val("");
+		$("#emailEdit").val("");
+		$("#celularEdit").val("");
+	}
+
+
+
+
+	//ingreso edit Estudiante
+	function ingresarEditEstudiante() {
+
+		$('#loadUpdateEstudiante').css('display', 'flex');
+
+		var valido = validarEstudianteEdit();
+
+		if (valido === true) {
+
+
+			var estudiante = {
+				Nombre: $("#nombreEdit").val(),
+				NombreDos: $("#nombreDosEdit").val(),
+				Apellido: $("#apellidoEdit").val(),
+				ApellidoDos: $("#apellidoDosEdit").val(),
+				Celular: $("#celularEdit").val(),
+				Matricula: $("#matriculaEdit").val()
+			};
+
+
+			$.ajax({
+				url: "/SuperAdmin/ingresarEstudiante",
+				data: JSON.stringify(estudiante),
+				type: "POST",
+				contentType: "application/json;charset=utf-8",
+				dataType: "json",
+				success: function (listaEstudiante) {
+
+					$("#tablaEstudiante").empty();
+
+
+					var d;
+					var a = 0;
+					for (var i = 0; i < listaEstudiante.length; i++) {
+
+
+						d += '<tr>' +
+							'<td>' + 'FICA' + '</td>' +
+							'<td>' + listaEstudiante[i].CodCarrera + '</td>' +
+							'<td>' + listaEstudiante[i].Matricula + '</td>' +
+							'<td>' + listaEstudiante[i].Nombre + '</td>' +
+							'<td>' + listaEstudiante[i].NombreDos + '</td>' +
+							'<td>' + listaEstudiante[i].Apellido + '</td>' +
+							'<td>' + listaEstudiante[i].ApellidoDos + '</td>' +
+							'<td>' + listaEstudiante[i].Email + '</td>' +
+							'<td>' + listaEstudiante[i].Celular + '</td>' +
+							'<td>' + '<a type="button"  onclick="confEliminarEstudiante(this)" id="' + listaEstudiante[i].Matricula + '"></i> Eliminar</a>' + '</td>' +
+							'<td>' + '<a type="button"  onclick="editarEstudiante(this)" id="' + listaEstudiante[i].Matricula + '"></i> Actualizar</a>' + '</td>' +
+							'</tr>';
+
+						a++;
+					}
+
+					$("#tablaEstudiante").append(d);
+					$("#editEstudiante").css("display", "none");
+
+					$("#nombreEdit").val("");
+					$("#nombreDosEdit").val("");
+					$("#apellidoEdit").val("");
+					$("#apellidoDosEdit").val("");
+					$("#emailEdit").val("");
+					$("#celularEdit").val("");
+					$("#matriculaEdit").val("");
+
+					$('#loadUpdateEstudiante').css('display', 'none');
+
+				},
+				error: function () {
+
+				}
+			});
+		} else {
+
+			$('#loadUpdateEstudiante').css('display', 'none');
+		}
+	}
+
+
+
+	function eliminarEstudiante(codigo) {
+
+		$('#loadDeleteEstudiante').css('display', 'flex');
+
+		$.ajax({
+			url: "/SuperAdmin/eliminarEstudiante",
+			data: JSON.stringify({ Matricula: codigo }),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (listaEstudiante) {
+
+				$("#tablaEstudiante").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaEstudiante.length; i++) {
+
+
+					d += '<tr>' +
+						'<td>' + 'FICA' + '</td>' +
+						'<td>' + listaEstudiante[i].CodCarrera + '</td>' +
+						'<td>' + listaEstudiante[i].Matricula + '</td>' +
+						'<td>' + listaEstudiante[i].Nombre + '</td>' +
+						'<td>' + listaEstudiante[i].NombreDos + '</td>' +
+						'<td>' + listaEstudiante[i].Apellido + '</td>' +
+						'<td>' + listaEstudiante[i].ApellidoDos + '</td>' +
+						'<td>' + listaEstudiante[i].Email + '</td>' +
+						'<td>' + listaEstudiante[i].Celular + '</td>' +
+						'<td>' + '<a type="button"  onclick="confEliminarEstudiante(this)" id="' + listaEstudiante[i].Matricula + '"></i> Eliminar</a>' + '</td>' +
+						'<td>' + '<a type="button"  onclick="editarEstudiante(this)" id="' + listaEstudiante[i].Matricula + '"></i> Actualizar</a>' + '</td>' +
+						'</tr>';
+
+					a++;
+				}
+
+				$("#tablaEstudiante").append(d);
+
+
+
+				$('#loadDeleteEstudiante').css('display', 'none');
+				$('#btnConfirmarEstudiante').css('display', 'none');
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+
+
+	//INGRESAR ESTUDIANTE DESDE EXCEL
+	//enviar form data
+
+	$("#excelData").on("submit", function (e) {
+		e.preventDefault();
+		var f = $(this);
+		var formData = new FormData(document.getElementById("excelData"));
+		formData.append("dato", "valor");
+
+		$('#tablaEstudiante').html(
+			'<tr id="modalLoad" class="loadingTable"><td><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></td></tr>'
+		);
+
+		//formData.append(f.attr("name"), $(this)[0].files[0]);
+		$.ajax({
+			url: "/SuperAdmin/ingresoEstudianteExcel",
+			type: "post",
+			dataType: "json",
+			data: formData,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function (listaEstudiante) {
+
+
+
+				$("#tablaEstudiante").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaEstudiante.length; i++) {
+
+
+					d += '<tr>' +
+						'<td>' + 'FICA' + '</td>' +
+						'<td>' + listaEstudiante[i].CodCarrera + '</td>' +
+						'<td>' + listaEstudiante[i].Matricula + '</td>' +
+						'<td>' + listaEstudiante[i].Nombre + '</td>' +
+						'<td>' + listaEstudiante[i].NombreDos + '</td>' +
+						'<td>' + listaEstudiante[i].Apellido + '</td>' +
+						'<td>' + listaEstudiante[i].ApellidoDos + '</td>' +
+						'<td>' + listaEstudiante[i].Email + '</td>' +
+						'<td>' + listaEstudiante[i].Celular + '</td>' +
+						'<td>' + '<a type="button"  onclick="confEliminarEstudiante(this)" id="' + listaEstudiante[i].Matricula + '"></i> Eliminar</a>' + '</td>' +
+						'<td>' + '<a type="button"  onclick="editarEstudiante(this)" id="' + listaEstudiante[i].Matricula + '"></i> Actualizar</a>' + '</td>' +
+						'</tr>';
+
+					a++;
+				}
+
+				$("#tablaEstudiante").append(d);
+
+				$("#nombre").val("");
+				$("#nombreDos").val("");
+				$("#apellido").val("");
+				$("#apellidoDos").val("");
+				$("#email").val("");
+				$("#celular").val("");
+				$("#matricula").val("");
+
+				$('#loadInsertEstudiante').css('display', 'none');
+
+
+				$('#excelFile').val('');
+
+				formData = null;
+
+			},
+			error: function () {
+			
+			}
+		})
+			.done(function (res) {
+
+			
+
+			});
+
+	});
+
+
+
+	//input cedula
+
+	function inputMatricula(e) {
+
+
+		if (e.value === "") {
+			$(e).addClass('input-error');
+		}
+		if (e.value !== "") {
+			$(e).removeClass('input-error');
+		}
+	}
+
+	//input mayusculas
+
+	function inputMayuscula(e) {
+
+		e.value = e.value.toUpperCase();
+		if (e.value === "") {
+			$(e).addClass('input-error');
+		}
+		if (e.value !== "") {
+			$(e).removeClass('input-error');
+		}
+	}
+
+	function inputMayusculaD(e) {
+
+		e.value = e.value.toUpperCase();
+
+	}
+
+	function inputEmail(e) {
+		e.value = e.value.toLowerCase();
+
+		if (e.value === "") {
+			$(e).addClass('input-error');
+		}
+		if (e.value !== "") {
+			$(e).removeClass('input-error');
+		}
+	}
+
+	//validar estudiante
+
+	function validarEstudiante() {
+
+		var valido = false;
+
+
+
+		if ($("#email").val() === "") {
+
+			$("#email").addClass('input-error');
+			$("#emailError").text("*");
+		} else {
+			$("#email").removeClass('input-error');
+			$("#emailError").text("");
+		}
+
+		if ($("#matricula").val() === "") {
+
+			$("#matricula").addClass('input-error');
+			$("#matriculaError").text("*");
+
+		} else {
+			$("#matricula").removeClass('input-error');
+			$("#matriculaError").text("");
+		}
+
+		if ($("#nombre").val() === "") {
+
+			$("#nombre").addClass('input-error');
+			$("#nombreError").text("*");
+		} else {
+			$("#nombre").removeClass('input-error');
+			$("#nombreError").text("");
+		}
+
+		if ($("#apellido").val() === "") {
+
+			$("#apellido").addClass('input-error');
+			$("#apellidoError").text("*");
+
+		} else {
+			$("#apellido").removeClass('input-error');
+			$("#apellidoError").text("");
+		}
+
+		if ($("#email").val() !== "" && $("#matricula").val() !== "" && $("#nombre").val() !== "" && $("#apellido").val() !== "") {
+
+			valido = true;
+			return valido;
+		}
+
+
+		return valido;
+	}
+
+
+	//validar docente
+
+	function validarEstudianteEdit() {
+
+		var valido = false;
+
+
+
+		if ($("#emailEdit").val() === "") {
+
+			$("#emailEdit").addClass('input-error');
+			$("#emailErrorEdit").text("*");
+		} else {
+			$("#emailEdit").removeClass('input-error');
+			$("#emailErrorEdit").text("");
+		}
+
+		if ($("#matriculaEdit").val() === "") {
+
+			$("#matriculaEdit").addClass('input-error');
+			$("#matriculaErrorEdit").text("*");
+
+		} else {
+			$("#matriculaEdit").removeClass('input-error');
+			$("#matriculaErrorEdit").text("");
+		}
+
+		if ($("#nombreEdit").val() === "") {
+
+			$("#nombreEdit").addClass('input-error');
+			$("#nombreErrorEdit").text("*");
+		} else {
+			$("#nombreEdit").removeClass('input-error');
+			$("#nombreErrorEdit").text("");
+		}
+
+		if ($("#apellidoEdit").val() === "") {
+
+			$("#apellidoEdit").addClass('input-error');
+			$("#apellidoErrorEdit").text("*");
+
+		} else {
+			$("#apellidoEdit").removeClass('input-error');
+			$("#apellidoErrorEdit").text("");
+		}
+
+		if ($("#emailEdit").val() !== "" && $("#matriculaEdit").val() !== "" && $("#nombreEdit").val() !== "" && $("#apellidoEdit").val() !== "") {
+
+			valido = true;
+			return valido;
+		}
+
+
+		return valido;
+	}
+
+</script>

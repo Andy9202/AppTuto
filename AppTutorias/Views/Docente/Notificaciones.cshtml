@@ -1,0 +1,412 @@
+﻿@model List<AppTutorias.Models.Estudiante.Solicitud>
+
+
+<style>
+	.container-titulo {
+		padding: 20px 15px;
+	}
+
+	.mensajes {
+		padding: 10px 10px;
+		color: rgb(41,41,41);
+	}
+
+		.mensajes table {
+			font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+			width: 100%;
+			margin-top: 20px;
+			border-collapse: collapse;
+			background: rgb(240,240,240);
+		}
+
+
+
+		.mensajes td:first-child {
+			width: 50px;
+		}
+
+		.mensajes td:nth-child(2) {
+			width: 200px;
+		}
+
+
+
+		.mensajes th {
+			text-align: left;
+			padding: 10px 0;
+			font-size: 15px;
+		}
+
+		.mensajes td {
+			border-bottom: 1px solid rgb(180,180,180);
+			border-top: 1px solid rgb(180,180,180);
+			padding: 10px 0;
+			font-size: 15px;
+		}
+
+		.mensajes tbody tr {
+			cursor: pointer;
+		}
+
+			.mensajes tbody tr:hover {
+				background: rgb(250,250,250);
+				box-shadow: 0px 1px 2px rgb(160,160,160);
+			}
+
+
+	.modal {
+		position: absolute;
+		display: none;
+		padding: 200px 0;
+		justify-content: center;
+		top: 0;
+		left: 0;
+		z-index: 10;
+		width: 100%;
+		height: 1024px;
+		background: rgba(0,0,0,0.6);
+	}
+
+	.body-modal {
+		background: #fff;
+		width: auto;
+		height: 315px;
+		padding: 10px;
+		border: 1px solid rgba(0,0,0,1);
+	}
+
+		.body-modal div {
+			display: flex;
+			flex-flow: row wrap;
+		}
+
+	.active-modal {
+		display: flex;
+	}
+
+	.datos-solicitud {
+		display: flex;
+		flex-flow: column wrap;
+	}
+
+		.datos-solicitud li {
+			margin: 10px 0px 0 15px;
+		}
+
+		.datos-solicitud label {
+			font-weight: 600;
+		}
+
+	.body-footer {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: 20px;
+	}
+
+		.body-footer button {
+			margin-right: 5px;
+		}
+
+
+	.btnClose {
+		background-color: #57090C;
+		border: 1px solid #57090C;
+		color: white;
+		cursor: pointer;
+		padding: 7px;
+	}
+
+		.btnClose:hover {
+			background-color: white;
+			color: #57090C;
+		}
+
+	.btnConfirmar {
+		background-color: #237c00;
+		border: 1px solid #237c00;
+		color: white;
+		cursor: pointer;
+		padding: 7px;
+	}
+
+		.btnConfirmar:hover {
+			background-color: white;
+			color: #237c00;
+		}
+
+	@@media only screen and (max-width:760px) {
+
+
+
+	
+
+		.mensajes {
+			padding: 10px 10px;
+			color: rgb(41,41,41);
+		}
+
+			.mensajes td:first-child {
+				width: 15px;
+			}
+
+			.mensajes td:nth-child(2) {
+				width: 175px;
+			}
+
+		.body-modal {
+		
+			height: 600px;
+
+		}
+	}
+
+	@@media only screen and (min-width:769px) {
+		#app {
+			display: flex;
+			justify-content: center;
+		}
+		.container-mensajes {
+			margin-top: 20px;
+			width: 800px;
+			padding: 5px;
+			border: 1px solid #bababa;
+			box-shadow: 1px 1px 2px #e2e2e2;
+			margin-bottom: 50px;
+		}
+	}
+</style>
+
+<div class="container-mensajes">
+
+	<div class="container-titulo">
+		<h3>Mensajes</h3>
+		<br />
+		<p>=>Revisa las nuevas solicitudes de estudiantes que necesitan tu ayuda.</p>
+		<p>
+			=>Activa las tutorias la cual crees que estarás disponible,así el estudiante
+			pueda observar en su cronograma y asistir.
+		</p>
+		<p>=>Si no dispones de tiempo a la solicitu enviada, envia un mensaje al estudiante.</p>
+	</div>
+	<div class="mensajes">
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th>Nombre</th>
+					<th>Mensaje</th>
+					<th>Confirmado</th>
+				</tr>
+			</thead>
+			<tbody id="tablaNoti">
+				@foreach (var x in Model)
+				{
+
+					<tr onclick="confirmaTutoria('@x.Id_Solicitud','@x.NombreMateria','@x.CodigoMateria','@x.Estudiante','@x.Matricula','@x.CodigoModulo','@x.Hora','@String.Format("{0:yyyy-MM-dd}",x.Fecha)')">
+						<td></td>
+						<td>@x.Estudiante</td>
+						<td>@x.Mensaje</td>
+						<td id="@x.Id_Solicitud">@x.Confirmar</td>
+					</tr>
+				}
+			</tbody>
+
+		</table>
+	</div>
+
+	<div class="modal" id="modal">
+		<div class="body-modal">
+			<h4>¿Deseas confirmar la tutoria solicitada?, selecciona una fecha y presiona en confirmar, o cancela.</h4>
+			<small style="color:#fff;" id="sId"></small>
+			<div>
+				<ul class="datos-solicitud">
+
+
+					<li>
+						<label>Materia</label><br />
+						<small id="sMateria"></small>
+					</li>
+					<li>
+						<label>Codigo Materia</label><br />
+						<small id="sCodigoMateria"></small>
+					</li>
+
+					<li>
+						<label>Estudiante</label><br />
+						<small id="sEstudiante"></small>
+					</li>
+					<li>
+						<label>Matricula</label><br />
+						<small id="sMatricula"></small>
+					</li>
+					<li>
+						<label>Codigo Perido</label><br />
+						<small id="sCodigoPeriodo"></small>
+
+					</li>
+
+				</ul>
+				<ul class="datos-solicitud">
+					<li>
+						<label>Periodo</label><br />
+						<small id="sPeriodo"></small>
+
+					</li>
+
+					<li>
+						<label>Modulo</label><br />
+						<small id="sModulo"></small>
+					</li>
+
+					<li>
+						<label>Hora</label><br />
+						<small id="sHora"></small>
+					</li>
+					<li>
+						<label>Aula/Oficina</label><br />
+						<input id="aulaConf" placeholder="Lugar"/>
+					</li>
+					<li>
+						<label>Fecha</label><br />
+						<input type="date" id="fecha" />
+					</li>
+
+
+
+				</ul>
+			</div>
+			<div class="body-footer">
+				<button class="btnConfirmar" onclick="ingresarTutoriasDocenteSolicitud()">Confirmar</button>
+				<button class="btnClose" id="cerrarModal">Cancelar</button>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<script>
+
+	function confirmaTutoria(id_notificacion, materia, codigoMateria, estudiante, matricula, modulo, hora, fecha) {
+
+
+
+		if ($("#"+id_notificacion).text() === "NO") {
+			$('#modal').addClass('active-modal');
+
+			$('#sMateria').text(materia);
+			$('#sCodigoMateria').text(codigoMateria);
+			$('#sEstudiante').text(estudiante);
+			$('#sMatricula').text(matricula);
+			$('#sModulo').text(modulo);
+			$('#sHora').text(hora);
+			$('#sId').text(id_notificacion);
+			$('input[type=date]').val(fecha);
+
+			listaPeriodo();
+		}
+	}
+
+	//perido academico
+
+	function listaPeriodo() {
+		$.ajax({
+			url: "/SuperAdmin/listaPeriodo",
+			type: 'post',
+			datatype: 'application/json',
+			success: function (listaPeriodo) {
+
+
+
+
+				var codigo;
+				var periodo;
+				var a = 0;
+				for (var i = 0; i < listaPeriodo.length; i++) {
+
+
+					periodo = listaPeriodo[i].CodigoPeriodo;
+					codigo = listaPeriodo[i].NombrePeriodo;
+					a++;
+				}
+
+				$("#sPeriodo").text(periodo);
+				$("#sCodigoPeriodo").text(codigo);
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+	//Confirmar tutoria del estudiante solicitada
+
+
+	function ingresarTutoriasDocenteSolicitud() {
+
+		$('#modal').removeClass('active-modal');
+
+		var confirma = "SI";
+
+		var horarioTutorias = {
+			Matricula: $('#sMatricula').text(),
+			CodigoModulo: $('#sModulo').text(),
+			CodigoMateria: $('#sCodigoMateria').text(),
+			Fecha: $("#fecha").val(),
+			CodigoPeriodo: $("#sPeriodo").text(),
+			Aula: $("#aulaConf").val(),
+			EstadoObligatorio: confirma
+			
+
+
+		};
+
+		var objeto = {
+			Id_notificacion: $('#sId').text(),
+			Confirma: confirma,
+			horarioTutorias: horarioTutorias
+		};
+
+
+		$.ajax({
+			url: "/Docente/confirmaSolicitud",
+			data: objeto,
+			type: "POST",
+			success: function (listaSolicitudes) {
+
+				$("#tablaNoti").empty();
+
+				var d;
+
+				for (var i = 0; i < listaSolicitudes.length; i++) {
+
+					var datos = "'" + listaSolicitudes[i].Id_Solicitud + "','" + listaSolicitudes[i].NombreMateria + "','" + listaSolicitudes[i].CodigoMateria + "','" + listaSolicitudes[i].Estudiante + "','" + listaSolicitudes[i].Matricula + "','" + listaSolicitudes[i].CodigoModulo + "','" + listaSolicitudes[i].Hora + "'";
+
+					d += '<tr onclick="confirmaTutoria(' + datos + ')">' +
+						'<td></td>' +
+						'<td>' + listaSolicitudes[i].Estudiante + '</td>' +
+						'<td>' + listaSolicitudes[i].Mensaje + '</td>' +
+						'<td>' + listaSolicitudes[i].Confirmar + '</td>' +
+						+'</tr>';
+				}
+
+				$("#tablaNoti").append(d);
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+
+	//cierra el modal de confirmacioin
+	$('#cerrarModal').on('click', function () {
+		$('#modal').removeClass('active-modal');
+	});
+</script>
+
+

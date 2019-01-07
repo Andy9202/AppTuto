@@ -1,0 +1,92 @@
+
+@model List<AppTutorias.Models.Docente.horarioClaseDocente>
+@{
+
+
+
+    List<AppTutorias.Models.SuperAdmin.Materia.materia> listaMaterias = new List<AppTutorias.Models.SuperAdmin.Materia.materia>();
+
+    string[] dias = new string[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
+
+
+
+    foreach (var materias in Model)
+    {
+
+
+
+        if (listaMaterias.Any(x => x.CodigoMateria == materias.CodigoMateria) == false)
+        {
+
+
+
+            AppTutorias.Models.SuperAdmin.Materia.materia materia = new AppTutorias.Models.SuperAdmin.Materia.materia();
+
+
+            materia.CodigoMateria = materias.CodigoMateria;
+            materia.NombreMateria = materias.NombreMateria;
+
+
+            listaMaterias.Add(materia);
+        }
+
+    }
+
+
+    
+
+
+    }
+
+
+
+<!-- CONTAINER TARJETAS MATERIAS -->
+<div class="container-cards">
+    <!-- TARJETAS DE MATERIAS -->
+
+    @foreach (var consulta in listaMaterias.Distinct())
+    {
+
+
+        <div class="container-card">
+            <div class="header-card">
+                <div>
+                    <h4>@consulta.NombreMateria</h4>
+                    <h5>@consulta.CodigoFacultad @consulta.CodigoCarrera</h5>
+                </div>
+                <div>
+                    <p>Codigo Materia</p>
+                    <h2>@consulta.CodigoMateria</h2>
+                </div>
+            </div>
+            <div class="body-card">
+              
+
+               
+                        @foreach (var dia in dias)
+                        {
+                            <div>
+                                <h5>@dia</h5>
+                                @foreach (var horarios in Model)
+                                {
+
+                                    if (consulta.CodigoMateria == horarios.CodigoMateria)
+                                    {
+                                        if (horarios.Dia == dia)
+                                        {
+
+                                                <ul class="list-inline">
+                                                    <li>@horarios.HoraInicio-@horarios.HoraFin</li>
+                                                    <li><b>@horarios.Aula/@horarios.Paralelo</b></li>
+                                                </ul>
+                                        }
+                                    }
+                                }
+
+                            </div>
+                        }
+           
+            </div>
+        </div>
+    }
+</div>

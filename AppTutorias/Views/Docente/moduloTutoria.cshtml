@@ -1,0 +1,387 @@
+<style>
+    .container-tutoria {
+        margin-top:10px;
+        width:100%;
+    }
+
+    button {
+        background-color: #57090C;
+        border: 1px solid #57090C;
+        color:white;
+        cursor:pointer;
+        padding:7px;
+    }
+        button:hover {
+            background-color: white;
+            color: #57090C;
+        }
+
+	.container-ingreso-tuto {
+		background:#141414;
+		color:white;
+	}
+
+		.container-ingreso-tuto li {
+			padding-top:8px;
+			padding-bottom:2px;
+		}
+
+		.container-ingreso-tuto input, select {
+			background: #fff;
+		}
+
+	@@media only screen and (max-width: 768px) {
+
+		.lista-tuto {
+			display: flex;
+			flex-flow: column wrap;
+			padding: 5px;
+		}
+			.lista-tuto input, select {
+				width:100%;
+				
+			}
+
+			.lista-tuto button {
+				width:100%;
+				margin-top:10px;
+			}
+	}
+</style>
+
+
+
+<div class="container-tutoria">
+     <div class="container-ingreso-tuto">
+         <ul class="lista-tuto">
+
+             <li>
+                 <label for="">Estudiante</label><br />
+                 <select id="listaEstudiantes" onchange="listaMateriasEstudianteDocente()"></select>
+             </li>
+             <li>
+                 <label for="">Materia</label><br />
+                 <select id="listaMateria"></select>
+             </li>
+             <li>
+                 <label for="">Modulo</label><br />
+                 <select id="listaModulos"></select>
+             </li>
+             <li>
+                 <label for="">Obligatorio</label><br />
+                 <select id="listaObligatorio">
+					  <option value="SI">SI</option>
+                     <option value="NO">NO</option>
+                    
+                 </select>
+             </li>
+
+             <li>
+                 <label for="">Periodo Academico</label><br />
+                 <select id="listaPeriodo"></select>
+             </li>
+             <li>
+                 <label for="">Aula/Oficina</label><br />
+                 <input placeholder="Aula" id="aulaTuto" />
+             </li>
+			 <li>
+				 <label>Fecha</label>
+				 <input type="date" id="fecha" value="@String.Format("{0:yyyy-MM-dd}",DateTime.Now)"/>
+			 </li>
+
+             <li>
+                 <button class="success" onclick="ingresarTutoriasDocente()">Ingresar</button>
+             </li>
+         </ul>
+    </div>
+    <div class="table-carrera container-scroll">
+		<br />
+		<h4>Tabla de tutorias actuales</h4>
+        <table>
+            <thead>
+				<tr>
+					<th>Matricula</th>
+					<th>Estudiante</th>
+					<th>Cod Materia</th>
+					<th>Materia</th>
+					<th>Modulo</th>
+					<th>Periodo</th>
+					<th>Estado Obligatorio</th>
+					<th>Fecha</th>
+					<th>Aula</th>
+					<th>Asistencia</th>
+
+
+					@*<th>Accion</th>*@
+				</tr>
+            </thead>
+            <tbody id="tablaHorarioTutorias">
+              
+            </tbody>
+
+
+        </table>
+    </div>
+
+</div>
+
+
+
+
+
+<script>
+
+    $(document).ready(function () {
+
+        listaEstudiantesDocente();
+        listaModulosDocenteLogin();
+        listaPeriodo();
+		tablaHorarioTutoriasDocente();
+	
+
+
+    });
+
+    function listaEstudiantesDocente() {
+
+
+        $.ajax({
+            url: "/Docente/estudiantesMateriaDocente",
+            data: JSON.stringify({ CodigoMateria: $("#materiasDocente").val() }),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (listaEstudiantes) {
+
+                $("#listaEstudiantes").empty();
+
+
+                var d;
+                var a = 0;
+                for (var i = 0; i < listaEstudiantes.length; i++) {
+
+
+                    d += '<option ' +
+                        'value="' + listaEstudiantes[i].Matricula + '" ' +
+                        '>' + listaEstudiantes[i].Estudiante + '</option>';
+
+                    a++;
+                }
+
+                $("#listaEstudiantes").append(d);
+
+				listaMateriasEstudianteDocente();
+			
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    function listaModulosDocenteLogin() {
+        $.ajax({
+            url: "/Docente/listaModulosDocente",
+            type: 'post',
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (listaModulos) {
+
+                $("#listaModulos").empty();
+
+
+                var d;
+                var a = 0;
+                for (var i = 0; i < listaModulos.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaModulos[i].CodigoModulo + '" ' +
+						'>' + listaModulos[i].CodigoModulo + ' ' + listaModulos[i].Dia + ' ' + listaModulos[i].HoraInicio + ' - ' + listaModulos[i].HoraFin + '</option>';
+
+                    a++;
+                }
+
+                $("#listaModulos").append(d);
+
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+
+    function listaMateriasEstudianteDocente() {
+        $.ajax({
+            url: "/Docente/listaMateriasEstudiante",
+            type: 'post',
+            data: JSON.stringify({ Matricula: $("#listaEstudiantes").val() }),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (listaMaterias) {
+
+                $("#listaMateria").empty();
+
+
+                var d;
+                var a = 0;
+                for (var i = 0; i < listaMaterias.length; i++) {
+
+
+                    d += '<option ' +
+                        'value="' + listaMaterias[i].CodigoMateria + '" ' +
+                        '>' + listaMaterias[i].NombreMateria + '</option>';
+
+                    a++;
+                }
+
+                $("#listaMateria").append(d);
+			
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+
+    function listaPeriodo() {
+        $.ajax({
+            url: "/SuperAdmin/listaPeriodo",
+            type: 'post',
+            datatype: 'application/json',
+            success: function (listaPeriodo) {
+
+                $("#listaPeriodo").empty();
+
+
+                var d;
+                var a = 0;
+                for (var i = 0; i < listaPeriodo.length; i++) {
+
+
+                    d += '<option ' +
+                        'value="' + listaPeriodo[i].CodigoPeriodo + '" ' +
+                        '>' + listaPeriodo[i].NombrePeriodo + '</option>';
+
+                    a++;
+                }
+
+				$("#listaPeriodo").append(d);
+
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+
+    function tablaHorarioTutoriasDocente() {
+
+
+        $.ajax({
+            url: "/Docente/listaTutoriasDocente",
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (listaHorariosTutorias) {
+
+                $("#tablaHorarioTutorias").empty();
+
+
+
+                var d;
+                var a = 0;
+                for (var i = 0; i < listaHorariosTutorias.length; i++) {
+
+                    var datos = "'" + listaHorariosTutorias[i].Id_HorarioTutorias + "'";
+
+                    d += '<tr>' +
+                        '<td>' + listaHorariosTutorias[i].Matricula + '</td>' +
+                        '<td>' + listaHorariosTutorias[i].NombreEstudiante + '</td>' +
+                        '<td>' + listaHorariosTutorias[i].CodigoMateria + '</td>' +
+                        '<td>' + listaHorariosTutorias[i].NombreMateria + '</td>' +
+                        '<td>' + listaHorariosTutorias[i].Modulo + '</td>' +
+                        '<td>' + listaHorariosTutorias[i].CodigoPeriodo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].EstadoObligatorio + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Fecha + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Aula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Asistencia + '</td>' +
+						
+                        '<td>' + '<button   onclick="confirmarAsistencia(' + datos + ')" ></i> Confirmar Asistencia</button>' + '</td>' +
+                        '</tr>';
+
+                    a++;
+                }
+
+
+
+                $("#tablaHorarioTutorias").append(d);
+
+            },
+            error: function () {
+
+            }
+        });
+	}
+
+
+
+	function confirmarAsistencia(e) {
+
+		$('#tablaHorarioTutorias').html(
+			'<tr id="modalLoad" class="loadingTable"><td><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></td></tr>'
+		);
+
+		$.ajax({
+			url: "/Docente/confirmarAsistencia",
+			type: "POST",
+			data: {Id:e},
+			success: function (listaHorariosTutorias) {
+
+				$("#tablaHorarioTutorias").empty();
+
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaHorariosTutorias.length; i++) {
+
+					var datos = "'" + listaHorariosTutorias[i].Id_HorarioTutorias + "'";
+
+					d += '<tr>' +
+						'<td>' + listaHorariosTutorias[i].Matricula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreEstudiante + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Modulo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoPeriodo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].EstadoObligatorio + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Fecha + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Aula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Asistencia + '</td>' +
+
+						'<td>' + '<button   onclick="confirmarAsistencia(' + datos + ')" ></i> Confirmar Asistencia</button>' + '</td>' +
+						'</tr>';
+
+					a++;
+				}
+
+
+
+				$("#tablaHorarioTutorias").append(d);
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+
+</script>

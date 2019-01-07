@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LoginDocente</title>
+
+    <style>
+        * {
+            padding:0;
+            margin:0;
+        }
+
+        body {
+            background-color: #57090c;
+            color:white;
+        }
+
+        input {
+            padding: 7px;
+            border: 0px solid #cdcdcd;
+            font-size: 16px;
+            font-weight: bold;
+            color: #666;
+        }
+
+
+        button {
+            margin-top: 20px;
+            background-color: #57090c;
+            border: 1px solid white;
+            border-radius: 1px;
+            padding: 7px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+        }
+
+            button:hover {
+                background-color: white;
+                border: 1px solid white;
+                color: #57090c;
+            }
+        .container-login {
+            position:relative;
+            width:100%;
+            display:flex;
+            justify-content:center;
+        }
+
+        .form-login {
+            position:absolute;
+            display:flex;
+            flex-flow:column wrap;
+            margin-top:200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-login">
+        <form class="form-login"action="/Docente/validarLogin" method="post" name="formLogin" onsubmit="return validoLogin();" >
+            <img src="~/Content/img/logotipo.png" />
+            <label>Correo</label>
+            <input id="correo" name="EmailUsuario" placeholder="Correo" />
+            <label>Contrase&ntilde;a</label>
+            <input id="contrasena" name="Pass" placeholder="Contrase&ntilde;a" />
+            <button>Ingresar</button>
+        </form>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/js")
+
+</body>
+</html>

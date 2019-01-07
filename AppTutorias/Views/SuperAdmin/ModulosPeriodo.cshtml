@@ -1,0 +1,441 @@
+@model AppTutorias.Models.masterModuloPeriodo
+
+<style>
+	.loadUpdate {
+		display: none;
+		justify-content: center;
+	}
+</style>
+
+
+<div class="container-admin">
+	<img src="~/Content/img/fondo_1.jpg" alt="" width="100%;">
+	<h3>Modulos/Periodo Academico</h3>
+	<p>Esta seccion contiene todos los modulos(horas de clase) de la universidad, asi como el periodo actual de la misma.</p>
+	<br />
+	<h3>Modulos</h3>
+	<p>Ingresa o elimine los modulos actuales de la Universidad</p>
+	<br />
+	<div class="form-carrera">
+		<ul class="list-inline">
+
+			<li>
+				<label for="">Codigo Modulo</label><br />
+				<input type="text" id="codigoModulo">
+			</li>
+			<li>
+				<label for="">Dia</label><br />
+				<select id="dia">
+					<option value="Lunes">Lunes</option>
+					<option value="Martes">Martes</option>
+					<option value="Miercoles">Miercoles</option>
+					<option value="Jueves">Jueves</option>
+					<option value="Viernes">Viernes</option>
+					<option value="Sabado">Sabado</option>
+				</select>
+			</li>
+			<li>
+				<label for="">Hora Inicio</label><br />
+				<input type="time" id="horaInicio">
+			</li>
+			<li>
+				<label for="">Hora Fin</label><br />
+				<input type="time" id="horaFin">
+			</li>
+
+			<li>
+				<button class="success" onclick="ingresarModulo()">Ingresar</button>
+			</li>
+
+			<li>
+				<span id="loadInsertModulo" class="loadUpdate" style="color:#fff;"><i class="fas fa-spinner fa-spin"></i> Ingresando...</span>
+			</li>
+		</ul>
+	</div>
+	<div class="table-carrera">
+		<br />
+		<h4>Tabla de Modulos(horas de clase) Actuales</h4>
+		<table>
+			<thead>
+				<tr>
+					<th>Codigo Modulo</th>
+					<th>Dia</th>
+					<th>Hora Inicio</th>
+					<th>Hora Fin</th>
+					<th>Accion</th>
+				</tr>
+			</thead>
+			<tbody id="tablaModulo">
+				@foreach (var consulta in Model.listaModulo)
+				{
+					<tr>
+						<td>@consulta.CodigoModulo</td>
+						<td>@consulta.Dia</td>
+						<td>@consulta.HoraInicio</td>
+						<td>@consulta.HoraFin</td>
+						<td><a onclick="confEliminarModulo(this)" id="@consulta.CodigoModulo">Eliminar</a></td>
+
+					</tr>
+				}
+			</tbody>
+
+
+		</table>
+	</div>
+
+
+</div>
+
+<div class="container-admin">
+	<h3>Periodo Academico</h3>
+	<p>Ingrese el periodo actual de clases de la universidad</p>
+	<br />
+	<div class="form-carrera">
+		<ul class="list-inline">
+
+			<li>
+				<label for="">Codigo Periodo Academico </label><br />
+				<input type="text" id="codigoPeriodo">
+			</li>
+			<li>
+				<label for="">Nombre Periodo Academico</label><br />
+				<input type="text" id="nombrePeriodo">
+			</li>
+
+			<li>
+				<button class="success" onclick="ingresarPeriodo()">Ingresar</button>
+			</li>
+
+			<li>
+				<span id="loadInsertPeriodo" class="loadUpdate" style="color:#fff;"><i class="fas fa-spinner fa-spin"></i> Ingresando...</span>
+			</li>
+		</ul>
+	</div>
+	<div class="table-carrera">
+		<br />
+		<h4>Periodo actual de estudio de la universidad</h4>
+		<table>
+			<thead>
+				<tr>
+					<th>Codigo Periodo Academico</th>
+					<th>Nombre Periodo Academico</th>
+					<th>Accion</th>
+				</tr>
+			</thead>
+			<tbody id="tablaPeriodo">
+				@foreach (var consulta in Model.listaPeriodo)
+				{
+					<tr>
+						<td>@consulta.CodigoPeriodo</td>
+						<td>@consulta.NombrePeriodo</td>
+						<td><a onclick="confEliminarPeriodo(this)" id="@consulta.CodigoPeriodo">Eliminar</a></td>
+
+					</tr>
+				}
+			</tbody>
+
+
+		</table>
+	</div>
+</div>
+
+
+<div id="btnConfirmarModulo" class="container-confirmacion">
+	<div>
+		<h4>¿Está seguro que desea eliminar el Modulo seleccionado?</h4>
+		<br />
+		<button class="btnSi" id="btnSiModulo">SI</button>
+		<button class="btnNo" id="btnNoModulo">NO</button>
+		<br />
+		<span id="loadDeleteModulo" class="loadUpdate"><i class="fas fa-spinner fa-spin"></i> Eliminando...</span>
+
+	</div>
+
+
+</div>
+
+<div id="btnConfirmarPeriodo" class="container-confirmacion">
+	<div>
+		<h4>¿Está seguro que desea eliminar el Periodo seleccionado?</h4>
+		<br />
+		<button class="btnSi" id="btnSiPeriodo">SI</button>
+		<button class="btnNo" id="btnNoPeriodo">NO</button>
+		<br />
+		<span id="loadDeletePeriodo" class="loadUpdate"><i class="fas fa-spinner fa-spin"></i> Eliminando...</span>
+
+	</div>
+
+
+</div>
+
+
+
+<script>
+
+	///CONFIRMACIONES MODULO
+	var cod = "";
+	function confEliminarModulo(codigo) {
+
+		$('#loadDeleteModulo').css('display', 'none');
+		$('#btnConfirmarModulo').css('display', 'flex');
+
+		cod = codigo.id;
+
+
+	}
+
+	$('#btnSiModulo').on('click', function () {
+
+		eliminarModulo(cod);
+
+		cod = "";
+	});
+
+	$('#btnNoModulo').on('click', function () {
+
+
+		$('#btnConfirmarModulo').css('display', 'none');
+		cod = "";
+	});
+
+	///CONFIRMACIONES PERIODO
+	var codP = "";
+	function confEliminarPeriodo(codigo) {
+
+		$('#loadDeletePeriodo').css('display', 'none');
+		$('#btnConfirmarPeriodo').css('display', 'flex');
+
+		codP = codigo.id;
+
+
+	}
+
+	$('#btnSiPeriodo').on('click', function () {
+
+		eliminarPeriodo(codP);
+
+		codP = "";
+	});
+
+	$('#btnNoPeriodo').on('click', function () {
+
+
+		$('#btnConfirmarPeriodo').css('display', 'none');
+		cod = "";
+	});
+
+
+
+
+
+
+</script>
+
+<script>
+
+
+	///MODULOS 
+
+	//----------------ingresar modulo-------
+
+
+	function ingresarModulo() {
+
+		$('#loadInsertModulo').css('display', 'flex');
+
+		var modulo = {
+			HoraInicio: $("#horaInicio").val(),
+			HoraFin: $("#horaFin").val(),
+			CodigoModulo: $("#codigoModulo").val(),
+			Dia: $("#dia").val()
+		};
+
+
+		$.ajax({
+			url: "/SuperAdmin/ingresarModulo",
+			data: JSON.stringify(modulo),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (listaModulo) {
+
+				$("#tablaModulo").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaModulo.length; i++) {
+
+					d += '<tr>' +
+						'<td>' + listaModulo[i].CodigoModulo + '</td>' +
+						'<td>' + listaModulo[i].Dia + '</td>' +
+						'<td>' + listaModulo[i].HoraInicio + '</td>' +
+						'<td>' + listaModulo[i].HoraFin + '</td>' +
+						'<td>' + '<a type="button"  onclick="confEliminarModulo(this)" id="' + listaModulo[i].CodigoModulo + '"></i> Eliminar</a>' + '</td>' +
+						'</tr>';
+
+					a++;
+				}
+
+
+
+				$("#tablaModulo").append(d);
+
+				$("#horaInicio").val("");
+				$("#horaFin").val("");
+				$("#codigoModulo").val("");
+
+				$('#loadInsertModulo').css('display', 'none');
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	//eliminar modulo
+	function eliminarModulo(codigo) {
+
+		$('#loadDeleteModulo').css('display', 'flex');
+
+		$.ajax({
+			url: "/SuperAdmin/eliminarModulo",
+			data: JSON.stringify({ CodigoModulo: codigo }),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (listaModulo) {
+
+				$("#tablaModulo").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaModulo.length; i++) {
+
+					d += '<tr>' +
+						'<td>' + listaModulo[i].CodigoModulo + '</td>' +
+						'<td>' + listaModulo[i].Dia + '</td>' +
+						'<td>' + listaModulo[i].HoraInicio + '</td>' +
+						'<td>' + listaModulo[i].HoraFin + '</td>' +
+						'<td>' + '<a type="button"  onclick="confEliminarModulo(this)" id="' + listaModulo[i].CodigoModulo + '"></i> Eliminar</a>' + '</td>' +
+						'</tr>';
+
+					a++;
+				}
+
+
+
+				$("#tablaModulo").append(d);
+
+
+				$('#loadDeleteModulo').css('display', 'none');
+				$('#btnConfirmarModulo').css('display', 'none');
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+</script>
+
+<script>
+
+
+	//PERIODO ACADMEICO
+	function ingresarPeriodo() {
+
+		$('#loadInsertPeriodo').css('display', 'flex');
+		var periodo = {
+			CodigoPeriodo: $("#codigoPeriodo").val(),
+			NombrePeriodo: $("#nombrePeriodo").val()
+		};
+
+
+		$.ajax({
+			url: "/SuperAdmin/ingresarPeriodo",
+			data: JSON.stringify(periodo),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (listaPeriodo) {
+
+				$("#tablaPeriodo").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaPeriodo.length; i++) {
+
+					d += '<tr>' +
+						'<td>' + listaPeriodo[i].CodigoPeriodo + '</td>' +
+						'<td>' + listaPeriodo[i].NombrePeriodo + '</td>' +
+						'<td>' + '<a type="button"  onclick="confEliminarPeriodo(this)" id="' + listaPeriodo[i].CodigoPeriodo + '"></i> Eliminar</a>' + '</td>' +
+						'</tr>';
+
+					a++;
+				}
+
+
+
+				$("#tablaPeriodo").append(d);
+
+				$("#codigoPeriodo").val("");
+				$("#nombrePeriodo").val("");
+
+				$('#loadInsertPeriodo').css('display', 'none');
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+	function eliminarPeriodo(codigo) {
+
+		$('#loadDeletePeriodo').css('display', 'flex');
+
+		$.ajax({
+			url: "/SuperAdmin/eliminarPeriodo",
+			data: JSON.stringify({ CodigoPeriodo: codigo }),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (listaPeriodo) {
+
+				$("#tablaPeriodo").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaPeriodo.length; i++) {
+
+					d += '<tr>' +
+						'<td>' + listaPeriodo[i].CodigoPeriodo + '</td>' +
+						'<td>' + listaPeriodo[i].NombrePeriodo + '</td>' +
+						'<td>' + '<a type="button"  onclick="confEliminarPeriodo(this)" id="' + listaPeriodo[i].CodigoPeriodo + '"></i> Eliminar</a>' + '</td>' +
+						'</tr>';
+
+					a++;
+				}
+
+
+
+				$("#tablaPeriodo").append(d);
+
+
+				$('#loadDeletePeriodo').css('display', 'none');
+				$('#btnConfirmarPeriodo').css('display', 'none');
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+</script>

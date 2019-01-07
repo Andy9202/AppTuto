@@ -1,0 +1,250 @@
+
+<style>
+
+    .container-select {
+        margin-top:10px;
+        padding:20px;
+
+    }
+
+        .container-select label {
+            font-size:16px;
+            font-weight:bold;
+        }
+    select,input {
+        margin-top:10px;
+        padding:5px;
+        font-weight:bold;
+		background:#fff;
+
+    }
+
+    table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin-top:10px;
+    }
+
+     td, table  {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        table tr:hover {
+            background-color: #ddd;
+        }
+
+    table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #57090C;
+        color: white;
+    }
+
+    a {
+        cursor: pointer;
+        font-weight: bold;
+        color: #57090C;
+        margin-top:20px;
+        margin-left:10px;
+        border-bottom:1px solid #57090C;
+    }
+        a:hover {
+            color:#333;
+        }
+
+	.container-estudiantes {
+		padding:5px;
+	}
+
+	.container-scroll{
+		overflow-x:scroll;
+	}
+
+
+	@@media only screen and (min-width: 769px) {
+		#app {
+			display:flex;
+			justify-content:center;
+		}
+		.container-estudiantes {
+			margin-top:20px;
+			width:800px;
+			padding:5px;
+			border:1px solid #bababa;
+			box-shadow:1px 1px 2px #e2e2e2;
+			margin-bottom:50px;
+		}
+
+		.lista-tuto {
+			display: flex;
+			flex-flow: column wrap;
+			justify-content:center;
+			padding: 5px;
+			padding:15px 20%;
+
+		}
+
+			.lista-tuto input, select {
+				width: 100%;
+			}
+	}
+</style>
+
+<div class="container-estudiantes">
+	<br />
+	<h4>Estudiantes actuales</h4><br />
+	<p>
+		Conoce tus estudiantes actuales, revisa el nuemero de matricula que contienen en cada una de tus materias y asigna tutorias necesarias
+		para los mismos.
+	</p>
+
+	<div class="container-select">
+		<ul>
+			<li>
+				<label for="">Materias</label>
+				<p>Selecciona una meteria, analiza los estudiantes que contienen un numero de matricula superior a uno(color rojo).</p>
+				<br />
+				<select id="materiasDocente" onchange="tablaEstudiantesDocente()"></select>
+			</li>
+
+		</ul>
+
+	</div>
+
+	<div class="container-scroll">
+		<br />
+		<h4>Numero de Matricula de los estudiantes perteneciente a la materia seleccionada.</h4>
+		<table>
+			<thead>
+				<tr>
+					<th>Matricula</th>
+					<th>Estudiante</th>
+					<th>Datos</th>
+					<th>Cod Materia</th>
+					<th>Materia</th>
+					<th>Repitencia</th>
+					@*<th>Accion</th>*@
+				</tr>
+			</thead>
+			<tbody id="tablaEstudiantesDocente"></tbody>
+
+
+		</table>
+	</div><br />
+	<div>
+		<a onclick="tutoriaEstudianteDocente()">Asignar Tutoria</a>
+		<p>Seleccioan un estudiante de la materia que impartes para establecer una tutoria con el mismo, selecciona un paralaleo un aula y una fecha 
+		para que el estudiante pueda asistir.</p>
+	</div>
+
+	<div id="tutoriaDocente">
+
+	</div>
+
+
+</div>
+
+
+
+<script>
+
+    $(document).ready(function () {
+
+        listaMateriasDocente();
+    });
+
+
+    function listaMateriasDocente() {
+        $.ajax({
+            url: "/Docente/listaMateriasDocente",
+            type: 'post',
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (listaMaterias) {
+
+                $("#materiasDocente").empty();
+
+
+                var d;
+                var a = 0;
+                for (var i = 0; i < listaMaterias.length; i++) {
+
+
+                    d += '<option ' +
+                        'value="' + listaMaterias[i].CodigoMateria + '" ' +
+                        '>' + listaMaterias[i].NombreMateria + '</option>';
+
+                    a++;
+                }
+
+                $("#materiasDocente").append(d);
+
+                tablaEstudiantesDocente();
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    function tablaEstudiantesDocente() {
+
+     
+
+        $.ajax({
+            url: "/Docente/estudiantesMateriaDocente",
+            data: JSON.stringify({ CodigoMateria: $("#materiasDocente").val()}),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (listaEstudiantes) {
+
+                $("#tablaEstudiantesDocente").empty();
+
+
+
+                var d;
+                var a = 0;
+                for (var i = 0; i < listaEstudiantes.length; i++) {
+
+					var style;
+					if (listaEstudiantes[i].Repitencia > 1) {
+
+						style = 'style="background:#ff3333"';
+					} else {
+						style = 'style="background:#00ff55"';
+					
+					}
+
+					d += '<tr>' +
+						'<td>' + listaEstudiantes[i].Matricula + '</td>' +
+						'<td>' + listaEstudiantes[i].Estudiante + '</td>' +
+						'<td>' + listaEstudiantes[i].EstudianteDatos + '</td>' +
+						'<td>' + listaEstudiantes[i].CodigoMateria + '</td>' +
+						'<td>' + listaEstudiantes[i].NombreMateria + '</td>' +
+						'<td ' + style + '>' + listaEstudiantes[i].Repitencia + '</td>' +
+						//'<td>' + listaEstudiantes[i].Horario + '</td>' +
+						//'<td>' + listaEstudiantes[i].Periodo + '</td>' +
+						'</tr>';
+
+                    a++;
+                }
+
+
+
+                $("#tablaEstudiantesDocente").append(d);
+				tutoriaEstudianteDocente();
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+
+
+
+</script>

@@ -1,0 +1,58 @@
+﻿@{
+
+	Layout = "~/Views/Account/_MasterAccount.cshtml";
+	ViewBag.Title = "Cerrar sesión";
+}
+
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+		font-family: 'Roboto', sans-serif;
+	}
+
+	a {
+		text-decoration: none;
+		color: white;
+		margin-top: 20px;
+		padding: 10px;
+		border: 1px solid rgb(128, 128, 128);
+		background-color: rgb(128, 128, 128);
+		cursor: pointer;
+		font-weight:300;
+	}
+
+		a:hover {
+			color: #57090C;
+			background:#fff;
+		}
+
+	.container_login {
+		display: flex;
+		flex-flow: column;
+		align-items: center;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		padding-top: 10%;
+		background-color: #57090C;
+		color: #fff;
+	}
+
+		.container_login h3 {
+			
+			padding:15px;
+			font-weight:400;
+		}
+
+		.container_login div {
+			margin: 10px;
+		}
+</style>
+
+
+<div class="container_login">
+	<div><img src="~/Content/img/logotipo_positivo.png" alt=""></div>
+	<div><h3>Udla Tuto-App</h3></div>
+	<div><a href="/Account/SignIn">Ingresar con Microsoft</a></div>
+</div>

@@ -1,0 +1,314 @@
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/SuperAdmin/MasterSuperAdmin.cshtml";
+}
+
+<style>
+	
+
+	.modalLoading {
+		display:flex;
+		z-index:20;
+		background: rgba(106, 12, 12, 1);
+
+		height: 800px;
+		margin-left:300px;
+		justify-content: center;
+		align-items: center;
+	}
+
+		.modalLoading div {
+			width: 200px;
+			height: 50px;
+			color: white;
+			text-align:center;
+		}
+
+		.modalLoading span {
+			font-size: 20px;
+		}
+
+	.container-confirmacion {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 20;
+		display: none;
+		width: 100%;
+		height: 800px;
+		justify-content: center;
+		background: rgba(0, 0, 0,0.4);
+	}
+
+		.container-confirmacion div {
+			margin-top:250px;
+			padding:15px;
+			background:#fff;
+			width: 300px;
+			height: 100px;
+			color: rgb(41, 41, 41);
+			text-align: center;
+			border:1px solid #0c0c0c;
+			border-radius:3px;
+		}
+
+
+
+	.btnSi {
+		border: none;
+		background: none;
+		color: rgb(41, 41, 41);
+		width:50px;
+	}
+
+		.btnSi:hover {
+			color: #fff;
+			background: rgb(26, 120, 0);
+			border: 1px solid #cdcdcd;
+		}
+
+	.btnNo {
+		border: none;
+		background: none;
+		color: rgb(41, 41, 41);
+		width: 50px;
+	}
+
+		.btnNo:hover {
+			color: #fff;
+			background: rgb(168, 26, 26);
+			border: 1px solid #cdcdcd;
+		}
+
+	#app {
+		
+		width:100%;
+	}
+
+	.cover_sadmin {
+		margin-left:300px;
+		padding:15px;
+		text-align:center;
+	}
+		
+</style>
+
+<div id="app" >
+	<div class="cover_sadmin" >
+		<h1>Bienvenido al Sistema de Tutorias de la UDLA</h1>
+		<h4>Navega por el panel lateral, y realiza las diferentes opciones del sistema.</h4><br />
+		<img src="~/Content/img/udla_sadmin.jpg"/>
+	</div>
+</div>
+
+
+
+
+
+
+
+<script>	
+
+</script>
+
+@section scripts{
+	<script>
+
+	
+		//facultad
+		function facultad() {
+
+			mostrarLoading();
+
+			$.ajax({
+				url: "/SuperAdmin/Facultad",
+				type: 'post',
+				datatype: 'application/json',
+				success: function (data) {
+
+					$("#app").html(data);
+
+					
+				},
+				error: function () {
+
+				}
+			});
+
+
+		}
+		//CARRERA
+		function carrera() {
+
+			mostrarLoading();
+
+			$.ajax({
+				url: "/SuperAdmin/Carrera",
+				type: 'post',
+				datatype: 'application/json',
+				//data: form.serialize(),
+				success: function (data) {
+					$("#app").html(data);
+				
+				},
+				error: function () {
+
+				}
+			});
+
+		}
+
+		//MATERIA
+		function materia() {
+
+			mostrarLoading();
+
+			$.ajax({
+				url: "/SuperAdmin/Materia",
+				type: 'post',
+				datatype: 'application/json',
+				//data: form.serialize(),
+				success: function (data) {
+					$("#app").html(data);
+
+				
+				},
+				error: function () {
+
+				}
+			});
+		}
+
+		//docente
+
+		function docente() {
+
+			mostrarLoading();
+			$.ajax({
+				url: "/SuperAdmin/Docente",
+				type: 'post',
+				datatype: 'application/json',
+				//data: form.serialize(),
+				success: function (data) {
+
+					$("#app").html(data);
+				
+				},
+				error: function () {
+
+				}
+			});
+		}
+
+		//estudiante
+		function estudiante() {
+			mostrarLoading();
+			$.ajax({
+				url: "/SuperAdmin/Estudiante",
+				type: 'post',
+				datatype: 'application/json',
+				//data: form.serialize(),
+				success: function (data) {
+					$("#app").html(data);
+				
+				},
+				error: function () {
+
+				}
+			});
+		}
+
+		//modulo periodo
+		function moduloPeriodo() {
+
+			mostrarLoading();
+			$.ajax({
+				url: "/SuperAdmin/moduloPeriodo",
+				type: 'post',
+				datatype: 'application/json',
+				success: function (data) {
+
+
+
+					$("#app").html(data);
+
+					
+
+				},
+				error: function () {
+
+				}
+			});
+		}
+
+		//horario clases
+		function horarioClase() {
+
+			mostrarLoading();
+			$.ajax({
+				url: "/SuperAdmin/horarioClase",
+				type: 'post',
+				datatype: 'application/json',
+				success: function (data) {
+
+
+
+					$("#app").html(data);
+
+			
+
+				},
+				error: function () {
+
+				}
+			});
+		}
+
+
+		////horario clase estudiante
+		function horarioClaseEstudiante() {
+
+			mostrarLoading();
+			$.ajax({
+				url: "/SuperAdmin/horarioClaseEstudiante",
+				type: 'post',
+				datatype: 'application/json',
+				success: function (data) {
+
+
+
+					$("#app").html(data);
+
+					
+
+				},
+				error: function () {
+
+				}
+			});
+		}
+
+
+
+
+		//modal de carga
+		function mostrarLoading() {
+
+			$('#app').empty();
+
+			$('#app').html(
+				'<div id="modalLoad" class="modalLoading"><div><img src="/Content/img/logotipo.png" alt="" width="97px" /><br /><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></div></div>'
+			);
+			
+
+		}
+
+		function ocultarLoading() {
+	
+			$('#app').empty();
+		}
+
+	</script>
+
+}

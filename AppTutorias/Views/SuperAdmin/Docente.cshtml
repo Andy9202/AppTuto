@@ -1,0 +1,698 @@
+@model List<AppTutorias.Models.SuperAdmin.Docente.docente>
+
+
+<style>
+	.loadUpdate {
+		display: none;
+		justify-content: center;
+	}
+
+	.input-error {
+		background:  #ff0000;
+	}
+
+	.sms-error {
+		color:#ff0000;
+	}
+
+	.loadingTable {
+		display:flex;
+		text-align:center;
+	}
+
+
+</style>
+
+
+<div class="container-admin">
+	<img src="~/Content/img/fondo_1.jpg" alt="" width="100%;">
+	<h3>DOCENTE</h3>
+	<p>Ingresa, actualiza o elimina las Docentes actuales de la Universidad</p>
+	<br />
+	<div class="form-carrera">
+		<ul class="list-inline">
+
+			<li>
+				<label for="">Primer Nombre <span class="sms-error" id="nombreError"></span></label><br />
+				<input type="text" id="nombre" onkeyup="inputMayuscula(this)">
+			</li>
+			<li>
+				<label for="">Segundo Nombre</label><br />
+				<input type="text" id="nombreDos" onkeyup="inputMayusculaD(this)">
+			</li>
+			<li>
+				<label for="">Apellido Paterno <span class="sms-error" id="apellidoError"></span></label><br />
+				<input type="text" id="apellido" onkeyup="inputMayuscula(this)">
+			</li>
+			<li>
+				<label for="">Apellido Materno</label><br />
+				<input type="text" id="apellidoDos" onkeyup="inputMayusculaD(this)">
+			</li>
+			<li>
+				<label for="">Cedula <span class="sms-error" id="cedulaError"></span></label><br />
+				<input type="number" id="cedula" onkeyup="inputCedula(this)">				
+			</li>
+			<li>
+				<label for="">Email <span class="sms-error" id="emailError"></span></label><br />
+				<input type="email" id="email" onkeyup="inputEmail(this)">
+			</li>
+			<li>
+				<label for="">Celular</label><br />
+				<input type="number" id="celular" >
+			</li>
+			<li>
+				<button class="success" onclick="ingresarDocente()">Ingresar</button>
+			</li>
+			<li>
+				<span id="loadInsertDocente" class="loadUpdate" style="color:#fff;"><i class="fas fa-spinner fa-spin"></i> Ingresando...</span>
+			</li>
+		</ul>
+	</div>
+	<br />
+	<div>
+		<form enctype="multipart/form-data" method="post" id="excelData">
+			
+
+			<h4>Cargar Docentes desde Excel</h4>
+			<input type="file" name="excelFile" id="excelFile" />
+			<input type="submit" value="Cargar Lista" class="success" />
+		</form>
+	</div>
+	<div class="table-carrera">
+		<br />
+		<h4>Tabla de Docentes Actuales</h4>
+		<table>
+			<thead>
+				<tr>
+					<th>Nombre 1</th>
+					<th>Nombre 2</th>
+					<th>Apellido 1</th>
+					<th>Apellido 2</th>
+					<th>Cedula</th>
+					<th>Email</th>
+					<th>Celular</th>
+					<th>Accion</th>
+				</tr>
+			</thead>
+			<tbody id="tablaDocente">
+				@foreach (var consulta in Model)
+				{
+					<tr>
+
+						<td>@consulta.Nombre</td>
+						<td>@consulta.NombreDos</td>
+						<td>@consulta.Apellido</td>
+						<td>@consulta.ApellidoDos</td>
+						<td>@consulta.Cedula</td>
+						<td>@consulta.Email</td>
+						<td>@consulta.Celular</td>
+						<td><a onclick="confEliminarDocente(this)" id="@consulta.Cedula">Eliminar</a></td>
+						<td><a onclick="editarDocente(this)" id="@consulta.Cedula">Actualizar</a></td>
+					</tr>
+					}
+			</tbody>
+
+		</table>
+	</div>
+
+</div>
+
+
+<!-- PANEL EDICION DE CAMPOS -->
+<div class="panel-edit" id="editDocente">
+	<h3><i class="fas fa-pen-square"></i> Editar Docente</h3>
+	<ul>
+
+		<li>
+			<label>Primer Nombre</label>
+			<input type="text" id="nombreEdit" onkeyup="inputMayuscula(this)">
+		</li>
+		<li>
+			<label>Segundo Nombre</label>
+			<input type="text" id="nombreDosEdit" onkeyup="inputMayusculaD(this)">
+		</li>
+		<li>
+			<label>Apellido Paterno</label>
+			<input type="text" id="apellidoEdit" onkeyup="inputMayuscula(this)">
+		</li>
+		<li>
+			<label>Apellido Materno</label>
+			<input type="text" id="apellidoDosEdit" onkeyup="inputMayusculaD(this)">
+		</li>
+		<li>
+			<label>Cedula</label>
+			<input type="number" id="cedulaEdit" onkeyup="inputCedula(this)">
+		</li>
+		<li>
+			<label>Email</label>
+			<input type="email" id="emailEdit" onkeyup="inputEmail(this)">
+		</li>
+		<li>
+			<label>Celular</label>
+			<input type="number" id="celularEdit">
+		</li>
+	</ul>
+	<ul class="list-inline  ">
+		<li><button onclick="ingresarEditDocente()">Aceptar <i class="fas fa-check"></i></button></li>
+		<li><button onclick="btnCerrarEditDocente()">Cancelar <i class="fas fa-times-circle"></i></button></li>
+	</ul>
+	<br />
+	<div id="loadUpdateDocente" class="loadUpdate">
+		<span><i class="fas fa-spinner fa-spin"></i> Actualizando...</span>
+	</div>
+</div>
+
+
+<div id="btnConfirmarDocente" class="container-confirmacion">
+	<div>
+		<h4>¿Está seguro que desea eliminar al Docente seleccionado?</h4>
+		<br />
+		<button class="btnSi" id="btnSiDocente">SI</button>
+		<button class="btnNo" id="btnNoDocente">NO</button>
+		<br />
+		<span id="loadDeleteDocente" class="loadUpdate"><i class="fas fa-spinner fa-spin"></i> Eliminando...</span>
+
+	</div>
+
+
+</div>
+
+
+
+<script>
+
+
+	//INGRESAR DOCENTES DESDE EXCEL
+	//enviar form data
+
+	$("#excelData").on("submit", function (e) {
+		e.preventDefault();
+		var f = $(this);
+		var formData = new FormData(document.getElementById("excelData"));
+		formData.append("dato", "valor");
+
+		$('#tablaDocente').html(
+			'<tr id="modalLoad" class="loadingTable"><td><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></td></tr>'
+		);
+
+			//formData.append(f.attr("name"), $(this)[0].files[0]);
+			$.ajax({
+				url: "/SuperAdmin/ingresoDocenteExcel",
+				type: "post",
+				dataType: "json",
+				data: formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function (listaDocente) {
+
+					$("#tablaDocente").empty();
+
+
+					var d;
+					var a = 0;
+					for (var i = 0; i < listaDocente.length; i++) {
+
+
+						d += '<tr>' +
+							'<td>' + listaDocente[i].Nombre + '</td>' +
+							'<td>' + listaDocente[i].NombreDos + '</td>' +
+							'<td>' + listaDocente[i].Apellido + '</td>' +
+							'<td>' + listaDocente[i].ApellidoDos + '</td>' +
+							'<td>' + listaDocente[i].Cedula + '</td>' +
+							'<td>' + listaDocente[i].Email + '</td>' +
+							'<td>' + listaDocente[i].Celular + '</td>' +
+							'<td>' + '<a type="button"  onclick="confEliminarDocente(this)" id="' + listaDocente[i].Cedula + '"></i> Eliminar</a>' + '</td>' +
+							'<td>' + '<a type="button"  onclick="editarDocente(this)" id="' + listaDocente[i].Cedula + '"></i> Actualizar</a>' + '</td>' +
+							'</tr>';
+
+						a++;
+					}
+
+					$("#tablaDocente").append(d);
+
+					$("#nombre").val("");
+					$("#nombreDos").val("");
+					$("#apellido").val("");
+					$("#apellidoDos").val("");
+					$("#email").val("");
+					$("#celular").val("");
+					$("#cedula").val("");
+
+
+					$('#excelFile').val('');
+
+					formData = null;
+
+				},
+				error: function () {
+
+				}
+			})
+				.done(function (res) {
+
+
+				});
+		
+	});
+
+
+
+	//input cedula
+
+	function inputCedula(e) {
+		
+
+		if (e.value === "") {
+			$(e).addClass('input-error');
+		}
+		if (e.value !== "") {
+			$(e).removeClass('input-error');
+		}
+	}
+
+	//input mayusculas
+
+	function inputMayuscula(e) {
+		
+		e.value = e.value.toUpperCase();
+		if (e.value === "") {
+			$(e).addClass('input-error');
+		}
+		if (e.value !== ""){
+			$(e).removeClass('input-error');
+		}
+	}
+
+	function inputMayusculaD(e) {
+
+		e.value = e.value.toUpperCase();
+		
+	}
+
+	function inputEmail(e) {
+		e.value = e.value.toLowerCase();
+
+		if (e.value === "") {
+			$(e).addClass('input-error');
+		}
+		if (e.value !== "") {
+			$(e).removeClass('input-error');
+		}
+	}
+
+
+
+	///CONFIRMACIONES
+	var cod = "";
+	function confEliminarDocente(codigo) {
+
+		$('#loadDeleteDocente').css('display', 'none');
+		$('#btnConfirmarDocente').css('display', 'flex');
+
+		cod = codigo.id;
+
+
+	}
+
+	$('#btnSiDocente').on('click', function () {
+
+		eliminarDocente(cod);
+
+		cod = "";
+	});
+
+	$('#btnNoDocente').on('click', function () {
+
+
+		$('#btnConfirmarDocente').css('display', 'none');
+		cod = "";
+	});
+
+
+
+	//DOCENTE
+	function ingresarDocente() {
+
+		$('#loadInsertDocente').css('display', 'flex');
+
+
+		var valido = validarDocente();
+
+		if (valido === true) {
+
+			var docente = {
+				Nombre: $("#nombre").val(),
+				NombreDos: $("#nombreDos").val(),
+				Apellido: $("#apellido").val(),
+				ApellidoDos: $("#apellidoDos").val(),
+				Email: $("#email").val(),
+				Celular: $("#celular").val(),
+				Cedula: $("#cedula").val()
+
+			};
+
+
+			$.ajax({
+				url: "/SuperAdmin/ingresarDocente",
+				data: JSON.stringify(docente),
+				type: "POST",
+				contentType: "application/json;charset=utf-8",
+				dataType: "json",
+				success: function (listaDocente) {
+
+					$("#tablaDocente").empty();
+
+
+					var d;
+					var a = 0;
+					for (var i = 0; i < listaDocente.length; i++) {
+
+
+						d += '<tr>' +
+							'<td>' + listaDocente[i].Nombre + '</td>' +
+							'<td>' + listaDocente[i].NombreDos + '</td>' +
+							'<td>' + listaDocente[i].Apellido + '</td>' +
+							'<td>' + listaDocente[i].ApellidoDos + '</td>' +
+							'<td>' + listaDocente[i].Cedula + '</td>' +
+							'<td>' + listaDocente[i].Email + '</td>' +
+							'<td>' + listaDocente[i].Celular + '</td>' +
+							'<td>' + '<a type="button"  onclick="confEliminarDocente(this)" id="' + listaDocente[i].Cedula + '"></i> Eliminar</a>' + '</td>' +
+							'<td>' + '<a type="button"  onclick="editarDocente(this)" id="' + listaDocente[i].Cedula + '"></i> Actualizar</a>' + '</td>' +
+							'</tr>';
+
+						a++;
+					}
+
+					$("#tablaDocente").append(d);
+
+					$("#nombre").val("");
+					$("#nombreDos").val("");
+					$("#apellido").val("");
+					$("#apellidoDos").val("");
+					$("#email").val("");
+					$("#celular").val("");
+					$("#cedula").val("");
+
+					$('#loadInsertDocente').css('display', 'none');
+
+				},
+				error: function () {
+
+				}
+			});
+		} else {
+			$('#loadInsertDocente').css('display', 'none');
+		}
+	}
+
+	//validar docente
+
+	function validarDocente() {
+
+		var valido = false;
+
+		
+		
+		if ($("#email").val() === "") {
+
+			$("#email").addClass('input-error');
+			$("#emailError").text("*");
+		} else {
+			$("#email").removeClass('input-error');
+			$("#emailError").text("");
+		}
+
+		if ($("#cedula").val() === "") {
+
+			$("#cedula").addClass('input-error');
+			$("#cedulaError").text("*");
+
+		} else {
+			$("#cedula").removeClass('input-error');
+			$("#cedulaError").text("");
+		}
+
+		if ($("#nombre").val() === "") {
+
+			$("#nombre").addClass('input-error');
+			$("#nombreError").text("*");
+		} else {
+			$("#nombre").removeClass('input-error');
+			$("#nombreError").text("");
+		}
+
+		if ($("#apellido").val() === "") {
+
+			$("#apellido").addClass('input-error');
+			$("#apellidoError").text("*");
+
+		} else {
+			$("#apellido").removeClass('input-error');
+			$("#apellidoError").text("");
+		}
+
+		if ($("#email").val() !== "" && $("#cedula").val() !== "" && $("#nombre").val() !== "" && $("#apellido").val() !== "") {
+
+			valido = true;
+			return valido;
+		}
+
+
+		return valido;
+	}
+
+
+	//validar docente
+
+	function validarDocenteEdit() {
+
+		var valido = false;
+
+
+
+		if ($("#emailEdit").val() === "") {
+
+			$("#emailEdit").addClass('input-error');
+			$("#emailErrorEdit").text("*");
+		} else {
+			$("#emailEdit").removeClass('input-error');
+			$("#emailErrorEdit").text("");
+		}
+
+		if ($("#cedulaEdit").val() === "") {
+
+			$("#cedulaEdit").addClass('input-error');
+			$("#cedulaErrorEdit").text("*");
+
+		} else {
+			$("#cedulaEdit").removeClass('input-error');
+			$("#cedulaErrorEdit").text("");
+		}
+
+		if ($("#nombreEdit").val() === "") {
+
+			$("#nombreEdit").addClass('input-error');
+			$("#nombreErrorEdit").text("*");
+		} else {
+			$("#nombreEdit").removeClass('input-error');
+			$("#nombreErrorEdit").text("");
+		}
+
+		if ($("#apellidoEdit").val() === "") {
+
+			$("#apellidoEdit").addClass('input-error');
+			$("#apellidoErrorEdit").text("*");
+
+		} else {
+			$("#apellidoEdit").removeClass('input-error');
+			$("#apellidoErrorEdit").text("");
+		}
+
+		if ($("#emailEdit").val() !== "" && $("#cedulaEdit").val() !== "" && $("#nombreEdit").val() !== "" && $("#apellidoEdit").val() !== "") {
+
+			valido = true;
+			return valido;
+		}
+
+
+		return valido;
+	}
+
+	//editar docente
+
+
+	function editarDocente(codigo) {
+
+		$("#editDocente").css("display", "block");
+
+		$.ajax({
+			url: "/SuperAdmin/editarDocente",
+			data: JSON.stringify({ Cedula: codigo.id }),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (docente) {
+
+				$("#nombreEdit").val(docente.Nombre);
+				$("#nombreDosEdit").val(docente.NombreDos);
+				$("#apellidoEdit").val(docente.Apellido);
+				$("#apellidoDosEdit").val(docente.ApellidoDos);
+				$("#emailEdit").val(docente.Email);
+				$("#celularEdit").val(docente.Celular);
+				$("#cedulaEdit").val(docente.Cedula);
+
+			},
+			error: function () {
+
+			}
+		});
+
+
+
+	}
+
+
+
+	function btnCerrarEditDocente() {
+		$("#editDocente").css("display", "none");
+		$("#nombreEdit").val("");
+		$("#nombreDosEdit").val("");
+		$("#apellidoEdit").val("");
+		$("#apellidoDosEdit").val("");
+		$("#emailEdit").val("");
+		$("#celularEdit").val("");
+		$("#cedulaEdit").val("");
+	}
+
+
+
+
+	//ingreso edit Materia
+	function ingresarEditDocente() {
+
+		$('#loadUpdateDocente').css('display', 'flex');
+
+		var valido = validarDocenteEdit();
+
+		if (valido === true) {
+
+
+			var docente = {
+				Nombre: $("#nombreEdit").val(),
+				NombreDos: $("#nombreDosEdit").val(),
+				Apellido: $("#apellidoEdit").val(),
+				ApellidoDos: $("#apellidoDosEdit").val(),
+				Email: $("#emailEdit").val(),
+				Celular: $("#celularEdit").val(),
+				Cedula: $("#cedulaEdit").val()
+
+
+			};
+
+
+			$.ajax({
+				url: "/SuperAdmin/ingresarDocente",
+				data: JSON.stringify(docente),
+				type: "POST",
+				contentType: "application/json;charset=utf-8",
+				dataType: "json",
+				success: function (listaDocente) {
+
+					$("#tablaDocente").empty();
+
+
+					var d;
+					var a = 0;
+					for (var i = 0; i < listaDocente.length; i++) {
+
+
+						d += '<tr>' +
+							'<td>' + listaDocente[i].Nombre + '</td>' +
+							'<td>' + listaDocente[i].NombreDos + '</td>' +
+							'<td>' + listaDocente[i].Apellido + '</td>' +
+							'<td>' + listaDocente[i].ApellidoDos + '</td>' +
+							'<td>' + listaDocente[i].Cedula + '</td>' +
+							'<td>' + listaDocente[i].Email + '</td>' +
+							'<td>' + listaDocente[i].Celular + '</td>' +
+							'<td>' + '<a type="button"  onclick="confEliminarDocente(this)" id="' + listaDocente[i].Cedula + '"></i> Eliminar</a>' + '</td>' +
+							'<td>' + '<a type="button"  onclick="editarDocente(this)" id="' + listaDocente[i].Cedula + '"></i> Actualizar</a>' + '</td>' +
+							'</tr>';
+
+						a++;
+					}
+
+					$("#tablaDocente").append(d);
+					$("#editDocente").css("display", "none");
+
+					$("#nombreEdit").val("");
+					$("#nombreDosEdit").val("");
+					$("#apellidoEdit").val("");
+					$("#apellidoDosEdit").val("");
+					$("#emailEdit").val("");
+					$("#celularEdit").val("");
+					$("#cedulaEdit").val("");
+
+					$('#loadUpdateDocente').css('display', 'none');
+
+				},
+				error: function () {
+
+				}
+			});
+		} else {
+			$('#loadUpdateDocente').css('display', 'none');
+		}
+	}
+	function eliminarDocente(codigo) {
+
+		$('#loadDeleteDocente').css('display', 'flex');
+
+		$.ajax({
+			url: "/SuperAdmin/eliminarDocente",
+			data: JSON.stringify({ Cedula: codigo}),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (listaDocente) {
+
+				$("#tablaDocente").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaDocente.length; i++) {
+
+
+					d += '<tr>' +
+						'<td>' + listaDocente[i].Nombre + '</td>' +
+						'<td>' + listaDocente[i].NombreDos + '</td>' +
+						'<td>' + listaDocente[i].Apellido + '</td>' +
+						'<td>' + listaDocente[i].ApellidoDos + '</td>' +
+						'<td>' + listaDocente[i].Cedula + '</td>' +
+						'<td>' + listaDocente[i].Email + '</td>' +
+						'<td>' + listaDocente[i].Celular + '</td>' +
+						'<td>' + '<a type="button"  onclick="confEliminarDocente(this)" id="' + listaDocente[i].Cedula + '"></i> Eliminar</a>' + '</td>' +
+						'<td>' + '<a type="button"  onclick="editarDocente(this)" id="' + listaDocente[i].Cedula + '"></i> Actualizar</a>' + '</td>' +
+						'</tr>';
+
+					a++;
+				}
+
+				$("#tablaDocente").append(d);
+
+
+
+				$('#loadDeleteDocente').css('display', 'none');
+				$('#btnConfirmarDocente').css('display', 'none');
+
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+</script>

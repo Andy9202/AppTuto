@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+    <title>@ViewBag.Title </title>
+    @Styles.Render("~/Content/css")
+   
+
+	
+</head>
+<body>
+
+	@using Microsoft.Azure.ActiveDirectory.GraphClient
+	@model User
+
+	<nav>
+		<div><img src="~/Content/img/logotipo.png" alt="" width="97px;"><h3> Administracion Central</h3></div>
+		<div></div>
+	</nav>
+	<div class="container-app">
+		<div class="panel-admin">
+			<h4>Bienvenido/a <br /> @Model.GivenName @Model.Surname (@Model.Mail)</h4><br />
+			<h4>PANEL DE INGRESOS</h4>
+			<ul>
+				<li onclick="facultad()"><i class="fas fa-angle-right"></i> Facultad</li>
+				<li onclick="carrera()"><i class="fas fa-angle-right"></i> Carrera</li>
+				<li onclick="materia()"><i class="fas fa-angle-right"></i> Materia</li>
+				<li onclick="moduloPeriodo()"><i class="fas fa-angle-right"></i> Modulos/Periodo Academico</li>
+				<li onclick="docente()"><i class="fas fa-angle-right"></i> Docente</li>
+				<li onclick="horarioClase()"><i class="fas fa-angle-right"></i> Horarios Docentes</li>
+				<li onclick="estudiante()"><i class="fas fa-angle-right"></i> Estudiante</li>		
+				<li onclick="horarioClaseEstudiante()"><i class="fas fa-angle-right"></i> Horarios Estudiantes</li>
+				<li><a style="color:#fff;" href="/Account/SignOut">Cerrar Sesi&oacute;n</a></li>
+
+
+			</ul>
+		</div>
+
+
+
+		@RenderBody()
+
+
+
+	</div>
+
+
+
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/js")
+	@RenderSection("scripts", required: false)
+	<
+
+</body>
+</html>

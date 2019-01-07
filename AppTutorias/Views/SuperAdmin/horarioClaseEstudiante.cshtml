@@ -1,0 +1,721 @@
+
+@model List<AppTutorias.Models.SuperAdmin.Estudiante.horarioClaseEstudiante>
+
+<style>
+	.loadUpdate {
+		display: none;
+		justify-content: center;
+	}
+</style>
+
+<div class="container-admin">
+	<img src="~/Content/img/fondo_1.jpg" alt="" width="100%;">
+	<h3>Horaio de Clases General</h3>
+	<p>
+		Ingresa o elimina la hora de clase del estudainte actual, en cada una de las materias correspondientes al mismo.
+		Asigna un paralelo y un numero de aula de clase.
+	</p>
+	<br />
+	<div class="form-carrera">
+		<ul class="list-inline">
+			<li>
+				<label for="">Facultad</label><br />
+				<select name="facultad" id="codigoFacultadCarrera">
+					<option name="facultad" value="FICA">FICA</option>
+				</select>
+			</li>
+			<li>
+				<label for="">Carrera</label><br />
+				<select id="listaCarreras" onchange="listaEstudiantesCarrera()"></select>
+			</li>
+			<li>
+				<label for="">Estudiante</label><br />
+				<select id="listaEstudiantes"></select>
+			</li>
+			<br />
+			<li>
+				<label for="">Materia</label><br />
+				<select id="listaMateriasDocente" onchange="listaParalelosMaterias()"></select>
+			</li>
+			<li>
+				<label for="">Paralelo</label><br />
+				<select id="paralelo" onchange="listaDocentesParalelo()"></select>
+			</li>
+			<li>
+				<label for="">Docente</label><br />
+				<select id="listaDocentes" onchange="listaMateriasDocenteCedula()"></select>
+			</li>
+			<li>
+				<label for="">Numero de Matricula</label><br />
+				<select id="numMatricula" >
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+				</select>
+			</li>
+
+			<li>
+				<button class="success" onclick="ingresarHorarioClasesEstudiantes()">Ingresar</button>
+			</li>
+			<li>
+				<span id="loadInsertHorarioE" class="loadUpdate" style="color:#fff;"><i class="fas fa-spinner fa-spin"></i> Ingresando...</span>
+			</li>
+		</ul>
+	</div><br />
+	<div>
+		<form enctype="multipart/form-data" method="post" id="excelData">
+
+
+			<h4>Cargar Horarios de Estudiantes desde Excel</h4>
+			<input type="file" name="excelFile" id="excelFile" />
+			<input type="submit" value="Cargar Lista" class="success" />
+		</form>
+	</div><br />
+	<div>
+		<h4>Selecciona el Estudiante Ingresado para consultar su horario</h4>
+		<ul class="list-inline">
+			<li>
+				<label for="">Estudiante</label><br />
+				<select id="listaEstudiantesDos" onchange="buscaEstudianteHorario(this)"></select>
+			</li>
+			<li>
+				<label for="">Materia</label><br />
+				<select id="listaMateriasEstudiante"></select>
+			</li>
+			<li>
+				<input onclick=" eliminarHorarioClasesEstudiantesMateria()" type="button" class="success" value="Eliminar Materia" />
+			</li>
+		</ul>
+
+	</div>
+	<div id="horario">
+
+	</div>
+	@*<div class="table-carrera">
+		<br />
+		<h4>Horarios asignados al estudiante, dependiendo del modulo dia y hora de clase.</h4>
+		<table>
+			<thead>
+				<tr>
+					<th>Matricula</th>
+					<th>Estudiante</th>
+					<th>Materia</th>
+					<th>Docente</th>
+					<th>Horario</th>
+					<th>Periodo</th>
+					<th>Accion</th>
+				</tr>
+			</thead>
+			<tbody id="tablaHorarioClaseEstudiante">
+				@foreach (var consulta in Model)
+				{
+					<tr>
+						<td>@consulta.Matricula</td>
+						<td>@consulta.Estudiante</td>
+						<td>@consulta.Materia</td>
+						<td>@consulta.Docente</td>
+						<td>@consulta.Horario</td>
+						<td>@consulta.Periodo</td>
+						<td><a onclick="confEliminarHorarioE('@consulta.Id_Paralelo')">Eliminar</a></td>
+					</tr>
+				}
+			</tbody>
+
+
+		</table>
+	</div>*@
+
+	<a onclick="repitencia()"><i class="fas fa-angle-right"></i> Repitencia Estudiantes</a>
+	<div id="moduloRepitencia">
+	</div>
+
+</div>
+
+<div id="btnConfirmarHorarioE" class="container-confirmacion">
+	<div style="height: 110px;">
+		<h4>¿Está seguro que desea eliminar el modulo de horario de clases del docente  seleccionado?</h4>
+		<br />
+		<button class="btnSi" id="btnSiHorarioE">SI</button>
+		<button class="btnNo" id="btnNoHorarioE">NO</button>
+		<br />
+		<span id="loadDeleteHorarioE" class="loadUpdate"><i class="fas fa-spinner fa-spin"></i> Eliminando...</span>
+
+	</div>
+
+
+</div>
+
+
+<div id="ihDocente" class="container-confirmacion">
+	<div>
+		<h4 id="mensaje"></h4>
+		<br />
+		<button class="btnSi" id="btnOk">Ok</button>
+		<br />
+	</div>
+
+
+</div>
+
+
+<script>
+	$(function listaCarreras() {
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaCarreras",
+			type: 'post',
+			datatype: 'application/json',
+			//data: form.serialize(),
+			success: function (listaCarrera) {
+
+				$("#listaCarreras").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaCarrera.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaCarrera[i].CodigoCarrera + '" ' +
+						'>' + listaCarrera[i].NombreCarrera + '</option>';
+
+					a++;
+				}
+
+				$("#listaCarreras").append(d);
+
+				listaEstudiantesCarrera();
+				listaMaterias();
+			},
+			error: function () {
+
+			}
+		});
+
+	});
+
+	function listaMaterias() {
+		$.ajax({
+			url: "/SuperAdmin/listaMaterias",
+			type: 'post',
+			datatype: 'application/json',
+			data: { CodigoCarrera: $("#listaCarreras").val() },
+			success: function (listaMaterias) {
+
+				$("#listaMateriasDocente").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaMaterias.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaMaterias[i].CodigoMateria + '" ' +
+						'>' + listaMaterias[i].NombreMateria + '</option>';
+
+					a++;
+				}
+
+				$("#listaMateriasDocente").append(d);
+
+				listaParalelosMaterias();
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+	function listaParalelosMaterias() {
+		$.ajax({
+			url: "/SuperAdmin/consultaParaleloMateria",
+			type: 'post',
+			datatype: 'application/json',
+			data: { CodigoMateria: $("#listaMateriasDocente").val() },
+			success: function (listaParalelos) {
+
+				$("#paralelo").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaParalelos.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaParalelos[i].Paralelo + '" ' +
+						'>' + listaParalelos[i].Paralelo + '</option>';
+
+					a++;
+				}
+
+				$("#paralelo").append(d);
+
+				listaDocentesParalelo();
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+	function listaEstudiantesCarrera() {
+		$.ajax({
+			url: "/SuperAdmin/listaEstudiantesCarrera",
+			type: 'post',
+			datatype: 'application/json',
+			data: { CodigoCarrera: $("#listaCarreras").val() },
+			success: function (listaEstudiantes) {
+
+				$("#listaEstudiantes").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaEstudiantes.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaEstudiantes[i].Matricula + '" ' +
+						'>' + listaEstudiantes[i].Nombre + ' ' + listaEstudiantes[i].NombreDos + ' ' + listaEstudiantes[i].Apellido + ' ' + listaEstudiantes[i].ApellidoDos + '</option>';
+
+					a++;
+				}
+
+				$("#listaEstudiantes").append(d);
+				$("#listaEstudiantesDos").append(d);
+				listaMateriasEstudianteMatricula();
+				buscaEstudianteHorarioMatricula();
+			},
+			error: function () {
+
+			}
+		});
+
+
+
+
+
+		function listaPeriodo() {
+			$.ajax({
+				url: "/SuperAdmin/listaPeriodo",
+				type: 'post',
+				datatype: 'application/json',
+				success: function (listaPeriodo) {
+
+					$("#listaPeriodo").empty();
+
+
+					var d;
+					var a = 0;
+					for (var i = 0; i < listaPeriodo.length; i++) {
+
+
+						d += '<option ' +
+							'value="' + listaPeriodo[i].CodigoPeriodo + '" ' +
+							'>' + listaPeriodo[i].NombrePeriodo + '</option>';
+
+						a++;
+					}
+
+					$("#listaPeriodo").append(d);
+
+
+				},
+				error: function () {
+
+				}
+			});
+		}
+
+		listaModulos();
+
+		function listaModulos() {
+			$.ajax({
+				url: "/SuperAdmin/listaModulos",
+				type: 'post',
+				datatype: 'application/json',
+				success: function (listaModulos) {
+
+					$("#listaModulos").empty();
+
+
+					var d;
+					var a = 0;
+					for (var i = 0; i < listaModulos.length; i++) {
+
+
+						d += '<option ' +
+							'value="' + listaModulos[i].CodigoModulo + '" ' +
+							'>' + listaModulos[i].CodigoModulo + ' ' + listaModulos[i].Dia + ' ' + listaModulos[i].HoraInicio + ' - ' + listaModulos[i].HoraFin + '</option>';
+
+						a++;
+					}
+
+					$("#listaModulos").append(d);
+
+
+				},
+				error: function () {
+
+				}
+			});
+		}
+	}
+
+
+
+
+	//consulta los docentes que esxisten de cada materia
+
+	function listaDocentesParalelo() {
+
+		$.ajax({
+			url: "/SuperAdmin/consultaDocenteParalelo",
+			type: 'post',
+			datatype: 'application/json',
+			data: { CodigoMateria: $("#listaMateriasDocente").val(), Paralelo: $("#paralelo").val()},
+			success: function (listaDocentes) {
+				$("#listaDocentes").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaDocentes.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaDocentes[i].Cedula + '" ' +
+						'>' + listaDocentes[i].Nombre + " " + listaDocentes[i].NombreDos + " " + listaDocentes[i].Apellido + " " + listaDocentes[i].ApellidoDos + '</option>';
+
+					a++;
+				}
+
+				$("#listaDocentes").append(d);
+
+
+
+
+
+			},
+			error: function () {
+
+			}
+		});
+
+	}
+</script>
+
+
+<script>
+
+	///CONFIRMACIONES
+	var cod = "";
+
+	function confEliminarHorarioE(codigo) {
+
+		$('#loadDeleteHorarioE').css('display', 'none');
+		$('#btnConfirmarHorarioE').css('display', 'flex');
+
+		cod = codigo;
+
+
+	}
+
+	$('#btnSiHorarioE').on('click', function () {
+
+		eliminarHorarioClasesEstudiantes(cod);
+
+		cod = "";
+	});
+
+	$('#btnNoHorarioE').on('click', function () {
+
+
+		$('#btnConfirmarHorarioE').css('display', 'none');
+
+		cod = "";
+	});
+
+	//-----------------------------------HORARIO DE CLASES ESTUDIANTE --------------------
+	//-------------------------------------------------------------------------
+
+
+	$('#btnOk').on('click', function () {
+		$('#ihDocente').css('display', 'none');
+	});
+
+	function ingresarHorarioClasesEstudiantes() {
+
+		$('#loadInsertHorarioE').css('display', 'flex');
+
+		var horarioClasesEstudiante = {
+			Matricula: $("#listaEstudiantes").val(),
+			CedulaDocente: $("#listaDocentes").val(),
+			CodigoMateria: $("#listaMateriasDocente").val(),
+			Paralelo: $("#paralelo").val(),
+			NumMatricula: $('#numMatricula').val(),
+			Aula: $('#aula').val()
+		};
+
+
+		$.ajax({
+			url: "/SuperAdmin/ingresarHorarioClasesEstudiantes",
+			data: JSON.stringify(horarioClasesEstudiante),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (data) {
+
+				$('#ihDocente').css('display', 'flex');
+
+				$("#mensaje").text(data.Mensaje);
+
+				listaMateriasEstudianteMatricula();
+				buscaEstudianteHorarioMatricula();
+
+
+				$('#loadInsertHorarioE').css('display', 'none');
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	function eliminarHorarioClasesEstudiantes(codigo) {
+
+		$('#loadDeleteHorarioE').css('display', 'flex');
+
+		$.ajax({
+			url: "/SuperAdmin/eliminarHorarioClasesEstudiantes",
+			data: JSON.stringify({ Id_Paralelo: codigo }),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (mensaje) {
+
+				listaMateriasEstudianteMatricula();
+				buscaEstudianteHorarioMatricula();
+
+
+
+				$('#loadDeleteHorarioE').css('display', 'none');
+				$('#btnConfirmarHorarioE').css('display', 'none');
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+	function eliminarHorarioClasesEstudiantesMateria() {
+
+
+		
+		var Matricula= $('#listaEstudiantesDos').val();
+		var CodigoMateria= $('#listaMateriasEstudiante').val();
+	
+
+		$('#loadDeleteHorarioE').css('display', 'flex');
+
+		$.ajax({
+			url: "/SuperAdmin/eliminarHorarioClasesEstudiantes",
+			data: JSON.stringify({ Matricula: Matricula, CodigoMateria: CodigoMateria }),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (mensaje) {
+
+
+				listaMateriasEstudianteMatricula();
+				buscaEstudianteHorarioMatricula();
+
+
+
+				$('#loadDeleteHorarioE').css('display', 'none');
+				$('#btnConfirmarHorarioE').css('display', 'none');
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+</script>
+<script>
+	function listaMateriasDocenteCedula() {
+		$.ajax({
+			url: "/SuperAdmin/listaMateriasDocenteCedula",
+			type: 'post',
+			datatype: 'application/json',
+			data: { Cedula: $("#listaDocentes").val() },
+			success: function (listaMaterias) {
+
+				$("#listaMateriasDocente").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaMaterias.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaMaterias[i].CodigoMateria + '" ' +
+						'>' + listaMaterias[i].NombreMateria + '</option>';
+
+					a++;
+				}
+
+				$("#listaMateriasDocente").append(d);
+				
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+</script>
+
+<script>
+
+
+	//horarioEstudiante
+	function buscaEstudianteHorario(e) {
+
+		var matricula = e.value;
+		$('#horario').html(
+			'<tr id="modalLoad" class="loadingTable"><td><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></td></tr>'
+		);
+
+		$.ajax({
+			url: "/Estudiante/moduloHorarioEstudianteMatricula",
+			type: 'post',
+			data: { Matricula: matricula },
+			success: function (data) {
+
+
+
+				$("#horario").html(data);
+				listaMateriasEstudianteMatricula();
+	
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+	function buscaEstudianteHorarioMatricula() {
+
+		var matricula = $('#listaEstudiantesDos').val();
+		$('#horario').html(
+			'<tr id="modalLoad" class="loadingTable"><td><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></td></tr>'
+		);
+
+		$.ajax({
+			url: "/Estudiante/moduloHorarioEstudianteMatricula",
+			type: 'post',
+			data: { Matricula: matricula },
+			success: function (data) {
+
+
+
+				$("#horario").html(data);
+				listaMateriasEstudianteMatricula();
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+	function listaMateriasEstudianteMatricula() {
+		$.ajax({
+			url: "/Estudiante/listaMateriasEstudianteMatricula",
+			type: 'post',
+			datatype: 'application/json',
+			data: { Matricula: $("#listaEstudiantesDos").val() },
+			success: function (listaMaterias) {
+
+				$("#listaMateriasEstudiante").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaMaterias.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaMaterias[i].CodigoMateria + '" ' +
+						'>' + listaMaterias[i].NombreMateria + '</option>';
+
+					a++;
+				}
+
+				$("#listaMateriasEstudiante").append(d);
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	//INGRESAR HORARIOS DE ESTUDIANTES DESDE EXCEL
+	//enviar form data
+
+	$("#excelData").on("submit", function (e) {
+		e.preventDefault();
+		var f = $(this);
+		var formData = new FormData(document.getElementById("excelData"));
+		formData.append("dato", "valor");
+
+		$('#horario').html(
+			'<tr id="modalLoad" class="loadingTable"><td><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></td></tr>'
+		);
+
+		//formData.append(f.attr("name"), $(this)[0].files[0]);
+		$.ajax({
+			url: "/SuperAdmin/ingresarHorarioClasesEstudiantesExcel",
+			type: "post",
+			dataType: "json",
+			data: formData,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function (listaHorarioClases) {
+
+				buscaEstudianteHorarioMatricula();
+
+				$('#excelFile').val('');
+
+				formData = null;
+
+			},
+			error: function () {
+
+			}
+		})
+			.done(function (res) {
+
+
+			});
+
+	});
+</script>
