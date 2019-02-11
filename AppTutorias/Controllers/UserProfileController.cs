@@ -92,5 +92,10 @@ namespace AppTutorias.Controllers
 
             return value;
         }
+
+        public ActionResult Error()
+        {
+            return View("Error");
+        }
     }
 }

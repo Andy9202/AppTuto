@@ -22,14 +22,14 @@ namespace AppTutorias.Metodos.SuperAdmin.HorarioClases
 
         public void eliminarHorarioClases(horarioClases horarioClases)
         {
-            db.EliminarHorarioClase(horarioClases.CedulaDocente, horarioClases.CodigoMateria);
+            db.EliminarHorarioClase(horarioClases.CedulaDocente, horarioClases.CodigoMateria,horarioClases.Paralelo);
         }
 
 
         //consutar horarios de clases generales
         public List<horarioClases> consultaHorarioClases()
         {
-            var horariosclases = db.horarioClaseDocentes();
+            var horariosclases = db.horarioClaseDocente();
 
             List<horarioClases> listaHorariosClases = new List<horarioClases>();
             foreach (var consulta in horariosclases)

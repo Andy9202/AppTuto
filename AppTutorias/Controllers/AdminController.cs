@@ -63,11 +63,11 @@ namespace AppTutorias.Controllers
         }
 
 
-        public ActionResult listaModulosDocente(string Cedula)
+        public ActionResult listaModulosDocente(string Cedula, string CodigoPeriodo)
         {
             metodoModulo metodoModulo = new metodoModulo();
             List<modulo> listaModulo = new List<modulo>();
-            listaModulo = metodoModulo.consultaModulosDocente(Cedula);
+            listaModulo = metodoModulo.consultaModulosDocente(Cedula, CodigoPeriodo);
 
             return Json(listaModulo, JsonRequestBehavior.AllowGet);
         }

@@ -96,7 +96,7 @@
 
 <div id="app" >
 	<div class="cover_sadmin" >
-		<h1>Bienvenido al Sistema de Tutorias de la UDLA</h1>
+		<h1>Bienvenido al Sistema de Tutorías de la UDLA</h1>
 		<h4>Navega por el panel lateral, y realiza las diferentes opciones del sistema.</h4><br />
 		<img src="~/Content/img/udla_sadmin.jpg"/>
 	</div>
@@ -173,6 +173,29 @@
 					$("#app").html(data);
 
 				
+				},
+				error: function () {
+
+				}
+			});
+		}
+
+
+
+
+		function materiaCarrera() {
+
+			mostrarLoading();
+
+			$.ajax({
+				url: "/SuperAdmin/MateriaCarrera",
+				type: 'post',
+				datatype: 'application/json',
+				//data: form.serialize(),
+				success: function (data) {
+					$("#app").html(data);
+
+
 				},
 				error: function () {
 
@@ -307,6 +330,27 @@
 		function ocultarLoading() {
 	
 			$('#app').empty();
+		}
+
+
+
+		//REPORTES
+
+		function reportes() {
+
+			mostrarLoading();
+			$.ajax({
+				url: "/SuperAdmin/Reportes",
+				type: "POST",
+				datatype: 'application/json',
+				success: function (data) {
+
+					$("#app").html(data);
+				},
+				error: function () {
+
+				}
+			});
 		}
 
 	</script>

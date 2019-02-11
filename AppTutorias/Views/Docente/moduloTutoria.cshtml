@@ -53,59 +53,61 @@
 
 <div class="container-tutoria">
      <div class="container-ingreso-tuto">
-         <ul class="lista-tuto">
+		 <ul class="lista-tuto">
 
-             <li>
-                 <label for="">Estudiante</label><br />
-                 <select id="listaEstudiantes" onchange="listaMateriasEstudianteDocente()"></select>
-             </li>
-             <li>
-                 <label for="">Materia</label><br />
-                 <select id="listaMateria"></select>
-             </li>
-             <li>
-                 <label for="">Modulo</label><br />
-                 <select id="listaModulos"></select>
-             </li>
-             <li>
-                 <label for="">Obligatorio</label><br />
-                 <select id="listaObligatorio">
-					  <option value="SI">SI</option>
-                     <option value="NO">NO</option>
-                    
-                 </select>
-             </li>
+		 	<li>
+		 		<label for="">Estudiante</label><br />
+		 		<select id="listaEstudiantes" onchange="listaMateriasEstudianteDocente()"></select>
+		 	</li>
+		 	<li>
+		 		<label for="">Materia</label><br />
+		 		<select id="listaMateria"></select>
+		 	</li>
+		 	<li>
+		 		<label>Periódo</label><br />
+		 		<select id="listaPeriodo"></select>
+		 	</li>
+		 	<li>
+		 		<label for="">Módulo</label><br />
+		 		<select id="listaModulos"></select>
+		 	</li>
+		 	<li>
+		 		<label for="">Obligatorio</label><br />
+		 		<select id="listaObligatorio">
+		 			<option value="SI">SI</option>
+		 			<option value="NO">NO</option>
 
-             <li>
-                 <label for="">Periodo Academico</label><br />
-                 <select id="listaPeriodo"></select>
-             </li>
-             <li>
-                 <label for="">Aula/Oficina</label><br />
-                 <input placeholder="Aula" id="aulaTuto" />
-             </li>
-			 <li>
-				 <label>Fecha</label>
-				 <input type="date" id="fecha" value="@String.Format("{0:yyyy-MM-dd}",DateTime.Now)"/>
-			 </li>
+		 		</select>
+		 	</li>
 
-             <li>
-                 <button class="success" onclick="ingresarTutoriasDocente()">Ingresar</button>
-             </li>
-         </ul>
+
+		 	<li>
+		 		<label for="">Aula/Oficina</label><br />
+		 		<input placeholder="Aula" id="aulaTuto" />
+		 	</li>
+		 	<li>
+		 		<label>Fecha</label>
+		 		<input type="date" id="fecha" value="@String.Format("{0:yyyy-MM-dd}",DateTime.Now)" />
+		 	</li>
+
+		 	<li>
+		 		<button class="success" onclick="ingresarTutoriasDocente()">Ingresar</button>
+		 	</li>
+		 </ul>
     </div>
     <div class="table-carrera container-scroll">
 		<br />
 		<h4>Tabla de tutorias actuales</h4>
+		<p>No te olvides de confirmar la asistencia, una vez pasada la fecha de la tutoria, la tutoria pasará a la seccion de reportes en el estado actual.</p>
         <table>
             <thead>
 				<tr>
-					<th>Matricula</th>
+					<th>Matrícula</th>
 					<th>Estudiante</th>
 					<th>Cod Materia</th>
 					<th>Materia</th>
-					<th>Modulo</th>
-					<th>Periodo</th>
+					<th>Módulo</th>
+					<th>Periódo</th>
 					<th>Estado Obligatorio</th>
 					<th>Fecha</th>
 					<th>Aula</th>
@@ -126,16 +128,72 @@
 </div>
 
 
+<div id="mensajeTutoria" class="container-confirmacion">
+	<div style="height: 110px;">
+		<h4 id="mensaje"></h4>
+		<button class="btnSi" id="btnCerrar">Cerrar</button>
+	</div>
+</div>
 
+
+<div id="btnConfirmarTutoria" class="container-confirmacion">
+	<div style="height: 110px;">
+		<h4>¿Asistió el estudiante a la tutoría impartida esta fecha?</h4>
+		<br />
+		<button class="btnSi" id="btnSi">SI</button>
+		<button class="btnNo" id="btnNo">NO</button>
+		<br />
+		
+
+	</div>
+
+
+</div>
 
 
 <script>
 
-    $(document).ready(function () {
+	function confEliminarHorarioE() {
 
-        listaEstudiantesDocente();
-        listaModulosDocenteLogin();
-        listaPeriodo();
+		$('#loadDeleteHorarioE').css('display', 'none');
+		$('#btnConfirmarHorarioE').css('display', 'flex');
+
+
+
+	}
+
+	$('#btnSiHorarioE').on('click', function () {
+
+		eliminarHorarioClasesEstudiantesMateria();
+
+
+	});
+
+	$('#btnNoHorarioE').on('click', function () {
+
+
+		$('#btnConfirmarHorarioE').css('display', 'none');
+
+	});
+
+	///cerrar ingreso tutoria
+
+	$('#btnCerrar').on('click', function () {
+
+		$('#mensajeTutoria').css('display', 'none');
+
+
+	});
+
+</script>
+
+<script>
+
+	$(document).ready(function () {
+	
+		listaEstudiantesDocente();
+		listaPeriodo();
+      
 		tablaHorarioTutoriasDocente();
 	
 
@@ -180,11 +238,10 @@
     }
 
     function listaModulosDocenteLogin() {
-        $.ajax({
-            url: "/Docente/listaModulosDocente",
-            type: 'post',
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
+		$.ajax({
+			url: "/Docente/listaModulosDocente",
+			type: 'post',
+			data: { CodigoPeriodo:$('#listaPeriodo').val() },
             success: function (listaModulos) {
 
                 $("#listaModulos").empty();
@@ -271,7 +328,7 @@
 
 				$("#listaPeriodo").append(d);
 
-
+				listaModulosDocenteLogin();
             },
             error: function () {
 
@@ -330,8 +387,32 @@
 	}
 
 
-
+	var Id = 0;
 	function confirmarAsistencia(e) {
+
+		Id = e;
+
+		$('#btnConfirmarTutoria').css('display', 'flex');
+	}
+
+	$('#btnSi').on('click', function () {
+
+		confirmada(Id, "SI");
+
+		$('#btnConfirmarTutoria').css('display', 'none');
+
+	});
+
+	$('#btnNo').on('click', function () {
+
+		confirmada(Id, "NO");
+		$('#btnConfirmarTutoria').css('display', 'none');
+
+	});
+
+
+	function confirmada(Id,Confirma) {
+
 
 		$('#tablaHorarioTutorias').html(
 			'<tr id="modalLoad" class="loadingTable"><td><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></td></tr>'
@@ -340,7 +421,7 @@
 		$.ajax({
 			url: "/Docente/confirmarAsistencia",
 			type: "POST",
-			data: {Id:e},
+			data: { Id: Id,Confirma:Confirma },
 			success: function (listaHorariosTutorias) {
 
 				$("#tablaHorarioTutorias").empty();
@@ -382,6 +463,85 @@
 		});
 	}
 
+	//INGRESAR TUTORIA DEL DOCENTE
+
+	//ingresarTutoria
+
+
+	function ingresarTutoriasDocente() {
+
+
+
+		var horarioTutorias = {
+			Matricula: $("#listaEstudiantes").val(),
+			CodigoModulo: $("#listaModulos").val(),
+			CodigoMateria: $("#listaMateria").val(),
+			Fecha: $("#fecha").val(),
+			CodigoPeriodo: $("#listaPeriodo").val(),
+			EstadoObligatorio: $("#listaObligatorio").val(),
+			Aula: $("#aulaTuto").val()
+
+
+		};
+
+		$('#tablaHorarioTutorias').html(
+			'<tr id="modalLoad" class="loadingTable"><td><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></td></tr>'
+		);
+
+
+
+		$.ajax({
+			url: "/Docente/ingresarTutorias",
+			data: JSON.stringify(horarioTutorias),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (data) {
+
+				$("#tablaHorarioTutorias").empty();
+
+				var listaHorariosTutorias = data.ListaHorariosTutorias;
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < data.ListaHorariosTutorias.length; i++) {
+
+					var datos = "'" + listaHorariosTutorias[i].Id_HorarioTutorias + "'";
+
+					d += '<tr>' +
+						'<td>' + listaHorariosTutorias[i].Matricula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreEstudiante + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Modulo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoPeriodo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].EstadoObligatorio + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Fecha + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Aula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Asistencia + '</td>' +
+
+						'<td>' + '<button   onclick="confirmarAsistencia(' + datos + ')" ></i> Confirmar Asistencia</button>' + '</td>' +
+						'</tr>';
+
+					a++;
+				}
+
+
+
+				$("#tablaHorarioTutorias").append(d);
+
+				$("#mensaje").text(data.Mensaje);
+
+				$('#mensajeTutoria').css('display', 'flex');
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
 
 
 </script>

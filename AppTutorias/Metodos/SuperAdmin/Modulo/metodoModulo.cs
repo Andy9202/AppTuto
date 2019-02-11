@@ -75,9 +75,9 @@ namespace AppTutorias.Metodos.SuperAdmin.Modulo
 
         //modulos del docente disponible
 
-        public List<modulo> consultaModulosDocente(string Cedula)
+        public List<modulo> consultaModulosDocente(string Cedula,string CodigoPeriodo)
         {
-            var modulos = db.modulosDocenteDisponible(Cedula);
+            var modulos = db.modulosDocenteDisponible(Cedula,CodigoPeriodo);
 
             
             
@@ -129,9 +129,9 @@ namespace AppTutorias.Metodos.SuperAdmin.Modulo
 
         ///modulos del estudiante y docente disponibles
         ///
-        public List<modulo> consultaModulosDocenteEstudiante(string Cedula,string Matricula)
+        public List<modulo> consultaModulosDocenteEstudiante(string Cedula,string Matricula,string CodigoPeriodo)
         {
-            var modulos = db.modulosDocenteDisponible(Cedula);
+            var modulos = db.modulosDocenteDisponible(Cedula,CodigoPeriodo);
             var modulosEstudainte = db.horarioClaseEstudianteMatricula(int.Parse(Matricula));
 
             //estudiante
@@ -177,11 +177,11 @@ namespace AppTutorias.Metodos.SuperAdmin.Modulo
 
         }
 
-        public void ingresarHorasLibres(string cedula, string codigoModulo)
+        public void ingresarHorasLibres(string cedula, string codigoModulo, string codigoPeriodo)
         {
             try
             {
-                db.IngresarHoraLibre(cedula, codigoModulo);
+                db.IngresarHoraLibre(cedula, codigoModulo,codigoPeriodo);
 
 
             }
@@ -191,11 +191,11 @@ namespace AppTutorias.Metodos.SuperAdmin.Modulo
             }
         }
 
-        public void eliminarHorasLibres(string cedula, string codigoModulo)
+        public void eliminarHorasLibres(string cedula, string codigoModulo, string codigoPeriodo)
         {
             try
             {
-                db.EliminarHoraLibre(cedula, codigoModulo);
+                db.EliminarHoraLibre(cedula, codigoModulo,codigoPeriodo);
 
 
             }
@@ -205,11 +205,11 @@ namespace AppTutorias.Metodos.SuperAdmin.Modulo
             }
         }
 
-        public void ingresarHorasObligatorias(string cedula, string codigoModulo)
+        public void ingresarHorasObligatorias(string cedula, string codigoModulo, string codigoPeriodo)
         {
             try
             {
-                db.IngresarHoraObligatoria(cedula, codigoModulo);
+                db.IngresarHoraObligatoria(cedula, codigoModulo, codigoPeriodo);
 
 
             }
@@ -219,11 +219,11 @@ namespace AppTutorias.Metodos.SuperAdmin.Modulo
             }
         }
 
-        public void eliminarHorasObligatorias(string cedula, string codigoModulo)
+        public void eliminarHorasObligatorias(string cedula, string codigoModulo, string codigoPeriodo)
         {
             try
             {
-                db.EliminarHoraObligatoria(cedula, codigoModulo);
+                db.EliminarHoraObligatoria(cedula, codigoModulo,codigoPeriodo);
 
 
             }

@@ -2,8 +2,8 @@
 
 <style>
 	.loadUpdate {
-		display:none;
-		justify-content:center;
+		display: none;
+		justify-content: center;
 	}
 </style>
 
@@ -16,7 +16,7 @@
 	<div class="form-carrera">
 		<ul class="list-inline">
 			<li>
-				<label for="">Ingrese codigo de la Facultad</label><br />
+				<label for="">Ingrese código de la Facultad</label><br />
 				<input type="text" id="codigoFacultad">
 			</li>
 			<li>
@@ -31,16 +31,16 @@
 			</li>
 		</ul>
 	</div>
-	
+
 	<div class="table-carrera">
 		<br />
 		<h4>Tabla de Facultades Actuales</h4>
 		<table>
 			<thead>
 				<tr>
-					<th>Cod Facultad</th>
+					<th>Cod. Facultad</th>
 					<th>Nombre Facultad</th>
-					<th>Accion</th>
+					<th>Acción</th>
 				</tr>
 			</thead>
 			<tbody id="tablaFacultad">
@@ -66,8 +66,8 @@
 	<h3><i class="fas fa-pen-square"></i> Editar Facultad</h3>
 	<ul>
 		<li>
-			<label>Codigo Facultad</label>
-			<input type="text" id="codigoFacultadEdit">
+			<label>Código Facultad: </label><br />
+			<lable type="text" id="codigoFacultadEdit"></lable>
 		</li>
 		<li>
 			<label>Nombre Facultad</label>
@@ -87,23 +87,26 @@
 
 <div id="btnConfirmar" class="container-confirmacion">
 	<div>
-		<h4>¿Está seguro que desea eliminar la Facultad seleccionado?</h4>
+		<h4>¿Está seguro que desea eliminar la Facultad seleccionada?</h4>
 		<br />
 		<button class="btnSi" id="btnSiFacultad">SI</button>
 		<button class="btnNo" id="btnNoFacultad">NO</button>
 		<br />
-			<span id="loadDeleteFacu" class="loadUpdate"><i class="fas fa-spinner fa-spin"></i> Eliminando...</span>
+		<span id="loadDeleteFacu" class="loadUpdate"><i class="fas fa-spinner fa-spin"></i> Eliminando...</span>
 
 	</div>
-	
+
 
 </div>
+
+
+
 
 
 <script>
 
 	///CONFIRMACIONES
-	var cod="";
+	var cod = "";
 	function confEliminarFacultad(codigo) {
 
 		$('#loadDeleteFacu').css('display', 'none');
@@ -123,7 +126,7 @@
 
 	$('#btnNoFacultad').on('click', function () {
 
-		
+
 		$('#btnConfirmar').css('display', 'none');
 		cod = "";
 	});
@@ -136,7 +139,7 @@
 	function ingresarFacultad() {
 
 		$('#loadInsertFacu').css('display', 'flex');
-		
+
 
 		var facultad = {
 			NombreFacultad: $("#nombreFacultad").val(),
@@ -193,7 +196,7 @@
 
 		$.ajax({
 			url: "/SuperAdmin/eliminarFacultad",
-			data: JSON.stringify({ CodigoFacultad: codigo}),
+			data: JSON.stringify({ CodigoFacultad: codigo }),
 			type: "POST",
 			contentType: "application/json;charset=utf-8",
 			dataType: "json",
@@ -226,10 +229,10 @@
 				$('#loadDeleteFacu').css('display', 'none');
 				$('#btnConfirmar').css('display', 'none');
 
-				
+
 			},
 			error: function () {
-				
+
 			}
 		});
 	}
@@ -250,7 +253,7 @@
 
 
 				$("#nombreFacultadEdit").val(facultad.NombreFacultad);
-				$("#codigoFacultadEdit").val(facultad.CodigoFacultad);
+				$("#codigoFacultadEdit").text(facultad.CodigoFacultad);
 
 			},
 			error: function () {
@@ -266,7 +269,7 @@
 	function btnCerrarEditFacultad() {
 		$("#editFacultad").css("display", "none");
 		$("#nombreFacultadEdit").val("");
-		$("#codigoFacultadEdit").val("");
+		$("#codigoFacultadEdit").text("");
 	}
 
 
@@ -276,7 +279,7 @@
 
 		var facultad = {
 			NombreFacultad: $("#nombreFacultadEdit").val(),
-			CodigoFacultad: $("#codigoFacultadEdit").val()
+			CodigoFacultad: $("#codigoFacultadEdit").text()
 		};
 
 		$('#loadUpdateFacu').css('display', 'flex');

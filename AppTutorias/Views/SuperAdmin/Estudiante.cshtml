@@ -30,7 +30,7 @@
 		<ul class="list-inline">
 			<li>
 				<label for="">Facultad</label><br />
-				<select name="facultad" id="codigoFacultadCarrera">
+				<select name="facultad" id="codigoFacultadCarrera" onchange="listaCarreras()">
 					<option name="facultad" value="FICA">FICA</option>
 				</select>
 			</li>
@@ -39,7 +39,7 @@
 				<select name="carrera" id="listaCarreras"></select>
 			</li>
 			<li>
-				<label for="">Matricula <span class="sms-error" id="matriculaError"></span></label><br />
+				<label for="">Matrícula <span class="sms-error" id="matriculaError"></span></label><br />
 				<input type="number" id="matricula" onkeyup="inputMatricula(this)">
 			</li>
 			<li>
@@ -75,6 +75,9 @@
 		</ul>
 	</div>
 	<br />
+
+
+
 	<div>
 		<form enctype="multipart/form-data" method="post" id="excelData">
 
@@ -83,28 +86,54 @@
 			<input type="file" name="excelFile" id="excelFile" />
 			<input type="submit" value="Cargar Lista" class="success" />
 		</form>
+	</div><br/>
+	<div style="padding-left:15px">
+		<h4>Selecciona la Facultad y Carrera para mostrar las materias</h4>
+		<ul class="list-inline">
+			<li>
+
+			</li>
+			<br />
+			<br />
+			<li>
+				<label for="">Facultad</label><br />
+				<select name="facultad" id="codigoFacultad" onchange="listaCarreras1();"></select>
+			</li>
+			<li>
+				<label for="">Carrera</label><br />
+				<select id="listaCarreras1"></select>
+			</li>
+
+
+			<li>
+				<input onclick="listaEstudiantesCarrera();" type="button" class="success" value="Consultar" />
+			</li>
+		</ul>
+
 	</div>
+
+
 	<div class="table-carrera">
 		<table>
 			<thead>
 				<tr>
 					<th>Facultad</th>
 					<th>Carera</th>
-					<th>Matricula</th>
-					<th>Nombre</th>
+					<th>Matrícula</th>
+					<th>Primer Nombre</th>
 					<th>Segundo Nombre</th>
 					<th>Apellido Paterno</th>
 					<th>Apellido Materno</th>
 					<th>Email</th>
 					<th>Celular</th>
-					<th>Accion</th>
+					<th>Acción</th>
 				</tr>
 			</thead>
 			<tbody id="tablaEstudiante">
-				@foreach (var consulta in Model)
+				@*@foreach (var consulta in Model)
 				{
 					<tr>
-						<td>FICA</td>
+						<td>@consulta.CodFacultad</td>
 						<td>@consulta.CodCarrera</td>
 						<td>@consulta.Matricula</td>
 						<td>@consulta.Nombre</td>
@@ -116,7 +145,7 @@
 						<td><a onclick="confEliminarEstudiante(this)" id="@consulta.Matricula">Eliminar</a></td>
 						<td><a onclick="editarEstudiante(this)" id="@consulta.Matricula">Actualizar</a></td>
 					</tr>
-				}
+				}*@
 			</tbody>
 
 
@@ -132,8 +161,11 @@
 	<h3><i class="fas fa-pen-square"></i> Editar Estudiante</h3>
 	<ul>
 		<li>
+
+
 			<label>Matricula</label>
-			<input type="number" id="matriculaEdit" onkeyup="inputMatricula(this)">
+			<label id="matriculaEdit"></label>
+
 		</li>
 
 		<li>
@@ -151,6 +183,11 @@
 		<li>
 			<label>Apellido Materno</label>
 			<input type="text" id="apellidoDosEdit" onkeyup="inputMayusculaD(this)">
+		</li>
+
+		<li>
+			<label>Email</label>
+			<input type="email" id="emailEdit" onkeyup="inputEmail(this)">
 		</li>
 		<li>
 			<label>Celular</label>
@@ -226,6 +263,128 @@
 
 <script>
 
+	$(function listaFacultad() {
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaFacultad",
+			type: 'post',
+			datatype: 'application/json',
+			//data: form.serialize(),
+			success: function (listaFacultad) {
+
+				$("#codigoFacultadCarrera").empty();
+				$("#codigoFacultad").empty();
+			
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaFacultad.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaFacultad[i].CodigoFacultad + '" ' +
+						'>' + listaFacultad[i].NombreFacultad + '</option>';
+
+					a++;
+				}
+
+				$("#codigoFacultadCarrera").append(d);
+				$("#codigoFacultad").append(d);
+				listaCarreras();
+				listaCarreras1();
+
+
+			},
+			error: function () {
+
+			}
+		});
+
+	});
+
+	function listaCarreras1() {
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaCarrerasFacultad",
+			type: 'post',
+			data: { CodigoFacultad: $('#codigoFacultad').val() },
+			success: function (listaCarrera) {
+
+				$("#listaCarreras1").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaCarrera.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaCarrera[i].CodigoCarrera + '" ' +
+						'>' + listaCarrera[i].NombreCarrera + '</option>';
+
+					a++;
+				}
+
+				$("#listaCarreras1").append(d);
+
+				
+
+
+			},
+			error: function () {
+
+			}
+		});
+
+	}
+
+
+
+
+	function listaCarreras() {
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaCarrerasFacultad",
+			type: 'post',
+			data: { CodigoFacultad: $('#codigoFacultadCarrera').val() },
+			success: function (listaCarrera) {
+
+				$("#listaCarreras").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaCarrera.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaCarrera[i].CodigoCarrera + '" ' +
+						'>' + listaCarrera[i].NombreCarrera + '</option>';
+
+					a++;
+				}
+
+				$("#listaCarreras").append(d);
+
+			
+
+
+			},
+			error: function () {
+
+			}
+		});
+
+	}
+
+
+
+
+
 	///CONFIRMACIONES
 	var cod = "";
 	function confEliminarEstudiante(codigo) {
@@ -253,7 +412,58 @@
 	});
 
 
+	//LISTA ESTUDIANTES POR CARRERA Y FACULTAD
+
+
+	function listaEstudiantesCarrera() {
+
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaEstudiantesCarrera",
+			type: 'post',
+			datatype: 'application/json',
+			data: { CodigoCarrera: $('#listaCarreras1').val() },
+			success: function (listaEstudiante) {
+
+				$("#tablaEstudiante").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaEstudiante.length; i++) {
+
+
+					d += '<tr>' +
+						'<td>' + listaEstudiante[i].CodFacultad + '</td>' +
+						'<td>' + listaEstudiante[i].CodCarrera + '</td>' +
+						'<td>' + listaEstudiante[i].Matricula + '</td>' +
+						'<td>' + listaEstudiante[i].Nombre + '</td>' +
+						'<td>' + listaEstudiante[i].NombreDos + '</td>' +
+						'<td>' + listaEstudiante[i].Apellido + '</td>' +
+						'<td>' + listaEstudiante[i].ApellidoDos + '</td>' +
+						'<td>' + listaEstudiante[i].Email + '</td>' +
+						'<td>' + listaEstudiante[i].Celular + '</td>' +
+						'<td>' + '<a type="button"  onclick="confEliminarEstudiante(this)" id="' + listaEstudiante[i].Matricula + '"></i> Eliminar</a>' + '</td>' +
+						'<td>' + '<a type="button"  onclick="editarEstudiante(this)" id="' + listaEstudiante[i].Matricula + '"></i> Actualizar</a>' + '</td>' +
+						'</tr>';
+
+					a++;
+				}
+
+				$("#tablaEstudiante").append(d);
+
+			},
+			error: function () {
+
+			}
+		});
+
+	}
+
 	//ESTUDIANTE
+
+
 
 	function ingresarEstudiante() {
 
@@ -272,7 +482,7 @@
 				Email: $("#email").val(),
 				Celular: $("#celular").val(),
 				Matricula: $("#matricula").val(),
-				CodCarrera: $("#listaCarreras").val()
+				CodCarrera: $("#listaCarreras").val(),
 
 			};
 
@@ -294,7 +504,7 @@
 
 
 						d += '<tr>' +
-							'<td>' + 'FICA' + '</td>' +
+							'<td>' + listaEstudiante[i].CodFacultad + '</td>' +
 							'<td>' + listaEstudiante[i].CodCarrera + '</td>' +
 							'<td>' + listaEstudiante[i].Matricula + '</td>' +
 							'<td>' + listaEstudiante[i].Nombre + '</td>' +
@@ -350,7 +560,7 @@
 			dataType: "json",
 			success: function (estudiante) {
 
-				$("#matriculaEdit").val(estudiante.Matricula);
+				$("#matriculaEdit").text(estudiante.Matricula);
 				$("#nombreEdit").val(estudiante.Nombre);
 				$("#nombreDosEdit").val(estudiante.NombreDos);
 				$("#apellidoEdit").val(estudiante.Apellido);
@@ -373,7 +583,7 @@
 	function btnCerrarEditEstudiante() {
 		$("#editEstudiante").css("display", "none");
 
-		$("#matriculaEdit").val("");
+		$("#matriculaEdit").text("");
 		$("#nombreEdit").val("");
 		$("#nombreDosEdit").val("");
 		$("#apellidoEdit").val("");
@@ -401,7 +611,8 @@
 				Apellido: $("#apellidoEdit").val(),
 				ApellidoDos: $("#apellidoDosEdit").val(),
 				Celular: $("#celularEdit").val(),
-				Matricula: $("#matriculaEdit").val()
+				Email: $("#emailEdit").val(),
+				Matricula: $("#matriculaEdit").text()
 			};
 
 
@@ -422,7 +633,7 @@
 
 
 						d += '<tr>' +
-							'<td>' + 'FICA' + '</td>' +
+							'<td>' + listaEstudiante[i].CodFacultad + '</td>' +
 							'<td>' + listaEstudiante[i].CodCarrera + '</td>' +
 							'<td>' + listaEstudiante[i].Matricula + '</td>' +
 							'<td>' + listaEstudiante[i].Nombre + '</td>' +
@@ -450,6 +661,8 @@
 					$("#matriculaEdit").val("");
 
 					$('#loadUpdateEstudiante').css('display', 'none');
+
+					listaFacultad();
 
 				},
 				error: function () {
@@ -485,7 +698,7 @@
 
 
 					d += '<tr>' +
-						'<td>' + 'FICA' + '</td>' +
+						'<td>' + listaEstudiante[i].CodFacultad + '</td>' +
 						'<td>' + listaEstudiante[i].CodCarrera + '</td>' +
 						'<td>' + listaEstudiante[i].Matricula + '</td>' +
 						'<td>' + listaEstudiante[i].Nombre + '</td>' +
@@ -554,7 +767,7 @@
 
 
 					d += '<tr>' +
-						'<td>' + 'FICA' + '</td>' +
+						'<td>' + listaEstudiante[i].CodFacultad + '</td>' +
 						'<td>' + listaEstudiante[i].CodCarrera + '</td>' +
 						'<td>' + listaEstudiante[i].Matricula + '</td>' +
 						'<td>' + listaEstudiante[i].Nombre + '</td>' +
@@ -719,15 +932,7 @@
 			$("#emailErrorEdit").text("");
 		}
 
-		if ($("#matriculaEdit").val() === "") {
-
-			$("#matriculaEdit").addClass('input-error');
-			$("#matriculaErrorEdit").text("*");
-
-		} else {
-			$("#matriculaEdit").removeClass('input-error');
-			$("#matriculaErrorEdit").text("");
-		}
+	
 
 		if ($("#nombreEdit").val() === "") {
 
@@ -748,7 +953,7 @@
 			$("#apellidoErrorEdit").text("");
 		}
 
-		if ($("#emailEdit").val() !== "" && $("#matriculaEdit").val() !== "" && $("#nombreEdit").val() !== "" && $("#apellidoEdit").val() !== "") {
+		if ($("#emailEdit").val() !== "" && $("#nombreEdit").val() !== "" && $("#apellidoEdit").val() !== "") {
 
 			valido = true;
 			return valido;

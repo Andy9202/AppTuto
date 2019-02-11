@@ -24,6 +24,8 @@ using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OpenIdConnect;
 using AppTutorias.Models.Estudiante;
+using SendGrid.Helpers.Mail;
+using SendGrid;
 
 namespace AppTutorias.Controllers
 
@@ -359,11 +361,11 @@ namespace AppTutorias.Controllers
 
         //MODULOS DEL DOCENTE
 
-        public ActionResult listaModulosDocente()
+        public ActionResult listaModulosDocente(string CodigoPeriodo)
         {
             metodoModulo metodoModulo = new metodoModulo();
             List<modulo> listaModulo = new List<modulo>();
-            listaModulo = metodoModulo.consultaModulosDocente(Session["cedula"].ToString());
+            listaModulo = metodoModulo.consultaModulosDocente(Session["cedula"].ToString(),CodigoPeriodo);
 
             return Json(listaModulo, JsonRequestBehavior.AllowGet);
         }
@@ -381,21 +383,148 @@ namespace AppTutorias.Controllers
             return Json(listaMateria, JsonRequestBehavior.AllowGet);
         }
 
-
+        ///INGRESA LA TUTORIA AL ESTUDIAN Y ENVIA UN MENSAJE AL CORREO ESTUDIANTE
 
         public ActionResult ingresarTutorias(horarioTutorias horarioTutorias)
         {
+            conexionDataContext db = new conexionDataContext();
 
-            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
-
-            metodoHorarioTutorias.ingresarHorarioTutoriaDocente(horarioTutorias, Session["cedula"].ToString());
             List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
-
+            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
 
             listaHorariosTutorias = metodoHorarioTutorias.consultaHorarioTutoriasDocenteFecha(Session["cedula"].ToString());
 
+            int contador = listaHorariosTutorias.ToList().Count;
+
+            metodoHorarioTutorias.ingresarHorarioTutoriaDocente(horarioTutorias, Session["cedula"].ToString());
+
+            listaHorariosTutorias = metodoHorarioTutorias.consultaHorarioTutoriasDocenteFecha(Session["cedula"].ToString());
+
+
+            var estudiante = (from x in db.ESTUDIANTE
+                              where x.Matricula == int.Parse(horarioTutorias.Matricula)
+                              select new
+                              {
+                                  x.Nombre,
+                                  x.NombreDos,
+                                  x.Apellido,
+                                  x.ApellidoDos,
+                                  x.Email,
+                                  x.Matricula
+                              }).FirstOrDefault();
+
+
+            string mensaje="";
+
+            int contadorDos = listaHorariosTutorias.ToList().Count;
+
+            if (contadorDos > contador)
+            {
+                contactoApp(horarioTutorias, Session["cedula"].ToString());
+
+                mensaje = "El tutoria para el estudiante "+ estudiante.Nombre + " " + estudiante.Apellido + " ha sido ingresado con exito!";
+
+            }
+            else
+            {
+                mensaje = "Ya existe una turoia asignada en la misma fecha, por favor asigne una fecha diferente o un modulo disitinto";
+
+            }
+
+            var data = new
+            {
+                ListaHorariosTutorias=listaHorariosTutorias,
+                Mensaje = mensaje
+
+            };
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+
+
+        }
+
+        //envia mensjae al estudiante
+        static async Task contactoApp(horarioTutorias horarioTutorias,string Cedula)
+        {
+            conexionDataContext db = new conexionDataContext();
+    
+
+            var estudiante = (from x in db.ESTUDIANTE
+                              where x.Matricula == int.Parse(horarioTutorias.Matricula)
+                              select new
+                              {
+                                  x.Nombre,
+                                  x.NombreDos,
+                                  x.Apellido,
+                                  x.ApellidoDos,
+                                  x.Email,
+                                  x.Matricula
+                              }).FirstOrDefault();
+
+            var docente = (from x in db.DOCENTE
+                              where x.Cedula == Cedula
+                              select new
+                              {
+                                  x.Nombre,
+                                  x.NombreDos,
+                                  x.Apellido,
+                                  x.ApellidoDos,
+                                  x.Email
+                              }).FirstOrDefault();
+
+            var modulo = (from x in db.MODULO
+                          where x.CodigoModulo == horarioTutorias.CodigoModulo
+                          select new
+                          {
+                              x.Dia,
+                              x.HoraInicio,
+                              x.HoraFin,
+                              x.CodigoModulo
+                          }).FirstOrDefault();
+
+
+            SendGridMessage mensaje = new SendGridMessage();
+            var apiKey = "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";
+            var client = new SendGridClient(apiKey);
+
+    
+                mensaje.From = new EmailAddress(docente.Email, docente.Nombre +" " +docente.Apellido);
+                mensaje.AddTo(estudiante.Email, estudiante.Nombre + " " + estudiante.Apellido);
+                mensaje.Subject = "Tutoria Nueva";
+
+
+
+            mensaje.AddSubstitution("-estudiante-", estudiante.Nombre + " " + estudiante.Apellido);
+            mensaje.AddSubstitution("-docente-", docente.Nombre + " " + docente.Apellido);
+           mensaje.AddSubstitution("-materia-", horarioTutorias.CodigoMateria+" "+horarioTutorias.NombreMateria);
+           mensaje.AddSubstitution("-aula-", horarioTutorias.Aula);
+           mensaje.AddSubstitution("-fecha-", horarioTutorias.Fecha);
+           mensaje.AddSubstitution("-modulo-", modulo.CodigoModulo +" "+modulo.Dia+" "+modulo.HoraInicio+" - " +modulo.HoraFin);
+
+
+
+
+            mensaje.TemplateId = "f74f2974-3701-4ecf-ba96-99cfdf21f9df";
+
+
+            var response = await client.SendEmailAsync(mensaje);
+        }
+
+
+        //LISTA TUTORIAS TOTALES
+        public ActionResult listaTutoriasDocenteTotal()
+        {
+
+            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
+            List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
+
+
+            listaHorariosTutorias = metodoHorarioTutorias.consultaHorarioTutoriasDocente(Session["cedula"].ToString());
+
             return Json(listaHorariosTutorias, JsonRequestBehavior.AllowGet);
         }
+
+        ///LISTA TUTORIAS DEL DOCENTE ACTUALES
 
         public ActionResult listaTutoriasDocente()
         {
@@ -408,6 +537,35 @@ namespace AppTutorias.Controllers
 
             return Json(listaHorariosTutorias, JsonRequestBehavior.AllowGet);
         }
+
+        //List tutorias docente por asistencia
+
+        public ActionResult listaTutoriasDocenteAsistencia(string Asistencia)
+        {
+
+            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
+            List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
+
+
+            listaHorariosTutorias = metodoHorarioTutorias.consultaHorarioTutoriasDocenteAsistencia(Session["cedula"].ToString(),Asistencia);
+
+            return Json(listaHorariosTutorias, JsonRequestBehavior.AllowGet);
+        }
+
+        //List tutorias docente por periodo academico
+
+        public ActionResult listaTutoriasDocentePeriodo(string CodigoPeriodo)
+        {
+
+            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
+            List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
+
+
+            listaHorariosTutorias = metodoHorarioTutorias.consultaHorarioTutoriasDocentePeriodo(Session["cedula"].ToString(), CodigoPeriodo);
+
+            return Json(listaHorariosTutorias, JsonRequestBehavior.AllowGet);
+        }
+
 
 
         //consulta el horario del docente desde el estudiante
@@ -453,21 +611,21 @@ namespace AppTutorias.Controllers
 
         //MODULOS DEL DOCENTE DISPONIBLES CONSULTADOS DESDE EL ESTUDIANTE
 
-        public ActionResult listaModulosDocenteDisponible(string cedula)
+        public ActionResult listaModulosDocenteDisponible(string cedula,string CodigoPeriodo)
         {
             metodoModulo metodoModulo = new metodoModulo();
             List<modulo> listaModulo = new List<modulo>();
-            listaModulo = metodoModulo.consultaModulosDocente(cedula);
+            listaModulo = metodoModulo.consultaModulosDocente(cedula,CodigoPeriodo);
 
             return Json(listaModulo, JsonRequestBehavior.AllowGet);
         }
 
 
-        public ActionResult listaModulosDocenteDisponibleLogueado()
+        public ActionResult listaModulosDocenteDisponibleLogueado(string CodigoPeriodo)
         {
             metodoModulo metodoModulo = new metodoModulo();
             List<modulo> listaModulo = new List<modulo>();
-            listaModulo = metodoModulo.consultaModulosDocente(Session["cedula"].ToString());
+            listaModulo = metodoModulo.consultaModulosDocente(Session["cedula"].ToString(),CodigoPeriodo);
 
             return Json(listaModulo, JsonRequestBehavior.AllowGet);
         }
@@ -520,29 +678,62 @@ namespace AppTutorias.Controllers
 
             metodoDocente metodoDocente = new metodoDocente();
             List<Solicitud> listaSolicitudes = new List<Solicitud>();
-
+            List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
+            string mensaje = "";
+            bool valido = false;
             if (horarioTutorias.Aula != null)
             {
-                metodoDocente.confirmaSolictudEstudiante(Id_Notificacion, Confirma);
+            
 
                 horarioTutorias.CedulaDocente = Session["cedula"].ToString();
                 metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
+                listaHorariosTutorias = metodoHorarioTutorias.consultaHorarioTutoriasDocenteFecha(Session["cedula"].ToString());
+                int contador = listaHorariosTutorias.ToList().Count;
+
                 metodoHorarioTutorias.ingresarHorarioTutoria(horarioTutorias);
+
+                listaHorariosTutorias = metodoHorarioTutorias.consultaHorarioTutoriasDocenteFecha(Session["cedula"].ToString());
+                int contadorDos = listaHorariosTutorias.ToList().Count;
+
+
+        
+                if (contadorDos > contador)
+                {
+                    metodoDocente.confirmaSolictudEstudiante(Id_Notificacion, Confirma);
+                    contactoApp(horarioTutorias, Session["cedula"].ToString());
+                    mensaje = "Solictud confirmada";
+                    valido = true;
+                }
+                else
+                {
+                    mensaje = "este horario no esta disponible";
+                }
+        
+
+
             }
 
             listaSolicitudes = metodoDocente.consultaMensajesEstudiante(Session["cedula"].ToString());
 
-            return Json(listaSolicitudes, JsonRequestBehavior.AllowGet);
+            var data = new
+            {
+                ListaSolicitudes = listaSolicitudes,
+                Mensaje = mensaje,
+                Valido =valido
+
+            };
+
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
 
         //INGRESO DE HORAS LIBRES
 
-        public ActionResult ingresarHorasLibres(string CodigoModulo)
+        public ActionResult ingresarHorasLibres(string CodigoModulo ,string CodigoPeriodo)
         {
 
             metodoModulo metodoModulo = new metodoModulo();
-            metodoModulo.ingresarHorasLibres(Session["cedula"].ToString(), CodigoModulo);
+            metodoModulo.ingresarHorasLibres(Session["cedula"].ToString(), CodigoModulo,CodigoPeriodo);
 
             metodoHorarioClaseDocente metodoHorarioClaseDocente = new metodoHorarioClaseDocente();
             List<horarioClaseDocente> listaHorarioDocente = new List<horarioClaseDocente>();
@@ -550,8 +741,8 @@ namespace AppTutorias.Controllers
             List<horarioClaseDocente> consultaHorarioObligatorioDocente = new List<horarioClaseDocente>();
 
             listaHorarioDocente = metodoHorarioClaseDocente.consultaHorariosDocenteCedula(Session["cedula"].ToString());
-            consultaHorarioLibreDocente = metodoHorarioClaseDocente.consultaHorarioLibreDocente(Session["cedula"].ToString());
-            consultaHorarioObligatorioDocente = metodoHorarioClaseDocente.consultaHorarioObligatorioDocente(Session["cedula"].ToString());
+            consultaHorarioLibreDocente = metodoHorarioClaseDocente.consultaHorarioLibreDocente(Session["cedula"].ToString()).Where(x => x.CodigoPeriodo == CodigoPeriodo).ToList();
+            consultaHorarioObligatorioDocente = metodoHorarioClaseDocente.consultaHorarioObligatorioDocente(Session["cedula"].ToString()).Where(x => x.CodigoPeriodo == CodigoPeriodo).ToList();
 
             ViewBag.horasLibres = consultaHorarioLibreDocente;
             ViewBag.horasObligatorias = consultaHorarioObligatorioDocente;
@@ -562,11 +753,34 @@ namespace AppTutorias.Controllers
         //INGREO DE HORAS OBLIGATORIAS
 
 
-        public ActionResult ingresarHorasObligatorias(string CodigoM)
+        public ActionResult ingresarHorasObligatorias(string CodigoM, string CodigoPeriodo)
         {
 
             metodoModulo metodoModulo = new metodoModulo();
-            metodoModulo.ingresarHorasObligatorias(Session["cedula"].ToString(), CodigoM);
+            metodoModulo.ingresarHorasObligatorias(Session["cedula"].ToString(), CodigoM,CodigoPeriodo);
+
+            metodoHorarioClaseDocente metodoHorarioClaseDocente = new metodoHorarioClaseDocente();
+            List<horarioClaseDocente> listaHorarioDocente = new List<horarioClaseDocente>();
+            List<horarioClaseDocente> consultaHorarioLibreDocente = new List<horarioClaseDocente>();
+            List<horarioClaseDocente> consultaHorarioObligatorioDocente = new List<horarioClaseDocente>();
+
+            listaHorarioDocente = metodoHorarioClaseDocente.consultaHorariosDocenteCedula(Session["cedula"].ToString());
+            consultaHorarioLibreDocente = metodoHorarioClaseDocente.consultaHorarioLibreDocente(Session["cedula"].ToString()).Where(x => x.CodigoPeriodo == CodigoPeriodo).ToList();
+            consultaHorarioObligatorioDocente = metodoHorarioClaseDocente.consultaHorarioObligatorioDocente(Session["cedula"].ToString()).Where(x => x.CodigoPeriodo == CodigoPeriodo).ToList();
+
+            ViewBag.horasLibres = consultaHorarioLibreDocente;
+            ViewBag.horasObligatorias = consultaHorarioObligatorioDocente;
+
+            return PartialView("moduloHorario", listaHorarioDocente);
+        }
+
+        //ELIMINAR HORAS LIBRES
+
+        public ActionResult eliminarHorasLibres(string CodigoModulo,string CodigoPeriodo)
+        {
+
+            metodoModulo metodoModulo = new metodoModulo();
+            metodoModulo.eliminarHorasLibres(Session["cedula"].ToString(), CodigoModulo,CodigoPeriodo);
 
             metodoHorarioClaseDocente metodoHorarioClaseDocente = new metodoHorarioClaseDocente();
             List<horarioClaseDocente> listaHorarioDocente = new List<horarioClaseDocente>();
@@ -585,34 +799,11 @@ namespace AppTutorias.Controllers
 
         //ELIMINAR HORAS LIBRES
 
-        public ActionResult eliminarHorasLibres(string CodigoModulo)
+        public ActionResult eliminarHorasObligatorias(string CodigoModulo, string CodigoPeriodo)
         {
 
             metodoModulo metodoModulo = new metodoModulo();
-            metodoModulo.eliminarHorasLibres(Session["cedula"].ToString(), CodigoModulo);
-
-            metodoHorarioClaseDocente metodoHorarioClaseDocente = new metodoHorarioClaseDocente();
-            List<horarioClaseDocente> listaHorarioDocente = new List<horarioClaseDocente>();
-            List<horarioClaseDocente> consultaHorarioLibreDocente = new List<horarioClaseDocente>();
-            List<horarioClaseDocente> consultaHorarioObligatorioDocente = new List<horarioClaseDocente>();
-
-            listaHorarioDocente = metodoHorarioClaseDocente.consultaHorariosDocenteCedula(Session["cedula"].ToString());
-            consultaHorarioLibreDocente = metodoHorarioClaseDocente.consultaHorarioLibreDocente(Session["cedula"].ToString());
-            consultaHorarioObligatorioDocente = metodoHorarioClaseDocente.consultaHorarioObligatorioDocente(Session["cedula"].ToString());
-
-            ViewBag.horasLibres = consultaHorarioLibreDocente;
-            ViewBag.horasObligatorias = consultaHorarioObligatorioDocente;
-
-            return PartialView("moduloHorario", listaHorarioDocente);
-        }
-
-        //ELIMINAR HORAS LIBRES
-
-        public ActionResult eliminarHorasObligatorias(string CodigoModulo)
-        {
-
-            metodoModulo metodoModulo = new metodoModulo();
-            metodoModulo.eliminarHorasObligatorias(Session["cedula"].ToString(), CodigoModulo);
+            metodoModulo.eliminarHorasObligatorias(Session["cedula"].ToString(), CodigoModulo,CodigoPeriodo);
 
             metodoHorarioClaseDocente metodoHorarioClaseDocente = new metodoHorarioClaseDocente();
             List<horarioClaseDocente> listaHorarioDocente = new List<horarioClaseDocente>();
@@ -632,10 +823,10 @@ namespace AppTutorias.Controllers
 
         //CONFIRMAR ASISTENCIA DEL ESTUDIANTE
 
-        public ActionResult confirmarAsistencia(int Id)
+        public ActionResult confirmarAsistencia(int Id,string Confirma)
         {
             conexionDataContext db = new conexionDataContext();
-            db.confirmarAsistenciaTutoria(Id);
+            db.confirmarAsistenciaTutoria(Id,Confirma);
 
             metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
             List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
@@ -645,6 +836,13 @@ namespace AppTutorias.Controllers
 
             return Json(listaHorariosTutorias, JsonRequestBehavior.AllowGet);
 
+        }
+
+        //REPORTES TUTORIAS
+
+       public ActionResult Reportes()
+        {
+            return PartialView("Reportes");
         }
 
     }

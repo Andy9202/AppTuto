@@ -40,6 +40,11 @@ namespace AppTutorias.Metodos.Estudiante
         //consulta las materias del estudiante actual
         public List<materia> materiasEstudiante(string matricula)
         {
+            if (matricula == "" || matricula ==null)
+            {
+                matricula = "0";
+            }
+         
             var consultaMaterias = db.materiasEstudiante(int.Parse(matricula));
 
             List<materia> listaMateria = new List<materia>();

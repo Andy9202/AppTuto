@@ -36,36 +36,15 @@ namespace AppTutorias
     partial void InsertCARRERA(CARRERA instance);
     partial void UpdateCARRERA(CARRERA instance);
     partial void DeleteCARRERA(CARRERA instance);
-    partial void InsertDOCENTE(DOCENTE instance);
-    partial void UpdateDOCENTE(DOCENTE instance);
-    partial void DeleteDOCENTE(DOCENTE instance);
     partial void InsertESTUDIANTE(ESTUDIANTE instance);
     partial void UpdateESTUDIANTE(ESTUDIANTE instance);
     partial void DeleteESTUDIANTE(ESTUDIANTE instance);
     partial void InsertFACULTAD(FACULTAD instance);
     partial void UpdateFACULTAD(FACULTAD instance);
     partial void DeleteFACULTAD(FACULTAD instance);
-    partial void InsertHORARIO_CLASES(HORARIO_CLASES instance);
-    partial void UpdateHORARIO_CLASES(HORARIO_CLASES instance);
-    partial void DeleteHORARIO_CLASES(HORARIO_CLASES instance);
-    partial void InsertHORARIO_ESTUDIANTE(HORARIO_ESTUDIANTE instance);
-    partial void UpdateHORARIO_ESTUDIANTE(HORARIO_ESTUDIANTE instance);
-    partial void DeleteHORARIO_ESTUDIANTE(HORARIO_ESTUDIANTE instance);
-    partial void InsertHORARIO_LIBRE_DOCENTE(HORARIO_LIBRE_DOCENTE instance);
-    partial void UpdateHORARIO_LIBRE_DOCENTE(HORARIO_LIBRE_DOCENTE instance);
-    partial void DeleteHORARIO_LIBRE_DOCENTE(HORARIO_LIBRE_DOCENTE instance);
-    partial void InsertHORARIO_OBLIGATORIO_DOCENTE(HORARIO_OBLIGATORIO_DOCENTE instance);
-    partial void UpdateHORARIO_OBLIGATORIO_DOCENTE(HORARIO_OBLIGATORIO_DOCENTE instance);
-    partial void DeleteHORARIO_OBLIGATORIO_DOCENTE(HORARIO_OBLIGATORIO_DOCENTE instance);
-    partial void InsertHORIO_TUTORIAS(HORIO_TUTORIAS instance);
-    partial void UpdateHORIO_TUTORIAS(HORIO_TUTORIAS instance);
-    partial void DeleteHORIO_TUTORIAS(HORIO_TUTORIAS instance);
     partial void InsertLOGIN_USUARIO(LOGIN_USUARIO instance);
     partial void UpdateLOGIN_USUARIO(LOGIN_USUARIO instance);
     partial void DeleteLOGIN_USUARIO(LOGIN_USUARIO instance);
-    partial void InsertMATERIA(MATERIA instance);
-    partial void UpdateMATERIA(MATERIA instance);
-    partial void DeleteMATERIA(MATERIA instance);
     partial void InsertMODULO(MODULO instance);
     partial void UpdateMODULO(MODULO instance);
     partial void DeleteMODULO(MODULO instance);
@@ -75,15 +54,36 @@ namespace AppTutorias
     partial void InsertPERIODO_ACADEMICO(PERIODO_ACADEMICO instance);
     partial void UpdatePERIODO_ACADEMICO(PERIODO_ACADEMICO instance);
     partial void DeletePERIODO_ACADEMICO(PERIODO_ACADEMICO instance);
-    partial void InsertREPITENCIA(REPITENCIA instance);
-    partial void UpdateREPITENCIA(REPITENCIA instance);
-    partial void DeleteREPITENCIA(REPITENCIA instance);
     partial void InsertROL(ROL instance);
     partial void UpdateROL(ROL instance);
     partial void DeleteROL(ROL instance);
     partial void InsertSUPERADMIN(SUPERADMIN instance);
     partial void UpdateSUPERADMIN(SUPERADMIN instance);
     partial void DeleteSUPERADMIN(SUPERADMIN instance);
+    partial void InsertHORARIO_CLASES(HORARIO_CLASES instance);
+    partial void UpdateHORARIO_CLASES(HORARIO_CLASES instance);
+    partial void DeleteHORARIO_CLASES(HORARIO_CLASES instance);
+    partial void InsertHORARIO_ESTUDIANTE(HORARIO_ESTUDIANTE instance);
+    partial void UpdateHORARIO_ESTUDIANTE(HORARIO_ESTUDIANTE instance);
+    partial void DeleteHORARIO_ESTUDIANTE(HORARIO_ESTUDIANTE instance);
+    partial void InsertHORIO_TUTORIAS(HORIO_TUTORIAS instance);
+    partial void UpdateHORIO_TUTORIAS(HORIO_TUTORIAS instance);
+    partial void DeleteHORIO_TUTORIAS(HORIO_TUTORIAS instance);
+    partial void InsertMATERIA(MATERIA instance);
+    partial void UpdateMATERIA(MATERIA instance);
+    partial void DeleteMATERIA(MATERIA instance);
+    partial void InsertREPITENCIA(REPITENCIA instance);
+    partial void UpdateREPITENCIA(REPITENCIA instance);
+    partial void DeleteREPITENCIA(REPITENCIA instance);
+    partial void InsertDOCENTE(DOCENTE instance);
+    partial void UpdateDOCENTE(DOCENTE instance);
+    partial void DeleteDOCENTE(DOCENTE instance);
+    partial void InsertHORARIO_OBLIGATORIO_DOCENTE(HORARIO_OBLIGATORIO_DOCENTE instance);
+    partial void UpdateHORARIO_OBLIGATORIO_DOCENTE(HORARIO_OBLIGATORIO_DOCENTE instance);
+    partial void DeleteHORARIO_OBLIGATORIO_DOCENTE(HORARIO_OBLIGATORIO_DOCENTE instance);
+    partial void InsertHORARIO_LIBRE_DOCENTE(HORARIO_LIBRE_DOCENTE instance);
+    partial void UpdateHORARIO_LIBRE_DOCENTE(HORARIO_LIBRE_DOCENTE instance);
+    partial void DeleteHORARIO_LIBRE_DOCENTE(HORARIO_LIBRE_DOCENTE instance);
     #endregion
 		
 		public conexionDataContext() : 
@@ -132,14 +132,6 @@ namespace AppTutorias
 			}
 		}
 		
-		public System.Data.Linq.Table<DOCENTE> DOCENTE
-		{
-			get
-			{
-				return this.GetTable<DOCENTE>();
-			}
-		}
-		
 		public System.Data.Linq.Table<ESTUDIANTE> ESTUDIANTE
 		{
 			get
@@ -156,59 +148,11 @@ namespace AppTutorias
 			}
 		}
 		
-		public System.Data.Linq.Table<HORARIO_CLASES> HORARIO_CLASES
-		{
-			get
-			{
-				return this.GetTable<HORARIO_CLASES>();
-			}
-		}
-		
-		public System.Data.Linq.Table<HORARIO_ESTUDIANTE> HORARIO_ESTUDIANTE
-		{
-			get
-			{
-				return this.GetTable<HORARIO_ESTUDIANTE>();
-			}
-		}
-		
-		public System.Data.Linq.Table<HORARIO_LIBRE_DOCENTE> HORARIO_LIBRE_DOCENTE
-		{
-			get
-			{
-				return this.GetTable<HORARIO_LIBRE_DOCENTE>();
-			}
-		}
-		
-		public System.Data.Linq.Table<HORARIO_OBLIGATORIO_DOCENTE> HORARIO_OBLIGATORIO_DOCENTE
-		{
-			get
-			{
-				return this.GetTable<HORARIO_OBLIGATORIO_DOCENTE>();
-			}
-		}
-		
-		public System.Data.Linq.Table<HORIO_TUTORIAS> HORIO_TUTORIAS
-		{
-			get
-			{
-				return this.GetTable<HORIO_TUTORIAS>();
-			}
-		}
-		
 		public System.Data.Linq.Table<LOGIN_USUARIO> LOGIN_USUARIO
 		{
 			get
 			{
 				return this.GetTable<LOGIN_USUARIO>();
-			}
-		}
-		
-		public System.Data.Linq.Table<MATERIA> MATERIA
-		{
-			get
-			{
-				return this.GetTable<MATERIA>();
 			}
 		}
 		
@@ -236,14 +180,6 @@ namespace AppTutorias
 			}
 		}
 		
-		public System.Data.Linq.Table<REPITENCIA> REPITENCIA
-		{
-			get
-			{
-				return this.GetTable<REPITENCIA>();
-			}
-		}
-		
 		public System.Data.Linq.Table<ROL> ROL
 		{
 			get
@@ -260,6 +196,70 @@ namespace AppTutorias
 			}
 		}
 		
+		public System.Data.Linq.Table<HORARIO_CLASES> HORARIO_CLASES
+		{
+			get
+			{
+				return this.GetTable<HORARIO_CLASES>();
+			}
+		}
+		
+		public System.Data.Linq.Table<HORARIO_ESTUDIANTE> HORARIO_ESTUDIANTE
+		{
+			get
+			{
+				return this.GetTable<HORARIO_ESTUDIANTE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<HORIO_TUTORIAS> HORIO_TUTORIAS
+		{
+			get
+			{
+				return this.GetTable<HORIO_TUTORIAS>();
+			}
+		}
+		
+		public System.Data.Linq.Table<MATERIA> MATERIA
+		{
+			get
+			{
+				return this.GetTable<MATERIA>();
+			}
+		}
+		
+		public System.Data.Linq.Table<REPITENCIA> REPITENCIA
+		{
+			get
+			{
+				return this.GetTable<REPITENCIA>();
+			}
+		}
+		
+		public System.Data.Linq.Table<DOCENTE> DOCENTE
+		{
+			get
+			{
+				return this.GetTable<DOCENTE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<HORARIO_OBLIGATORIO_DOCENTE> HORARIO_OBLIGATORIO_DOCENTE
+		{
+			get
+			{
+				return this.GetTable<HORARIO_OBLIGATORIO_DOCENTE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<HORARIO_LIBRE_DOCENTE> HORARIO_LIBRE_DOCENTE
+		{
+			get
+			{
+				return this.GetTable<HORARIO_LIBRE_DOCENTE>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ActualizarCarrera")]
 		public int ActualizarCarrera([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoCarrera", DbType="VarChar(50)")] string codigoCarrera, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreCarrera", DbType="VarChar(200)")] string nombreCarrera)
 		{
@@ -267,38 +267,10 @@ namespace AppTutorias
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ActualizarDocente")]
-		public int ActualizarDocente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombre", DbType="VarChar(50)")] string nombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreDos", DbType="VarChar(50)")] string nombreDos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Apellido", DbType="VarChar(50)")] string apellido, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ApellidoDos", DbType="VarChar(50)")] string apellidoDos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(50)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Celular", DbType="VarChar(10)")] string celular, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="Char(10)")] string cedula)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombre, nombreDos, apellido, apellidoDos, email, celular, cedula);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ActualizarEstudiante")]
-		public int ActualizarEstudiante([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombre", DbType="VarChar(50)")] string nombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreDos", DbType="VarChar(50)")] string nombreDos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Apellido", DbType="VarChar(50)")] string apellido, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ApellidoDos", DbType="VarChar(50)")] string apellidoDos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Celular", DbType="VarChar(10)")] string celular, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombre, nombreDos, apellido, apellidoDos, celular, matricula);
-			return ((int)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ActualizarFacultad")]
 		public int ActualizarFacultad([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoFacultdad", DbType="VarChar(50)")] string codigoFacultdad, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreFacultad", DbType="VarChar(200)")] string nombreFacultad)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoFacultdad, nombreFacultad);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ActualizarMateria")]
-		public int ActualizarMateria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreMateria", DbType="VarChar(200)")] string nombreMateria)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoMateria, nombreMateria);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.confirmarAsistenciaTutoria")]
-		public int confirmarAsistenciaTutoria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Id_HorarioTutorias", DbType="Int")] System.Nullable<int> id_HorarioTutorias)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id_HorarioTutorias);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -316,13 +288,6 @@ namespace AppTutorias
 			return ((ISingleResult<consultaDatosEstudianteResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.consultaDocentesPorMateria")]
-		public ISingleResult<consultaDocentesPorMateriaResult> consultaDocentesPorMateria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoMateria);
-			return ((ISingleResult<consultaDocentesPorMateriaResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.consultaDocentesPorMateriaFull")]
 		public ISingleResult<consultaDocentesPorMateriaFullResult> consultaDocentesPorMateriaFull([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria)
 		{
@@ -335,41 +300,6 @@ namespace AppTutorias
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoMateria, paralelo);
 			return ((ISingleResult<consultaDocentesPorParaleloResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.consultaDocentesPorParaleloFull")]
-		public ISingleResult<consultaDocentesPorParaleloFullResult> consultaDocentesPorParaleloFull([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Paralelo", DbType="VarChar(5)")] string paralelo)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoMateria, paralelo);
-			return ((ISingleResult<consultaDocentesPorParaleloFullResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.consultaMensajesEstudiante")]
-		public ISingleResult<consultaMensajesEstudianteResult> consultaMensajesEstudiante([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="Char(10)")] string cedula)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedula);
-			return ((ISingleResult<consultaMensajesEstudianteResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.consultaParalelosMateria")]
-		public ISingleResult<consultaParalelosMateriaResult> consultaParalelosMateria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoMateria);
-			return ((ISingleResult<consultaParalelosMateriaResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.conusltaHorarioLibreDocente")]
-		public ISingleResult<conusltaHorarioLibreDocenteResult> conusltaHorarioLibreDocente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(10)")] string cedula)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedula);
-			return ((ISingleResult<conusltaHorarioLibreDocenteResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.conusltaHorarioObligatorioDocente")]
-		public ISingleResult<conusltaHorarioObligatorioDocenteResult> conusltaHorarioObligatorioDocente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(10)")] string cedula)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedula);
-			return ((ISingleResult<conusltaHorarioObligatorioDocenteResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.docentesEstudiante")]
@@ -407,41 +337,6 @@ namespace AppTutorias
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.EliminarHoraLibre")]
-		public int EliminarHoraLibre([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(10)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(50)")] string codigoModulo)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedulaDocente, codigoModulo);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.EliminarHoraObligatoria")]
-		public int EliminarHoraObligatoria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(10)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(50)")] string codigoModulo)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedulaDocente, codigoModulo);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.EliminarHorarioClase")]
-		public int EliminarHorarioClase([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(200)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(100)")] string codigoMateria)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedulaDocente, codigoMateria);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.EliminarMateria")]
-		public int EliminarMateria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoMateria);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.EliminarMateriaEstudiante")]
-		public int EliminarMateriaEstudiante([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Id_HorarioClases", DbType="Int")] System.Nullable<int> id_HorarioClases)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula, id_HorarioClases);
-			return ((int)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.EliminarModulo")]
 		public int EliminarModulo([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(50)")] string codigoModulo)
 		{
@@ -456,69 +351,6 @@ namespace AppTutorias
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.EliminarRepitencia")]
-		public int EliminarRepitencia([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula, codigoMateria);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.estudiantesDocenteMateria")]
-		public ISingleResult<estudiantesDocenteMateriaResult> estudiantesDocenteMateria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(10)")] string cedula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedula, codigoMateria);
-			return ((ISingleResult<estudiantesDocenteMateriaResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.horarioClaseDocentes")]
-		public ISingleResult<horarioClaseDocentesResult> horarioClaseDocentes()
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<horarioClaseDocentesResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.horarioClaseEstudiante")]
-		public ISingleResult<horarioClaseEstudianteResult> horarioClaseEstudiante()
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<horarioClaseEstudianteResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.horarioClaseEstudianteMatricula")]
-		public ISingleResult<horarioClaseEstudianteMatriculaResult> horarioClaseEstudianteMatricula([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula);
-			return ((ISingleResult<horarioClaseEstudianteMatriculaResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.horarioDocenteCedula")]
-		public ISingleResult<horarioDocenteCedulaResult> horarioDocenteCedula([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(10)")] string cedula)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedula);
-			return ((ISingleResult<horarioDocenteCedulaResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.horarioTutorias")]
-		public ISingleResult<horarioTutoriasResult> horarioTutorias()
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<horarioTutoriasResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.horarioTutoriasDocente")]
-		public ISingleResult<horarioTutoriasDocenteResult> horarioTutoriasDocente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(10)")] string cedula)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedula);
-			return ((ISingleResult<horarioTutoriasDocenteResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.horarioTutoriasEstudiante")]
-		public ISingleResult<horarioTutoriasEstudianteResult> horarioTutoriasEstudiante([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="VarChar(10)")] string matricula)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula);
-			return ((ISingleResult<horarioTutoriasEstudianteResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.IngresarAdmin")]
 		public int IngresarAdmin([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombre", DbType="VarChar(50)")] string nombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreDos", DbType="VarChar(50)")] string nombreDos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Apellido", DbType="VarChar(50)")] string apellido, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ApellidoDos", DbType="VarChar(50)")] string apellidoDos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(50)")] string email)
 		{
@@ -530,13 +362,6 @@ namespace AppTutorias
 		public int IngresarCarrera([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoFacultad", DbType="VarChar(50)")] string codigoFacultad, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreCarrera", DbType="VarChar(200)")] string nombreCarrera, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoCarrera", DbType="VarChar(50)")] string codigoCarrera)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoFacultad, nombreCarrera, codigoCarrera);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.IngresarDocente")]
-		public int IngresarDocente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombre", DbType="VarChar(50)")] string nombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreDos", DbType="VarChar(50)")] string nombreDos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Apellido", DbType="VarChar(50)")] string apellido, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ApellidoDos", DbType="VarChar(50)")] string apellidoDos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(50)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Celular", DbType="VarChar(10)")] string celular, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="Char(10)")] string cedula)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombre, nombreDos, apellido, apellidoDos, email, celular, cedula);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -554,52 +379,10 @@ namespace AppTutorias
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.IngresarHoraLibre")]
-		public int IngresarHoraLibre([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(200)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(100)")] string codigoModulo)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedulaDocente, codigoModulo);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.IngresarHoraObligatoria")]
-		public int IngresarHoraObligatoria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(200)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(100)")] string codigoModulo)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedulaDocente, codigoModulo);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.IngresarHorarioClase")]
-		public int IngresarHorarioClase([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(200)")] string codigoMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(200)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(50)")] string codigoModulo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoPeriodo", DbType="VarChar(100)")] string codigoPeriodo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Aula", DbType="VarChar(10)")] string aula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Paralelo", DbType="VarChar(5)")] string paralelo)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoMateria, cedulaDocente, codigoModulo, codigoPeriodo, aula, paralelo);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.IngresarHorarioClaseEstudiante")]
-		public int IngresarHorarioClaseEstudiante([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(200)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(100)")] string codigoMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(100)")] string codigoModulo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Paralelo", DbType="VarChar(5)")] string paralelo)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula, cedulaDocente, codigoMateria, codigoModulo, paralelo);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.IngresarMateria")]
-		public int IngresarMateria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoCarrera", DbType="VarChar(50)")] string codigoCarrera, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreMateria", DbType="VarChar(200)")] string nombreMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoCarrera, nombreMateria, codigoMateria);
-			return ((int)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.IngresarModulo")]
 		public int IngresarModulo([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(50)")] string codigoModulo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="HoraInicio", DbType="Time")] System.Nullable<System.TimeSpan> horaInicio, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="HoraFin", DbType="Time")] System.Nullable<System.TimeSpan> horaFin, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Dia", DbType="VarChar(50)")] string dia)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoModulo, horaInicio, horaFin, dia);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ingresarNotificacionEstudiante")]
-		public int ingresarNotificacionEstudiante([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="Char(10)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(50)")] string codigoModulo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="VarChar(MAX)")] string mensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Fecha", DbType="Date")] System.Nullable<System.DateTime> fecha)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedulaDocente, matricula, codigoMateria, codigoModulo, mensaje, fecha);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -610,13 +393,6 @@ namespace AppTutorias
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.IngresarRepitencia")]
-		public int IngresarRepitencia([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Repitencia", DbType="Char(1)")] System.Nullable<char> repitencia)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula, codigoMateria, repitencia);
-			return ((int)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.IngresarSuperAdmin")]
 		public int IngresarSuperAdmin([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombre", DbType="VarChar(50)")] string nombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreDos", DbType="VarChar(50)")] string nombreDos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Apellido", DbType="VarChar(50)")] string apellido, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ApellidoDos", DbType="VarChar(50)")] string apellidoDos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(50)")] string email)
 		{
@@ -624,53 +400,298 @@ namespace AppTutorias
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.IngresarTutoria")]
-		public int IngresarTutoria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(200)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(100)")] string codigoModulo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(100)")] string codigoMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoPeriodo", DbType="VarChar(50)")] string codigoPeriodo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EstadoObligatorio", DbType="Char(2)")] string estadoObligatorio, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Fecha", DbType="Date")] System.Nullable<System.DateTime> fecha, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Aula", DbType="VarChar(20)")] string aula)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.[SqlQueryNotificationStoredProcedure-9f46e87c-82c9-4f28-ae1d-ab7112450e26]")]
+		public ISingleResult<SqlQueryNotificationStoredProcedure_9f46e87c_82c9_4f28_ae1d_ab7112450e26Result> SqlQueryNotificationStoredProcedure_9f46e87c_82c9_4f28_ae1d_ab7112450e26()
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula, cedulaDocente, codigoModulo, codigoMateria, codigoPeriodo, estadoObligatorio, fecha, aula);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<SqlQueryNotificationStoredProcedure_9f46e87c_82c9_4f28_ae1d_ab7112450e26Result>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.EliminarMateria")]
+		public int EliminarMateria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoMateria);
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.materiasDocente")]
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.IngresarMateria")]
+		public int IngresarMateria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoCarrera", DbType="VarChar(50)")] string codigoCarrera, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreMateria", DbType="VarChar(200)")] string nombreMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoCarrera, nombreMateria, codigoMateria);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.ActualizarDocente")]
+		public int ActualizarDocente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombre", DbType="VarChar(50)")] string nombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreDos", DbType="VarChar(50)")] string nombreDos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Apellido", DbType="VarChar(50)")] string apellido, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ApellidoDos", DbType="VarChar(50)")] string apellidoDos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(50)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Celular", DbType="VarChar(10)")] string celular, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="Char(10)")] string cedula)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombre, nombreDos, apellido, apellidoDos, email, celular, cedula);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.ActualizarMateria")]
+		public int ActualizarMateria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreMateria", DbType="VarChar(200)")] string nombreMateria)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoMateria, nombreMateria);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.consultaParaleloMateriaDocente")]
+		public ISingleResult<consultaParaleloMateriaDocenteResult> consultaParaleloMateriaDocente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="Char(10)")] string cedulaDocente)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoMateria, cedulaDocente);
+			return ((ISingleResult<consultaParaleloMateriaDocenteResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.EliminarHorarioClase")]
+		public int EliminarHorarioClase([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(200)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(100)")] string codigoMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Paralelo", DbType="VarChar(5)")] string paralelo)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedulaDocente, codigoMateria, paralelo);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.IngresarHorarioClase")]
+		public int IngresarHorarioClase([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(200)")] string codigoMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(200)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(50)")] string codigoModulo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoPeriodo", DbType="VarChar(100)")] string codigoPeriodo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Aula", DbType="VarChar(10)")] string aula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Paralelo", DbType="VarChar(5)")] string paralelo)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoMateria, cedulaDocente, codigoModulo, codigoPeriodo, aula, paralelo);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.horarioClaseDocente")]
+		public ISingleResult<horarioClaseDocenteResult> horarioClaseDocente()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<horarioClaseDocenteResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.materiasDocente")]
 		public ISingleResult<materiasDocenteResult> materiasDocente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(10)")] string cedula)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedula);
 			return ((ISingleResult<materiasDocenteResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.materiasEstudiante")]
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.consultaParalelosMateria")]
+		public ISingleResult<consultaParalelosMateriaResult> consultaParalelosMateria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoMateria);
+			return ((ISingleResult<consultaParalelosMateriaResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.consultaDocentesCoicidencias")]
+		public ISingleResult<consultaDocentesCoicidenciasResult> consultaDocentesCoicidencias([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Palabra", DbType="VarChar(200)")] string palabra)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), palabra);
+			return ((ISingleResult<consultaDocentesCoicidenciasResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.consultaDocentesPorParaleloFull")]
+		public ISingleResult<consultaDocentesPorParaleloFullResult> consultaDocentesPorParaleloFull([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Paralelo", DbType="VarChar(5)")] string paralelo)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoMateria, paralelo);
+			return ((ISingleResult<consultaDocentesPorParaleloFullResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.materiasEstudiante")]
 		public ISingleResult<materiasEstudianteResult> materiasEstudiante([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula);
 			return ((ISingleResult<materiasEstudianteResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.materiasEstudianteDocente")]
-		public ISingleResult<materiasEstudianteDocenteResult> materiasEstudianteDocente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(10)")] string cedula)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.IngresarHorarioClaseEstudiante")]
+		public int IngresarHorarioClaseEstudiante([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(200)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(100)")] string codigoMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(100)")] string codigoModulo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Paralelo", DbType="VarChar(5)")] string paralelo)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula, cedula);
-			return ((ISingleResult<materiasEstudianteDocenteResult>)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula, cedulaDocente, codigoMateria, codigoModulo, paralelo);
+			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.modulosDocenteDisponible")]
-		public ISingleResult<modulosDocenteDisponibleResult> modulosDocenteDisponible([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(10)")] string cedulaDocente)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.horarioClaseEstudiantes")]
+		public ISingleResult<horarioClaseEstudiantesResult> horarioClaseEstudiantes()
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedulaDocente);
-			return ((ISingleResult<modulosDocenteDisponibleResult>)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<horarioClaseEstudiantesResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.modulosDocenteDisponibleAsignacion")]
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.horarioDocenteCedula")]
+		public ISingleResult<horarioDocenteCedulaResult> horarioDocenteCedula([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(10)")] string cedula)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedula);
+			return ((ISingleResult<horarioDocenteCedulaResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.horarioClaseEstudianteMatricula")]
+		public ISingleResult<horarioClaseEstudianteMatriculaResult> horarioClaseEstudianteMatricula([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula);
+			return ((ISingleResult<horarioClaseEstudianteMatriculaResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.IngresarRepitencia")]
+		public int IngresarRepitencia([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Repitencia", DbType="Char(1)")] System.Nullable<char> repitencia)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula, codigoMateria, repitencia);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.EliminarMateriaEstudiante")]
+		public int EliminarMateriaEstudiante([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Id_HorarioClases", DbType="Int")] System.Nullable<int> id_HorarioClases)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula, id_HorarioClases);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.EliminarRepitencia")]
+		public int EliminarRepitencia([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula, codigoMateria);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.modulosDocenteDisponibleAsignacion")]
 		public ISingleResult<modulosDocenteDisponibleAsignacionResult> modulosDocenteDisponibleAsignacion([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(10)")] string cedulaDocente)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedulaDocente);
 			return ((ISingleResult<modulosDocenteDisponibleAsignacionResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.[SqlQueryNotificationStoredProcedure-9f46e87c-82c9-4f28-ae1d-ab7112450e26]")]
-		public ISingleResult<SqlQueryNotificationStoredProcedure_9f46e87c_82c9_4f28_ae1d_ab7112450e26Result> SqlQueryNotificationStoredProcedure_9f46e87c_82c9_4f28_ae1d_ab7112450e26()
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.materiasEstudianteDocente")]
+		public ISingleResult<materiasEstudianteDocenteResult> materiasEstudianteDocente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(10)")] string cedula)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula, cedula);
+			return ((ISingleResult<materiasEstudianteDocenteResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.estudiantesDocenteMateria")]
+		public ISingleResult<estudiantesDocenteMateriaResult> estudiantesDocenteMateria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(10)")] string cedula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedula, codigoMateria);
+			return ((ISingleResult<estudiantesDocenteMateriaResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.IngresarTutoria")]
+		public int IngresarTutoria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(200)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(100)")] string codigoModulo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(100)")] string codigoMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoPeriodo", DbType="VarChar(50)")] string codigoPeriodo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EstadoObligatorio", DbType="Char(2)")] string estadoObligatorio, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Fecha", DbType="Date")] System.Nullable<System.DateTime> fecha, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Aula", DbType="VarChar(20)")] string aula)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula, cedulaDocente, codigoModulo, codigoMateria, codigoPeriodo, estadoObligatorio, fecha, aula);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.horarioTutorias")]
+		public ISingleResult<horarioTutoriasResult> horarioTutorias()
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<SqlQueryNotificationStoredProcedure_9f46e87c_82c9_4f28_ae1d_ab7112450e26Result>)(result.ReturnValue));
+			return ((ISingleResult<horarioTutoriasResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.horarioTutoriasEstudiante")]
+		public ISingleResult<horarioTutoriasEstudianteResult> horarioTutoriasEstudiante([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="VarChar(10)")] string matricula)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), matricula);
+			return ((ISingleResult<horarioTutoriasEstudianteResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.consultaMensajesEstudiante")]
+		public ISingleResult<consultaMensajesEstudianteResult> consultaMensajesEstudiante([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="Char(10)")] string cedula)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedula);
+			return ((ISingleResult<consultaMensajesEstudianteResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.confirmarAsistenciaTutoria")]
+		public int confirmarAsistenciaTutoria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Id_HorarioTutorias", DbType="Int")] System.Nullable<int> id_HorarioTutorias, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Confirma", DbType="Char(2)")] string confirma)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id_HorarioTutorias, confirma);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.consultaDocentesPorMateria")]
+		public ISingleResult<consultaDocentesPorMateriaResult> consultaDocentesPorMateria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codigoMateria);
+			return ((ISingleResult<consultaDocentesPorMateriaResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.ingresarNotificacionEstudiante")]
+		public int ingresarNotificacionEstudiante([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="Char(10)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoMateria", DbType="VarChar(50)")] string codigoMateria, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(50)")] string codigoModulo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="VarChar(MAX)")] string mensaje, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Fecha", DbType="Date")] System.Nullable<System.DateTime> fecha)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedulaDocente, matricula, codigoMateria, codigoModulo, mensaje, fecha);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.IngresarDocente")]
+		public int IngresarDocente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombre", DbType="VarChar(50)")] string nombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreDos", DbType="VarChar(50)")] string nombreDos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Apellido", DbType="VarChar(50)")] string apellido, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ApellidoDos", DbType="VarChar(50)")] string apellidoDos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(50)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Celular", DbType="VarChar(10)")] string celular, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="Char(10)")] string cedula)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombre, nombreDos, apellido, apellidoDos, email, celular, cedula);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.ActualizarEstudiante")]
+		public int ActualizarEstudiante([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombre", DbType="VarChar(50)")] string nombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreDos", DbType="VarChar(50)")] string nombreDos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Apellido", DbType="VarChar(50)")] string apellido, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ApellidoDos", DbType="VarChar(50)")] string apellidoDos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Celular", DbType="VarChar(10)")] string celular, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(50)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Matricula", DbType="Int")] System.Nullable<int> matricula)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombre, nombreDos, apellido, apellidoDos, celular, email, matricula);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.horarioTutoriasDocente")]
+		public ISingleResult<horarioTutoriasDocenteResult> horarioTutoriasDocente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(10)")] string cedula)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedula);
+			return ((ISingleResult<horarioTutoriasDocenteResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.horarioTutoriasFull")]
+		public ISingleResult<horarioTutoriasFullResult> horarioTutoriasFull()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<horarioTutoriasFullResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.IngresarHoraObligatoria")]
+		public int IngresarHoraObligatoria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(200)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(100)")] string codigoModulo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoPeriodo", DbType="VarChar(50)")] string codigoPeriodo)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedulaDocente, codigoModulo, codigoPeriodo);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.IngresarHoraLibre")]
+		public int IngresarHoraLibre([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(200)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(100)")] string codigoModulo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoPeriodo", DbType="VarChar(50)")] string codigoPeriodo)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedulaDocente, codigoModulo, codigoPeriodo);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.conusltaHorarioLibreDocente")]
+		public ISingleResult<conusltaHorarioLibreDocenteResult> conusltaHorarioLibreDocente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(10)")] string cedula)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedula);
+			return ((ISingleResult<conusltaHorarioLibreDocenteResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.conusltaHorarioObligatorioDocente")]
+		public ISingleResult<conusltaHorarioObligatorioDocenteResult> conusltaHorarioObligatorioDocente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(10)")] string cedula)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedula);
+			return ((ISingleResult<conusltaHorarioObligatorioDocenteResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.EliminarHoraLibre")]
+		public int EliminarHoraLibre([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(10)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(50)")] string codigoModulo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoPeriodo", DbType="VarChar(50)")] string codigoPeriodo)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedulaDocente, codigoModulo, codigoPeriodo);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.EliminarHoraObligatoria")]
+		public int EliminarHoraObligatoria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(10)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoModulo", DbType="VarChar(50)")] string codigoModulo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoPeriodo", DbType="VarChar(50)")] string codigoPeriodo)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedulaDocente, codigoModulo, codigoPeriodo);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="TutoAdmin.modulosDocenteDisponible")]
+		public ISingleResult<modulosDocenteDisponibleResult> modulosDocenteDisponible([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaDocente", DbType="VarChar(10)")] string cedulaDocente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodigoPeriodo", DbType="VarChar(50)")] string codigoPeriodo)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cedulaDocente, codigoPeriodo);
+			return ((ISingleResult<modulosDocenteDisponibleResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -1149,413 +1170,6 @@ namespace AppTutorias
 		{
 			this.SendPropertyChanging();
 			entity.CARRERA = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DOCENTE")]
-	public partial class DOCENTE : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id_Docente;
-		
-		private int _Id_Rol;
-		
-		private string _Nombre;
-		
-		private string _NombreDos;
-		
-		private string _Apellido;
-		
-		private string _ApellidoDos;
-		
-		private string _Email;
-		
-		private string _Celular;
-		
-		private string _Cedula;
-		
-		private EntitySet<HORARIO_CLASES> _HORARIO_CLASES;
-		
-		private EntitySet<HORARIO_LIBRE_DOCENTE> _HORARIO_LIBRE_DOCENTE;
-		
-		private EntitySet<HORARIO_OBLIGATORIO_DOCENTE> _HORARIO_OBLIGATORIO_DOCENTE;
-		
-		private EntitySet<HORIO_TUTORIAS> _HORIO_TUTORIAS;
-		
-		private EntityRef<ROL> _ROL;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnId_DocenteChanging(int value);
-    partial void OnId_DocenteChanged();
-    partial void OnId_RolChanging(int value);
-    partial void OnId_RolChanged();
-    partial void OnNombreChanging(string value);
-    partial void OnNombreChanged();
-    partial void OnNombreDosChanging(string value);
-    partial void OnNombreDosChanged();
-    partial void OnApellidoChanging(string value);
-    partial void OnApellidoChanged();
-    partial void OnApellidoDosChanging(string value);
-    partial void OnApellidoDosChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnCelularChanging(string value);
-    partial void OnCelularChanged();
-    partial void OnCedulaChanging(string value);
-    partial void OnCedulaChanged();
-    #endregion
-		
-		public DOCENTE()
-		{
-			this._HORARIO_CLASES = new EntitySet<HORARIO_CLASES>(new Action<HORARIO_CLASES>(this.attach_HORARIO_CLASES), new Action<HORARIO_CLASES>(this.detach_HORARIO_CLASES));
-			this._HORARIO_LIBRE_DOCENTE = new EntitySet<HORARIO_LIBRE_DOCENTE>(new Action<HORARIO_LIBRE_DOCENTE>(this.attach_HORARIO_LIBRE_DOCENTE), new Action<HORARIO_LIBRE_DOCENTE>(this.detach_HORARIO_LIBRE_DOCENTE));
-			this._HORARIO_OBLIGATORIO_DOCENTE = new EntitySet<HORARIO_OBLIGATORIO_DOCENTE>(new Action<HORARIO_OBLIGATORIO_DOCENTE>(this.attach_HORARIO_OBLIGATORIO_DOCENTE), new Action<HORARIO_OBLIGATORIO_DOCENTE>(this.detach_HORARIO_OBLIGATORIO_DOCENTE));
-			this._HORIO_TUTORIAS = new EntitySet<HORIO_TUTORIAS>(new Action<HORIO_TUTORIAS>(this.attach_HORIO_TUTORIAS), new Action<HORIO_TUTORIAS>(this.detach_HORIO_TUTORIAS));
-			this._ROL = default(EntityRef<ROL>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Docente", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id_Docente
-		{
-			get
-			{
-				return this._Id_Docente;
-			}
-			set
-			{
-				if ((this._Id_Docente != value))
-				{
-					this.OnId_DocenteChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Docente = value;
-					this.SendPropertyChanged("Id_Docente");
-					this.OnId_DocenteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Rol", DbType="Int NOT NULL")]
-		public int Id_Rol
-		{
-			get
-			{
-				return this._Id_Rol;
-			}
-			set
-			{
-				if ((this._Id_Rol != value))
-				{
-					if (this._ROL.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnId_RolChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Rol = value;
-					this.SendPropertyChanged("Id_Rol");
-					this.OnId_RolChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Nombre
-		{
-			get
-			{
-				return this._Nombre;
-			}
-			set
-			{
-				if ((this._Nombre != value))
-				{
-					this.OnNombreChanging(value);
-					this.SendPropertyChanging();
-					this._Nombre = value;
-					this.SendPropertyChanged("Nombre");
-					this.OnNombreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreDos", DbType="VarChar(50)")]
-		public string NombreDos
-		{
-			get
-			{
-				return this._NombreDos;
-			}
-			set
-			{
-				if ((this._NombreDos != value))
-				{
-					this.OnNombreDosChanging(value);
-					this.SendPropertyChanging();
-					this._NombreDos = value;
-					this.SendPropertyChanged("NombreDos");
-					this.OnNombreDosChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Apellido
-		{
-			get
-			{
-				return this._Apellido;
-			}
-			set
-			{
-				if ((this._Apellido != value))
-				{
-					this.OnApellidoChanging(value);
-					this.SendPropertyChanging();
-					this._Apellido = value;
-					this.SendPropertyChanged("Apellido");
-					this.OnApellidoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApellidoDos", DbType="VarChar(50)")]
-		public string ApellidoDos
-		{
-			get
-			{
-				return this._ApellidoDos;
-			}
-			set
-			{
-				if ((this._ApellidoDos != value))
-				{
-					this.OnApellidoDosChanging(value);
-					this.SendPropertyChanging();
-					this._ApellidoDos = value;
-					this.SendPropertyChanged("ApellidoDos");
-					this.OnApellidoDosChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Celular", DbType="VarChar(10)")]
-		public string Celular
-		{
-			get
-			{
-				return this._Celular;
-			}
-			set
-			{
-				if ((this._Celular != value))
-				{
-					this.OnCelularChanging(value);
-					this.SendPropertyChanging();
-					this._Celular = value;
-					this.SendPropertyChanged("Celular");
-					this.OnCelularChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="Char(10)")]
-		public string Cedula
-		{
-			get
-			{
-				return this._Cedula;
-			}
-			set
-			{
-				if ((this._Cedula != value))
-				{
-					this.OnCedulaChanging(value);
-					this.SendPropertyChanging();
-					this._Cedula = value;
-					this.SendPropertyChanged("Cedula");
-					this.OnCedulaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DOCENTE_HORARIO_CLASES", Storage="_HORARIO_CLASES", ThisKey="Id_Docente", OtherKey="Id_Docente")]
-		public EntitySet<HORARIO_CLASES> HORARIO_CLASES
-		{
-			get
-			{
-				return this._HORARIO_CLASES;
-			}
-			set
-			{
-				this._HORARIO_CLASES.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DOCENTE_HORARIO_LIBRE_DOCENTE", Storage="_HORARIO_LIBRE_DOCENTE", ThisKey="Id_Docente", OtherKey="Id_Docente")]
-		public EntitySet<HORARIO_LIBRE_DOCENTE> HORARIO_LIBRE_DOCENTE
-		{
-			get
-			{
-				return this._HORARIO_LIBRE_DOCENTE;
-			}
-			set
-			{
-				this._HORARIO_LIBRE_DOCENTE.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DOCENTE_HORARIO_OBLIGATORIO_DOCENTE", Storage="_HORARIO_OBLIGATORIO_DOCENTE", ThisKey="Id_Docente", OtherKey="Id_Docente")]
-		public EntitySet<HORARIO_OBLIGATORIO_DOCENTE> HORARIO_OBLIGATORIO_DOCENTE
-		{
-			get
-			{
-				return this._HORARIO_OBLIGATORIO_DOCENTE;
-			}
-			set
-			{
-				this._HORARIO_OBLIGATORIO_DOCENTE.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DOCENTE_HORIO_TUTORIAS", Storage="_HORIO_TUTORIAS", ThisKey="Id_Docente", OtherKey="Id_Docente")]
-		public EntitySet<HORIO_TUTORIAS> HORIO_TUTORIAS
-		{
-			get
-			{
-				return this._HORIO_TUTORIAS;
-			}
-			set
-			{
-				this._HORIO_TUTORIAS.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ROL_DOCENTE", Storage="_ROL", ThisKey="Id_Rol", OtherKey="Id_Rol", IsForeignKey=true)]
-		public ROL ROL
-		{
-			get
-			{
-				return this._ROL.Entity;
-			}
-			set
-			{
-				ROL previousValue = this._ROL.Entity;
-				if (((previousValue != value) 
-							|| (this._ROL.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ROL.Entity = null;
-						previousValue.DOCENTE.Remove(this);
-					}
-					this._ROL.Entity = value;
-					if ((value != null))
-					{
-						value.DOCENTE.Add(this);
-						this._Id_Rol = value.Id_Rol;
-					}
-					else
-					{
-						this._Id_Rol = default(int);
-					}
-					this.SendPropertyChanged("ROL");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_HORARIO_CLASES(HORARIO_CLASES entity)
-		{
-			this.SendPropertyChanging();
-			entity.DOCENTE = this;
-		}
-		
-		private void detach_HORARIO_CLASES(HORARIO_CLASES entity)
-		{
-			this.SendPropertyChanging();
-			entity.DOCENTE = null;
-		}
-		
-		private void attach_HORARIO_LIBRE_DOCENTE(HORARIO_LIBRE_DOCENTE entity)
-		{
-			this.SendPropertyChanging();
-			entity.DOCENTE = this;
-		}
-		
-		private void detach_HORARIO_LIBRE_DOCENTE(HORARIO_LIBRE_DOCENTE entity)
-		{
-			this.SendPropertyChanging();
-			entity.DOCENTE = null;
-		}
-		
-		private void attach_HORARIO_OBLIGATORIO_DOCENTE(HORARIO_OBLIGATORIO_DOCENTE entity)
-		{
-			this.SendPropertyChanging();
-			entity.DOCENTE = this;
-		}
-		
-		private void detach_HORARIO_OBLIGATORIO_DOCENTE(HORARIO_OBLIGATORIO_DOCENTE entity)
-		{
-			this.SendPropertyChanging();
-			entity.DOCENTE = null;
-		}
-		
-		private void attach_HORIO_TUTORIAS(HORIO_TUTORIAS entity)
-		{
-			this.SendPropertyChanging();
-			entity.DOCENTE = this;
-		}
-		
-		private void detach_HORIO_TUTORIAS(HORIO_TUTORIAS entity)
-		{
-			this.SendPropertyChanging();
-			entity.DOCENTE = null;
 		}
 	}
 	
@@ -2141,7 +1755,1377 @@ namespace AppTutorias
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.HORARIO_CLASES")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LOGIN_USUARIO")]
+	public partial class LOGIN_USUARIO : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id_LoginUsuario;
+		
+		private int _Id_Rol;
+		
+		private string _Usuario;
+		
+		private string _Contrasena;
+		
+		private EntityRef<ROL> _ROL;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnId_LoginUsuarioChanging(int value);
+    partial void OnId_LoginUsuarioChanged();
+    partial void OnId_RolChanging(int value);
+    partial void OnId_RolChanged();
+    partial void OnUsuarioChanging(string value);
+    partial void OnUsuarioChanged();
+    partial void OnContrasenaChanging(string value);
+    partial void OnContrasenaChanged();
+    #endregion
+		
+		public LOGIN_USUARIO()
+		{
+			this._ROL = default(EntityRef<ROL>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_LoginUsuario", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id_LoginUsuario
+		{
+			get
+			{
+				return this._Id_LoginUsuario;
+			}
+			set
+			{
+				if ((this._Id_LoginUsuario != value))
+				{
+					this.OnId_LoginUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._Id_LoginUsuario = value;
+					this.SendPropertyChanged("Id_LoginUsuario");
+					this.OnId_LoginUsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Rol", DbType="Int NOT NULL")]
+		public int Id_Rol
+		{
+			get
+			{
+				return this._Id_Rol;
+			}
+			set
+			{
+				if ((this._Id_Rol != value))
+				{
+					if (this._ROL.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_RolChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Rol = value;
+					this.SendPropertyChanged("Id_Rol");
+					this.OnId_RolChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usuario", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Usuario
+		{
+			get
+			{
+				return this._Usuario;
+			}
+			set
+			{
+				if ((this._Usuario != value))
+				{
+					this.OnUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._Usuario = value;
+					this.SendPropertyChanged("Usuario");
+					this.OnUsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contrasena", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Contrasena
+		{
+			get
+			{
+				return this._Contrasena;
+			}
+			set
+			{
+				if ((this._Contrasena != value))
+				{
+					this.OnContrasenaChanging(value);
+					this.SendPropertyChanging();
+					this._Contrasena = value;
+					this.SendPropertyChanged("Contrasena");
+					this.OnContrasenaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ROL_LOGIN_USUARIO", Storage="_ROL", ThisKey="Id_Rol", OtherKey="Id_Rol", IsForeignKey=true)]
+		public ROL ROL
+		{
+			get
+			{
+				return this._ROL.Entity;
+			}
+			set
+			{
+				ROL previousValue = this._ROL.Entity;
+				if (((previousValue != value) 
+							|| (this._ROL.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ROL.Entity = null;
+						previousValue.LOGIN_USUARIO.Remove(this);
+					}
+					this._ROL.Entity = value;
+					if ((value != null))
+					{
+						value.LOGIN_USUARIO.Add(this);
+						this._Id_Rol = value.Id_Rol;
+					}
+					else
+					{
+						this._Id_Rol = default(int);
+					}
+					this.SendPropertyChanged("ROL");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MODULO")]
+	public partial class MODULO : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id_Modulo;
+		
+		private System.TimeSpan _HoraInicio;
+		
+		private System.TimeSpan _HoraFin;
+		
+		private string _CodigoModulo;
+		
+		private string _Dia;
+		
+		private EntitySet<HORARIO_CLASES> _HORARIO_CLASES;
+		
+		private EntitySet<HORIO_TUTORIAS> _HORIO_TUTORIAS;
+		
+		private EntitySet<HORARIO_OBLIGATORIO_DOCENTE> _HORARIO_OBLIGATORIO_DOCENTE;
+		
+		private EntitySet<HORARIO_LIBRE_DOCENTE> _HORARIO_LIBRE_DOCENTE;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnId_ModuloChanging(int value);
+    partial void OnId_ModuloChanged();
+    partial void OnHoraInicioChanging(System.TimeSpan value);
+    partial void OnHoraInicioChanged();
+    partial void OnHoraFinChanging(System.TimeSpan value);
+    partial void OnHoraFinChanged();
+    partial void OnCodigoModuloChanging(string value);
+    partial void OnCodigoModuloChanged();
+    partial void OnDiaChanging(string value);
+    partial void OnDiaChanged();
+    #endregion
+		
+		public MODULO()
+		{
+			this._HORARIO_CLASES = new EntitySet<HORARIO_CLASES>(new Action<HORARIO_CLASES>(this.attach_HORARIO_CLASES), new Action<HORARIO_CLASES>(this.detach_HORARIO_CLASES));
+			this._HORIO_TUTORIAS = new EntitySet<HORIO_TUTORIAS>(new Action<HORIO_TUTORIAS>(this.attach_HORIO_TUTORIAS), new Action<HORIO_TUTORIAS>(this.detach_HORIO_TUTORIAS));
+			this._HORARIO_OBLIGATORIO_DOCENTE = new EntitySet<HORARIO_OBLIGATORIO_DOCENTE>(new Action<HORARIO_OBLIGATORIO_DOCENTE>(this.attach_HORARIO_OBLIGATORIO_DOCENTE), new Action<HORARIO_OBLIGATORIO_DOCENTE>(this.detach_HORARIO_OBLIGATORIO_DOCENTE));
+			this._HORARIO_LIBRE_DOCENTE = new EntitySet<HORARIO_LIBRE_DOCENTE>(new Action<HORARIO_LIBRE_DOCENTE>(this.attach_HORARIO_LIBRE_DOCENTE), new Action<HORARIO_LIBRE_DOCENTE>(this.detach_HORARIO_LIBRE_DOCENTE));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Modulo", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id_Modulo
+		{
+			get
+			{
+				return this._Id_Modulo;
+			}
+			set
+			{
+				if ((this._Id_Modulo != value))
+				{
+					this.OnId_ModuloChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Modulo = value;
+					this.SendPropertyChanged("Id_Modulo");
+					this.OnId_ModuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraInicio", DbType="Time NOT NULL")]
+		public System.TimeSpan HoraInicio
+		{
+			get
+			{
+				return this._HoraInicio;
+			}
+			set
+			{
+				if ((this._HoraInicio != value))
+				{
+					this.OnHoraInicioChanging(value);
+					this.SendPropertyChanging();
+					this._HoraInicio = value;
+					this.SendPropertyChanged("HoraInicio");
+					this.OnHoraInicioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraFin", DbType="Time NOT NULL")]
+		public System.TimeSpan HoraFin
+		{
+			get
+			{
+				return this._HoraFin;
+			}
+			set
+			{
+				if ((this._HoraFin != value))
+				{
+					this.OnHoraFinChanging(value);
+					this.SendPropertyChanging();
+					this._HoraFin = value;
+					this.SendPropertyChanged("HoraFin");
+					this.OnHoraFinChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoModulo
+		{
+			get
+			{
+				return this._CodigoModulo;
+			}
+			set
+			{
+				if ((this._CodigoModulo != value))
+				{
+					this.OnCodigoModuloChanging(value);
+					this.SendPropertyChanging();
+					this._CodigoModulo = value;
+					this.SendPropertyChanged("CodigoModulo");
+					this.OnCodigoModuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dia", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Dia
+		{
+			get
+			{
+				return this._Dia;
+			}
+			set
+			{
+				if ((this._Dia != value))
+				{
+					this.OnDiaChanging(value);
+					this.SendPropertyChanging();
+					this._Dia = value;
+					this.SendPropertyChanged("Dia");
+					this.OnDiaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MODULO_HORARIO_CLASES", Storage="_HORARIO_CLASES", ThisKey="Id_Modulo", OtherKey="Id_Modulo")]
+		public EntitySet<HORARIO_CLASES> HORARIO_CLASES
+		{
+			get
+			{
+				return this._HORARIO_CLASES;
+			}
+			set
+			{
+				this._HORARIO_CLASES.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MODULO_HORIO_TUTORIAS", Storage="_HORIO_TUTORIAS", ThisKey="Id_Modulo", OtherKey="Id_Modulo")]
+		public EntitySet<HORIO_TUTORIAS> HORIO_TUTORIAS
+		{
+			get
+			{
+				return this._HORIO_TUTORIAS;
+			}
+			set
+			{
+				this._HORIO_TUTORIAS.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MODULO_HORARIO_OBLIGATORIO_DOCENTE", Storage="_HORARIO_OBLIGATORIO_DOCENTE", ThisKey="Id_Modulo", OtherKey="Id_Modulo")]
+		public EntitySet<HORARIO_OBLIGATORIO_DOCENTE> HORARIO_OBLIGATORIO_DOCENTE
+		{
+			get
+			{
+				return this._HORARIO_OBLIGATORIO_DOCENTE;
+			}
+			set
+			{
+				this._HORARIO_OBLIGATORIO_DOCENTE.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MODULO_HORARIO_LIBRE_DOCENTE", Storage="_HORARIO_LIBRE_DOCENTE", ThisKey="Id_Modulo", OtherKey="Id_Modulo")]
+		public EntitySet<HORARIO_LIBRE_DOCENTE> HORARIO_LIBRE_DOCENTE
+		{
+			get
+			{
+				return this._HORARIO_LIBRE_DOCENTE;
+			}
+			set
+			{
+				this._HORARIO_LIBRE_DOCENTE.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_HORARIO_CLASES(HORARIO_CLASES entity)
+		{
+			this.SendPropertyChanging();
+			entity.MODULO = this;
+		}
+		
+		private void detach_HORARIO_CLASES(HORARIO_CLASES entity)
+		{
+			this.SendPropertyChanging();
+			entity.MODULO = null;
+		}
+		
+		private void attach_HORIO_TUTORIAS(HORIO_TUTORIAS entity)
+		{
+			this.SendPropertyChanging();
+			entity.MODULO = this;
+		}
+		
+		private void detach_HORIO_TUTORIAS(HORIO_TUTORIAS entity)
+		{
+			this.SendPropertyChanging();
+			entity.MODULO = null;
+		}
+		
+		private void attach_HORARIO_OBLIGATORIO_DOCENTE(HORARIO_OBLIGATORIO_DOCENTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.MODULO = this;
+		}
+		
+		private void detach_HORARIO_OBLIGATORIO_DOCENTE(HORARIO_OBLIGATORIO_DOCENTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.MODULO = null;
+		}
+		
+		private void attach_HORARIO_LIBRE_DOCENTE(HORARIO_LIBRE_DOCENTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.MODULO = this;
+		}
+		
+		private void detach_HORARIO_LIBRE_DOCENTE(HORARIO_LIBRE_DOCENTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.MODULO = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NOTIF_ESTUDIANTE")]
+	public partial class NOTIF_ESTUDIANTE : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id_Notifacion;
+		
+		private string _CedulaDocente;
+		
+		private int _Matricula;
+		
+		private string _CodigoMateria;
+		
+		private string _CodigoModulo;
+		
+		private string _Mensaje;
+		
+		private string _Confirmar;
+		
+		private System.DateTime _Fecha;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnId_NotifacionChanging(int value);
+    partial void OnId_NotifacionChanged();
+    partial void OnCedulaDocenteChanging(string value);
+    partial void OnCedulaDocenteChanged();
+    partial void OnMatriculaChanging(int value);
+    partial void OnMatriculaChanged();
+    partial void OnCodigoMateriaChanging(string value);
+    partial void OnCodigoMateriaChanged();
+    partial void OnCodigoModuloChanging(string value);
+    partial void OnCodigoModuloChanged();
+    partial void OnMensajeChanging(string value);
+    partial void OnMensajeChanged();
+    partial void OnConfirmarChanging(string value);
+    partial void OnConfirmarChanged();
+    partial void OnFechaChanging(System.DateTime value);
+    partial void OnFechaChanged();
+    #endregion
+		
+		public NOTIF_ESTUDIANTE()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Notifacion", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id_Notifacion
+		{
+			get
+			{
+				return this._Id_Notifacion;
+			}
+			set
+			{
+				if ((this._Id_Notifacion != value))
+				{
+					this.OnId_NotifacionChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Notifacion = value;
+					this.SendPropertyChanged("Id_Notifacion");
+					this.OnId_NotifacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CedulaDocente", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string CedulaDocente
+		{
+			get
+			{
+				return this._CedulaDocente;
+			}
+			set
+			{
+				if ((this._CedulaDocente != value))
+				{
+					this.OnCedulaDocenteChanging(value);
+					this.SendPropertyChanging();
+					this._CedulaDocente = value;
+					this.SendPropertyChanged("CedulaDocente");
+					this.OnCedulaDocenteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Matricula", DbType="Int NOT NULL")]
+		public int Matricula
+		{
+			get
+			{
+				return this._Matricula;
+			}
+			set
+			{
+				if ((this._Matricula != value))
+				{
+					this.OnMatriculaChanging(value);
+					this.SendPropertyChanging();
+					this._Matricula = value;
+					this.SendPropertyChanged("Matricula");
+					this.OnMatriculaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMateria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoMateria
+		{
+			get
+			{
+				return this._CodigoMateria;
+			}
+			set
+			{
+				if ((this._CodigoMateria != value))
+				{
+					this.OnCodigoMateriaChanging(value);
+					this.SendPropertyChanging();
+					this._CodigoMateria = value;
+					this.SendPropertyChanged("CodigoMateria");
+					this.OnCodigoMateriaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoModulo
+		{
+			get
+			{
+				return this._CodigoModulo;
+			}
+			set
+			{
+				if ((this._CodigoModulo != value))
+				{
+					this.OnCodigoModuloChanging(value);
+					this.SendPropertyChanging();
+					this._CodigoModulo = value;
+					this.SendPropertyChanged("CodigoModulo");
+					this.OnCodigoModuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mensaje", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Mensaje
+		{
+			get
+			{
+				return this._Mensaje;
+			}
+			set
+			{
+				if ((this._Mensaje != value))
+				{
+					this.OnMensajeChanging(value);
+					this.SendPropertyChanging();
+					this._Mensaje = value;
+					this.SendPropertyChanged("Mensaje");
+					this.OnMensajeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Confirmar", DbType="Char(2) NOT NULL", CanBeNull=false)]
+		public string Confirmar
+		{
+			get
+			{
+				return this._Confirmar;
+			}
+			set
+			{
+				if ((this._Confirmar != value))
+				{
+					this.OnConfirmarChanging(value);
+					this.SendPropertyChanging();
+					this._Confirmar = value;
+					this.SendPropertyChanged("Confirmar");
+					this.OnConfirmarChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="Date NOT NULL")]
+		public System.DateTime Fecha
+		{
+			get
+			{
+				return this._Fecha;
+			}
+			set
+			{
+				if ((this._Fecha != value))
+				{
+					this.OnFechaChanging(value);
+					this.SendPropertyChanging();
+					this._Fecha = value;
+					this.SendPropertyChanged("Fecha");
+					this.OnFechaChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PERIODO_ACADEMICO")]
+	public partial class PERIODO_ACADEMICO : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id_Periodo;
+		
+		private string _CodigoPeriodo;
+		
+		private string _Periodo;
+		
+		private EntitySet<HORARIO_CLASES> _HORARIO_CLASES;
+		
+		private EntitySet<HORIO_TUTORIAS> _HORIO_TUTORIAS;
+		
+		private EntitySet<HORARIO_OBLIGATORIO_DOCENTE> _HORARIO_OBLIGATORIO_DOCENTE;
+		
+		private EntitySet<HORARIO_LIBRE_DOCENTE> _HORARIO_LIBRE_DOCENTE;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnId_PeriodoChanging(int value);
+    partial void OnId_PeriodoChanged();
+    partial void OnCodigoPeriodoChanging(string value);
+    partial void OnCodigoPeriodoChanged();
+    partial void OnPeriodoChanging(string value);
+    partial void OnPeriodoChanged();
+    #endregion
+		
+		public PERIODO_ACADEMICO()
+		{
+			this._HORARIO_CLASES = new EntitySet<HORARIO_CLASES>(new Action<HORARIO_CLASES>(this.attach_HORARIO_CLASES), new Action<HORARIO_CLASES>(this.detach_HORARIO_CLASES));
+			this._HORIO_TUTORIAS = new EntitySet<HORIO_TUTORIAS>(new Action<HORIO_TUTORIAS>(this.attach_HORIO_TUTORIAS), new Action<HORIO_TUTORIAS>(this.detach_HORIO_TUTORIAS));
+			this._HORARIO_OBLIGATORIO_DOCENTE = new EntitySet<HORARIO_OBLIGATORIO_DOCENTE>(new Action<HORARIO_OBLIGATORIO_DOCENTE>(this.attach_HORARIO_OBLIGATORIO_DOCENTE), new Action<HORARIO_OBLIGATORIO_DOCENTE>(this.detach_HORARIO_OBLIGATORIO_DOCENTE));
+			this._HORARIO_LIBRE_DOCENTE = new EntitySet<HORARIO_LIBRE_DOCENTE>(new Action<HORARIO_LIBRE_DOCENTE>(this.attach_HORARIO_LIBRE_DOCENTE), new Action<HORARIO_LIBRE_DOCENTE>(this.detach_HORARIO_LIBRE_DOCENTE));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Periodo", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id_Periodo
+		{
+			get
+			{
+				return this._Id_Periodo;
+			}
+			set
+			{
+				if ((this._Id_Periodo != value))
+				{
+					this.OnId_PeriodoChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Periodo = value;
+					this.SendPropertyChanged("Id_Periodo");
+					this.OnId_PeriodoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoPeriodo", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string CodigoPeriodo
+		{
+			get
+			{
+				return this._CodigoPeriodo;
+			}
+			set
+			{
+				if ((this._CodigoPeriodo != value))
+				{
+					this.OnCodigoPeriodoChanging(value);
+					this.SendPropertyChanging();
+					this._CodigoPeriodo = value;
+					this.SendPropertyChanged("CodigoPeriodo");
+					this.OnCodigoPeriodoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Periodo", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string Periodo
+		{
+			get
+			{
+				return this._Periodo;
+			}
+			set
+			{
+				if ((this._Periodo != value))
+				{
+					this.OnPeriodoChanging(value);
+					this.SendPropertyChanging();
+					this._Periodo = value;
+					this.SendPropertyChanged("Periodo");
+					this.OnPeriodoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PERIODO_ACADEMICO_HORARIO_CLASES", Storage="_HORARIO_CLASES", ThisKey="Id_Periodo", OtherKey="Id_Periodo")]
+		public EntitySet<HORARIO_CLASES> HORARIO_CLASES
+		{
+			get
+			{
+				return this._HORARIO_CLASES;
+			}
+			set
+			{
+				this._HORARIO_CLASES.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PERIODO_ACADEMICO_HORIO_TUTORIAS", Storage="_HORIO_TUTORIAS", ThisKey="Id_Periodo", OtherKey="Id_Periodo")]
+		public EntitySet<HORIO_TUTORIAS> HORIO_TUTORIAS
+		{
+			get
+			{
+				return this._HORIO_TUTORIAS;
+			}
+			set
+			{
+				this._HORIO_TUTORIAS.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PERIODO_ACADEMICO_HORARIO_OBLIGATORIO_DOCENTE", Storage="_HORARIO_OBLIGATORIO_DOCENTE", ThisKey="Id_Periodo", OtherKey="Id_Periodo")]
+		public EntitySet<HORARIO_OBLIGATORIO_DOCENTE> HORARIO_OBLIGATORIO_DOCENTE
+		{
+			get
+			{
+				return this._HORARIO_OBLIGATORIO_DOCENTE;
+			}
+			set
+			{
+				this._HORARIO_OBLIGATORIO_DOCENTE.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PERIODO_ACADEMICO_HORARIO_LIBRE_DOCENTE", Storage="_HORARIO_LIBRE_DOCENTE", ThisKey="Id_Periodo", OtherKey="Id_Periodo")]
+		public EntitySet<HORARIO_LIBRE_DOCENTE> HORARIO_LIBRE_DOCENTE
+		{
+			get
+			{
+				return this._HORARIO_LIBRE_DOCENTE;
+			}
+			set
+			{
+				this._HORARIO_LIBRE_DOCENTE.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_HORARIO_CLASES(HORARIO_CLASES entity)
+		{
+			this.SendPropertyChanging();
+			entity.PERIODO_ACADEMICO = this;
+		}
+		
+		private void detach_HORARIO_CLASES(HORARIO_CLASES entity)
+		{
+			this.SendPropertyChanging();
+			entity.PERIODO_ACADEMICO = null;
+		}
+		
+		private void attach_HORIO_TUTORIAS(HORIO_TUTORIAS entity)
+		{
+			this.SendPropertyChanging();
+			entity.PERIODO_ACADEMICO = this;
+		}
+		
+		private void detach_HORIO_TUTORIAS(HORIO_TUTORIAS entity)
+		{
+			this.SendPropertyChanging();
+			entity.PERIODO_ACADEMICO = null;
+		}
+		
+		private void attach_HORARIO_OBLIGATORIO_DOCENTE(HORARIO_OBLIGATORIO_DOCENTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.PERIODO_ACADEMICO = this;
+		}
+		
+		private void detach_HORARIO_OBLIGATORIO_DOCENTE(HORARIO_OBLIGATORIO_DOCENTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.PERIODO_ACADEMICO = null;
+		}
+		
+		private void attach_HORARIO_LIBRE_DOCENTE(HORARIO_LIBRE_DOCENTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.PERIODO_ACADEMICO = this;
+		}
+		
+		private void detach_HORARIO_LIBRE_DOCENTE(HORARIO_LIBRE_DOCENTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.PERIODO_ACADEMICO = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ROL")]
+	public partial class ROL : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id_Rol;
+		
+		private string _Rol;
+		
+		private EntitySet<ADMINIS> _ADMINIS;
+		
+		private EntitySet<ESTUDIANTE> _ESTUDIANTE;
+		
+		private EntitySet<LOGIN_USUARIO> _LOGIN_USUARIO;
+		
+		private EntitySet<SUPERADMIN> _SUPERADMIN;
+		
+		private EntitySet<DOCENTE> _DOCENTE;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnId_RolChanging(int value);
+    partial void OnId_RolChanged();
+    partial void OnRolChanging(string value);
+    partial void OnRolChanged();
+    #endregion
+		
+		public ROL()
+		{
+			this._ADMINIS = new EntitySet<ADMINIS>(new Action<ADMINIS>(this.attach_ADMINIS), new Action<ADMINIS>(this.detach_ADMINIS));
+			this._ESTUDIANTE = new EntitySet<ESTUDIANTE>(new Action<ESTUDIANTE>(this.attach_ESTUDIANTE), new Action<ESTUDIANTE>(this.detach_ESTUDIANTE));
+			this._LOGIN_USUARIO = new EntitySet<LOGIN_USUARIO>(new Action<LOGIN_USUARIO>(this.attach_LOGIN_USUARIO), new Action<LOGIN_USUARIO>(this.detach_LOGIN_USUARIO));
+			this._SUPERADMIN = new EntitySet<SUPERADMIN>(new Action<SUPERADMIN>(this.attach_SUPERADMIN), new Action<SUPERADMIN>(this.detach_SUPERADMIN));
+			this._DOCENTE = new EntitySet<DOCENTE>(new Action<DOCENTE>(this.attach_DOCENTE), new Action<DOCENTE>(this.detach_DOCENTE));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Rol", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id_Rol
+		{
+			get
+			{
+				return this._Id_Rol;
+			}
+			set
+			{
+				if ((this._Id_Rol != value))
+				{
+					this.OnId_RolChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Rol = value;
+					this.SendPropertyChanged("Id_Rol");
+					this.OnId_RolChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rol", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Rol
+		{
+			get
+			{
+				return this._Rol;
+			}
+			set
+			{
+				if ((this._Rol != value))
+				{
+					this.OnRolChanging(value);
+					this.SendPropertyChanging();
+					this._Rol = value;
+					this.SendPropertyChanged("Rol");
+					this.OnRolChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ROL_ADMINIS", Storage="_ADMINIS", ThisKey="Id_Rol", OtherKey="Id_Rol")]
+		public EntitySet<ADMINIS> ADMINIS
+		{
+			get
+			{
+				return this._ADMINIS;
+			}
+			set
+			{
+				this._ADMINIS.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ROL_ESTUDIANTE", Storage="_ESTUDIANTE", ThisKey="Id_Rol", OtherKey="Id_Rol")]
+		public EntitySet<ESTUDIANTE> ESTUDIANTE
+		{
+			get
+			{
+				return this._ESTUDIANTE;
+			}
+			set
+			{
+				this._ESTUDIANTE.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ROL_LOGIN_USUARIO", Storage="_LOGIN_USUARIO", ThisKey="Id_Rol", OtherKey="Id_Rol")]
+		public EntitySet<LOGIN_USUARIO> LOGIN_USUARIO
+		{
+			get
+			{
+				return this._LOGIN_USUARIO;
+			}
+			set
+			{
+				this._LOGIN_USUARIO.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ROL_SUPERADMIN", Storage="_SUPERADMIN", ThisKey="Id_Rol", OtherKey="Id_Rol")]
+		public EntitySet<SUPERADMIN> SUPERADMIN
+		{
+			get
+			{
+				return this._SUPERADMIN;
+			}
+			set
+			{
+				this._SUPERADMIN.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ROL_DOCENTE", Storage="_DOCENTE", ThisKey="Id_Rol", OtherKey="Id_Rol")]
+		public EntitySet<DOCENTE> DOCENTE
+		{
+			get
+			{
+				return this._DOCENTE;
+			}
+			set
+			{
+				this._DOCENTE.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ADMINIS(ADMINIS entity)
+		{
+			this.SendPropertyChanging();
+			entity.ROL = this;
+		}
+		
+		private void detach_ADMINIS(ADMINIS entity)
+		{
+			this.SendPropertyChanging();
+			entity.ROL = null;
+		}
+		
+		private void attach_ESTUDIANTE(ESTUDIANTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.ROL = this;
+		}
+		
+		private void detach_ESTUDIANTE(ESTUDIANTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.ROL = null;
+		}
+		
+		private void attach_LOGIN_USUARIO(LOGIN_USUARIO entity)
+		{
+			this.SendPropertyChanging();
+			entity.ROL = this;
+		}
+		
+		private void detach_LOGIN_USUARIO(LOGIN_USUARIO entity)
+		{
+			this.SendPropertyChanging();
+			entity.ROL = null;
+		}
+		
+		private void attach_SUPERADMIN(SUPERADMIN entity)
+		{
+			this.SendPropertyChanging();
+			entity.ROL = this;
+		}
+		
+		private void detach_SUPERADMIN(SUPERADMIN entity)
+		{
+			this.SendPropertyChanging();
+			entity.ROL = null;
+		}
+		
+		private void attach_DOCENTE(DOCENTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.ROL = this;
+		}
+		
+		private void detach_DOCENTE(DOCENTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.ROL = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SUPERADMIN")]
+	public partial class SUPERADMIN : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id_SuperAdmin;
+		
+		private int _Id_Rol;
+		
+		private string _Nombre;
+		
+		private string _NombreDos;
+		
+		private string _Apellido;
+		
+		private string _ApellidoDos;
+		
+		private string _Email;
+		
+		private EntityRef<ROL> _ROL;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnId_SuperAdminChanging(int value);
+    partial void OnId_SuperAdminChanged();
+    partial void OnId_RolChanging(int value);
+    partial void OnId_RolChanged();
+    partial void OnNombreChanging(string value);
+    partial void OnNombreChanged();
+    partial void OnNombreDosChanging(string value);
+    partial void OnNombreDosChanged();
+    partial void OnApellidoChanging(string value);
+    partial void OnApellidoChanged();
+    partial void OnApellidoDosChanging(string value);
+    partial void OnApellidoDosChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    #endregion
+		
+		public SUPERADMIN()
+		{
+			this._ROL = default(EntityRef<ROL>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_SuperAdmin", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id_SuperAdmin
+		{
+			get
+			{
+				return this._Id_SuperAdmin;
+			}
+			set
+			{
+				if ((this._Id_SuperAdmin != value))
+				{
+					this.OnId_SuperAdminChanging(value);
+					this.SendPropertyChanging();
+					this._Id_SuperAdmin = value;
+					this.SendPropertyChanged("Id_SuperAdmin");
+					this.OnId_SuperAdminChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Rol", DbType="Int NOT NULL")]
+		public int Id_Rol
+		{
+			get
+			{
+				return this._Id_Rol;
+			}
+			set
+			{
+				if ((this._Id_Rol != value))
+				{
+					if (this._ROL.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_RolChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Rol = value;
+					this.SendPropertyChanged("Id_Rol");
+					this.OnId_RolChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this.OnNombreChanging(value);
+					this.SendPropertyChanging();
+					this._Nombre = value;
+					this.SendPropertyChanged("Nombre");
+					this.OnNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreDos", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string NombreDos
+		{
+			get
+			{
+				return this._NombreDos;
+			}
+			set
+			{
+				if ((this._NombreDos != value))
+				{
+					this.OnNombreDosChanging(value);
+					this.SendPropertyChanging();
+					this._NombreDos = value;
+					this.SendPropertyChanged("NombreDos");
+					this.OnNombreDosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Apellido
+		{
+			get
+			{
+				return this._Apellido;
+			}
+			set
+			{
+				if ((this._Apellido != value))
+				{
+					this.OnApellidoChanging(value);
+					this.SendPropertyChanging();
+					this._Apellido = value;
+					this.SendPropertyChanged("Apellido");
+					this.OnApellidoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApellidoDos", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string ApellidoDos
+		{
+			get
+			{
+				return this._ApellidoDos;
+			}
+			set
+			{
+				if ((this._ApellidoDos != value))
+				{
+					this.OnApellidoDosChanging(value);
+					this.SendPropertyChanging();
+					this._ApellidoDos = value;
+					this.SendPropertyChanged("ApellidoDos");
+					this.OnApellidoDosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ROL_SUPERADMIN", Storage="_ROL", ThisKey="Id_Rol", OtherKey="Id_Rol", IsForeignKey=true)]
+		public ROL ROL
+		{
+			get
+			{
+				return this._ROL.Entity;
+			}
+			set
+			{
+				ROL previousValue = this._ROL.Entity;
+				if (((previousValue != value) 
+							|| (this._ROL.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ROL.Entity = null;
+						previousValue.SUPERADMIN.Remove(this);
+					}
+					this._ROL.Entity = value;
+					if ((value != null))
+					{
+						value.SUPERADMIN.Add(this);
+						this._Id_Rol = value.Id_Rol;
+					}
+					else
+					{
+						this._Id_Rol = default(int);
+					}
+					this.SendPropertyChanged("ROL");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="TutoAdmin.HORARIO_CLASES")]
 	public partial class HORARIO_CLASES : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -2163,13 +3147,13 @@ namespace AppTutorias
 		
 		private EntitySet<HORARIO_ESTUDIANTE> _HORARIO_ESTUDIANTE;
 		
-		private EntityRef<DOCENTE> _DOCENTE;
-		
-		private EntityRef<MATERIA> _MATERIA;
-		
 		private EntityRef<MODULO> _MODULO;
 		
 		private EntityRef<PERIODO_ACADEMICO> _PERIODO_ACADEMICO;
+		
+		private EntityRef<MATERIA> _MATERIA;
+		
+		private EntityRef<DOCENTE> _DOCENTE;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -2194,10 +3178,10 @@ namespace AppTutorias
 		public HORARIO_CLASES()
 		{
 			this._HORARIO_ESTUDIANTE = new EntitySet<HORARIO_ESTUDIANTE>(new Action<HORARIO_ESTUDIANTE>(this.attach_HORARIO_ESTUDIANTE), new Action<HORARIO_ESTUDIANTE>(this.detach_HORARIO_ESTUDIANTE));
-			this._DOCENTE = default(EntityRef<DOCENTE>);
-			this._MATERIA = default(EntityRef<MATERIA>);
 			this._MODULO = default(EntityRef<MODULO>);
 			this._PERIODO_ACADEMICO = default(EntityRef<PERIODO_ACADEMICO>);
+			this._MATERIA = default(EntityRef<MATERIA>);
+			this._DOCENTE = default(EntityRef<DOCENTE>);
 			OnCreated();
 		}
 		
@@ -2370,74 +3354,6 @@ namespace AppTutorias
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DOCENTE_HORARIO_CLASES", Storage="_DOCENTE", ThisKey="Id_Docente", OtherKey="Id_Docente", IsForeignKey=true)]
-		public DOCENTE DOCENTE
-		{
-			get
-			{
-				return this._DOCENTE.Entity;
-			}
-			set
-			{
-				DOCENTE previousValue = this._DOCENTE.Entity;
-				if (((previousValue != value) 
-							|| (this._DOCENTE.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._DOCENTE.Entity = null;
-						previousValue.HORARIO_CLASES.Remove(this);
-					}
-					this._DOCENTE.Entity = value;
-					if ((value != null))
-					{
-						value.HORARIO_CLASES.Add(this);
-						this._Id_Docente = value.Id_Docente;
-					}
-					else
-					{
-						this._Id_Docente = default(int);
-					}
-					this.SendPropertyChanged("DOCENTE");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MATERIA_HORARIO_CLASES", Storage="_MATERIA", ThisKey="Id_Materia", OtherKey="Id_Materia", IsForeignKey=true)]
-		public MATERIA MATERIA
-		{
-			get
-			{
-				return this._MATERIA.Entity;
-			}
-			set
-			{
-				MATERIA previousValue = this._MATERIA.Entity;
-				if (((previousValue != value) 
-							|| (this._MATERIA.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._MATERIA.Entity = null;
-						previousValue.HORARIO_CLASES.Remove(this);
-					}
-					this._MATERIA.Entity = value;
-					if ((value != null))
-					{
-						value.HORARIO_CLASES.Add(this);
-						this._Id_Materia = value.Id_Materia;
-					}
-					else
-					{
-						this._Id_Materia = default(int);
-					}
-					this.SendPropertyChanged("MATERIA");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MODULO_HORARIO_CLASES", Storage="_MODULO", ThisKey="Id_Modulo", OtherKey="Id_Modulo", IsForeignKey=true)]
 		public MODULO MODULO
 		{
@@ -2506,6 +3422,74 @@ namespace AppTutorias
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MATERIA_HORARIO_CLASES", Storage="_MATERIA", ThisKey="Id_Materia", OtherKey="Id_Materia", IsForeignKey=true)]
+		public MATERIA MATERIA
+		{
+			get
+			{
+				return this._MATERIA.Entity;
+			}
+			set
+			{
+				MATERIA previousValue = this._MATERIA.Entity;
+				if (((previousValue != value) 
+							|| (this._MATERIA.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._MATERIA.Entity = null;
+						previousValue.HORARIO_CLASES.Remove(this);
+					}
+					this._MATERIA.Entity = value;
+					if ((value != null))
+					{
+						value.HORARIO_CLASES.Add(this);
+						this._Id_Materia = value.Id_Materia;
+					}
+					else
+					{
+						this._Id_Materia = default(int);
+					}
+					this.SendPropertyChanged("MATERIA");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DOCENTE_HORARIO_CLASES", Storage="_DOCENTE", ThisKey="Id_Docente", OtherKey="Id_Docente", IsForeignKey=true)]
+		public DOCENTE DOCENTE
+		{
+			get
+			{
+				return this._DOCENTE.Entity;
+			}
+			set
+			{
+				DOCENTE previousValue = this._DOCENTE.Entity;
+				if (((previousValue != value) 
+							|| (this._DOCENTE.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DOCENTE.Entity = null;
+						previousValue.HORARIO_CLASES.Remove(this);
+					}
+					this._DOCENTE.Entity = value;
+					if ((value != null))
+					{
+						value.HORARIO_CLASES.Add(this);
+						this._Id_Docente = value.Id_Docente;
+					}
+					else
+					{
+						this._Id_Docente = default(int);
+					}
+					this.SendPropertyChanged("DOCENTE");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2539,7 +3523,7 @@ namespace AppTutorias
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.HORARIO_ESTUDIANTE")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="TutoAdmin.HORARIO_ESTUDIANTE")]
 	public partial class HORARIO_ESTUDIANTE : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -2731,439 +3715,7 @@ namespace AppTutorias
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.HORARIO_LIBRE_DOCENTE")]
-	public partial class HORARIO_LIBRE_DOCENTE : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id_HorioLibre;
-		
-		private int _Id_Docente;
-		
-		private int _Id_Modulo;
-		
-		private string _Descripcion;
-		
-		private EntityRef<DOCENTE> _DOCENTE;
-		
-		private EntityRef<MODULO> _MODULO;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnId_HorioLibreChanging(int value);
-    partial void OnId_HorioLibreChanged();
-    partial void OnId_DocenteChanging(int value);
-    partial void OnId_DocenteChanged();
-    partial void OnId_ModuloChanging(int value);
-    partial void OnId_ModuloChanged();
-    partial void OnDescripcionChanging(string value);
-    partial void OnDescripcionChanged();
-    #endregion
-		
-		public HORARIO_LIBRE_DOCENTE()
-		{
-			this._DOCENTE = default(EntityRef<DOCENTE>);
-			this._MODULO = default(EntityRef<MODULO>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_HorioLibre", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id_HorioLibre
-		{
-			get
-			{
-				return this._Id_HorioLibre;
-			}
-			set
-			{
-				if ((this._Id_HorioLibre != value))
-				{
-					this.OnId_HorioLibreChanging(value);
-					this.SendPropertyChanging();
-					this._Id_HorioLibre = value;
-					this.SendPropertyChanged("Id_HorioLibre");
-					this.OnId_HorioLibreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Docente", DbType="Int NOT NULL")]
-		public int Id_Docente
-		{
-			get
-			{
-				return this._Id_Docente;
-			}
-			set
-			{
-				if ((this._Id_Docente != value))
-				{
-					if (this._DOCENTE.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnId_DocenteChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Docente = value;
-					this.SendPropertyChanged("Id_Docente");
-					this.OnId_DocenteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Modulo", DbType="Int NOT NULL")]
-		public int Id_Modulo
-		{
-			get
-			{
-				return this._Id_Modulo;
-			}
-			set
-			{
-				if ((this._Id_Modulo != value))
-				{
-					if (this._MODULO.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnId_ModuloChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Modulo = value;
-					this.SendPropertyChanged("Id_Modulo");
-					this.OnId_ModuloChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Descripcion
-		{
-			get
-			{
-				return this._Descripcion;
-			}
-			set
-			{
-				if ((this._Descripcion != value))
-				{
-					this.OnDescripcionChanging(value);
-					this.SendPropertyChanging();
-					this._Descripcion = value;
-					this.SendPropertyChanged("Descripcion");
-					this.OnDescripcionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DOCENTE_HORARIO_LIBRE_DOCENTE", Storage="_DOCENTE", ThisKey="Id_Docente", OtherKey="Id_Docente", IsForeignKey=true)]
-		public DOCENTE DOCENTE
-		{
-			get
-			{
-				return this._DOCENTE.Entity;
-			}
-			set
-			{
-				DOCENTE previousValue = this._DOCENTE.Entity;
-				if (((previousValue != value) 
-							|| (this._DOCENTE.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._DOCENTE.Entity = null;
-						previousValue.HORARIO_LIBRE_DOCENTE.Remove(this);
-					}
-					this._DOCENTE.Entity = value;
-					if ((value != null))
-					{
-						value.HORARIO_LIBRE_DOCENTE.Add(this);
-						this._Id_Docente = value.Id_Docente;
-					}
-					else
-					{
-						this._Id_Docente = default(int);
-					}
-					this.SendPropertyChanged("DOCENTE");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MODULO_HORARIO_LIBRE_DOCENTE", Storage="_MODULO", ThisKey="Id_Modulo", OtherKey="Id_Modulo", IsForeignKey=true)]
-		public MODULO MODULO
-		{
-			get
-			{
-				return this._MODULO.Entity;
-			}
-			set
-			{
-				MODULO previousValue = this._MODULO.Entity;
-				if (((previousValue != value) 
-							|| (this._MODULO.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._MODULO.Entity = null;
-						previousValue.HORARIO_LIBRE_DOCENTE.Remove(this);
-					}
-					this._MODULO.Entity = value;
-					if ((value != null))
-					{
-						value.HORARIO_LIBRE_DOCENTE.Add(this);
-						this._Id_Modulo = value.Id_Modulo;
-					}
-					else
-					{
-						this._Id_Modulo = default(int);
-					}
-					this.SendPropertyChanged("MODULO");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.HORARIO_OBLIGATORIO_DOCENTE")]
-	public partial class HORARIO_OBLIGATORIO_DOCENTE : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id_HorioObligatorio;
-		
-		private int _Id_Docente;
-		
-		private int _Id_Modulo;
-		
-		private string _Descripcion;
-		
-		private EntityRef<DOCENTE> _DOCENTE;
-		
-		private EntityRef<MODULO> _MODULO;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnId_HorioObligatorioChanging(int value);
-    partial void OnId_HorioObligatorioChanged();
-    partial void OnId_DocenteChanging(int value);
-    partial void OnId_DocenteChanged();
-    partial void OnId_ModuloChanging(int value);
-    partial void OnId_ModuloChanged();
-    partial void OnDescripcionChanging(string value);
-    partial void OnDescripcionChanged();
-    #endregion
-		
-		public HORARIO_OBLIGATORIO_DOCENTE()
-		{
-			this._DOCENTE = default(EntityRef<DOCENTE>);
-			this._MODULO = default(EntityRef<MODULO>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_HorioObligatorio", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id_HorioObligatorio
-		{
-			get
-			{
-				return this._Id_HorioObligatorio;
-			}
-			set
-			{
-				if ((this._Id_HorioObligatorio != value))
-				{
-					this.OnId_HorioObligatorioChanging(value);
-					this.SendPropertyChanging();
-					this._Id_HorioObligatorio = value;
-					this.SendPropertyChanged("Id_HorioObligatorio");
-					this.OnId_HorioObligatorioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Docente", DbType="Int NOT NULL")]
-		public int Id_Docente
-		{
-			get
-			{
-				return this._Id_Docente;
-			}
-			set
-			{
-				if ((this._Id_Docente != value))
-				{
-					if (this._DOCENTE.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnId_DocenteChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Docente = value;
-					this.SendPropertyChanged("Id_Docente");
-					this.OnId_DocenteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Modulo", DbType="Int NOT NULL")]
-		public int Id_Modulo
-		{
-			get
-			{
-				return this._Id_Modulo;
-			}
-			set
-			{
-				if ((this._Id_Modulo != value))
-				{
-					if (this._MODULO.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnId_ModuloChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Modulo = value;
-					this.SendPropertyChanged("Id_Modulo");
-					this.OnId_ModuloChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Descripcion
-		{
-			get
-			{
-				return this._Descripcion;
-			}
-			set
-			{
-				if ((this._Descripcion != value))
-				{
-					this.OnDescripcionChanging(value);
-					this.SendPropertyChanging();
-					this._Descripcion = value;
-					this.SendPropertyChanged("Descripcion");
-					this.OnDescripcionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DOCENTE_HORARIO_OBLIGATORIO_DOCENTE", Storage="_DOCENTE", ThisKey="Id_Docente", OtherKey="Id_Docente", IsForeignKey=true)]
-		public DOCENTE DOCENTE
-		{
-			get
-			{
-				return this._DOCENTE.Entity;
-			}
-			set
-			{
-				DOCENTE previousValue = this._DOCENTE.Entity;
-				if (((previousValue != value) 
-							|| (this._DOCENTE.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._DOCENTE.Entity = null;
-						previousValue.HORARIO_OBLIGATORIO_DOCENTE.Remove(this);
-					}
-					this._DOCENTE.Entity = value;
-					if ((value != null))
-					{
-						value.HORARIO_OBLIGATORIO_DOCENTE.Add(this);
-						this._Id_Docente = value.Id_Docente;
-					}
-					else
-					{
-						this._Id_Docente = default(int);
-					}
-					this.SendPropertyChanged("DOCENTE");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MODULO_HORARIO_OBLIGATORIO_DOCENTE", Storage="_MODULO", ThisKey="Id_Modulo", OtherKey="Id_Modulo", IsForeignKey=true)]
-		public MODULO MODULO
-		{
-			get
-			{
-				return this._MODULO.Entity;
-			}
-			set
-			{
-				MODULO previousValue = this._MODULO.Entity;
-				if (((previousValue != value) 
-							|| (this._MODULO.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._MODULO.Entity = null;
-						previousValue.HORARIO_OBLIGATORIO_DOCENTE.Remove(this);
-					}
-					this._MODULO.Entity = value;
-					if ((value != null))
-					{
-						value.HORARIO_OBLIGATORIO_DOCENTE.Add(this);
-						this._Id_Modulo = value.Id_Modulo;
-					}
-					else
-					{
-						this._Id_Modulo = default(int);
-					}
-					this.SendPropertyChanged("MODULO");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.HORIO_TUTORIAS")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="TutoAdmin.HORIO_TUTORIAS")]
 	public partial class HORIO_TUTORIAS : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -3189,15 +3741,15 @@ namespace AppTutorias
 		
 		private string _Aula;
 		
-		private EntityRef<ESTUDIANTE> _ESTUDIANTE;
-		
-		private EntityRef<DOCENTE> _DOCENTE;
-		
-		private EntityRef<MATERIA> _MATERIA;
-		
 		private EntityRef<MODULO> _MODULO;
 		
 		private EntityRef<PERIODO_ACADEMICO> _PERIODO_ACADEMICO;
+		
+		private EntityRef<ESTUDIANTE> _ESTUDIANTE;
+		
+		private EntityRef<MATERIA> _MATERIA;
+		
+		private EntityRef<DOCENTE> _DOCENTE;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -3227,11 +3779,11 @@ namespace AppTutorias
 		
 		public HORIO_TUTORIAS()
 		{
-			this._ESTUDIANTE = default(EntityRef<ESTUDIANTE>);
-			this._DOCENTE = default(EntityRef<DOCENTE>);
-			this._MATERIA = default(EntityRef<MATERIA>);
 			this._MODULO = default(EntityRef<MODULO>);
 			this._PERIODO_ACADEMICO = default(EntityRef<PERIODO_ACADEMICO>);
+			this._ESTUDIANTE = default(EntityRef<ESTUDIANTE>);
+			this._MATERIA = default(EntityRef<MATERIA>);
+			this._DOCENTE = default(EntityRef<DOCENTE>);
 			OnCreated();
 		}
 		
@@ -3435,7 +3987,7 @@ namespace AppTutorias
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Aula", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Aula", DbType="Char(10) NOT NULL", CanBeNull=false)]
 		public string Aula
 		{
 			get
@@ -3451,108 +4003,6 @@ namespace AppTutorias
 					this._Aula = value;
 					this.SendPropertyChanged("Aula");
 					this.OnAulaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ESTUDIANTE_HORIO_TUTORIAS", Storage="_ESTUDIANTE", ThisKey="Id_Estudiante", OtherKey="Id_Estudiante", IsForeignKey=true)]
-		public ESTUDIANTE ESTUDIANTE
-		{
-			get
-			{
-				return this._ESTUDIANTE.Entity;
-			}
-			set
-			{
-				ESTUDIANTE previousValue = this._ESTUDIANTE.Entity;
-				if (((previousValue != value) 
-							|| (this._ESTUDIANTE.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ESTUDIANTE.Entity = null;
-						previousValue.HORIO_TUTORIAS.Remove(this);
-					}
-					this._ESTUDIANTE.Entity = value;
-					if ((value != null))
-					{
-						value.HORIO_TUTORIAS.Add(this);
-						this._Id_Estudiante = value.Id_Estudiante;
-					}
-					else
-					{
-						this._Id_Estudiante = default(int);
-					}
-					this.SendPropertyChanged("ESTUDIANTE");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DOCENTE_HORIO_TUTORIAS", Storage="_DOCENTE", ThisKey="Id_Docente", OtherKey="Id_Docente", IsForeignKey=true)]
-		public DOCENTE DOCENTE
-		{
-			get
-			{
-				return this._DOCENTE.Entity;
-			}
-			set
-			{
-				DOCENTE previousValue = this._DOCENTE.Entity;
-				if (((previousValue != value) 
-							|| (this._DOCENTE.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._DOCENTE.Entity = null;
-						previousValue.HORIO_TUTORIAS.Remove(this);
-					}
-					this._DOCENTE.Entity = value;
-					if ((value != null))
-					{
-						value.HORIO_TUTORIAS.Add(this);
-						this._Id_Docente = value.Id_Docente;
-					}
-					else
-					{
-						this._Id_Docente = default(int);
-					}
-					this.SendPropertyChanged("DOCENTE");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MATERIA_HORIO_TUTORIAS", Storage="_MATERIA", ThisKey="Id_Materia", OtherKey="Id_Materia", IsForeignKey=true)]
-		public MATERIA MATERIA
-		{
-			get
-			{
-				return this._MATERIA.Entity;
-			}
-			set
-			{
-				MATERIA previousValue = this._MATERIA.Entity;
-				if (((previousValue != value) 
-							|| (this._MATERIA.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._MATERIA.Entity = null;
-						previousValue.HORIO_TUTORIAS.Remove(this);
-					}
-					this._MATERIA.Entity = value;
-					if ((value != null))
-					{
-						value.HORIO_TUTORIAS.Add(this);
-						this._Id_Materia = value.Id_Materia;
-					}
-					else
-					{
-						this._Id_Materia = default(int);
-					}
-					this.SendPropertyChanged("MATERIA");
 				}
 			}
 		}
@@ -3625,177 +4075,104 @@ namespace AppTutorias
 			}
 		}
 		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LOGIN_USUARIO")]
-	public partial class LOGIN_USUARIO : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id_LoginUsuario;
-		
-		private int _Id_Rol;
-		
-		private string _Usuario;
-		
-		private string _Contrasena;
-		
-		private EntityRef<ROL> _ROL;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnId_LoginUsuarioChanging(int value);
-    partial void OnId_LoginUsuarioChanged();
-    partial void OnId_RolChanging(int value);
-    partial void OnId_RolChanged();
-    partial void OnUsuarioChanging(string value);
-    partial void OnUsuarioChanged();
-    partial void OnContrasenaChanging(string value);
-    partial void OnContrasenaChanged();
-    #endregion
-		
-		public LOGIN_USUARIO()
-		{
-			this._ROL = default(EntityRef<ROL>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_LoginUsuario", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id_LoginUsuario
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ESTUDIANTE_HORIO_TUTORIAS", Storage="_ESTUDIANTE", ThisKey="Id_Estudiante", OtherKey="Id_Estudiante", IsForeignKey=true)]
+		public ESTUDIANTE ESTUDIANTE
 		{
 			get
 			{
-				return this._Id_LoginUsuario;
+				return this._ESTUDIANTE.Entity;
 			}
 			set
 			{
-				if ((this._Id_LoginUsuario != value))
-				{
-					this.OnId_LoginUsuarioChanging(value);
-					this.SendPropertyChanging();
-					this._Id_LoginUsuario = value;
-					this.SendPropertyChanged("Id_LoginUsuario");
-					this.OnId_LoginUsuarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Rol", DbType="Int NOT NULL")]
-		public int Id_Rol
-		{
-			get
-			{
-				return this._Id_Rol;
-			}
-			set
-			{
-				if ((this._Id_Rol != value))
-				{
-					if (this._ROL.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnId_RolChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Rol = value;
-					this.SendPropertyChanged("Id_Rol");
-					this.OnId_RolChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usuario", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Usuario
-		{
-			get
-			{
-				return this._Usuario;
-			}
-			set
-			{
-				if ((this._Usuario != value))
-				{
-					this.OnUsuarioChanging(value);
-					this.SendPropertyChanging();
-					this._Usuario = value;
-					this.SendPropertyChanged("Usuario");
-					this.OnUsuarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contrasena", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Contrasena
-		{
-			get
-			{
-				return this._Contrasena;
-			}
-			set
-			{
-				if ((this._Contrasena != value))
-				{
-					this.OnContrasenaChanging(value);
-					this.SendPropertyChanging();
-					this._Contrasena = value;
-					this.SendPropertyChanged("Contrasena");
-					this.OnContrasenaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ROL_LOGIN_USUARIO", Storage="_ROL", ThisKey="Id_Rol", OtherKey="Id_Rol", IsForeignKey=true)]
-		public ROL ROL
-		{
-			get
-			{
-				return this._ROL.Entity;
-			}
-			set
-			{
-				ROL previousValue = this._ROL.Entity;
+				ESTUDIANTE previousValue = this._ESTUDIANTE.Entity;
 				if (((previousValue != value) 
-							|| (this._ROL.HasLoadedOrAssignedValue == false)))
+							|| (this._ESTUDIANTE.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._ROL.Entity = null;
-						previousValue.LOGIN_USUARIO.Remove(this);
+						this._ESTUDIANTE.Entity = null;
+						previousValue.HORIO_TUTORIAS.Remove(this);
 					}
-					this._ROL.Entity = value;
+					this._ESTUDIANTE.Entity = value;
 					if ((value != null))
 					{
-						value.LOGIN_USUARIO.Add(this);
-						this._Id_Rol = value.Id_Rol;
+						value.HORIO_TUTORIAS.Add(this);
+						this._Id_Estudiante = value.Id_Estudiante;
 					}
 					else
 					{
-						this._Id_Rol = default(int);
+						this._Id_Estudiante = default(int);
 					}
-					this.SendPropertyChanged("ROL");
+					this.SendPropertyChanged("ESTUDIANTE");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MATERIA_HORIO_TUTORIAS", Storage="_MATERIA", ThisKey="Id_Materia", OtherKey="Id_Materia", IsForeignKey=true)]
+		public MATERIA MATERIA
+		{
+			get
+			{
+				return this._MATERIA.Entity;
+			}
+			set
+			{
+				MATERIA previousValue = this._MATERIA.Entity;
+				if (((previousValue != value) 
+							|| (this._MATERIA.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._MATERIA.Entity = null;
+						previousValue.HORIO_TUTORIAS.Remove(this);
+					}
+					this._MATERIA.Entity = value;
+					if ((value != null))
+					{
+						value.HORIO_TUTORIAS.Add(this);
+						this._Id_Materia = value.Id_Materia;
+					}
+					else
+					{
+						this._Id_Materia = default(int);
+					}
+					this.SendPropertyChanged("MATERIA");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DOCENTE_HORIO_TUTORIAS", Storage="_DOCENTE", ThisKey="Id_Docente", OtherKey="Id_Docente", IsForeignKey=true)]
+		public DOCENTE DOCENTE
+		{
+			get
+			{
+				return this._DOCENTE.Entity;
+			}
+			set
+			{
+				DOCENTE previousValue = this._DOCENTE.Entity;
+				if (((previousValue != value) 
+							|| (this._DOCENTE.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DOCENTE.Entity = null;
+						previousValue.HORIO_TUTORIAS.Remove(this);
+					}
+					this._DOCENTE.Entity = value;
+					if ((value != null))
+					{
+						value.HORIO_TUTORIAS.Add(this);
+						this._Id_Docente = value.Id_Docente;
+					}
+					else
+					{
+						this._Id_Docente = default(int);
+					}
+					this.SendPropertyChanged("DOCENTE");
 				}
 			}
 		}
@@ -3821,7 +4198,7 @@ namespace AppTutorias
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MATERIA")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="TutoAdmin.MATERIA")]
 	public partial class MATERIA : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -4080,673 +4457,7 @@ namespace AppTutorias
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MODULO")]
-	public partial class MODULO : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id_Modulo;
-		
-		private System.TimeSpan _HoraInicio;
-		
-		private System.TimeSpan _HoraFin;
-		
-		private string _CodigoModulo;
-		
-		private string _Dia;
-		
-		private EntitySet<HORARIO_CLASES> _HORARIO_CLASES;
-		
-		private EntitySet<HORARIO_LIBRE_DOCENTE> _HORARIO_LIBRE_DOCENTE;
-		
-		private EntitySet<HORARIO_OBLIGATORIO_DOCENTE> _HORARIO_OBLIGATORIO_DOCENTE;
-		
-		private EntitySet<HORIO_TUTORIAS> _HORIO_TUTORIAS;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnId_ModuloChanging(int value);
-    partial void OnId_ModuloChanged();
-    partial void OnHoraInicioChanging(System.TimeSpan value);
-    partial void OnHoraInicioChanged();
-    partial void OnHoraFinChanging(System.TimeSpan value);
-    partial void OnHoraFinChanged();
-    partial void OnCodigoModuloChanging(string value);
-    partial void OnCodigoModuloChanged();
-    partial void OnDiaChanging(string value);
-    partial void OnDiaChanged();
-    #endregion
-		
-		public MODULO()
-		{
-			this._HORARIO_CLASES = new EntitySet<HORARIO_CLASES>(new Action<HORARIO_CLASES>(this.attach_HORARIO_CLASES), new Action<HORARIO_CLASES>(this.detach_HORARIO_CLASES));
-			this._HORARIO_LIBRE_DOCENTE = new EntitySet<HORARIO_LIBRE_DOCENTE>(new Action<HORARIO_LIBRE_DOCENTE>(this.attach_HORARIO_LIBRE_DOCENTE), new Action<HORARIO_LIBRE_DOCENTE>(this.detach_HORARIO_LIBRE_DOCENTE));
-			this._HORARIO_OBLIGATORIO_DOCENTE = new EntitySet<HORARIO_OBLIGATORIO_DOCENTE>(new Action<HORARIO_OBLIGATORIO_DOCENTE>(this.attach_HORARIO_OBLIGATORIO_DOCENTE), new Action<HORARIO_OBLIGATORIO_DOCENTE>(this.detach_HORARIO_OBLIGATORIO_DOCENTE));
-			this._HORIO_TUTORIAS = new EntitySet<HORIO_TUTORIAS>(new Action<HORIO_TUTORIAS>(this.attach_HORIO_TUTORIAS), new Action<HORIO_TUTORIAS>(this.detach_HORIO_TUTORIAS));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Modulo", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id_Modulo
-		{
-			get
-			{
-				return this._Id_Modulo;
-			}
-			set
-			{
-				if ((this._Id_Modulo != value))
-				{
-					this.OnId_ModuloChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Modulo = value;
-					this.SendPropertyChanged("Id_Modulo");
-					this.OnId_ModuloChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraInicio", DbType="Time NOT NULL")]
-		public System.TimeSpan HoraInicio
-		{
-			get
-			{
-				return this._HoraInicio;
-			}
-			set
-			{
-				if ((this._HoraInicio != value))
-				{
-					this.OnHoraInicioChanging(value);
-					this.SendPropertyChanging();
-					this._HoraInicio = value;
-					this.SendPropertyChanged("HoraInicio");
-					this.OnHoraInicioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraFin", DbType="Time NOT NULL")]
-		public System.TimeSpan HoraFin
-		{
-			get
-			{
-				return this._HoraFin;
-			}
-			set
-			{
-				if ((this._HoraFin != value))
-				{
-					this.OnHoraFinChanging(value);
-					this.SendPropertyChanging();
-					this._HoraFin = value;
-					this.SendPropertyChanged("HoraFin");
-					this.OnHoraFinChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoModulo
-		{
-			get
-			{
-				return this._CodigoModulo;
-			}
-			set
-			{
-				if ((this._CodigoModulo != value))
-				{
-					this.OnCodigoModuloChanging(value);
-					this.SendPropertyChanging();
-					this._CodigoModulo = value;
-					this.SendPropertyChanged("CodigoModulo");
-					this.OnCodigoModuloChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dia", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Dia
-		{
-			get
-			{
-				return this._Dia;
-			}
-			set
-			{
-				if ((this._Dia != value))
-				{
-					this.OnDiaChanging(value);
-					this.SendPropertyChanging();
-					this._Dia = value;
-					this.SendPropertyChanged("Dia");
-					this.OnDiaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MODULO_HORARIO_CLASES", Storage="_HORARIO_CLASES", ThisKey="Id_Modulo", OtherKey="Id_Modulo")]
-		public EntitySet<HORARIO_CLASES> HORARIO_CLASES
-		{
-			get
-			{
-				return this._HORARIO_CLASES;
-			}
-			set
-			{
-				this._HORARIO_CLASES.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MODULO_HORARIO_LIBRE_DOCENTE", Storage="_HORARIO_LIBRE_DOCENTE", ThisKey="Id_Modulo", OtherKey="Id_Modulo")]
-		public EntitySet<HORARIO_LIBRE_DOCENTE> HORARIO_LIBRE_DOCENTE
-		{
-			get
-			{
-				return this._HORARIO_LIBRE_DOCENTE;
-			}
-			set
-			{
-				this._HORARIO_LIBRE_DOCENTE.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MODULO_HORARIO_OBLIGATORIO_DOCENTE", Storage="_HORARIO_OBLIGATORIO_DOCENTE", ThisKey="Id_Modulo", OtherKey="Id_Modulo")]
-		public EntitySet<HORARIO_OBLIGATORIO_DOCENTE> HORARIO_OBLIGATORIO_DOCENTE
-		{
-			get
-			{
-				return this._HORARIO_OBLIGATORIO_DOCENTE;
-			}
-			set
-			{
-				this._HORARIO_OBLIGATORIO_DOCENTE.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MODULO_HORIO_TUTORIAS", Storage="_HORIO_TUTORIAS", ThisKey="Id_Modulo", OtherKey="Id_Modulo")]
-		public EntitySet<HORIO_TUTORIAS> HORIO_TUTORIAS
-		{
-			get
-			{
-				return this._HORIO_TUTORIAS;
-			}
-			set
-			{
-				this._HORIO_TUTORIAS.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_HORARIO_CLASES(HORARIO_CLASES entity)
-		{
-			this.SendPropertyChanging();
-			entity.MODULO = this;
-		}
-		
-		private void detach_HORARIO_CLASES(HORARIO_CLASES entity)
-		{
-			this.SendPropertyChanging();
-			entity.MODULO = null;
-		}
-		
-		private void attach_HORARIO_LIBRE_DOCENTE(HORARIO_LIBRE_DOCENTE entity)
-		{
-			this.SendPropertyChanging();
-			entity.MODULO = this;
-		}
-		
-		private void detach_HORARIO_LIBRE_DOCENTE(HORARIO_LIBRE_DOCENTE entity)
-		{
-			this.SendPropertyChanging();
-			entity.MODULO = null;
-		}
-		
-		private void attach_HORARIO_OBLIGATORIO_DOCENTE(HORARIO_OBLIGATORIO_DOCENTE entity)
-		{
-			this.SendPropertyChanging();
-			entity.MODULO = this;
-		}
-		
-		private void detach_HORARIO_OBLIGATORIO_DOCENTE(HORARIO_OBLIGATORIO_DOCENTE entity)
-		{
-			this.SendPropertyChanging();
-			entity.MODULO = null;
-		}
-		
-		private void attach_HORIO_TUTORIAS(HORIO_TUTORIAS entity)
-		{
-			this.SendPropertyChanging();
-			entity.MODULO = this;
-		}
-		
-		private void detach_HORIO_TUTORIAS(HORIO_TUTORIAS entity)
-		{
-			this.SendPropertyChanging();
-			entity.MODULO = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NOTIF_ESTUDIANTE")]
-	public partial class NOTIF_ESTUDIANTE : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id_Notifacion;
-		
-		private string _CedulaDocente;
-		
-		private int _Matricula;
-		
-		private string _CodigoMateria;
-		
-		private string _CodigoModulo;
-		
-		private string _Mensaje;
-		
-		private string _Confirmar;
-		
-		private System.DateTime _Fecha;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnId_NotifacionChanging(int value);
-    partial void OnId_NotifacionChanged();
-    partial void OnCedulaDocenteChanging(string value);
-    partial void OnCedulaDocenteChanged();
-    partial void OnMatriculaChanging(int value);
-    partial void OnMatriculaChanged();
-    partial void OnCodigoMateriaChanging(string value);
-    partial void OnCodigoMateriaChanged();
-    partial void OnCodigoModuloChanging(string value);
-    partial void OnCodigoModuloChanged();
-    partial void OnMensajeChanging(string value);
-    partial void OnMensajeChanged();
-    partial void OnConfirmarChanging(string value);
-    partial void OnConfirmarChanged();
-    partial void OnFechaChanging(System.DateTime value);
-    partial void OnFechaChanged();
-    #endregion
-		
-		public NOTIF_ESTUDIANTE()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Notifacion", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id_Notifacion
-		{
-			get
-			{
-				return this._Id_Notifacion;
-			}
-			set
-			{
-				if ((this._Id_Notifacion != value))
-				{
-					this.OnId_NotifacionChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Notifacion = value;
-					this.SendPropertyChanged("Id_Notifacion");
-					this.OnId_NotifacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CedulaDocente", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string CedulaDocente
-		{
-			get
-			{
-				return this._CedulaDocente;
-			}
-			set
-			{
-				if ((this._CedulaDocente != value))
-				{
-					this.OnCedulaDocenteChanging(value);
-					this.SendPropertyChanging();
-					this._CedulaDocente = value;
-					this.SendPropertyChanged("CedulaDocente");
-					this.OnCedulaDocenteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Matricula", DbType="Int NOT NULL")]
-		public int Matricula
-		{
-			get
-			{
-				return this._Matricula;
-			}
-			set
-			{
-				if ((this._Matricula != value))
-				{
-					this.OnMatriculaChanging(value);
-					this.SendPropertyChanging();
-					this._Matricula = value;
-					this.SendPropertyChanged("Matricula");
-					this.OnMatriculaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMateria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoMateria
-		{
-			get
-			{
-				return this._CodigoMateria;
-			}
-			set
-			{
-				if ((this._CodigoMateria != value))
-				{
-					this.OnCodigoMateriaChanging(value);
-					this.SendPropertyChanging();
-					this._CodigoMateria = value;
-					this.SendPropertyChanged("CodigoMateria");
-					this.OnCodigoMateriaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoModulo
-		{
-			get
-			{
-				return this._CodigoModulo;
-			}
-			set
-			{
-				if ((this._CodigoModulo != value))
-				{
-					this.OnCodigoModuloChanging(value);
-					this.SendPropertyChanging();
-					this._CodigoModulo = value;
-					this.SendPropertyChanged("CodigoModulo");
-					this.OnCodigoModuloChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mensaje", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Mensaje
-		{
-			get
-			{
-				return this._Mensaje;
-			}
-			set
-			{
-				if ((this._Mensaje != value))
-				{
-					this.OnMensajeChanging(value);
-					this.SendPropertyChanging();
-					this._Mensaje = value;
-					this.SendPropertyChanged("Mensaje");
-					this.OnMensajeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Confirmar", DbType="Char(2) NOT NULL", CanBeNull=false)]
-		public string Confirmar
-		{
-			get
-			{
-				return this._Confirmar;
-			}
-			set
-			{
-				if ((this._Confirmar != value))
-				{
-					this.OnConfirmarChanging(value);
-					this.SendPropertyChanging();
-					this._Confirmar = value;
-					this.SendPropertyChanged("Confirmar");
-					this.OnConfirmarChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="Date NOT NULL")]
-		public System.DateTime Fecha
-		{
-			get
-			{
-				return this._Fecha;
-			}
-			set
-			{
-				if ((this._Fecha != value))
-				{
-					this.OnFechaChanging(value);
-					this.SendPropertyChanging();
-					this._Fecha = value;
-					this.SendPropertyChanged("Fecha");
-					this.OnFechaChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PERIODO_ACADEMICO")]
-	public partial class PERIODO_ACADEMICO : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id_Periodo;
-		
-		private string _CodigoPeriodo;
-		
-		private string _Periodo;
-		
-		private EntitySet<HORARIO_CLASES> _HORARIO_CLASES;
-		
-		private EntitySet<HORIO_TUTORIAS> _HORIO_TUTORIAS;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnId_PeriodoChanging(int value);
-    partial void OnId_PeriodoChanged();
-    partial void OnCodigoPeriodoChanging(string value);
-    partial void OnCodigoPeriodoChanged();
-    partial void OnPeriodoChanging(string value);
-    partial void OnPeriodoChanged();
-    #endregion
-		
-		public PERIODO_ACADEMICO()
-		{
-			this._HORARIO_CLASES = new EntitySet<HORARIO_CLASES>(new Action<HORARIO_CLASES>(this.attach_HORARIO_CLASES), new Action<HORARIO_CLASES>(this.detach_HORARIO_CLASES));
-			this._HORIO_TUTORIAS = new EntitySet<HORIO_TUTORIAS>(new Action<HORIO_TUTORIAS>(this.attach_HORIO_TUTORIAS), new Action<HORIO_TUTORIAS>(this.detach_HORIO_TUTORIAS));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Periodo", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id_Periodo
-		{
-			get
-			{
-				return this._Id_Periodo;
-			}
-			set
-			{
-				if ((this._Id_Periodo != value))
-				{
-					this.OnId_PeriodoChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Periodo = value;
-					this.SendPropertyChanged("Id_Periodo");
-					this.OnId_PeriodoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoPeriodo", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string CodigoPeriodo
-		{
-			get
-			{
-				return this._CodigoPeriodo;
-			}
-			set
-			{
-				if ((this._CodigoPeriodo != value))
-				{
-					this.OnCodigoPeriodoChanging(value);
-					this.SendPropertyChanging();
-					this._CodigoPeriodo = value;
-					this.SendPropertyChanged("CodigoPeriodo");
-					this.OnCodigoPeriodoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Periodo", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string Periodo
-		{
-			get
-			{
-				return this._Periodo;
-			}
-			set
-			{
-				if ((this._Periodo != value))
-				{
-					this.OnPeriodoChanging(value);
-					this.SendPropertyChanging();
-					this._Periodo = value;
-					this.SendPropertyChanged("Periodo");
-					this.OnPeriodoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PERIODO_ACADEMICO_HORARIO_CLASES", Storage="_HORARIO_CLASES", ThisKey="Id_Periodo", OtherKey="Id_Periodo")]
-		public EntitySet<HORARIO_CLASES> HORARIO_CLASES
-		{
-			get
-			{
-				return this._HORARIO_CLASES;
-			}
-			set
-			{
-				this._HORARIO_CLASES.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PERIODO_ACADEMICO_HORIO_TUTORIAS", Storage="_HORIO_TUTORIAS", ThisKey="Id_Periodo", OtherKey="Id_Periodo")]
-		public EntitySet<HORIO_TUTORIAS> HORIO_TUTORIAS
-		{
-			get
-			{
-				return this._HORIO_TUTORIAS;
-			}
-			set
-			{
-				this._HORIO_TUTORIAS.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_HORARIO_CLASES(HORARIO_CLASES entity)
-		{
-			this.SendPropertyChanging();
-			entity.PERIODO_ACADEMICO = this;
-		}
-		
-		private void detach_HORARIO_CLASES(HORARIO_CLASES entity)
-		{
-			this.SendPropertyChanging();
-			entity.PERIODO_ACADEMICO = null;
-		}
-		
-		private void attach_HORIO_TUTORIAS(HORIO_TUTORIAS entity)
-		{
-			this.SendPropertyChanging();
-			entity.PERIODO_ACADEMICO = this;
-		}
-		
-		private void detach_HORIO_TUTORIAS(HORIO_TUTORIAS entity)
-		{
-			this.SendPropertyChanging();
-			entity.PERIODO_ACADEMICO = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.REPITENCIA")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="TutoAdmin.REPITENCIA")]
 	public partial class REPITENCIA : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -4962,239 +4673,13 @@ namespace AppTutorias
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ROL")]
-	public partial class ROL : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DOCENTE")]
+	public partial class DOCENTE : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Id_Rol;
-		
-		private string _Rol;
-		
-		private EntitySet<ADMINIS> _ADMINIS;
-		
-		private EntitySet<DOCENTE> _DOCENTE;
-		
-		private EntitySet<ESTUDIANTE> _ESTUDIANTE;
-		
-		private EntitySet<LOGIN_USUARIO> _LOGIN_USUARIO;
-		
-		private EntitySet<SUPERADMIN> _SUPERADMIN;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnId_RolChanging(int value);
-    partial void OnId_RolChanged();
-    partial void OnRolChanging(string value);
-    partial void OnRolChanged();
-    #endregion
-		
-		public ROL()
-		{
-			this._ADMINIS = new EntitySet<ADMINIS>(new Action<ADMINIS>(this.attach_ADMINIS), new Action<ADMINIS>(this.detach_ADMINIS));
-			this._DOCENTE = new EntitySet<DOCENTE>(new Action<DOCENTE>(this.attach_DOCENTE), new Action<DOCENTE>(this.detach_DOCENTE));
-			this._ESTUDIANTE = new EntitySet<ESTUDIANTE>(new Action<ESTUDIANTE>(this.attach_ESTUDIANTE), new Action<ESTUDIANTE>(this.detach_ESTUDIANTE));
-			this._LOGIN_USUARIO = new EntitySet<LOGIN_USUARIO>(new Action<LOGIN_USUARIO>(this.attach_LOGIN_USUARIO), new Action<LOGIN_USUARIO>(this.detach_LOGIN_USUARIO));
-			this._SUPERADMIN = new EntitySet<SUPERADMIN>(new Action<SUPERADMIN>(this.attach_SUPERADMIN), new Action<SUPERADMIN>(this.detach_SUPERADMIN));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Rol", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id_Rol
-		{
-			get
-			{
-				return this._Id_Rol;
-			}
-			set
-			{
-				if ((this._Id_Rol != value))
-				{
-					this.OnId_RolChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Rol = value;
-					this.SendPropertyChanged("Id_Rol");
-					this.OnId_RolChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rol", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Rol
-		{
-			get
-			{
-				return this._Rol;
-			}
-			set
-			{
-				if ((this._Rol != value))
-				{
-					this.OnRolChanging(value);
-					this.SendPropertyChanging();
-					this._Rol = value;
-					this.SendPropertyChanged("Rol");
-					this.OnRolChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ROL_ADMINIS", Storage="_ADMINIS", ThisKey="Id_Rol", OtherKey="Id_Rol")]
-		public EntitySet<ADMINIS> ADMINIS
-		{
-			get
-			{
-				return this._ADMINIS;
-			}
-			set
-			{
-				this._ADMINIS.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ROL_DOCENTE", Storage="_DOCENTE", ThisKey="Id_Rol", OtherKey="Id_Rol")]
-		public EntitySet<DOCENTE> DOCENTE
-		{
-			get
-			{
-				return this._DOCENTE;
-			}
-			set
-			{
-				this._DOCENTE.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ROL_ESTUDIANTE", Storage="_ESTUDIANTE", ThisKey="Id_Rol", OtherKey="Id_Rol")]
-		public EntitySet<ESTUDIANTE> ESTUDIANTE
-		{
-			get
-			{
-				return this._ESTUDIANTE;
-			}
-			set
-			{
-				this._ESTUDIANTE.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ROL_LOGIN_USUARIO", Storage="_LOGIN_USUARIO", ThisKey="Id_Rol", OtherKey="Id_Rol")]
-		public EntitySet<LOGIN_USUARIO> LOGIN_USUARIO
-		{
-			get
-			{
-				return this._LOGIN_USUARIO;
-			}
-			set
-			{
-				this._LOGIN_USUARIO.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ROL_SUPERADMIN", Storage="_SUPERADMIN", ThisKey="Id_Rol", OtherKey="Id_Rol")]
-		public EntitySet<SUPERADMIN> SUPERADMIN
-		{
-			get
-			{
-				return this._SUPERADMIN;
-			}
-			set
-			{
-				this._SUPERADMIN.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ADMINIS(ADMINIS entity)
-		{
-			this.SendPropertyChanging();
-			entity.ROL = this;
-		}
-		
-		private void detach_ADMINIS(ADMINIS entity)
-		{
-			this.SendPropertyChanging();
-			entity.ROL = null;
-		}
-		
-		private void attach_DOCENTE(DOCENTE entity)
-		{
-			this.SendPropertyChanging();
-			entity.ROL = this;
-		}
-		
-		private void detach_DOCENTE(DOCENTE entity)
-		{
-			this.SendPropertyChanging();
-			entity.ROL = null;
-		}
-		
-		private void attach_ESTUDIANTE(ESTUDIANTE entity)
-		{
-			this.SendPropertyChanging();
-			entity.ROL = this;
-		}
-		
-		private void detach_ESTUDIANTE(ESTUDIANTE entity)
-		{
-			this.SendPropertyChanging();
-			entity.ROL = null;
-		}
-		
-		private void attach_LOGIN_USUARIO(LOGIN_USUARIO entity)
-		{
-			this.SendPropertyChanging();
-			entity.ROL = this;
-		}
-		
-		private void detach_LOGIN_USUARIO(LOGIN_USUARIO entity)
-		{
-			this.SendPropertyChanging();
-			entity.ROL = null;
-		}
-		
-		private void attach_SUPERADMIN(SUPERADMIN entity)
-		{
-			this.SendPropertyChanging();
-			entity.ROL = this;
-		}
-		
-		private void detach_SUPERADMIN(SUPERADMIN entity)
-		{
-			this.SendPropertyChanging();
-			entity.ROL = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SUPERADMIN")]
-	public partial class SUPERADMIN : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id_SuperAdmin;
+		private int _Id_Docente;
 		
 		private int _Id_Rol;
 		
@@ -5208,14 +4693,26 @@ namespace AppTutorias
 		
 		private string _Email;
 		
+		private string _Celular;
+		
+		private string _Cedula;
+		
+		private EntitySet<HORARIO_CLASES> _HORARIO_CLASES;
+		
+		private EntitySet<HORIO_TUTORIAS> _HORIO_TUTORIAS;
+		
+		private EntitySet<HORARIO_OBLIGATORIO_DOCENTE> _HORARIO_OBLIGATORIO_DOCENTE;
+		
+		private EntitySet<HORARIO_LIBRE_DOCENTE> _HORARIO_LIBRE_DOCENTE;
+		
 		private EntityRef<ROL> _ROL;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnId_SuperAdminChanging(int value);
-    partial void OnId_SuperAdminChanged();
+    partial void OnId_DocenteChanging(int value);
+    partial void OnId_DocenteChanged();
     partial void OnId_RolChanging(int value);
     partial void OnId_RolChanged();
     partial void OnNombreChanging(string value);
@@ -5228,30 +4725,38 @@ namespace AppTutorias
     partial void OnApellidoDosChanged();
     partial void OnEmailChanging(string value);
     partial void OnEmailChanged();
+    partial void OnCelularChanging(string value);
+    partial void OnCelularChanged();
+    partial void OnCedulaChanging(string value);
+    partial void OnCedulaChanged();
     #endregion
 		
-		public SUPERADMIN()
+		public DOCENTE()
 		{
+			this._HORARIO_CLASES = new EntitySet<HORARIO_CLASES>(new Action<HORARIO_CLASES>(this.attach_HORARIO_CLASES), new Action<HORARIO_CLASES>(this.detach_HORARIO_CLASES));
+			this._HORIO_TUTORIAS = new EntitySet<HORIO_TUTORIAS>(new Action<HORIO_TUTORIAS>(this.attach_HORIO_TUTORIAS), new Action<HORIO_TUTORIAS>(this.detach_HORIO_TUTORIAS));
+			this._HORARIO_OBLIGATORIO_DOCENTE = new EntitySet<HORARIO_OBLIGATORIO_DOCENTE>(new Action<HORARIO_OBLIGATORIO_DOCENTE>(this.attach_HORARIO_OBLIGATORIO_DOCENTE), new Action<HORARIO_OBLIGATORIO_DOCENTE>(this.detach_HORARIO_OBLIGATORIO_DOCENTE));
+			this._HORARIO_LIBRE_DOCENTE = new EntitySet<HORARIO_LIBRE_DOCENTE>(new Action<HORARIO_LIBRE_DOCENTE>(this.attach_HORARIO_LIBRE_DOCENTE), new Action<HORARIO_LIBRE_DOCENTE>(this.detach_HORARIO_LIBRE_DOCENTE));
 			this._ROL = default(EntityRef<ROL>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_SuperAdmin", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id_SuperAdmin
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Docente", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id_Docente
 		{
 			get
 			{
-				return this._Id_SuperAdmin;
+				return this._Id_Docente;
 			}
 			set
 			{
-				if ((this._Id_SuperAdmin != value))
+				if ((this._Id_Docente != value))
 				{
-					this.OnId_SuperAdminChanging(value);
+					this.OnId_DocenteChanging(value);
 					this.SendPropertyChanging();
-					this._Id_SuperAdmin = value;
-					this.SendPropertyChanged("Id_SuperAdmin");
-					this.OnId_SuperAdminChanged();
+					this._Id_Docente = value;
+					this.SendPropertyChanged("Id_Docente");
+					this.OnId_DocenteChanged();
 				}
 			}
 		}
@@ -5300,7 +4805,7 @@ namespace AppTutorias
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreDos", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreDos", DbType="VarChar(50)")]
 		public string NombreDos
 		{
 			get
@@ -5340,7 +4845,7 @@ namespace AppTutorias
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApellidoDos", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApellidoDos", DbType="VarChar(50)")]
 		public string ApellidoDos
 		{
 			get
@@ -5380,7 +4885,99 @@ namespace AppTutorias
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ROL_SUPERADMIN", Storage="_ROL", ThisKey="Id_Rol", OtherKey="Id_Rol", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Celular", DbType="VarChar(50)")]
+		public string Celular
+		{
+			get
+			{
+				return this._Celular;
+			}
+			set
+			{
+				if ((this._Celular != value))
+				{
+					this.OnCelularChanging(value);
+					this.SendPropertyChanging();
+					this._Celular = value;
+					this.SendPropertyChanged("Celular");
+					this.OnCelularChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="Char(10)")]
+		public string Cedula
+		{
+			get
+			{
+				return this._Cedula;
+			}
+			set
+			{
+				if ((this._Cedula != value))
+				{
+					this.OnCedulaChanging(value);
+					this.SendPropertyChanging();
+					this._Cedula = value;
+					this.SendPropertyChanged("Cedula");
+					this.OnCedulaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DOCENTE_HORARIO_CLASES", Storage="_HORARIO_CLASES", ThisKey="Id_Docente", OtherKey="Id_Docente")]
+		public EntitySet<HORARIO_CLASES> HORARIO_CLASES
+		{
+			get
+			{
+				return this._HORARIO_CLASES;
+			}
+			set
+			{
+				this._HORARIO_CLASES.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DOCENTE_HORIO_TUTORIAS", Storage="_HORIO_TUTORIAS", ThisKey="Id_Docente", OtherKey="Id_Docente")]
+		public EntitySet<HORIO_TUTORIAS> HORIO_TUTORIAS
+		{
+			get
+			{
+				return this._HORIO_TUTORIAS;
+			}
+			set
+			{
+				this._HORIO_TUTORIAS.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DOCENTE_HORARIO_OBLIGATORIO_DOCENTE", Storage="_HORARIO_OBLIGATORIO_DOCENTE", ThisKey="Id_Docente", OtherKey="Id_Docente")]
+		public EntitySet<HORARIO_OBLIGATORIO_DOCENTE> HORARIO_OBLIGATORIO_DOCENTE
+		{
+			get
+			{
+				return this._HORARIO_OBLIGATORIO_DOCENTE;
+			}
+			set
+			{
+				this._HORARIO_OBLIGATORIO_DOCENTE.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DOCENTE_HORARIO_LIBRE_DOCENTE", Storage="_HORARIO_LIBRE_DOCENTE", ThisKey="Id_Docente", OtherKey="Id_Docente")]
+		public EntitySet<HORARIO_LIBRE_DOCENTE> HORARIO_LIBRE_DOCENTE
+		{
+			get
+			{
+				return this._HORARIO_LIBRE_DOCENTE;
+			}
+			set
+			{
+				this._HORARIO_LIBRE_DOCENTE.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ROL_DOCENTE", Storage="_ROL", ThisKey="Id_Rol", OtherKey="Id_Rol", IsForeignKey=true)]
 		public ROL ROL
 		{
 			get
@@ -5397,12 +4994,12 @@ namespace AppTutorias
 					if ((previousValue != null))
 					{
 						this._ROL.Entity = null;
-						previousValue.SUPERADMIN.Remove(this);
+						previousValue.DOCENTE.Remove(this);
 					}
 					this._ROL.Entity = value;
 					if ((value != null))
 					{
-						value.SUPERADMIN.Add(this);
+						value.DOCENTE.Add(this);
 						this._Id_Rol = value.Id_Rol;
 					}
 					else
@@ -5410,6 +5007,616 @@ namespace AppTutorias
 						this._Id_Rol = default(int);
 					}
 					this.SendPropertyChanged("ROL");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_HORARIO_CLASES(HORARIO_CLASES entity)
+		{
+			this.SendPropertyChanging();
+			entity.DOCENTE = this;
+		}
+		
+		private void detach_HORARIO_CLASES(HORARIO_CLASES entity)
+		{
+			this.SendPropertyChanging();
+			entity.DOCENTE = null;
+		}
+		
+		private void attach_HORIO_TUTORIAS(HORIO_TUTORIAS entity)
+		{
+			this.SendPropertyChanging();
+			entity.DOCENTE = this;
+		}
+		
+		private void detach_HORIO_TUTORIAS(HORIO_TUTORIAS entity)
+		{
+			this.SendPropertyChanging();
+			entity.DOCENTE = null;
+		}
+		
+		private void attach_HORARIO_OBLIGATORIO_DOCENTE(HORARIO_OBLIGATORIO_DOCENTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.DOCENTE = this;
+		}
+		
+		private void detach_HORARIO_OBLIGATORIO_DOCENTE(HORARIO_OBLIGATORIO_DOCENTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.DOCENTE = null;
+		}
+		
+		private void attach_HORARIO_LIBRE_DOCENTE(HORARIO_LIBRE_DOCENTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.DOCENTE = this;
+		}
+		
+		private void detach_HORARIO_LIBRE_DOCENTE(HORARIO_LIBRE_DOCENTE entity)
+		{
+			this.SendPropertyChanging();
+			entity.DOCENTE = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="TutoAdmin.HORARIO_OBLIGATORIO_DOCENTE")]
+	public partial class HORARIO_OBLIGATORIO_DOCENTE : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id_HorioObligatorio;
+		
+		private int _Id_Periodo;
+		
+		private int _Id_Docente;
+		
+		private int _Id_Modulo;
+		
+		private string _Descripcion;
+		
+		private EntityRef<DOCENTE> _DOCENTE;
+		
+		private EntityRef<MODULO> _MODULO;
+		
+		private EntityRef<PERIODO_ACADEMICO> _PERIODO_ACADEMICO;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnId_HorioObligatorioChanging(int value);
+    partial void OnId_HorioObligatorioChanged();
+    partial void OnId_PeriodoChanging(int value);
+    partial void OnId_PeriodoChanged();
+    partial void OnId_DocenteChanging(int value);
+    partial void OnId_DocenteChanged();
+    partial void OnId_ModuloChanging(int value);
+    partial void OnId_ModuloChanged();
+    partial void OnDescripcionChanging(string value);
+    partial void OnDescripcionChanged();
+    #endregion
+		
+		public HORARIO_OBLIGATORIO_DOCENTE()
+		{
+			this._DOCENTE = default(EntityRef<DOCENTE>);
+			this._MODULO = default(EntityRef<MODULO>);
+			this._PERIODO_ACADEMICO = default(EntityRef<PERIODO_ACADEMICO>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_HorioObligatorio", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id_HorioObligatorio
+		{
+			get
+			{
+				return this._Id_HorioObligatorio;
+			}
+			set
+			{
+				if ((this._Id_HorioObligatorio != value))
+				{
+					this.OnId_HorioObligatorioChanging(value);
+					this.SendPropertyChanging();
+					this._Id_HorioObligatorio = value;
+					this.SendPropertyChanged("Id_HorioObligatorio");
+					this.OnId_HorioObligatorioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Periodo", DbType="Int NOT NULL")]
+		public int Id_Periodo
+		{
+			get
+			{
+				return this._Id_Periodo;
+			}
+			set
+			{
+				if ((this._Id_Periodo != value))
+				{
+					if (this._PERIODO_ACADEMICO.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_PeriodoChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Periodo = value;
+					this.SendPropertyChanged("Id_Periodo");
+					this.OnId_PeriodoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Docente", DbType="Int NOT NULL")]
+		public int Id_Docente
+		{
+			get
+			{
+				return this._Id_Docente;
+			}
+			set
+			{
+				if ((this._Id_Docente != value))
+				{
+					if (this._DOCENTE.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_DocenteChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Docente = value;
+					this.SendPropertyChanged("Id_Docente");
+					this.OnId_DocenteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Modulo", DbType="Int NOT NULL")]
+		public int Id_Modulo
+		{
+			get
+			{
+				return this._Id_Modulo;
+			}
+			set
+			{
+				if ((this._Id_Modulo != value))
+				{
+					if (this._MODULO.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_ModuloChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Modulo = value;
+					this.SendPropertyChanged("Id_Modulo");
+					this.OnId_ModuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Descripcion
+		{
+			get
+			{
+				return this._Descripcion;
+			}
+			set
+			{
+				if ((this._Descripcion != value))
+				{
+					this.OnDescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._Descripcion = value;
+					this.SendPropertyChanged("Descripcion");
+					this.OnDescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DOCENTE_HORARIO_OBLIGATORIO_DOCENTE", Storage="_DOCENTE", ThisKey="Id_Docente", OtherKey="Id_Docente", IsForeignKey=true)]
+		public DOCENTE DOCENTE
+		{
+			get
+			{
+				return this._DOCENTE.Entity;
+			}
+			set
+			{
+				DOCENTE previousValue = this._DOCENTE.Entity;
+				if (((previousValue != value) 
+							|| (this._DOCENTE.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DOCENTE.Entity = null;
+						previousValue.HORARIO_OBLIGATORIO_DOCENTE.Remove(this);
+					}
+					this._DOCENTE.Entity = value;
+					if ((value != null))
+					{
+						value.HORARIO_OBLIGATORIO_DOCENTE.Add(this);
+						this._Id_Docente = value.Id_Docente;
+					}
+					else
+					{
+						this._Id_Docente = default(int);
+					}
+					this.SendPropertyChanged("DOCENTE");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MODULO_HORARIO_OBLIGATORIO_DOCENTE", Storage="_MODULO", ThisKey="Id_Modulo", OtherKey="Id_Modulo", IsForeignKey=true)]
+		public MODULO MODULO
+		{
+			get
+			{
+				return this._MODULO.Entity;
+			}
+			set
+			{
+				MODULO previousValue = this._MODULO.Entity;
+				if (((previousValue != value) 
+							|| (this._MODULO.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._MODULO.Entity = null;
+						previousValue.HORARIO_OBLIGATORIO_DOCENTE.Remove(this);
+					}
+					this._MODULO.Entity = value;
+					if ((value != null))
+					{
+						value.HORARIO_OBLIGATORIO_DOCENTE.Add(this);
+						this._Id_Modulo = value.Id_Modulo;
+					}
+					else
+					{
+						this._Id_Modulo = default(int);
+					}
+					this.SendPropertyChanged("MODULO");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PERIODO_ACADEMICO_HORARIO_OBLIGATORIO_DOCENTE", Storage="_PERIODO_ACADEMICO", ThisKey="Id_Periodo", OtherKey="Id_Periodo", IsForeignKey=true)]
+		public PERIODO_ACADEMICO PERIODO_ACADEMICO
+		{
+			get
+			{
+				return this._PERIODO_ACADEMICO.Entity;
+			}
+			set
+			{
+				PERIODO_ACADEMICO previousValue = this._PERIODO_ACADEMICO.Entity;
+				if (((previousValue != value) 
+							|| (this._PERIODO_ACADEMICO.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._PERIODO_ACADEMICO.Entity = null;
+						previousValue.HORARIO_OBLIGATORIO_DOCENTE.Remove(this);
+					}
+					this._PERIODO_ACADEMICO.Entity = value;
+					if ((value != null))
+					{
+						value.HORARIO_OBLIGATORIO_DOCENTE.Add(this);
+						this._Id_Periodo = value.Id_Periodo;
+					}
+					else
+					{
+						this._Id_Periodo = default(int);
+					}
+					this.SendPropertyChanged("PERIODO_ACADEMICO");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="TutoAdmin.HORARIO_LIBRE_DOCENTE")]
+	public partial class HORARIO_LIBRE_DOCENTE : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id_HorioLibre;
+		
+		private int _Id_Periodo;
+		
+		private int _Id_Docente;
+		
+		private int _Id_Modulo;
+		
+		private string _Descripcion;
+		
+		private EntityRef<DOCENTE> _DOCENTE;
+		
+		private EntityRef<MODULO> _MODULO;
+		
+		private EntityRef<PERIODO_ACADEMICO> _PERIODO_ACADEMICO;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnId_HorioLibreChanging(int value);
+    partial void OnId_HorioLibreChanged();
+    partial void OnId_PeriodoChanging(int value);
+    partial void OnId_PeriodoChanged();
+    partial void OnId_DocenteChanging(int value);
+    partial void OnId_DocenteChanged();
+    partial void OnId_ModuloChanging(int value);
+    partial void OnId_ModuloChanged();
+    partial void OnDescripcionChanging(string value);
+    partial void OnDescripcionChanged();
+    #endregion
+		
+		public HORARIO_LIBRE_DOCENTE()
+		{
+			this._DOCENTE = default(EntityRef<DOCENTE>);
+			this._MODULO = default(EntityRef<MODULO>);
+			this._PERIODO_ACADEMICO = default(EntityRef<PERIODO_ACADEMICO>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_HorioLibre", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id_HorioLibre
+		{
+			get
+			{
+				return this._Id_HorioLibre;
+			}
+			set
+			{
+				if ((this._Id_HorioLibre != value))
+				{
+					this.OnId_HorioLibreChanging(value);
+					this.SendPropertyChanging();
+					this._Id_HorioLibre = value;
+					this.SendPropertyChanged("Id_HorioLibre");
+					this.OnId_HorioLibreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Periodo", DbType="Int NOT NULL")]
+		public int Id_Periodo
+		{
+			get
+			{
+				return this._Id_Periodo;
+			}
+			set
+			{
+				if ((this._Id_Periodo != value))
+				{
+					if (this._PERIODO_ACADEMICO.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_PeriodoChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Periodo = value;
+					this.SendPropertyChanged("Id_Periodo");
+					this.OnId_PeriodoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Docente", DbType="Int NOT NULL")]
+		public int Id_Docente
+		{
+			get
+			{
+				return this._Id_Docente;
+			}
+			set
+			{
+				if ((this._Id_Docente != value))
+				{
+					if (this._DOCENTE.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_DocenteChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Docente = value;
+					this.SendPropertyChanged("Id_Docente");
+					this.OnId_DocenteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Modulo", DbType="Int NOT NULL")]
+		public int Id_Modulo
+		{
+			get
+			{
+				return this._Id_Modulo;
+			}
+			set
+			{
+				if ((this._Id_Modulo != value))
+				{
+					if (this._MODULO.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_ModuloChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Modulo = value;
+					this.SendPropertyChanged("Id_Modulo");
+					this.OnId_ModuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Descripcion
+		{
+			get
+			{
+				return this._Descripcion;
+			}
+			set
+			{
+				if ((this._Descripcion != value))
+				{
+					this.OnDescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._Descripcion = value;
+					this.SendPropertyChanged("Descripcion");
+					this.OnDescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DOCENTE_HORARIO_LIBRE_DOCENTE", Storage="_DOCENTE", ThisKey="Id_Docente", OtherKey="Id_Docente", IsForeignKey=true)]
+		public DOCENTE DOCENTE
+		{
+			get
+			{
+				return this._DOCENTE.Entity;
+			}
+			set
+			{
+				DOCENTE previousValue = this._DOCENTE.Entity;
+				if (((previousValue != value) 
+							|| (this._DOCENTE.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DOCENTE.Entity = null;
+						previousValue.HORARIO_LIBRE_DOCENTE.Remove(this);
+					}
+					this._DOCENTE.Entity = value;
+					if ((value != null))
+					{
+						value.HORARIO_LIBRE_DOCENTE.Add(this);
+						this._Id_Docente = value.Id_Docente;
+					}
+					else
+					{
+						this._Id_Docente = default(int);
+					}
+					this.SendPropertyChanged("DOCENTE");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MODULO_HORARIO_LIBRE_DOCENTE", Storage="_MODULO", ThisKey="Id_Modulo", OtherKey="Id_Modulo", IsForeignKey=true)]
+		public MODULO MODULO
+		{
+			get
+			{
+				return this._MODULO.Entity;
+			}
+			set
+			{
+				MODULO previousValue = this._MODULO.Entity;
+				if (((previousValue != value) 
+							|| (this._MODULO.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._MODULO.Entity = null;
+						previousValue.HORARIO_LIBRE_DOCENTE.Remove(this);
+					}
+					this._MODULO.Entity = value;
+					if ((value != null))
+					{
+						value.HORARIO_LIBRE_DOCENTE.Add(this);
+						this._Id_Modulo = value.Id_Modulo;
+					}
+					else
+					{
+						this._Id_Modulo = default(int);
+					}
+					this.SendPropertyChanged("MODULO");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PERIODO_ACADEMICO_HORARIO_LIBRE_DOCENTE", Storage="_PERIODO_ACADEMICO", ThisKey="Id_Periodo", OtherKey="Id_Periodo", IsForeignKey=true)]
+		public PERIODO_ACADEMICO PERIODO_ACADEMICO
+		{
+			get
+			{
+				return this._PERIODO_ACADEMICO.Entity;
+			}
+			set
+			{
+				PERIODO_ACADEMICO previousValue = this._PERIODO_ACADEMICO.Entity;
+				if (((previousValue != value) 
+							|| (this._PERIODO_ACADEMICO.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._PERIODO_ACADEMICO.Entity = null;
+						previousValue.HORARIO_LIBRE_DOCENTE.Remove(this);
+					}
+					this._PERIODO_ACADEMICO.Entity = value;
+					if ((value != null))
+					{
+						value.HORARIO_LIBRE_DOCENTE.Add(this);
+						this._Id_Periodo = value.Id_Periodo;
+					}
+					else
+					{
+						this._Id_Periodo = default(int);
+					}
+					this.SendPropertyChanged("PERIODO_ACADEMICO");
 				}
 			}
 		}
@@ -5569,50 +5776,6 @@ namespace AppTutorias
 		}
 	}
 	
-	public partial class consultaDocentesPorMateriaResult
-	{
-		
-		private string _Cedula;
-		
-		private string _Docente;
-		
-		public consultaDocentesPorMateriaResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="Char(10)")]
-		public string Cedula
-		{
-			get
-			{
-				return this._Cedula;
-			}
-			set
-			{
-				if ((this._Cedula != value))
-				{
-					this._Cedula = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Docente", DbType="VarChar(101) NOT NULL", CanBeNull=false)]
-		public string Docente
-		{
-			get
-			{
-				return this._Docente;
-			}
-			set
-			{
-				if ((this._Docente != value))
-				{
-					this._Docente = value;
-				}
-			}
-		}
-	}
-	
 	public partial class consultaDocentesPorMateriaFullResult
 	{
 		
@@ -5755,784 +5918,6 @@ namespace AppTutorias
 		}
 	}
 	
-	public partial class consultaDocentesPorParaleloFullResult
-	{
-		
-		private string _Cedula;
-		
-		private string _Nombre;
-		
-		private string _NombreDos;
-		
-		private string _Apellido;
-		
-		private string _ApellidoDos;
-		
-		public consultaDocentesPorParaleloFullResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="Char(10)")]
-		public string Cedula
-		{
-			get
-			{
-				return this._Cedula;
-			}
-			set
-			{
-				if ((this._Cedula != value))
-				{
-					this._Cedula = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Nombre
-		{
-			get
-			{
-				return this._Nombre;
-			}
-			set
-			{
-				if ((this._Nombre != value))
-				{
-					this._Nombre = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreDos", DbType="VarChar(50)")]
-		public string NombreDos
-		{
-			get
-			{
-				return this._NombreDos;
-			}
-			set
-			{
-				if ((this._NombreDos != value))
-				{
-					this._NombreDos = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Apellido
-		{
-			get
-			{
-				return this._Apellido;
-			}
-			set
-			{
-				if ((this._Apellido != value))
-				{
-					this._Apellido = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApellidoDos", DbType="VarChar(50)")]
-		public string ApellidoDos
-		{
-			get
-			{
-				return this._ApellidoDos;
-			}
-			set
-			{
-				if ((this._ApellidoDos != value))
-				{
-					this._ApellidoDos = value;
-				}
-			}
-		}
-	}
-	
-	public partial class consultaMensajesEstudianteResult
-	{
-		
-		private int _Id_Notifacion;
-		
-		private string _Estudiante;
-		
-		private int _Matricula;
-		
-		private string _CodigoMeteria;
-		
-		private string _NombreMateria;
-		
-		private string _CodigoModulo;
-		
-		private System.TimeSpan _HoraInicio;
-		
-		private System.TimeSpan _HoraFin;
-		
-		private string _Mensaje;
-		
-		private string _Confirmar;
-		
-		private System.DateTime _Fecha;
-		
-		public consultaMensajesEstudianteResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Notifacion", DbType="Int NOT NULL")]
-		public int Id_Notifacion
-		{
-			get
-			{
-				return this._Id_Notifacion;
-			}
-			set
-			{
-				if ((this._Id_Notifacion != value))
-				{
-					this._Id_Notifacion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estudiante", DbType="VarChar(203)")]
-		public string Estudiante
-		{
-			get
-			{
-				return this._Estudiante;
-			}
-			set
-			{
-				if ((this._Estudiante != value))
-				{
-					this._Estudiante = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Matricula", DbType="Int NOT NULL")]
-		public int Matricula
-		{
-			get
-			{
-				return this._Matricula;
-			}
-			set
-			{
-				if ((this._Matricula != value))
-				{
-					this._Matricula = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMeteria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoMeteria
-		{
-			get
-			{
-				return this._CodigoMeteria;
-			}
-			set
-			{
-				if ((this._CodigoMeteria != value))
-				{
-					this._CodigoMeteria = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMateria", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string NombreMateria
-		{
-			get
-			{
-				return this._NombreMateria;
-			}
-			set
-			{
-				if ((this._NombreMateria != value))
-				{
-					this._NombreMateria = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoModulo
-		{
-			get
-			{
-				return this._CodigoModulo;
-			}
-			set
-			{
-				if ((this._CodigoModulo != value))
-				{
-					this._CodigoModulo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraInicio", DbType="Time NOT NULL")]
-		public System.TimeSpan HoraInicio
-		{
-			get
-			{
-				return this._HoraInicio;
-			}
-			set
-			{
-				if ((this._HoraInicio != value))
-				{
-					this._HoraInicio = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraFin", DbType="Time NOT NULL")]
-		public System.TimeSpan HoraFin
-		{
-			get
-			{
-				return this._HoraFin;
-			}
-			set
-			{
-				if ((this._HoraFin != value))
-				{
-					this._HoraFin = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mensaje", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Mensaje
-		{
-			get
-			{
-				return this._Mensaje;
-			}
-			set
-			{
-				if ((this._Mensaje != value))
-				{
-					this._Mensaje = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Confirmar", DbType="Char(2) NOT NULL", CanBeNull=false)]
-		public string Confirmar
-		{
-			get
-			{
-				return this._Confirmar;
-			}
-			set
-			{
-				if ((this._Confirmar != value))
-				{
-					this._Confirmar = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="Date NOT NULL")]
-		public System.DateTime Fecha
-		{
-			get
-			{
-				return this._Fecha;
-			}
-			set
-			{
-				if ((this._Fecha != value))
-				{
-					this._Fecha = value;
-				}
-			}
-		}
-	}
-	
-	public partial class consultaParalelosMateriaResult
-	{
-		
-		private string _Paralelo;
-		
-		private string _NombreMateria;
-		
-		private string _CodigoMeteria;
-		
-		public consultaParalelosMateriaResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Paralelo", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
-		public string Paralelo
-		{
-			get
-			{
-				return this._Paralelo;
-			}
-			set
-			{
-				if ((this._Paralelo != value))
-				{
-					this._Paralelo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMateria", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string NombreMateria
-		{
-			get
-			{
-				return this._NombreMateria;
-			}
-			set
-			{
-				if ((this._NombreMateria != value))
-				{
-					this._NombreMateria = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMeteria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoMeteria
-		{
-			get
-			{
-				return this._CodigoMeteria;
-			}
-			set
-			{
-				if ((this._CodigoMeteria != value))
-				{
-					this._CodigoMeteria = value;
-				}
-			}
-		}
-	}
-	
-	public partial class conusltaHorarioLibreDocenteResult
-	{
-		
-		private int _Id_HorioLibre;
-		
-		private string _Descripcion;
-		
-		private string _Nombre;
-		
-		private string _NombreDos;
-		
-		private string _Apellido;
-		
-		private string _ApellidoDos;
-		
-		private string _Cedula;
-		
-		private string _CodigoModulo;
-		
-		private System.TimeSpan _HoraInicio;
-		
-		private System.TimeSpan _HoraFin;
-		
-		private string _Dia;
-		
-		public conusltaHorarioLibreDocenteResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_HorioLibre", DbType="Int NOT NULL")]
-		public int Id_HorioLibre
-		{
-			get
-			{
-				return this._Id_HorioLibre;
-			}
-			set
-			{
-				if ((this._Id_HorioLibre != value))
-				{
-					this._Id_HorioLibre = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Descripcion
-		{
-			get
-			{
-				return this._Descripcion;
-			}
-			set
-			{
-				if ((this._Descripcion != value))
-				{
-					this._Descripcion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Nombre
-		{
-			get
-			{
-				return this._Nombre;
-			}
-			set
-			{
-				if ((this._Nombre != value))
-				{
-					this._Nombre = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreDos", DbType="VarChar(50)")]
-		public string NombreDos
-		{
-			get
-			{
-				return this._NombreDos;
-			}
-			set
-			{
-				if ((this._NombreDos != value))
-				{
-					this._NombreDos = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Apellido
-		{
-			get
-			{
-				return this._Apellido;
-			}
-			set
-			{
-				if ((this._Apellido != value))
-				{
-					this._Apellido = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApellidoDos", DbType="VarChar(50)")]
-		public string ApellidoDos
-		{
-			get
-			{
-				return this._ApellidoDos;
-			}
-			set
-			{
-				if ((this._ApellidoDos != value))
-				{
-					this._ApellidoDos = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="Char(10)")]
-		public string Cedula
-		{
-			get
-			{
-				return this._Cedula;
-			}
-			set
-			{
-				if ((this._Cedula != value))
-				{
-					this._Cedula = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoModulo
-		{
-			get
-			{
-				return this._CodigoModulo;
-			}
-			set
-			{
-				if ((this._CodigoModulo != value))
-				{
-					this._CodigoModulo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraInicio", DbType="Time NOT NULL")]
-		public System.TimeSpan HoraInicio
-		{
-			get
-			{
-				return this._HoraInicio;
-			}
-			set
-			{
-				if ((this._HoraInicio != value))
-				{
-					this._HoraInicio = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraFin", DbType="Time NOT NULL")]
-		public System.TimeSpan HoraFin
-		{
-			get
-			{
-				return this._HoraFin;
-			}
-			set
-			{
-				if ((this._HoraFin != value))
-				{
-					this._HoraFin = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dia", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Dia
-		{
-			get
-			{
-				return this._Dia;
-			}
-			set
-			{
-				if ((this._Dia != value))
-				{
-					this._Dia = value;
-				}
-			}
-		}
-	}
-	
-	public partial class conusltaHorarioObligatorioDocenteResult
-	{
-		
-		private int _Id_HorioObligatorio;
-		
-		private string _Descripcion;
-		
-		private string _Nombre;
-		
-		private string _NombreDos;
-		
-		private string _Apellido;
-		
-		private string _ApellidoDos;
-		
-		private string _Cedula;
-		
-		private string _CodigoModulo;
-		
-		private System.TimeSpan _HoraInicio;
-		
-		private System.TimeSpan _HoraFin;
-		
-		private string _Dia;
-		
-		public conusltaHorarioObligatorioDocenteResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_HorioObligatorio", DbType="Int NOT NULL")]
-		public int Id_HorioObligatorio
-		{
-			get
-			{
-				return this._Id_HorioObligatorio;
-			}
-			set
-			{
-				if ((this._Id_HorioObligatorio != value))
-				{
-					this._Id_HorioObligatorio = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Descripcion
-		{
-			get
-			{
-				return this._Descripcion;
-			}
-			set
-			{
-				if ((this._Descripcion != value))
-				{
-					this._Descripcion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Nombre
-		{
-			get
-			{
-				return this._Nombre;
-			}
-			set
-			{
-				if ((this._Nombre != value))
-				{
-					this._Nombre = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreDos", DbType="VarChar(50)")]
-		public string NombreDos
-		{
-			get
-			{
-				return this._NombreDos;
-			}
-			set
-			{
-				if ((this._NombreDos != value))
-				{
-					this._NombreDos = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Apellido
-		{
-			get
-			{
-				return this._Apellido;
-			}
-			set
-			{
-				if ((this._Apellido != value))
-				{
-					this._Apellido = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApellidoDos", DbType="VarChar(50)")]
-		public string ApellidoDos
-		{
-			get
-			{
-				return this._ApellidoDos;
-			}
-			set
-			{
-				if ((this._ApellidoDos != value))
-				{
-					this._ApellidoDos = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="Char(10)")]
-		public string Cedula
-		{
-			get
-			{
-				return this._Cedula;
-			}
-			set
-			{
-				if ((this._Cedula != value))
-				{
-					this._Cedula = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoModulo
-		{
-			get
-			{
-				return this._CodigoModulo;
-			}
-			set
-			{
-				if ((this._CodigoModulo != value))
-				{
-					this._CodigoModulo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraInicio", DbType="Time NOT NULL")]
-		public System.TimeSpan HoraInicio
-		{
-			get
-			{
-				return this._HoraInicio;
-			}
-			set
-			{
-				if ((this._HoraInicio != value))
-				{
-					this._HoraInicio = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraFin", DbType="Time NOT NULL")]
-		public System.TimeSpan HoraFin
-		{
-			get
-			{
-				return this._HoraFin;
-			}
-			set
-			{
-				if ((this._HoraFin != value))
-				{
-					this._HoraFin = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dia", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Dia
-		{
-			get
-			{
-				return this._Dia;
-			}
-			set
-			{
-				if ((this._Dia != value))
-				{
-					this._Dia = value;
-				}
-			}
-		}
-	}
-	
 	public partial class docentesEstudianteResult
 	{
 		
@@ -6631,103 +6016,131 @@ namespace AppTutorias
 		}
 	}
 	
-	public partial class estudiantesDocenteMateriaResult
+	public partial class SqlQueryNotificationStoredProcedure_9f46e87c_82c9_4f28_ae1d_ab7112450e26Result
 	{
 		
-		private string _Estudiante;
+		private System.Guid _conversation_handle;
 		
-		private int _Matricula;
+		public SqlQueryNotificationStoredProcedure_9f46e87c_82c9_4f28_ae1d_ab7112450e26Result()
+		{
+		}
 		
-		private string _Email;
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_conversation_handle", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid conversation_handle
+		{
+			get
+			{
+				return this._conversation_handle;
+			}
+			set
+			{
+				if ((this._conversation_handle != value))
+				{
+					this._conversation_handle = value;
+				}
+			}
+		}
+	}
+	
+	public partial class consultaParaleloMateriaDocenteResult
+	{
 		
-		private string _Celular;
+		private string _Cedula;
 		
-		private string _CodigoMeteria;
+		private string _Nombre;
+		
+		private string _NombreDos;
+		
+		private string _Apellido;
+		
+		private string _ApellidoDos;
 		
 		private string _NombreMateria;
 		
-		private char _Repitencia;
+		private string _CodigoMeteria;
 		
-		public estudiantesDocenteMateriaResult()
+		private string _Paralelo;
+		
+		public consultaParaleloMateriaDocenteResult()
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estudiante", DbType="VarChar(203)")]
-		public string Estudiante
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="Char(10)")]
+		public string Cedula
 		{
 			get
 			{
-				return this._Estudiante;
+				return this._Cedula;
 			}
 			set
 			{
-				if ((this._Estudiante != value))
+				if ((this._Cedula != value))
 				{
-					this._Estudiante = value;
+					this._Cedula = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Matricula", DbType="Int NOT NULL")]
-		public int Matricula
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Nombre
 		{
 			get
 			{
-				return this._Matricula;
+				return this._Nombre;
 			}
 			set
 			{
-				if ((this._Matricula != value))
+				if ((this._Nombre != value))
 				{
-					this._Matricula = value;
+					this._Nombre = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Email
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreDos", DbType="VarChar(50)")]
+		public string NombreDos
 		{
 			get
 			{
-				return this._Email;
+				return this._NombreDos;
 			}
 			set
 			{
-				if ((this._Email != value))
+				if ((this._NombreDos != value))
 				{
-					this._Email = value;
+					this._NombreDos = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Celular", DbType="VarChar(10)")]
-		public string Celular
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Apellido
 		{
 			get
 			{
-				return this._Celular;
+				return this._Apellido;
 			}
 			set
 			{
-				if ((this._Celular != value))
+				if ((this._Apellido != value))
 				{
-					this._Celular = value;
+					this._Apellido = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMeteria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoMeteria
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApellidoDos", DbType="VarChar(50)")]
+		public string ApellidoDos
 		{
 			get
 			{
-				return this._CodigoMeteria;
+				return this._ApellidoDos;
 			}
 			set
 			{
-				if ((this._CodigoMeteria != value))
+				if ((this._ApellidoDos != value))
 				{
-					this._CodigoMeteria = value;
+					this._ApellidoDos = value;
 				}
 			}
 		}
@@ -6748,24 +6161,40 @@ namespace AppTutorias
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Repitencia", DbType="Char(1) NOT NULL")]
-		public char Repitencia
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMeteria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoMeteria
 		{
 			get
 			{
-				return this._Repitencia;
+				return this._CodigoMeteria;
 			}
 			set
 			{
-				if ((this._Repitencia != value))
+				if ((this._CodigoMeteria != value))
 				{
-					this._Repitencia = value;
+					this._CodigoMeteria = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Paralelo", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
+		public string Paralelo
+		{
+			get
+			{
+				return this._Paralelo;
+			}
+			set
+			{
+				if ((this._Paralelo != value))
+				{
+					this._Paralelo = value;
 				}
 			}
 		}
 	}
 	
-	public partial class horarioClaseDocentesResult
+	public partial class horarioClaseDocenteResult
 	{
 		
 		private int _Id_HorarioClases;
@@ -6804,7 +6233,7 @@ namespace AppTutorias
 		
 		private string _Paralelo;
 		
-		public horarioClaseDocentesResult()
+		public horarioClaseDocenteResult()
 		{
 		}
 		
@@ -7097,7 +6526,299 @@ namespace AppTutorias
 		}
 	}
 	
-	public partial class horarioClaseEstudianteResult
+	public partial class materiasDocenteResult
+	{
+		
+		private string _NombreMateria;
+		
+		private string _CodigoMeteria;
+		
+		public materiasDocenteResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMateria", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string NombreMateria
+		{
+			get
+			{
+				return this._NombreMateria;
+			}
+			set
+			{
+				if ((this._NombreMateria != value))
+				{
+					this._NombreMateria = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMeteria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoMeteria
+		{
+			get
+			{
+				return this._CodigoMeteria;
+			}
+			set
+			{
+				if ((this._CodigoMeteria != value))
+				{
+					this._CodigoMeteria = value;
+				}
+			}
+		}
+	}
+	
+	public partial class consultaParalelosMateriaResult
+	{
+		
+		private string _Paralelo;
+		
+		private string _NombreMateria;
+		
+		private string _CodigoMeteria;
+		
+		public consultaParalelosMateriaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Paralelo", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
+		public string Paralelo
+		{
+			get
+			{
+				return this._Paralelo;
+			}
+			set
+			{
+				if ((this._Paralelo != value))
+				{
+					this._Paralelo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMateria", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string NombreMateria
+		{
+			get
+			{
+				return this._NombreMateria;
+			}
+			set
+			{
+				if ((this._NombreMateria != value))
+				{
+					this._NombreMateria = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMeteria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoMeteria
+		{
+			get
+			{
+				return this._CodigoMeteria;
+			}
+			set
+			{
+				if ((this._CodigoMeteria != value))
+				{
+					this._CodigoMeteria = value;
+				}
+			}
+		}
+	}
+	
+	public partial class consultaDocentesCoicidenciasResult
+	{
+		
+		private string _cedula;
+		
+		private string _Docente;
+		
+		public consultaDocentesCoicidenciasResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cedula", DbType="Char(10)")]
+		public string cedula
+		{
+			get
+			{
+				return this._cedula;
+			}
+			set
+			{
+				if ((this._cedula != value))
+				{
+					this._cedula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Docente", DbType="VarChar(203)")]
+		public string Docente
+		{
+			get
+			{
+				return this._Docente;
+			}
+			set
+			{
+				if ((this._Docente != value))
+				{
+					this._Docente = value;
+				}
+			}
+		}
+	}
+	
+	public partial class consultaDocentesPorParaleloFullResult
+	{
+		
+		private string _Cedula;
+		
+		private string _Nombre;
+		
+		private string _NombreDos;
+		
+		private string _Apellido;
+		
+		private string _ApellidoDos;
+		
+		public consultaDocentesPorParaleloFullResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="Char(10)")]
+		public string Cedula
+		{
+			get
+			{
+				return this._Cedula;
+			}
+			set
+			{
+				if ((this._Cedula != value))
+				{
+					this._Cedula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this._Nombre = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreDos", DbType="VarChar(50)")]
+		public string NombreDos
+		{
+			get
+			{
+				return this._NombreDos;
+			}
+			set
+			{
+				if ((this._NombreDos != value))
+				{
+					this._NombreDos = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Apellido
+		{
+			get
+			{
+				return this._Apellido;
+			}
+			set
+			{
+				if ((this._Apellido != value))
+				{
+					this._Apellido = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApellidoDos", DbType="VarChar(50)")]
+		public string ApellidoDos
+		{
+			get
+			{
+				return this._ApellidoDos;
+			}
+			set
+			{
+				if ((this._ApellidoDos != value))
+				{
+					this._ApellidoDos = value;
+				}
+			}
+		}
+	}
+	
+	public partial class materiasEstudianteResult
+	{
+		
+		private string _NombreMateria;
+		
+		private string _CodigoMeteria;
+		
+		public materiasEstudianteResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMateria", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string NombreMateria
+		{
+			get
+			{
+				return this._NombreMateria;
+			}
+			set
+			{
+				if ((this._NombreMateria != value))
+				{
+					this._NombreMateria = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMeteria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoMeteria
+		{
+			get
+			{
+				return this._CodigoMeteria;
+			}
+			set
+			{
+				if ((this._CodigoMeteria != value))
+				{
+					this._CodigoMeteria = value;
+				}
+			}
+		}
+	}
+	
+	public partial class horarioClaseEstudiantesResult
 	{
 		
 		private int _Id_HoraioEstudiante;
@@ -7122,7 +6843,7 @@ namespace AppTutorias
 		
 		private string _CodigoPeriodo;
 		
-		public horarioClaseEstudianteResult()
+		public horarioClaseEstudiantesResult()
 		{
 		}
 		
@@ -7138,356 +6859,6 @@ namespace AppTutorias
 				if ((this._Id_HoraioEstudiante != value))
 				{
 					this._Id_HoraioEstudiante = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Matricula", DbType="Int NOT NULL")]
-		public int Matricula
-		{
-			get
-			{
-				return this._Matricula;
-			}
-			set
-			{
-				if ((this._Matricula != value))
-				{
-					this._Matricula = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estudiante", DbType="VarChar(203)")]
-		public string Estudiante
-		{
-			get
-			{
-				return this._Estudiante;
-			}
-			set
-			{
-				if ((this._Estudiante != value))
-				{
-					this._Estudiante = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Materia", DbType="VarChar(67) NOT NULL", CanBeNull=false)]
-		public string Materia
-		{
-			get
-			{
-				return this._Materia;
-			}
-			set
-			{
-				if ((this._Materia != value))
-				{
-					this._Materia = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Docente", DbType="VarChar(203)")]
-		public string Docente
-		{
-			get
-			{
-				return this._Docente;
-			}
-			set
-			{
-				if ((this._Docente != value))
-				{
-					this._Docente = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoModulo
-		{
-			get
-			{
-				return this._CodigoModulo;
-			}
-			set
-			{
-				if ((this._CodigoModulo != value))
-				{
-					this._CodigoModulo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dia", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Dia
-		{
-			get
-			{
-				return this._Dia;
-			}
-			set
-			{
-				if ((this._Dia != value))
-				{
-					this._Dia = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraInicio", DbType="Time NOT NULL")]
-		public System.TimeSpan HoraInicio
-		{
-			get
-			{
-				return this._HoraInicio;
-			}
-			set
-			{
-				if ((this._HoraInicio != value))
-				{
-					this._HoraInicio = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraFin", DbType="Time NOT NULL")]
-		public System.TimeSpan HoraFin
-		{
-			get
-			{
-				return this._HoraFin;
-			}
-			set
-			{
-				if ((this._HoraFin != value))
-				{
-					this._HoraFin = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Periodo", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string Periodo
-		{
-			get
-			{
-				return this._Periodo;
-			}
-			set
-			{
-				if ((this._Periodo != value))
-				{
-					this._Periodo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoPeriodo", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string CodigoPeriodo
-		{
-			get
-			{
-				return this._CodigoPeriodo;
-			}
-			set
-			{
-				if ((this._CodigoPeriodo != value))
-				{
-					this._CodigoPeriodo = value;
-				}
-			}
-		}
-	}
-	
-	public partial class horarioClaseEstudianteMatriculaResult
-	{
-		
-		private int _Id_HorarioClases;
-		
-		private string _CodigoFacultad;
-		
-		private string _NombreFacultad;
-		
-		private string _CodigoCarrera;
-		
-		private string _NombreCarrera;
-		
-		private string _CodigoMeteria;
-		
-		private string _NombreMateria;
-		
-		private string _Aula;
-		
-		private string _Paralelo;
-		
-		private int _Matricula;
-		
-		private string _Estudiante;
-		
-		private string _Materia;
-		
-		private string _Docente;
-		
-		private string _CodigoModulo;
-		
-		private string _Dia;
-		
-		private System.TimeSpan _HoraInicio;
-		
-		private System.TimeSpan _HoraFin;
-		
-		private string _Periodo;
-		
-		private string _CodigoPeriodo;
-		
-		public horarioClaseEstudianteMatriculaResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_HorarioClases", DbType="Int NOT NULL")]
-		public int Id_HorarioClases
-		{
-			get
-			{
-				return this._Id_HorarioClases;
-			}
-			set
-			{
-				if ((this._Id_HorarioClases != value))
-				{
-					this._Id_HorarioClases = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoFacultad", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoFacultad
-		{
-			get
-			{
-				return this._CodigoFacultad;
-			}
-			set
-			{
-				if ((this._CodigoFacultad != value))
-				{
-					this._CodigoFacultad = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreFacultad", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string NombreFacultad
-		{
-			get
-			{
-				return this._NombreFacultad;
-			}
-			set
-			{
-				if ((this._NombreFacultad != value))
-				{
-					this._NombreFacultad = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoCarrera", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoCarrera
-		{
-			get
-			{
-				return this._CodigoCarrera;
-			}
-			set
-			{
-				if ((this._CodigoCarrera != value))
-				{
-					this._CodigoCarrera = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreCarrera", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string NombreCarrera
-		{
-			get
-			{
-				return this._NombreCarrera;
-			}
-			set
-			{
-				if ((this._NombreCarrera != value))
-				{
-					this._NombreCarrera = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMeteria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoMeteria
-		{
-			get
-			{
-				return this._CodigoMeteria;
-			}
-			set
-			{
-				if ((this._CodigoMeteria != value))
-				{
-					this._CodigoMeteria = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMateria", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string NombreMateria
-		{
-			get
-			{
-				return this._NombreMateria;
-			}
-			set
-			{
-				if ((this._NombreMateria != value))
-				{
-					this._NombreMateria = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Aula", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string Aula
-		{
-			get
-			{
-				return this._Aula;
-			}
-			set
-			{
-				if ((this._Aula != value))
-				{
-					this._Aula = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Paralelo", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
-		public string Paralelo
-		{
-			get
-			{
-				return this._Paralelo;
-			}
-			set
-			{
-				if ((this._Paralelo != value))
-				{
-					this._Paralelo = value;
 				}
 			}
 		}
@@ -7985,6 +7356,614 @@ namespace AppTutorias
 		}
 	}
 	
+	public partial class horarioClaseEstudianteMatriculaResult
+	{
+		
+		private int _Id_HorarioClases;
+		
+		private string _CodigoFacultad;
+		
+		private string _NombreFacultad;
+		
+		private string _CodigoCarrera;
+		
+		private string _NombreCarrera;
+		
+		private string _CodigoMeteria;
+		
+		private string _NombreMateria;
+		
+		private string _Aula;
+		
+		private string _Paralelo;
+		
+		private int _Matricula;
+		
+		private string _Estudiante;
+		
+		private string _Materia;
+		
+		private string _Docente;
+		
+		private string _CodigoModulo;
+		
+		private string _Dia;
+		
+		private System.TimeSpan _HoraInicio;
+		
+		private System.TimeSpan _HoraFin;
+		
+		private string _Periodo;
+		
+		private string _CodigoPeriodo;
+		
+		public horarioClaseEstudianteMatriculaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_HorarioClases", DbType="Int NOT NULL")]
+		public int Id_HorarioClases
+		{
+			get
+			{
+				return this._Id_HorarioClases;
+			}
+			set
+			{
+				if ((this._Id_HorarioClases != value))
+				{
+					this._Id_HorarioClases = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoFacultad", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoFacultad
+		{
+			get
+			{
+				return this._CodigoFacultad;
+			}
+			set
+			{
+				if ((this._CodigoFacultad != value))
+				{
+					this._CodigoFacultad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreFacultad", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string NombreFacultad
+		{
+			get
+			{
+				return this._NombreFacultad;
+			}
+			set
+			{
+				if ((this._NombreFacultad != value))
+				{
+					this._NombreFacultad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoCarrera", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoCarrera
+		{
+			get
+			{
+				return this._CodigoCarrera;
+			}
+			set
+			{
+				if ((this._CodigoCarrera != value))
+				{
+					this._CodigoCarrera = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreCarrera", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string NombreCarrera
+		{
+			get
+			{
+				return this._NombreCarrera;
+			}
+			set
+			{
+				if ((this._NombreCarrera != value))
+				{
+					this._NombreCarrera = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMeteria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoMeteria
+		{
+			get
+			{
+				return this._CodigoMeteria;
+			}
+			set
+			{
+				if ((this._CodigoMeteria != value))
+				{
+					this._CodigoMeteria = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMateria", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string NombreMateria
+		{
+			get
+			{
+				return this._NombreMateria;
+			}
+			set
+			{
+				if ((this._NombreMateria != value))
+				{
+					this._NombreMateria = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Aula", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Aula
+		{
+			get
+			{
+				return this._Aula;
+			}
+			set
+			{
+				if ((this._Aula != value))
+				{
+					this._Aula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Paralelo", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
+		public string Paralelo
+		{
+			get
+			{
+				return this._Paralelo;
+			}
+			set
+			{
+				if ((this._Paralelo != value))
+				{
+					this._Paralelo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Matricula", DbType="Int NOT NULL")]
+		public int Matricula
+		{
+			get
+			{
+				return this._Matricula;
+			}
+			set
+			{
+				if ((this._Matricula != value))
+				{
+					this._Matricula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estudiante", DbType="VarChar(203)")]
+		public string Estudiante
+		{
+			get
+			{
+				return this._Estudiante;
+			}
+			set
+			{
+				if ((this._Estudiante != value))
+				{
+					this._Estudiante = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Materia", DbType="VarChar(67) NOT NULL", CanBeNull=false)]
+		public string Materia
+		{
+			get
+			{
+				return this._Materia;
+			}
+			set
+			{
+				if ((this._Materia != value))
+				{
+					this._Materia = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Docente", DbType="VarChar(203)")]
+		public string Docente
+		{
+			get
+			{
+				return this._Docente;
+			}
+			set
+			{
+				if ((this._Docente != value))
+				{
+					this._Docente = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoModulo
+		{
+			get
+			{
+				return this._CodigoModulo;
+			}
+			set
+			{
+				if ((this._CodigoModulo != value))
+				{
+					this._CodigoModulo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dia", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Dia
+		{
+			get
+			{
+				return this._Dia;
+			}
+			set
+			{
+				if ((this._Dia != value))
+				{
+					this._Dia = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraInicio", DbType="Time NOT NULL")]
+		public System.TimeSpan HoraInicio
+		{
+			get
+			{
+				return this._HoraInicio;
+			}
+			set
+			{
+				if ((this._HoraInicio != value))
+				{
+					this._HoraInicio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraFin", DbType="Time NOT NULL")]
+		public System.TimeSpan HoraFin
+		{
+			get
+			{
+				return this._HoraFin;
+			}
+			set
+			{
+				if ((this._HoraFin != value))
+				{
+					this._HoraFin = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Periodo", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string Periodo
+		{
+			get
+			{
+				return this._Periodo;
+			}
+			set
+			{
+				if ((this._Periodo != value))
+				{
+					this._Periodo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoPeriodo", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string CodigoPeriodo
+		{
+			get
+			{
+				return this._CodigoPeriodo;
+			}
+			set
+			{
+				if ((this._CodigoPeriodo != value))
+				{
+					this._CodigoPeriodo = value;
+				}
+			}
+		}
+	}
+	
+	public partial class modulosDocenteDisponibleAsignacionResult
+	{
+		
+		private string _CodigoModulo;
+		
+		private string _Dia;
+		
+		private System.TimeSpan _HoraInicio;
+		
+		private System.TimeSpan _HoraFin;
+		
+		public modulosDocenteDisponibleAsignacionResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoModulo
+		{
+			get
+			{
+				return this._CodigoModulo;
+			}
+			set
+			{
+				if ((this._CodigoModulo != value))
+				{
+					this._CodigoModulo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dia", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Dia
+		{
+			get
+			{
+				return this._Dia;
+			}
+			set
+			{
+				if ((this._Dia != value))
+				{
+					this._Dia = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraInicio", DbType="Time NOT NULL")]
+		public System.TimeSpan HoraInicio
+		{
+			get
+			{
+				return this._HoraInicio;
+			}
+			set
+			{
+				if ((this._HoraInicio != value))
+				{
+					this._HoraInicio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraFin", DbType="Time NOT NULL")]
+		public System.TimeSpan HoraFin
+		{
+			get
+			{
+				return this._HoraFin;
+			}
+			set
+			{
+				if ((this._HoraFin != value))
+				{
+					this._HoraFin = value;
+				}
+			}
+		}
+	}
+	
+	public partial class materiasEstudianteDocenteResult
+	{
+		
+		private string _NombreMateria;
+		
+		private string _CodigoMeteria;
+		
+		public materiasEstudianteDocenteResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMateria", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string NombreMateria
+		{
+			get
+			{
+				return this._NombreMateria;
+			}
+			set
+			{
+				if ((this._NombreMateria != value))
+				{
+					this._NombreMateria = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMeteria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoMeteria
+		{
+			get
+			{
+				return this._CodigoMeteria;
+			}
+			set
+			{
+				if ((this._CodigoMeteria != value))
+				{
+					this._CodigoMeteria = value;
+				}
+			}
+		}
+	}
+	
+	public partial class estudiantesDocenteMateriaResult
+	{
+		
+		private string _Estudiante;
+		
+		private int _Matricula;
+		
+		private string _Email;
+		
+		private string _Celular;
+		
+		private string _CodigoMeteria;
+		
+		private string _NombreMateria;
+		
+		private char _Repitencia;
+		
+		public estudiantesDocenteMateriaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estudiante", DbType="VarChar(203)")]
+		public string Estudiante
+		{
+			get
+			{
+				return this._Estudiante;
+			}
+			set
+			{
+				if ((this._Estudiante != value))
+				{
+					this._Estudiante = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Matricula", DbType="Int NOT NULL")]
+		public int Matricula
+		{
+			get
+			{
+				return this._Matricula;
+			}
+			set
+			{
+				if ((this._Matricula != value))
+				{
+					this._Matricula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Celular", DbType="VarChar(10)")]
+		public string Celular
+		{
+			get
+			{
+				return this._Celular;
+			}
+			set
+			{
+				if ((this._Celular != value))
+				{
+					this._Celular = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMeteria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoMeteria
+		{
+			get
+			{
+				return this._CodigoMeteria;
+			}
+			set
+			{
+				if ((this._CodigoMeteria != value))
+				{
+					this._CodigoMeteria = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMateria", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string NombreMateria
+		{
+			get
+			{
+				return this._NombreMateria;
+			}
+			set
+			{
+				if ((this._NombreMateria != value))
+				{
+					this._NombreMateria = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Repitencia", DbType="Char(1) NOT NULL")]
+		public char Repitencia
+		{
+			get
+			{
+				return this._Repitencia;
+			}
+			set
+			{
+				if ((this._Repitencia != value))
+				{
+					this._Repitencia = value;
+				}
+			}
+		}
+	}
+	
 	public partial class horarioTutoriasResult
 	{
 		
@@ -8248,321 +8227,7 @@ namespace AppTutorias
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Aula", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string Aula
-		{
-			get
-			{
-				return this._Aula;
-			}
-			set
-			{
-				if ((this._Aula != value))
-				{
-					this._Aula = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Asistencia", DbType="Char(2) NOT NULL", CanBeNull=false)]
-		public string Asistencia
-		{
-			get
-			{
-				return this._Asistencia;
-			}
-			set
-			{
-				if ((this._Asistencia != value))
-				{
-					this._Asistencia = value;
-				}
-			}
-		}
-	}
-	
-	public partial class horarioTutoriasDocenteResult
-	{
-		
-		private int _Id_HorioTutorias;
-		
-		private int _Matricula;
-		
-		private string _Estudiante;
-		
-		private string _Docente;
-		
-		private string _Cedula;
-		
-		private string _NombreMateria;
-		
-		private string _CodigoMeteria;
-		
-		private string _CodigoModulo;
-		
-		private System.TimeSpan _HoraInicio;
-		
-		private System.TimeSpan _HoraFin;
-		
-		private string _Dia;
-		
-		private string _Periodo;
-		
-		private string _CodigoPeriodo;
-		
-		private string _EstadoObligatorio;
-		
-		private System.DateTime _Fecha;
-		
-		private string _Aula;
-		
-		private string _Asistencia;
-		
-		public horarioTutoriasDocenteResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_HorioTutorias", DbType="Int NOT NULL")]
-		public int Id_HorioTutorias
-		{
-			get
-			{
-				return this._Id_HorioTutorias;
-			}
-			set
-			{
-				if ((this._Id_HorioTutorias != value))
-				{
-					this._Id_HorioTutorias = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Matricula", DbType="Int NOT NULL")]
-		public int Matricula
-		{
-			get
-			{
-				return this._Matricula;
-			}
-			set
-			{
-				if ((this._Matricula != value))
-				{
-					this._Matricula = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estudiante", DbType="VarChar(203)")]
-		public string Estudiante
-		{
-			get
-			{
-				return this._Estudiante;
-			}
-			set
-			{
-				if ((this._Estudiante != value))
-				{
-					this._Estudiante = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Docente", DbType="VarChar(203)")]
-		public string Docente
-		{
-			get
-			{
-				return this._Docente;
-			}
-			set
-			{
-				if ((this._Docente != value))
-				{
-					this._Docente = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="Char(10)")]
-		public string Cedula
-		{
-			get
-			{
-				return this._Cedula;
-			}
-			set
-			{
-				if ((this._Cedula != value))
-				{
-					this._Cedula = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMateria", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string NombreMateria
-		{
-			get
-			{
-				return this._NombreMateria;
-			}
-			set
-			{
-				if ((this._NombreMateria != value))
-				{
-					this._NombreMateria = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMeteria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoMeteria
-		{
-			get
-			{
-				return this._CodigoMeteria;
-			}
-			set
-			{
-				if ((this._CodigoMeteria != value))
-				{
-					this._CodigoMeteria = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoModulo
-		{
-			get
-			{
-				return this._CodigoModulo;
-			}
-			set
-			{
-				if ((this._CodigoModulo != value))
-				{
-					this._CodigoModulo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraInicio", DbType="Time NOT NULL")]
-		public System.TimeSpan HoraInicio
-		{
-			get
-			{
-				return this._HoraInicio;
-			}
-			set
-			{
-				if ((this._HoraInicio != value))
-				{
-					this._HoraInicio = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraFin", DbType="Time NOT NULL")]
-		public System.TimeSpan HoraFin
-		{
-			get
-			{
-				return this._HoraFin;
-			}
-			set
-			{
-				if ((this._HoraFin != value))
-				{
-					this._HoraFin = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dia", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Dia
-		{
-			get
-			{
-				return this._Dia;
-			}
-			set
-			{
-				if ((this._Dia != value))
-				{
-					this._Dia = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Periodo", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string Periodo
-		{
-			get
-			{
-				return this._Periodo;
-			}
-			set
-			{
-				if ((this._Periodo != value))
-				{
-					this._Periodo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoPeriodo", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string CodigoPeriodo
-		{
-			get
-			{
-				return this._CodigoPeriodo;
-			}
-			set
-			{
-				if ((this._CodigoPeriodo != value))
-				{
-					this._CodigoPeriodo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EstadoObligatorio", DbType="Char(2) NOT NULL", CanBeNull=false)]
-		public string EstadoObligatorio
-		{
-			get
-			{
-				return this._EstadoObligatorio;
-			}
-			set
-			{
-				if ((this._EstadoObligatorio != value))
-				{
-					this._EstadoObligatorio = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="Date NOT NULL")]
-		public System.DateTime Fecha
-		{
-			get
-			{
-				return this._Fecha;
-			}
-			set
-			{
-				if ((this._Fecha != value))
-				{
-					this._Fecha = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Aula", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Aula", DbType="Char(10) NOT NULL", CanBeNull=false)]
 		public string Aula
 		{
 			get
@@ -8876,7 +8541,7 @@ namespace AppTutorias
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Aula", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Aula", DbType="Char(10) NOT NULL", CanBeNull=false)]
 		public string Aula
 		{
 			get
@@ -8909,15 +8574,97 @@ namespace AppTutorias
 		}
 	}
 	
-	public partial class materiasDocenteResult
+	public partial class consultaMensajesEstudianteResult
 	{
 		
-		private string _NombreMateria;
+		private int _Id_Notifacion;
+		
+		private string _Estudiante;
+		
+		private int _Matricula;
 		
 		private string _CodigoMeteria;
 		
-		public materiasDocenteResult()
+		private string _NombreMateria;
+		
+		private string _CodigoModulo;
+		
+		private System.TimeSpan _HoraInicio;
+		
+		private System.TimeSpan _HoraFin;
+		
+		private string _Mensaje;
+		
+		private string _Confirmar;
+		
+		private System.DateTime _Fecha;
+		
+		public consultaMensajesEstudianteResult()
 		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Notifacion", DbType="Int NOT NULL")]
+		public int Id_Notifacion
+		{
+			get
+			{
+				return this._Id_Notifacion;
+			}
+			set
+			{
+				if ((this._Id_Notifacion != value))
+				{
+					this._Id_Notifacion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estudiante", DbType="VarChar(203)")]
+		public string Estudiante
+		{
+			get
+			{
+				return this._Estudiante;
+			}
+			set
+			{
+				if ((this._Estudiante != value))
+				{
+					this._Estudiante = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Matricula", DbType="Int NOT NULL")]
+		public int Matricula
+		{
+			get
+			{
+				return this._Matricula;
+			}
+			set
+			{
+				if ((this._Matricula != value))
+				{
+					this._Matricula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMeteria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoMeteria
+		{
+			get
+			{
+				return this._CodigoMeteria;
+			}
+			set
+			{
+				if ((this._CodigoMeteria != value))
+				{
+					this._CodigoMeteria = value;
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMateria", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
@@ -8936,76 +8683,270 @@ namespace AppTutorias
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMeteria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoMeteria
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoModulo
 		{
 			get
 			{
-				return this._CodigoMeteria;
+				return this._CodigoModulo;
 			}
 			set
 			{
-				if ((this._CodigoMeteria != value))
+				if ((this._CodigoModulo != value))
 				{
-					this._CodigoMeteria = value;
+					this._CodigoModulo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraInicio", DbType="Time NOT NULL")]
+		public System.TimeSpan HoraInicio
+		{
+			get
+			{
+				return this._HoraInicio;
+			}
+			set
+			{
+				if ((this._HoraInicio != value))
+				{
+					this._HoraInicio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraFin", DbType="Time NOT NULL")]
+		public System.TimeSpan HoraFin
+		{
+			get
+			{
+				return this._HoraFin;
+			}
+			set
+			{
+				if ((this._HoraFin != value))
+				{
+					this._HoraFin = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mensaje", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Mensaje
+		{
+			get
+			{
+				return this._Mensaje;
+			}
+			set
+			{
+				if ((this._Mensaje != value))
+				{
+					this._Mensaje = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Confirmar", DbType="Char(2) NOT NULL", CanBeNull=false)]
+		public string Confirmar
+		{
+			get
+			{
+				return this._Confirmar;
+			}
+			set
+			{
+				if ((this._Confirmar != value))
+				{
+					this._Confirmar = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="Date NOT NULL")]
+		public System.DateTime Fecha
+		{
+			get
+			{
+				return this._Fecha;
+			}
+			set
+			{
+				if ((this._Fecha != value))
+				{
+					this._Fecha = value;
 				}
 			}
 		}
 	}
 	
-	public partial class materiasEstudianteResult
+	public partial class consultaDocentesPorMateriaResult
 	{
 		
-		private string _NombreMateria;
+		private string _Cedula;
 		
-		private string _CodigoMeteria;
+		private string _Docente;
 		
-		public materiasEstudianteResult()
+		public consultaDocentesPorMateriaResult()
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMateria", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string NombreMateria
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="Char(10)")]
+		public string Cedula
 		{
 			get
 			{
-				return this._NombreMateria;
+				return this._Cedula;
 			}
 			set
 			{
-				if ((this._NombreMateria != value))
+				if ((this._Cedula != value))
 				{
-					this._NombreMateria = value;
+					this._Cedula = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMeteria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoMeteria
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Docente", DbType="VarChar(101) NOT NULL", CanBeNull=false)]
+		public string Docente
 		{
 			get
 			{
-				return this._CodigoMeteria;
+				return this._Docente;
 			}
 			set
 			{
-				if ((this._CodigoMeteria != value))
+				if ((this._Docente != value))
 				{
-					this._CodigoMeteria = value;
+					this._Docente = value;
 				}
 			}
 		}
 	}
 	
-	public partial class materiasEstudianteDocenteResult
+	public partial class horarioTutoriasDocenteResult
 	{
+		
+		private int _Id_HorioTutorias;
+		
+		private int _Matricula;
+		
+		private string _Estudiante;
+		
+		private string _Docente;
+		
+		private string _Cedula;
 		
 		private string _NombreMateria;
 		
 		private string _CodigoMeteria;
 		
-		public materiasEstudianteDocenteResult()
+		private string _CodigoModulo;
+		
+		private System.TimeSpan _HoraInicio;
+		
+		private System.TimeSpan _HoraFin;
+		
+		private string _Dia;
+		
+		private string _Periodo;
+		
+		private string _CodigoPeriodo;
+		
+		private string _EstadoObligatorio;
+		
+		private System.DateTime _Fecha;
+		
+		private string _Aula;
+		
+		private string _Asistencia;
+		
+		private string _NombreFacultad;
+		
+		private string _CodigoFacultad;
+		
+		public horarioTutoriasDocenteResult()
 		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_HorioTutorias", DbType="Int NOT NULL")]
+		public int Id_HorioTutorias
+		{
+			get
+			{
+				return this._Id_HorioTutorias;
+			}
+			set
+			{
+				if ((this._Id_HorioTutorias != value))
+				{
+					this._Id_HorioTutorias = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Matricula", DbType="Int NOT NULL")]
+		public int Matricula
+		{
+			get
+			{
+				return this._Matricula;
+			}
+			set
+			{
+				if ((this._Matricula != value))
+				{
+					this._Matricula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estudiante", DbType="VarChar(203)")]
+		public string Estudiante
+		{
+			get
+			{
+				return this._Estudiante;
+			}
+			set
+			{
+				if ((this._Estudiante != value))
+				{
+					this._Estudiante = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Docente", DbType="VarChar(203)")]
+		public string Docente
+		{
+			get
+			{
+				return this._Docente;
+			}
+			set
+			{
+				if ((this._Docente != value))
+				{
+					this._Docente = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="Char(10)")]
+		public string Cedula
+		{
+			get
+			{
+				return this._Cedula;
+			}
+			set
+			{
+				if ((this._Cedula != value))
+				{
+					this._Cedula = value;
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMateria", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
@@ -9036,6 +8977,1104 @@ namespace AppTutorias
 				if ((this._CodigoMeteria != value))
 				{
 					this._CodigoMeteria = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoModulo
+		{
+			get
+			{
+				return this._CodigoModulo;
+			}
+			set
+			{
+				if ((this._CodigoModulo != value))
+				{
+					this._CodigoModulo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraInicio", DbType="Time NOT NULL")]
+		public System.TimeSpan HoraInicio
+		{
+			get
+			{
+				return this._HoraInicio;
+			}
+			set
+			{
+				if ((this._HoraInicio != value))
+				{
+					this._HoraInicio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraFin", DbType="Time NOT NULL")]
+		public System.TimeSpan HoraFin
+		{
+			get
+			{
+				return this._HoraFin;
+			}
+			set
+			{
+				if ((this._HoraFin != value))
+				{
+					this._HoraFin = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dia", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Dia
+		{
+			get
+			{
+				return this._Dia;
+			}
+			set
+			{
+				if ((this._Dia != value))
+				{
+					this._Dia = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Periodo", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string Periodo
+		{
+			get
+			{
+				return this._Periodo;
+			}
+			set
+			{
+				if ((this._Periodo != value))
+				{
+					this._Periodo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoPeriodo", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string CodigoPeriodo
+		{
+			get
+			{
+				return this._CodigoPeriodo;
+			}
+			set
+			{
+				if ((this._CodigoPeriodo != value))
+				{
+					this._CodigoPeriodo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EstadoObligatorio", DbType="Char(2) NOT NULL", CanBeNull=false)]
+		public string EstadoObligatorio
+		{
+			get
+			{
+				return this._EstadoObligatorio;
+			}
+			set
+			{
+				if ((this._EstadoObligatorio != value))
+				{
+					this._EstadoObligatorio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="Date NOT NULL")]
+		public System.DateTime Fecha
+		{
+			get
+			{
+				return this._Fecha;
+			}
+			set
+			{
+				if ((this._Fecha != value))
+				{
+					this._Fecha = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Aula", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string Aula
+		{
+			get
+			{
+				return this._Aula;
+			}
+			set
+			{
+				if ((this._Aula != value))
+				{
+					this._Aula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Asistencia", DbType="Char(2) NOT NULL", CanBeNull=false)]
+		public string Asistencia
+		{
+			get
+			{
+				return this._Asistencia;
+			}
+			set
+			{
+				if ((this._Asistencia != value))
+				{
+					this._Asistencia = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreFacultad", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string NombreFacultad
+		{
+			get
+			{
+				return this._NombreFacultad;
+			}
+			set
+			{
+				if ((this._NombreFacultad != value))
+				{
+					this._NombreFacultad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoFacultad", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoFacultad
+		{
+			get
+			{
+				return this._CodigoFacultad;
+			}
+			set
+			{
+				if ((this._CodigoFacultad != value))
+				{
+					this._CodigoFacultad = value;
+				}
+			}
+		}
+	}
+	
+	public partial class horarioTutoriasFullResult
+	{
+		
+		private int _Id_HorioTutorias;
+		
+		private int _Matricula;
+		
+		private string _Estudiante;
+		
+		private string _Docente;
+		
+		private string _Cedula;
+		
+		private string _NombreMateria;
+		
+		private string _CodigoMeteria;
+		
+		private char _Repitencia;
+		
+		private string _CodigoModulo;
+		
+		private System.TimeSpan _HoraInicio;
+		
+		private System.TimeSpan _HoraFin;
+		
+		private string _Dia;
+		
+		private string _Periodo;
+		
+		private string _CodigoPeriodo;
+		
+		private string _EstadoObligatorio;
+		
+		private string _Aula;
+		
+		private string _Asistencia;
+		
+		private System.DateTime _Fecha;
+		
+		private string _NombreCarrera;
+		
+		private string _CodigoCarrera;
+		
+		private string _NombreFacultad;
+		
+		private string _CodigoFacultad;
+		
+		public horarioTutoriasFullResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_HorioTutorias", DbType="Int NOT NULL")]
+		public int Id_HorioTutorias
+		{
+			get
+			{
+				return this._Id_HorioTutorias;
+			}
+			set
+			{
+				if ((this._Id_HorioTutorias != value))
+				{
+					this._Id_HorioTutorias = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Matricula", DbType="Int NOT NULL")]
+		public int Matricula
+		{
+			get
+			{
+				return this._Matricula;
+			}
+			set
+			{
+				if ((this._Matricula != value))
+				{
+					this._Matricula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estudiante", DbType="VarChar(203)")]
+		public string Estudiante
+		{
+			get
+			{
+				return this._Estudiante;
+			}
+			set
+			{
+				if ((this._Estudiante != value))
+				{
+					this._Estudiante = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Docente", DbType="VarChar(203)")]
+		public string Docente
+		{
+			get
+			{
+				return this._Docente;
+			}
+			set
+			{
+				if ((this._Docente != value))
+				{
+					this._Docente = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="Char(10)")]
+		public string Cedula
+		{
+			get
+			{
+				return this._Cedula;
+			}
+			set
+			{
+				if ((this._Cedula != value))
+				{
+					this._Cedula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMateria", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string NombreMateria
+		{
+			get
+			{
+				return this._NombreMateria;
+			}
+			set
+			{
+				if ((this._NombreMateria != value))
+				{
+					this._NombreMateria = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoMeteria", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoMeteria
+		{
+			get
+			{
+				return this._CodigoMeteria;
+			}
+			set
+			{
+				if ((this._CodigoMeteria != value))
+				{
+					this._CodigoMeteria = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Repitencia", DbType="Char(1) NOT NULL")]
+		public char Repitencia
+		{
+			get
+			{
+				return this._Repitencia;
+			}
+			set
+			{
+				if ((this._Repitencia != value))
+				{
+					this._Repitencia = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoModulo
+		{
+			get
+			{
+				return this._CodigoModulo;
+			}
+			set
+			{
+				if ((this._CodigoModulo != value))
+				{
+					this._CodigoModulo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraInicio", DbType="Time NOT NULL")]
+		public System.TimeSpan HoraInicio
+		{
+			get
+			{
+				return this._HoraInicio;
+			}
+			set
+			{
+				if ((this._HoraInicio != value))
+				{
+					this._HoraInicio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraFin", DbType="Time NOT NULL")]
+		public System.TimeSpan HoraFin
+		{
+			get
+			{
+				return this._HoraFin;
+			}
+			set
+			{
+				if ((this._HoraFin != value))
+				{
+					this._HoraFin = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dia", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Dia
+		{
+			get
+			{
+				return this._Dia;
+			}
+			set
+			{
+				if ((this._Dia != value))
+				{
+					this._Dia = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Periodo", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string Periodo
+		{
+			get
+			{
+				return this._Periodo;
+			}
+			set
+			{
+				if ((this._Periodo != value))
+				{
+					this._Periodo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoPeriodo", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string CodigoPeriodo
+		{
+			get
+			{
+				return this._CodigoPeriodo;
+			}
+			set
+			{
+				if ((this._CodigoPeriodo != value))
+				{
+					this._CodigoPeriodo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EstadoObligatorio", DbType="Char(2) NOT NULL", CanBeNull=false)]
+		public string EstadoObligatorio
+		{
+			get
+			{
+				return this._EstadoObligatorio;
+			}
+			set
+			{
+				if ((this._EstadoObligatorio != value))
+				{
+					this._EstadoObligatorio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Aula", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string Aula
+		{
+			get
+			{
+				return this._Aula;
+			}
+			set
+			{
+				if ((this._Aula != value))
+				{
+					this._Aula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Asistencia", DbType="Char(2) NOT NULL", CanBeNull=false)]
+		public string Asistencia
+		{
+			get
+			{
+				return this._Asistencia;
+			}
+			set
+			{
+				if ((this._Asistencia != value))
+				{
+					this._Asistencia = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="Date NOT NULL")]
+		public System.DateTime Fecha
+		{
+			get
+			{
+				return this._Fecha;
+			}
+			set
+			{
+				if ((this._Fecha != value))
+				{
+					this._Fecha = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreCarrera", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string NombreCarrera
+		{
+			get
+			{
+				return this._NombreCarrera;
+			}
+			set
+			{
+				if ((this._NombreCarrera != value))
+				{
+					this._NombreCarrera = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoCarrera", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoCarrera
+		{
+			get
+			{
+				return this._CodigoCarrera;
+			}
+			set
+			{
+				if ((this._CodigoCarrera != value))
+				{
+					this._CodigoCarrera = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreFacultad", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string NombreFacultad
+		{
+			get
+			{
+				return this._NombreFacultad;
+			}
+			set
+			{
+				if ((this._NombreFacultad != value))
+				{
+					this._NombreFacultad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoFacultad", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoFacultad
+		{
+			get
+			{
+				return this._CodigoFacultad;
+			}
+			set
+			{
+				if ((this._CodigoFacultad != value))
+				{
+					this._CodigoFacultad = value;
+				}
+			}
+		}
+	}
+	
+	public partial class conusltaHorarioLibreDocenteResult
+	{
+		
+		private int _Id_HorioLibre;
+		
+		private string _Descripcion;
+		
+		private string _Nombre;
+		
+		private string _NombreDos;
+		
+		private string _Apellido;
+		
+		private string _ApellidoDos;
+		
+		private string _Cedula;
+		
+		private string _CodigoModulo;
+		
+		private System.TimeSpan _HoraInicio;
+		
+		private System.TimeSpan _HoraFin;
+		
+		private string _Dia;
+		
+		private string _CodigoPeriodo;
+		
+		private string _Periodo;
+		
+		public conusltaHorarioLibreDocenteResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_HorioLibre", DbType="Int NOT NULL")]
+		public int Id_HorioLibre
+		{
+			get
+			{
+				return this._Id_HorioLibre;
+			}
+			set
+			{
+				if ((this._Id_HorioLibre != value))
+				{
+					this._Id_HorioLibre = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Descripcion
+		{
+			get
+			{
+				return this._Descripcion;
+			}
+			set
+			{
+				if ((this._Descripcion != value))
+				{
+					this._Descripcion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this._Nombre = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreDos", DbType="VarChar(50)")]
+		public string NombreDos
+		{
+			get
+			{
+				return this._NombreDos;
+			}
+			set
+			{
+				if ((this._NombreDos != value))
+				{
+					this._NombreDos = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Apellido
+		{
+			get
+			{
+				return this._Apellido;
+			}
+			set
+			{
+				if ((this._Apellido != value))
+				{
+					this._Apellido = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApellidoDos", DbType="VarChar(50)")]
+		public string ApellidoDos
+		{
+			get
+			{
+				return this._ApellidoDos;
+			}
+			set
+			{
+				if ((this._ApellidoDos != value))
+				{
+					this._ApellidoDos = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="Char(10)")]
+		public string Cedula
+		{
+			get
+			{
+				return this._Cedula;
+			}
+			set
+			{
+				if ((this._Cedula != value))
+				{
+					this._Cedula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoModulo
+		{
+			get
+			{
+				return this._CodigoModulo;
+			}
+			set
+			{
+				if ((this._CodigoModulo != value))
+				{
+					this._CodigoModulo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraInicio", DbType="Time NOT NULL")]
+		public System.TimeSpan HoraInicio
+		{
+			get
+			{
+				return this._HoraInicio;
+			}
+			set
+			{
+				if ((this._HoraInicio != value))
+				{
+					this._HoraInicio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraFin", DbType="Time NOT NULL")]
+		public System.TimeSpan HoraFin
+		{
+			get
+			{
+				return this._HoraFin;
+			}
+			set
+			{
+				if ((this._HoraFin != value))
+				{
+					this._HoraFin = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dia", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Dia
+		{
+			get
+			{
+				return this._Dia;
+			}
+			set
+			{
+				if ((this._Dia != value))
+				{
+					this._Dia = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoPeriodo", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string CodigoPeriodo
+		{
+			get
+			{
+				return this._CodigoPeriodo;
+			}
+			set
+			{
+				if ((this._CodigoPeriodo != value))
+				{
+					this._CodigoPeriodo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Periodo", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string Periodo
+		{
+			get
+			{
+				return this._Periodo;
+			}
+			set
+			{
+				if ((this._Periodo != value))
+				{
+					this._Periodo = value;
+				}
+			}
+		}
+	}
+	
+	public partial class conusltaHorarioObligatorioDocenteResult
+	{
+		
+		private int _Id_HorioObligatorio;
+		
+		private string _Descripcion;
+		
+		private string _Nombre;
+		
+		private string _NombreDos;
+		
+		private string _Apellido;
+		
+		private string _ApellidoDos;
+		
+		private string _Cedula;
+		
+		private string _CodigoModulo;
+		
+		private System.TimeSpan _HoraInicio;
+		
+		private System.TimeSpan _HoraFin;
+		
+		private string _Dia;
+		
+		private string _Nombre1;
+		
+		private string _CodigoPeriodo;
+		
+		private string _Periodo;
+		
+		public conusltaHorarioObligatorioDocenteResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_HorioObligatorio", DbType="Int NOT NULL")]
+		public int Id_HorioObligatorio
+		{
+			get
+			{
+				return this._Id_HorioObligatorio;
+			}
+			set
+			{
+				if ((this._Id_HorioObligatorio != value))
+				{
+					this._Id_HorioObligatorio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Descripcion
+		{
+			get
+			{
+				return this._Descripcion;
+			}
+			set
+			{
+				if ((this._Descripcion != value))
+				{
+					this._Descripcion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this._Nombre = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreDos", DbType="VarChar(50)")]
+		public string NombreDos
+		{
+			get
+			{
+				return this._NombreDos;
+			}
+			set
+			{
+				if ((this._NombreDos != value))
+				{
+					this._NombreDos = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Apellido
+		{
+			get
+			{
+				return this._Apellido;
+			}
+			set
+			{
+				if ((this._Apellido != value))
+				{
+					this._Apellido = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApellidoDos", DbType="VarChar(50)")]
+		public string ApellidoDos
+		{
+			get
+			{
+				return this._ApellidoDos;
+			}
+			set
+			{
+				if ((this._ApellidoDos != value))
+				{
+					this._ApellidoDos = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="Char(10)")]
+		public string Cedula
+		{
+			get
+			{
+				return this._Cedula;
+			}
+			set
+			{
+				if ((this._Cedula != value))
+				{
+					this._Cedula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodigoModulo
+		{
+			get
+			{
+				return this._CodigoModulo;
+			}
+			set
+			{
+				if ((this._CodigoModulo != value))
+				{
+					this._CodigoModulo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraInicio", DbType="Time NOT NULL")]
+		public System.TimeSpan HoraInicio
+		{
+			get
+			{
+				return this._HoraInicio;
+			}
+			set
+			{
+				if ((this._HoraInicio != value))
+				{
+					this._HoraInicio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraFin", DbType="Time NOT NULL")]
+		public System.TimeSpan HoraFin
+		{
+			get
+			{
+				return this._HoraFin;
+			}
+			set
+			{
+				if ((this._HoraFin != value))
+				{
+					this._HoraFin = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dia", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Dia
+		{
+			get
+			{
+				return this._Dia;
+			}
+			set
+			{
+				if ((this._Dia != value))
+				{
+					this._Dia = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre1", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Nombre1
+		{
+			get
+			{
+				return this._Nombre1;
+			}
+			set
+			{
+				if ((this._Nombre1 != value))
+				{
+					this._Nombre1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoPeriodo", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string CodigoPeriodo
+		{
+			get
+			{
+				return this._CodigoPeriodo;
+			}
+			set
+			{
+				if ((this._CodigoPeriodo != value))
+				{
+					this._CodigoPeriodo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Periodo", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string Periodo
+		{
+			get
+			{
+				return this._Periodo;
+			}
+			set
+			{
+				if ((this._Periodo != value))
+				{
+					this._Periodo = value;
 				}
 			}
 		}
@@ -9043,6 +10082,8 @@ namespace AppTutorias
 	
 	public partial class modulosDocenteDisponibleResult
 	{
+		
+		private int _Id_modulo;
 		
 		private string _CodigoModulo;
 		
@@ -9056,84 +10097,20 @@ namespace AppTutorias
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodigoModulo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_modulo", DbType="Int NOT NULL")]
+		public int Id_modulo
 		{
 			get
 			{
-				return this._CodigoModulo;
+				return this._Id_modulo;
 			}
 			set
 			{
-				if ((this._CodigoModulo != value))
+				if ((this._Id_modulo != value))
 				{
-					this._CodigoModulo = value;
+					this._Id_modulo = value;
 				}
 			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dia", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Dia
-		{
-			get
-			{
-				return this._Dia;
-			}
-			set
-			{
-				if ((this._Dia != value))
-				{
-					this._Dia = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraInicio", DbType="Time NOT NULL")]
-		public System.TimeSpan HoraInicio
-		{
-			get
-			{
-				return this._HoraInicio;
-			}
-			set
-			{
-				if ((this._HoraInicio != value))
-				{
-					this._HoraInicio = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoraFin", DbType="Time NOT NULL")]
-		public System.TimeSpan HoraFin
-		{
-			get
-			{
-				return this._HoraFin;
-			}
-			set
-			{
-				if ((this._HoraFin != value))
-				{
-					this._HoraFin = value;
-				}
-			}
-		}
-	}
-	
-	public partial class modulosDocenteDisponibleAsignacionResult
-	{
-		
-		private string _CodigoModulo;
-		
-		private string _Dia;
-		
-		private System.TimeSpan _HoraInicio;
-		
-		private System.TimeSpan _HoraFin;
-		
-		public modulosDocenteDisponibleAsignacionResult()
-		{
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoModulo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
@@ -9196,32 +10173,6 @@ namespace AppTutorias
 				if ((this._HoraFin != value))
 				{
 					this._HoraFin = value;
-				}
-			}
-		}
-	}
-	
-	public partial class SqlQueryNotificationStoredProcedure_9f46e87c_82c9_4f28_ae1d_ab7112450e26Result
-	{
-		
-		private System.Guid _conversation_handle;
-		
-		public SqlQueryNotificationStoredProcedure_9f46e87c_82c9_4f28_ae1d_ab7112450e26Result()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_conversation_handle", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid conversation_handle
-		{
-			get
-			{
-				return this._conversation_handle;
-			}
-			set
-			{
-				if ((this._conversation_handle != value))
-				{
-					this._conversation_handle = value;
 				}
 			}
 		}

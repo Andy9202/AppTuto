@@ -27,7 +27,7 @@
 <div class="container-admin">
 	<img src="~/Content/img/fondo_1.jpg" alt="" width="100%;">
 	<h3>DOCENTE</h3>
-	<p>Ingresa, actualiza o elimina las Docentes actuales de la Universidad</p>
+	<p>Ingresa, actualiza o elimina los Docentes actuales de la Universidad</p>
 	<br />
 	<div class="form-carrera">
 		<ul class="list-inline">
@@ -49,7 +49,7 @@
 				<input type="text" id="apellidoDos" onkeyup="inputMayusculaD(this)">
 			</li>
 			<li>
-				<label for="">Cedula <span class="sms-error" id="cedulaError"></span></label><br />
+				<label for="">Cédula <span class="sms-error" id="cedulaError"></span></label><br />
 				<input type="number" id="cedula" onkeyup="inputCedula(this)">				
 			</li>
 			<li>
@@ -84,14 +84,14 @@
 		<table>
 			<thead>
 				<tr>
-					<th>Nombre 1</th>
-					<th>Nombre 2</th>
-					<th>Apellido 1</th>
-					<th>Apellido 2</th>
-					<th>Cedula</th>
+					<th>Primer Nombre</th>
+					<th>Segundo Nombre</th>
+					<th>Apellido Paterno</th>
+					<th>Apellido Materno</th>
+					<th>Cédula</th>
 					<th>Email</th>
 					<th>Celular</th>
-					<th>Accion</th>
+					<th>Acción</th>
 				</tr>
 			</thead>
 			<tbody id="tablaDocente">
@@ -122,7 +122,10 @@
 <div class="panel-edit" id="editDocente">
 	<h3><i class="fas fa-pen-square"></i> Editar Docente</h3>
 	<ul>
-
+		<li>
+			<label>Cedula:</label>
+			<label id="cedulaEdit"></label>
+		</li>
 		<li>
 			<label>Primer Nombre</label>
 			<input type="text" id="nombreEdit" onkeyup="inputMayuscula(this)">
@@ -139,10 +142,7 @@
 			<label>Apellido Materno</label>
 			<input type="text" id="apellidoDosEdit" onkeyup="inputMayusculaD(this)">
 		</li>
-		<li>
-			<label>Cedula</label>
-			<input type="number" id="cedulaEdit" onkeyup="inputCedula(this)">
-		</li>
+
 		<li>
 			<label>Email</label>
 			<input type="email" id="emailEdit" onkeyup="inputEmail(this)">
@@ -355,10 +355,8 @@
 
 			$.ajax({
 				url: "/SuperAdmin/ingresarDocente",
-				data: JSON.stringify(docente),
+				data: docente,
 				type: "POST",
-				contentType: "application/json;charset=utf-8",
-				dataType: "json",
 				success: function (listaDocente) {
 
 					$("#tablaDocente").empty();
@@ -480,7 +478,7 @@
 			$("#emailErrorEdit").text("");
 		}
 
-		if ($("#cedulaEdit").val() === "") {
+		if ($("#cedulaEdit").text() === "") {
 
 			$("#cedulaEdit").addClass('input-error');
 			$("#cedulaErrorEdit").text("*");
@@ -509,7 +507,7 @@
 			$("#apellidoErrorEdit").text("");
 		}
 
-		if ($("#emailEdit").val() !== "" && $("#cedulaEdit").val() !== "" && $("#nombreEdit").val() !== "" && $("#apellidoEdit").val() !== "") {
+		if ($("#emailEdit").val() !== "" && $("#cedulaEdit").text() !== "" && $("#nombreEdit").val() !== "" && $("#apellidoEdit").val() !== "") {
 
 			valido = true;
 			return valido;
@@ -540,7 +538,7 @@
 				$("#apellidoDosEdit").val(docente.ApellidoDos);
 				$("#emailEdit").val(docente.Email);
 				$("#celularEdit").val(docente.Celular);
-				$("#cedulaEdit").val(docente.Cedula);
+				$("#cedulaEdit").text(docente.Cedula);
 
 			},
 			error: function () {
@@ -585,7 +583,7 @@
 				ApellidoDos: $("#apellidoDosEdit").val(),
 				Email: $("#emailEdit").val(),
 				Celular: $("#celularEdit").val(),
-				Cedula: $("#cedulaEdit").val()
+				Cedula: $("#cedulaEdit").text()
 
 
 			};
@@ -637,11 +635,12 @@
 
 				},
 				error: function () {
-
+					
 				}
 			});
 		} else {
 			$('#loadUpdateDocente').css('display', 'none');
+			alert()
 		}
 	}
 	function eliminarDocente(codigo) {

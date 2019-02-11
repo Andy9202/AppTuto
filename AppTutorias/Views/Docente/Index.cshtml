@@ -110,9 +110,9 @@
 		<div class="cover_docente">
 			<img src="~/Content/img/logotipo.png" width="200px"/>
 			<h2>¡Bienvenido Docente!</h2>
-			<h3>Este es el sistema de administración de tutorias.</h3>
+			<h3>Este es el sistema de administración de tutorías.</h3>
 			<br />
-			<p>Elige la opcion del menu, para realizar tu actividad el dia de hoy.</p>
+			<p>Elige la opción del menu, para realizar tu actividad el día de hoy.</p>
 
 		</div>
 	</div>
@@ -183,4 +183,29 @@
 
 
 	}
+
+
+	function Reportes() {
+
+		mostrarLoading();
+
+		$.ajax({
+			url: "/Docente/Reportes",
+			type: 'post',
+			datatype: 'application/json',
+			success: function (data) {
+
+
+
+				$("#app").html(data);
+
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
 </script>

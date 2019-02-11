@@ -88,6 +88,40 @@ namespace AppTutorias.Metodos.SuperAdmin.Carrera
         }
 
 
+        //Conultar  Carrera
+
+        public List<carrera> consultarCarrerasFacultad(string CodigoFacultad)
+        {
+            var carreras = from facult in db.FACULTAD
+                           from carr in db.CARRERA
+                           where facult.Id_Facultad == carr.Id_Facultad
+                           where facult.CodigoFacultad == CodigoFacultad
+                           select new
+                           {
+                               facult.CodigoFacultad,
+                               carr.NombreCarrera,
+                               carr.CodigoCarrera
+                           };
+
+            List<carrera> listaCarrera = new List<carrera>();
+
+
+            foreach (var consulta in carreras)
+            {
+                carrera carrera = new carrera();
+
+                carrera.CodigoFacultad = consulta.CodigoFacultad;
+                carrera.NombreCarrera = consulta.NombreCarrera;
+                carrera.CodigoCarrera = consulta.CodigoCarrera;
+
+                listaCarrera.Add(carrera);
+            }
+
+            return listaCarrera;
+
+        }
+
+
         //consultar si existe  Carrera
 
         public bool consultaExisteCarrera(string codigoCarrera)

@@ -97,7 +97,7 @@
 	<br />
 	<h4>Estudiantes actuales</h4><br />
 	<p>
-		Conoce tus estudiantes actuales, revisa el nuemero de matricula que contienen en cada una de tus materias y asigna tutorias necesarias
+		Conoce tus estudiantes actuales, revisa el número de matrícula que contienen en cada una de tus materias y asigna tutorías necesarias
 		para los mismos.
 	</p>
 
@@ -105,7 +105,7 @@
 		<ul>
 			<li>
 				<label for="">Materias</label>
-				<p>Selecciona una meteria, analiza los estudiantes que contienen un numero de matricula superior a uno(color rojo).</p>
+				<p>Selecciona una materia, analiza los estudiantes que contienen un número de matrícula superior a uno(color rojo).</p>
 				<br />
 				<select id="materiasDocente" onchange="tablaEstudiantesDocente()"></select>
 			</li>
@@ -116,11 +116,11 @@
 
 	<div class="container-scroll">
 		<br />
-		<h4>Numero de Matricula de los estudiantes perteneciente a la materia seleccionada.</h4>
+		<h4>Número de Matricula de los estudiantes pertenecientes a la materia seleccionada.</h4>
 		<table>
 			<thead>
 				<tr>
-					<th>Matricula</th>
+					<th>Matrícula</th>
 					<th>Estudiante</th>
 					<th>Datos</th>
 					<th>Cod Materia</th>
@@ -135,8 +135,8 @@
 		</table>
 	</div><br />
 	<div>
-		<a onclick="tutoriaEstudianteDocente()">Asignar Tutoria</a>
-		<p>Seleccioan un estudiante de la materia que impartes para establecer una tutoria con el mismo, selecciona un paralaleo un aula y una fecha 
+		<a onclick="tutoriaEstudianteDocente()">Asignar Tutoría</a>
+		<p>Seleccioan un estudiante de la materia que impartes para establecer una tutoría con el mismo, selecciona un paralaleo una aula y una fecha 
 		para que el estudiante pueda asistir.</p>
 	</div>
 
@@ -153,7 +153,8 @@
 
     $(document).ready(function () {
 
-        listaMateriasDocente();
+		listaMateriasDocente();
+	
     });
 
 
@@ -243,8 +244,6 @@
             }
         });
     }
-
-
 
 
 </script>

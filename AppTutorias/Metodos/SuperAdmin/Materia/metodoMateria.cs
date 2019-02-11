@@ -19,7 +19,7 @@ namespace AppTutorias.Metodos.SuperAdmin.Materia
         {
             try
             {
-                db.IngresarMateria(materia.CodigoCarrera, materia.NombreMateria, materia.CodigoMateria);
+                db.IngresarMateria(materia.CodigoCarrera,materia.NombreMateria, materia.CodigoMateria);
             }
             catch
             {
@@ -63,14 +63,14 @@ namespace AppTutorias.Metodos.SuperAdmin.Materia
                            from mate in db.MATERIA
                            where facult.Id_Facultad == carr.Id_Facultad
                            where mate.Id_Carrera == carr.Id_Carrera
-                             select new
-                             {
-                                 
-                                 facult.CodigoFacultad,
-                                 carr.CodigoCarrera,
-                                 mate.NombreMateria,
-                                 mate.CodigoMeteria
-                             };
+                           select new
+                           {
+
+                               facult.CodigoFacultad,
+                               carr.CodigoCarrera,
+                               mate.NombreMateria,
+                               mate.CodigoMeteria
+                           };
 
             List<materia> listaMateria = new List<materia>();
 
@@ -79,12 +79,12 @@ namespace AppTutorias.Metodos.SuperAdmin.Materia
             {
                 materia materia = new materia();
 
-         
+
                 materia.CodigoFacultad = consulta.CodigoFacultad;
-                materia.CodigoCarrera= consulta.CodigoCarrera;
+                materia.CodigoCarrera = consulta.CodigoCarrera;
                 materia.NombreMateria = consulta.NombreMateria;
                 materia.CodigoMateria = consulta.CodigoMeteria;
-           
+
 
                 listaMateria.Add(materia);
             }
@@ -123,19 +123,19 @@ namespace AppTutorias.Metodos.SuperAdmin.Materia
         {
 
 
-            var materi =from carr in db.CARRERA
-                        from mate in db.MATERIA
-                        where mate.Id_Carrera == carr.Id_Carrera
-                        where mate.CodigoMeteria == codigoMateria
-                        select new
-                        {
+            var materi = from carr in db.CARRERA
+                         from mate in db.MATERIA
+                         where mate.Id_Carrera == carr.Id_Carrera
+                         where mate.CodigoMeteria == codigoMateria
+                         select new
+                         {
 
-                            carr.CodigoCarrera,
-                            mate.NombreMateria,
-                            mate.CodigoMeteria
-                        };
+                             carr.CodigoCarrera,
+                             mate.NombreMateria,
+                             mate.CodigoMeteria
+                         };
 
-            materia materia= new materia();
+            materia materia = new materia();
 
             foreach (var consulta in materi)
             {
@@ -189,6 +189,45 @@ namespace AppTutorias.Metodos.SuperAdmin.Materia
 
         }
 
+        //Conultar Materias
+
+        public List<materia> consultarMateriasFacultad(string CodigoFacultad)
+        {
+            var materias = from mate in db.MATERIA
+                           from facu in db.FACULTAD
+                           from carr in db.CARRERA
+                           where facu.Id_Facultad == carr.Id_Facultad
+                           where mate.Id_Carrera == mate.Id_Carrera
+                           where facu.CodigoFacultad == CodigoFacultad
+
+                           select new
+                           {
+                               carr.CodigoCarrera,
+                               facu.CodigoFacultad,
+                               mate.NombreMateria,
+                               mate.CodigoMeteria
+                           };
+
+            List<materia> listaMateria = new List<materia>();
+
+
+            foreach (var consulta in materias)
+            {
+                materia materia = new materia();
+
+                materia.CodigoCarrera = consulta.CodigoCarrera;
+                materia.CodigoFacultad = consulta.CodigoFacultad;
+                materia.NombreMateria = consulta.NombreMateria;
+                materia.CodigoMateria = consulta.CodigoMeteria;
+
+
+                listaMateria.Add(materia);
+            }
+
+            return listaMateria;
+
+        }
+
 
         //Conultar Materias estudiante
 
@@ -203,6 +242,8 @@ namespace AppTutorias.Metodos.SuperAdmin.Materia
             {
                 materia materia = new materia();
 
+
+               
                 materia.NombreMateria = consulta.NombreMateria;
                 materia.CodigoMateria = consulta.CodigoMeteria;
     
@@ -245,6 +286,11 @@ namespace AppTutorias.Metodos.SuperAdmin.Materia
 
         public List<materia> consultarMateriasEstudianteDocente(string Matricula,string Cedula)
         {
+            if(Matricula == "" || Matricula == null){
+                Matricula = "0";
+            } 
+
+
             var materias = db.materiasEstudianteDocente(int.Parse(Matricula),Cedula);
 
             List<materia> listaMateria = new List<materia>();

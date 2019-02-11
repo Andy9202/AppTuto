@@ -15,12 +15,17 @@ namespace AppTutorias.Models.SuperAdmin.Estudiante
         public string CodigoModulo { get; set; }
         public string NombreMateria { get; set; }
         public string CodigoMateria { get; set; }
+        public string NombreFacultad { get; set; }
+        public string CodigoFacultad { get; set; }
+        public string NombreCarrera { get; set; }
+        public string CodigoCarrera { get; set; }
         public string CodigoPeriodo { get; set; }
         public string Modulo { get; set; }
         public string EstadoObligatorio{ get; set; }
         public string Fecha { get; set; }
         public string Aula { get; set; }
         public string Asistencia { get; set; }
+        public string Repitencia{ get; set; }
 
 
     }

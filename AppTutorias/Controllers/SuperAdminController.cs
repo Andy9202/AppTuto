@@ -54,33 +54,34 @@ namespace TutoriasApp.Controllers
         {
            
                 string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
-                string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
-                try
-                {
-                    Uri servicePointUri = new Uri(graphResourceID);
-                    Uri serviceRoot = new Uri(servicePointUri, tenantID);
-                    ActiveDirectoryClient activeDirectoryClient = new ActiveDirectoryClient(serviceRoot,
-                          async () => await GetTokenForApplication());
+            string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
+            try
+            {
+                Uri servicePointUri = new Uri(graphResourceID);
+                Uri serviceRoot = new Uri(servicePointUri, tenantID);
+                ActiveDirectoryClient activeDirectoryClient = new ActiveDirectoryClient(serviceRoot,
+                      async () => await GetTokenForApplication());
 
-                    // utiliza el token para consultar el gráfico y obtener detalles sobre el usuario
+                // utiliza el token para consultar el gráfico y obtener detalles sobre el usuario
 
-                    var result = await activeDirectoryClient.Users
-                        .Where(u => u.ObjectId.Equals(userObjectID))
-                        .ExecuteAsync();
-                    IUser user = result.CurrentPage.ToList().First();
+                var result = await activeDirectoryClient.Users
+                    .Where(u => u.ObjectId.Equals(userObjectID))
+                    .ExecuteAsync();
+                IUser user = result.CurrentPage.ToList().First();
 
-                    return View("Index", user);
-                }
-                catch (AdalException)
-                {
-                    // Devuelve a la página de error.
-                    return View("Error");
-                }
-                // si lo anterior no funciona, el usuario deberá reautenticarse explícitamente para la aplicación para obtener el token necesario
-                catch (Exception)
-                {
-                    return RedirectToAction("SignIn", "Account");
-                }
+                return View("Index", user);
+            }
+            catch (AdalException)
+            {
+                // Devuelve a la página de error.
+                return View("Error");
+            }
+            // si lo anterior no funciona, el usuario deberá reautenticarse explícitamente para la aplicación para obtener el token necesario
+            catch (Exception)
+            {
+                return RedirectToAction("SignIn", "Account");
+            }
+         
 
         }
 
@@ -133,24 +134,33 @@ namespace TutoriasApp.Controllers
             List<facultad> listaFaculta = new List<facultad>();
             listaFaculta = metodoFacultad.consultarFacultades();
 
-            return PartialView("Facultad",listaFaculta );
+            return PartialView("Facultad", listaFaculta);
         }
 
         public ActionResult ingresarFacultad(facultad facultad)
         {
-            
+
             metodoFacultad metodoFacultad = new metodoFacultad();
 
-            if(metodoFacultad.consultaExisteFacultad(facultad.CodigoFacultad)!=true)
+            if (metodoFacultad.consultaExisteFacultad(facultad.CodigoFacultad) != true)
             {
                 metodoFacultad.ingresarFacultad(facultad);
-           
+
             }
             else
             {
                 metodoFacultad.actualizarFacultad(facultad);
             }
 
+            List<facultad> listaFacultad = new List<facultad>();
+            listaFacultad = metodoFacultad.consultarFacultades();
+
+            return Json(listaFacultad, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult listaFacultad()
+        {
+            metodoFacultad metodoFacultad = new metodoFacultad();
             List<facultad> listaFacultad = new List<facultad>();
             listaFacultad = metodoFacultad.consultarFacultades();
 
@@ -187,6 +197,16 @@ namespace TutoriasApp.Controllers
 
             return PartialView("Carrera", listaCarrera);
         }
+
+        public ActionResult listaCarreraFacultad(string CodigoFacultad)
+        {
+            metodoCarrera metodoCarrera = new metodoCarrera();
+            List<carrera> listaCarrera = new List<carrera>();
+            listaCarrera = metodoCarrera.consultarCarrerasFacultad(CodigoFacultad);
+
+            return Json(listaCarrera, JsonRequestBehavior.AllowGet);
+        }
+
 
         public ActionResult editarCarrera(string CodigoCarrera)
         {
@@ -238,7 +258,7 @@ namespace TutoriasApp.Controllers
 
             listaMateria = metodoMateria.consultarMaterias();
 
-            return PartialView("Materia",listaMateria);
+            return PartialView("Materia", listaMateria);
         }
 
         public ActionResult listaCarreras()
@@ -246,6 +266,14 @@ namespace TutoriasApp.Controllers
             metodoCarrera metodoCarrera = new metodoCarrera();
             List<carrera> listaCarrera = new List<carrera>();
             listaCarrera = metodoCarrera.consultarCarreras();
+            return Json(listaCarrera, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult listaCarrerasFacultad(string CodigoFacultad)
+        {
+            metodoCarrera metodoCarrera = new metodoCarrera();
+            List<carrera> listaCarrera = new List<carrera>();
+            listaCarrera = metodoCarrera.consultarCarrerasFacultad(CodigoFacultad);
             return Json(listaCarrera, JsonRequestBehavior.AllowGet);
         }
 
@@ -291,7 +319,8 @@ namespace TutoriasApp.Controllers
         }
 
 
-      //DOCENTE
+
+        //DOCENTE
 
 
 
@@ -302,12 +331,27 @@ namespace TutoriasApp.Controllers
 
             listaDocente = metodoDocente.consultarDocentes();
 
-            return PartialView("Docente",listaDocente);
+            return PartialView("Docente", listaDocente);
         }
 
         public ActionResult ingresarDocente(docente docente)
         {
             metodoDocente metodoDocente = new metodoDocente();
+
+            if (docente.NombreDos == null) {
+                docente.NombreDos = "";
+
+            }
+            if (docente.ApellidoDos == null)
+            {
+                docente.ApellidoDos = "";
+            }
+
+            if (docente.Celular == null)
+            {
+                docente.Celular = "";
+            }
+
 
             if (metodoDocente.consultaExisteDocente(docente.Cedula) != true)
             {
@@ -339,13 +383,13 @@ namespace TutoriasApp.Controllers
             }
             else
             {
-                if(excelFile.FileName.EndsWith("xls") || excelFile.FileName.EndsWith("xlsx")){
+                if (excelFile.FileName.EndsWith("xls") || excelFile.FileName.EndsWith("xlsx")) {
 
                     string path = Server.MapPath("~/Content/" + excelFile.FileName);
-               
 
-                        if (System.IO.File.Exists(path))
-                            System.IO.File.Delete(path);
+
+                    if (System.IO.File.Exists(path))
+                        System.IO.File.Delete(path);
 
                     excelFile.SaveAs(path);
 
@@ -357,10 +401,10 @@ namespace TutoriasApp.Controllers
                     Excel.Worksheet worksheet = workbook.ActiveSheet;
                     Excel.Range range = worksheet.UsedRange;
 
-                
-        
 
-                    for ( var x =2;x <=range.Rows.Count;x++)
+
+
+                    for (var x = 2; x <= range.Rows.Count; x++)
                     {
                         docente d = new docente();
 
@@ -372,7 +416,7 @@ namespace TutoriasApp.Controllers
                         d.Email = ((Excel.Range)range.Cells[x, 6]).Text;
                         d.Celular = ((Excel.Range)range.Cells[x, 7]).Text;
 
-                       
+
 
                         if (metodoDocente.consultaExisteDocente(d.Cedula) != true)
                         {
@@ -384,22 +428,22 @@ namespace TutoriasApp.Controllers
                             metodoDocente.actualizarDocente(d);
                         }
 
-                   
+
                     }
 
-                   
+
                     listaDocente = metodoDocente.consultarDocentes();
 
                     workbook.Close(false, excelFile.FileName, null);
                     Marshal.FinalReleaseComObject(workbook);
                     application.Quit();
-                    
+
 
 
                     return Json(listaDocente, JsonRequestBehavior.AllowGet);
                 }
-                else{
-                 
+                else {
+
                     listaDocente = metodoDocente.consultarDocentes();
                     return Json(listaDocente, JsonRequestBehavior.AllowGet);
                 }
@@ -437,12 +481,29 @@ namespace TutoriasApp.Controllers
             List<estudiante> listaEstudiante = new List<estudiante>();
             listaEstudiante = metodoEstudiante.consultarEtudiantes();
 
-            return PartialView("Estudiante",listaEstudiante);
+            return PartialView("Estudiante", listaEstudiante);
         }
 
         public ActionResult ingresarEstudiante(estudiante estudiante)
         {
             metodoEstudiante metodoEstudiante = new metodoEstudiante();
+
+            if (estudiante.NombreDos == null)
+            {
+                estudiante.NombreDos = "";
+
+            }
+            if (estudiante.ApellidoDos == null)
+            {
+                estudiante.ApellidoDos = "";
+            }
+
+            if (estudiante.Celular == null)
+            {
+                estudiante.Celular = "";
+            }
+
+
 
             if (metodoEstudiante.consultaExisteEstudiante(int.Parse(estudiante.Matricula)) != true)
             {
@@ -455,10 +516,14 @@ namespace TutoriasApp.Controllers
             }
 
             List<estudiante> listaEstudiante = new List<estudiante>();
-            listaEstudiante = metodoEstudiante.consultarEtudiantes(); 
+            listaEstudiante = metodoEstudiante.consultarEtudiantes();
 
             return Json(listaEstudiante, JsonRequestBehavior.AllowGet);
         }
+
+
+
+
 
         //ingresar estudiantes desde excel
         [HttpPost]
@@ -553,7 +618,7 @@ namespace TutoriasApp.Controllers
         {
             metodoEstudiante metodoEstudiante = new metodoEstudiante();
             estudiante estudiante = new estudiante();
-            estudiante =metodoEstudiante.consultaEstudiante(Matricula);
+            estudiante = metodoEstudiante.consultaEstudiante(Matricula);
 
             return Json(estudiante, JsonRequestBehavior.AllowGet);
         }
@@ -564,7 +629,7 @@ namespace TutoriasApp.Controllers
             metodoEstudiante metodoEstudiante = new metodoEstudiante();
             metodoEstudiante.eliminarEstudiante(Matricula);
             List<estudiante> listaEstudiante = new List<estudiante>();
-            listaEstudiante = metodoEstudiante.consultarEtudiantes(); 
+            listaEstudiante = metodoEstudiante.consultarEtudiantes();
 
             return Json(listaEstudiante, JsonRequestBehavior.AllowGet);
         }
@@ -572,7 +637,7 @@ namespace TutoriasApp.Controllers
         public ActionResult listaEstudiantesCarrera(string CodigoCarrera)
         {
             metodoEstudiante metodoEstudiante = new metodoEstudiante();
-            
+
             List<estudiante> listaEstudiante = new List<estudiante>();
             listaEstudiante = metodoEstudiante.consultarEstudiantesCarrera(CodigoCarrera);
 
@@ -595,7 +660,7 @@ namespace TutoriasApp.Controllers
             masterModuloPeriodo.listaPeriodo = metodoPeriodo.consultaPeriodos();
 
 
-            return PartialView("modulosPeriodo",masterModuloPeriodo);
+            return PartialView("modulosPeriodo", masterModuloPeriodo);
         }
 
 
@@ -663,7 +728,7 @@ namespace TutoriasApp.Controllers
 
             listaHorariosClases = metodoHorarioClases.consultaHorarioClases();
 
-            return PartialView("HorarioClases",listaHorariosClases);
+            return PartialView("HorarioClases", listaHorariosClases);
         }
 
         //LISTA DE MATERIAS POR CARRERA
@@ -678,9 +743,47 @@ namespace TutoriasApp.Controllers
             return Json(listaMateria, JsonRequestBehavior.AllowGet);
         }
 
+
+
+        //LISTA MATERIAS POR FACULTAD
+
+        public ActionResult listaMateriasFacultad(string CodigoFacultad)
+        {
+            metodoMateria metodoMateria = new metodoMateria();
+            List<materia> listaMateria = new List<materia>();
+
+            listaMateria = metodoMateria.consultarMateriasFacultad(CodigoFacultad);
+
+            return Json(listaMateria, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
         //LISTA Docentes
 
         public ActionResult listaDocentes()
+        {
+            metodoDocente metodoDocente = new metodoDocente();
+            List<docente> listaDocentes = new List<docente>();
+
+            listaDocentes = metodoDocente.consultarDocentes();
+
+            return Json(listaDocentes, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult docentesCedula(string Cedula)
+        {
+            metodoDocente metodoDocente = new metodoDocente();
+            docente docente = new docente();
+
+            docente = metodoDocente.consultaDocente(Cedula);
+
+            return Json(docente, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult listaDocentesCarrera()
         {
             metodoDocente metodoDocente = new metodoDocente();
             List<docente> listaDocentes = new List<docente>();
@@ -704,7 +807,7 @@ namespace TutoriasApp.Controllers
         public ActionResult listaModulos()
         {
             metodoModulo metodoModulo = new metodoModulo();
-         
+
             List<modulo> listaModulo = new List<modulo>();
             listaModulo = metodoModulo.consultaModulos();
 
@@ -738,7 +841,7 @@ namespace TutoriasApp.Controllers
 
             int contadorDos = metodoHorarioClases.consultaHorarioClases().ToList().Count;
 
-            string mensaje="";
+            string mensaje = "";
 
             if (contadorDos > contador)
             {
@@ -749,7 +852,7 @@ namespace TutoriasApp.Controllers
                 mensaje = "Ya existe el Modulo ingresado en el Horario Actual,Ingrese uno diferente";
             }
 
-         
+
 
             listaHorariosClases = metodoHorarioClases.consultaHorarioClases();
 
@@ -803,7 +906,7 @@ namespace TutoriasApp.Controllers
 
                     for (var i = 2; i <= range.Rows.Count; i++)
                     {
-                      
+
                         horarioClases horarioClases = new horarioClases();
 
                         horarioClases.CodigoMateria = ((Excel.Range)range.Cells[i, 1]).Text;
@@ -811,15 +914,15 @@ namespace TutoriasApp.Controllers
                         horarioClases.Modulo = ((Excel.Range)range.Cells[i, 3]).Text;
                         horarioClases.Periodo = ((Excel.Range)range.Cells[i, 4]).Text;
                         horarioClases.Aula = ((Excel.Range)range.Cells[i, 5]).Text;
-                        horarioClases.Paralelo= ((Excel.Range)range.Cells[i, 6]).Text;
+                        horarioClases.Paralelo = ((Excel.Range)range.Cells[i, 6]).Text;
 
                         metodoDocente metodoDocente = new metodoDocente();
-                      
-                            metodoHorarioClases.ingresarHorarioClases(horarioClases);
 
-                      
-                      
-                      
+                        metodoHorarioClases.ingresarHorarioClases(horarioClases);
+
+
+
+
 
                     }
 
@@ -853,7 +956,7 @@ namespace TutoriasApp.Controllers
             metodoHorarioClases metodoHorarioClases = new metodoHorarioClases();
 
             metodoHorarioClases.eliminarHorarioClases(horarioClases);
-        
+
 
             return Json("Materia Eliminada", JsonRequestBehavior.AllowGet);
         }
@@ -862,50 +965,63 @@ namespace TutoriasApp.Controllers
 
 
 
-            public ActionResult ingresarHorarioClasesEstudiantes(string Matricula, string CedulaDocente, string CodigoMateria,string Paralelo,string NumMatricula)
+        public ActionResult ingresarHorarioClasesEstudiantes(string Matricula, string CedulaDocente, string CodigoMateria, string Paralelo, string NumMatricula)
         {
+
+
+            if (Matricula == null)
+            {
+                Matricula = "0";
+            }
+
+            if (NumMatricula == null)
+            {
+                NumMatricula = "0";
+            }
+
+
             conexionDataContext db = new conexionDataContext();
             metodoHorarioClaseEstudiante metodoHorarioClaseEstudiante = new metodoHorarioClaseEstudiante();
             metodoDocente metodoDocente = new metodoDocente();
 
             var existe = db.horarioClaseEstudianteMatricula(int.Parse(Matricula)).Where(x => x.CodigoMeteria == CodigoMateria).FirstOrDefault();
-            var modulosMateria = db.horarioDocenteCedula(CedulaDocente).Where(x=>x.CodigoMeteria == CodigoMateria);
+            var modulosMateria = db.horarioDocenteCedula(CedulaDocente).Where(y => y.CodigoMeteria == CodigoMateria).ToList();
 
 
             int contador = metodoHorarioClaseEstudiante.consultaHorariosEstudainte().ToList().Count;
 
 
 
-            if ( existe == null)
+            if (existe == null)
+            {
+                foreach (var x in modulosMateria)
                 {
-                    foreach (var x in modulosMateria)
-                    {
-                        metodoHorarioClaseEstudiante.ingresarHorarioClaseEstudiante(Matricula, CedulaDocente, CodigoMateria, x.CodigoModulo, Paralelo);
+                    metodoHorarioClaseEstudiante.ingresarHorarioClaseEstudiante(Matricula, CedulaDocente, CodigoMateria, x.CodigoModulo, Paralelo);
 
-                      
+
+                }
+                db.IngresarRepitencia(int.Parse(Matricula), CodigoMateria, char.Parse(NumMatricula));
+            }
+            if (existe != null)
+            {
+                if (existe.Paralelo == Paralelo)
+                {
+                    foreach (var a in modulosMateria)
+                    {
+                        metodoHorarioClaseEstudiante.ingresarHorarioClaseEstudiante(Matricula, CedulaDocente, CodigoMateria, a.CodigoModulo, Paralelo);
+
+
                     }
-                       db.IngresarRepitencia(int.Parse(Matricula), CodigoMateria, char.Parse(NumMatricula));
                 }
-                if (existe != null)
-                {
-                    if (existe.Paralelo == Paralelo)
-                    {
-                        foreach (var x in modulosMateria)
-                        {
-                            metodoHorarioClaseEstudiante.ingresarHorarioClaseEstudiante(Matricula, CedulaDocente, CodigoMateria, x.CodigoModulo, Paralelo);
+            }
 
 
-                        }
-                     }
-                }
-            
-                
             List<horarioClaseEstudiante> listaHorarioEstudiante = new List<horarioClaseEstudiante>();
             listaHorarioEstudiante = metodoHorarioClaseEstudiante.consultaHorariosEstudainte();
 
-           
 
-    
+
+
 
             int contadorDos = metodoHorarioClaseEstudiante.consultaHorariosEstudainte().ToList().Count;
 
@@ -922,7 +1038,7 @@ namespace TutoriasApp.Controllers
 
 
 
-      
+
             var data = new
             {
                 Mensaje = mensaje,
@@ -944,7 +1060,7 @@ namespace TutoriasApp.Controllers
             metodoDocente metodoDocente = new metodoDocente();
 
             metodoHorarioClases metodoHorarioClases = new metodoHorarioClases();
-   
+
             List<horarioClaseEstudiante> listaHorarioEstudiante = new List<horarioClaseEstudiante>();
 
 
@@ -989,26 +1105,44 @@ namespace TutoriasApp.Controllers
                         string Paralelo = ((Excel.Range)range.Cells[i, 5]).Text;
 
 
+
+                        var existe = db.horarioClaseEstudianteMatricula(int.Parse(horarioClaseEstudiante.Matricula)).Where(x => x.CodigoMeteria == horarioClaseEstudiante.Materia).FirstOrDefault();
+                        var modulosMateria = db.horarioDocenteCedula(horarioClaseEstudiante.Docente).Where(y => y.CodigoMeteria == horarioClaseEstudiante.Materia).ToList();
+
+
+                        int contador = metodoHorarioClaseEstudiante.consultaHorariosEstudainte().ToList().Count;
+
+
+
+
+
                         if (horarioClaseEstudiante.Matricula != "")
                         {
-                            var modulosMateria = db.horarioDocenteCedula(horarioClaseEstudiante.Docente).Where(x => x.CodigoMeteria == horarioClaseEstudiante.Materia);
 
-
-                            foreach (var x in modulosMateria)
+                            if (existe == null)
                             {
 
-                                metodoHorarioClaseEstudiante.ingresarHorarioClaseEstudiante(horarioClaseEstudiante.Matricula, horarioClaseEstudiante.Docente, horarioClaseEstudiante.Materia, x.CodigoModulo, Paralelo);
+                                foreach (var x in modulosMateria)
+                                {
 
+                                    metodoHorarioClaseEstudiante.ingresarHorarioClaseEstudiante(horarioClaseEstudiante.Matricula, horarioClaseEstudiante.Docente, horarioClaseEstudiante.Materia, x.CodigoModulo, Paralelo);
+
+                                }
                             }
-
                             db.IngresarRepitencia(int.Parse(horarioClaseEstudiante.Matricula), horarioClaseEstudiante.Materia, char.Parse(NumMatricula));
 
+                            if (existe != null)
+                            {
+                                if (existe.Paralelo == Paralelo)
+                                {
+                                    db.IngresarRepitencia(int.Parse(horarioClaseEstudiante.Matricula), horarioClaseEstudiante.Materia, char.Parse(NumMatricula));
 
-
+                                }
+                            }
                         }
 
                     }
-                  
+
                     workbook.Close(false, excelFile.FileName, null);
                     Marshal.FinalReleaseComObject(workbook);
                     application.Quit();
@@ -1039,21 +1173,21 @@ namespace TutoriasApp.Controllers
             listaHorarioEstudiante = metodoHorarioClaseEstudiante.consultaHorariosEstudainte();
 
 
-            return PartialView("horarioClaseEstudiante",listaHorarioEstudiante);
+            return PartialView("horarioClaseEstudiante", listaHorarioEstudiante);
         }
 
-        public ActionResult eliminarHorarioClasesEstudiantes(string Matricula,string CodigoMateria)
+        public ActionResult eliminarHorarioClasesEstudiantes(string Matricula, string CodigoMateria)
         {
             conexionDataContext db = new conexionDataContext();
             metodoHorarioClaseEstudiante metodoHorarioClaseEstudiante = new metodoHorarioClaseEstudiante();
 
-            var horariosClases = db.horarioClaseEstudianteMatricula(int.Parse(Matricula)).Where(x => x.CodigoMeteria == CodigoMateria);
+            var horariosClases = db.horarioClaseEstudianteMatricula(int.Parse(Matricula)).Where(x => x.CodigoMeteria == CodigoMateria).ToList();
 
             foreach (var x in horariosClases) {
 
                 metodoHorarioClaseEstudiante.eliminarHorarioClaseEstudiante(Matricula, x.Id_HorarioClases.ToString());
             }
-            db.EliminarRepitencia(int.Parse(Matricula),CodigoMateria);
+            db.EliminarRepitencia(int.Parse(Matricula), CodigoMateria);
             List<horarioClaseEstudiante> listaHorarioEstudiante = new List<horarioClaseEstudiante>();
             listaHorarioEstudiante = metodoHorarioClaseEstudiante.consultaHorariosEstudainte();
 
@@ -1072,7 +1206,7 @@ namespace TutoriasApp.Controllers
             List<repitencia> listaRepitencia = new List<repitencia>();
             listaRepitencia = metodoRepitencia.consultaRepitencias();
 
-            return PartialView("repitenciaEstudiante",listaRepitencia);
+            return PartialView("repitenciaEstudiante", listaRepitencia);
         }
 
 
@@ -1086,7 +1220,7 @@ namespace TutoriasApp.Controllers
             List<repitencia> listaRepitencia = new List<repitencia>();
             listaRepitencia = metodoRepitencia.consultaRepitencias();
 
-            return Json(listaRepitencia,JsonRequestBehavior.AllowGet);
+            return Json(listaRepitencia, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult eliminarRepitencia(repitencia RepitenciaDatos)
@@ -1104,7 +1238,7 @@ namespace TutoriasApp.Controllers
         //consulta el paralelolo de la materia
         public ActionResult consultaParaleloMateria(string CodigoMateria)
         {
-           
+
             List<horarioClaseDocente> listaParalelosMateria = new List<horarioClaseDocente>();
             metodoHorarioClaseDocente metodoHorarioClaseDocente = new metodoHorarioClaseDocente();
             listaParalelosMateria = metodoHorarioClaseDocente.listaParalelosMateria(CodigoMateria);
@@ -1116,7 +1250,7 @@ namespace TutoriasApp.Controllers
 
         //consulta el doncente del paralelo de la materia
 
-        public ActionResult consultaDocenteParalelo(string CodigoMateria,string Paralelo)
+        public ActionResult consultaDocenteParalelo(string CodigoMateria, string Paralelo)
         {
 
             List<docente> listaDocentes = new List<docente>();
@@ -1128,6 +1262,438 @@ namespace TutoriasApp.Controllers
 
             return Json(listaDocentes, JsonRequestBehavior.AllowGet);
         }
+        // consula paralelos de la materia del docente
+        public ActionResult consultaParaleloMateriaDocente(string CodigoMateria, string CedulaDocente)
+        {
+            List<horarioClaseDocente> listaParalelos = new List<horarioClaseDocente>();
+            metodoDocente metodoDocente = new metodoDocente();
+
+            listaParalelos = metodoDocente.consultaParaleloMateriaDocente(CodigoMateria, CedulaDocente);
+
+            return Json(listaParalelos, JsonRequestBehavior.AllowGet);
+        }
+
+        //consulta los docentes que coincida con la palabra de texto
+
+        public ActionResult consultaDocentesCoincidencia(string Palabra)
+        {
+            List<docente> listaDocentes = new List<docente>();
+            metodoDocente metodoDocente = new metodoDocente();
+
+            listaDocentes = metodoDocente.consultaDocenteCoincidencia(Palabra);
+
+            return Json(listaDocentes, JsonRequestBehavior.AllowGet);
+        }
+
+
+        //HORARIO DE CLASES DESDE EXCEL 
+
+        public ActionResult ingresoMateriaExcel(HttpPostedFileBase excelFile)
+        {
+
+            metodoMateria metodoMateria = new metodoMateria();
+            List<materia> listaMateria = new List<materia>();
+
+
+
+            if (excelFile == null || excelFile.ContentLength == 0)
+            {
+                listaMateria = metodoMateria.consultarMaterias();
+                return Json(listaMateria, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                if (excelFile.FileName.EndsWith("xls") || excelFile.FileName.EndsWith("xlsx"))
+                {
+
+                    string path = Server.MapPath("~/Content/" + excelFile.FileName);
+
+
+                    if (System.IO.File.Exists(path))
+                        System.IO.File.Delete(path);
+
+                    excelFile.SaveAs(path);
+
+                    //LEER DATOS DEL EXCEL
+
+                    Excel.Application application = new Excel.Application();
+
+                    Excel.Workbook workbook = application.Workbooks.Open(path);
+                    Excel.Worksheet worksheet = workbook.ActiveSheet;
+                    Excel.Range range = worksheet.UsedRange;
+
+
+
+
+                    for (var i = 2; i <= range.Rows.Count; i++)
+                    {
+
+                        materia materia = new materia();
+
+                        materia.CodigoCarrera = ((Excel.Range)range.Cells[i, 1]).Text;
+                        materia.CodigoMateria = ((Excel.Range)range.Cells[i, 2]).Text;
+                        materia.NombreMateria = ((Excel.Range)range.Cells[i, 3]).Text;
+
+
+                        if (materia.CodigoMateria != "" && materia.CodigoCarrera != "" && materia.NombreMateria != "")
+                        {
+                            if (metodoMateria.consultaExisteMateria(materia.CodigoMateria) != true)
+                            {
+                                metodoMateria.ingresarMateria(materia);
+
+                            }
+                            else
+                            {
+                                metodoMateria.actualizarMateria(materia);
+                            }
+
+
+                        }
+
+
+
+                    }
+
+
+                    listaMateria = metodoMateria.consultarMaterias();
+
+                    workbook.Close(false, excelFile.FileName, null);
+                    Marshal.FinalReleaseComObject(workbook);
+                    application.Quit();
+
+
+
+
+
+                    listaMateria = metodoMateria.consultarMaterias();
+
+                    return Json(listaMateria, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    listaMateria = metodoMateria.consultarMaterias();
+
+                    return Json(listaMateria, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
+        //REPORTES DE TUTORIAS
+
+        public ActionResult Reportes()
+        {
+            return PartialView("Reportes");
+        }
+
+
+        //TUTORIAS LISTAS
+
+        //tutorias del estudiante por Carrera
+        public ActionResult listaTutorias(string CodigoCarrera)
+        {
+
+            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
+            List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
+
+
+            listaHorariosTutorias = metodoHorarioTutorias.consultaHorarioTutoriasCarrera(CodigoCarrera);
+
+            return Json(listaHorariosTutorias, JsonRequestBehavior.AllowGet);
+        }
+
+        //todas las tutorias
+        public ActionResult listaTutoriasTotal()
+        {
+
+            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
+            List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
+
+
+            listaHorariosTutorias = metodoHorarioTutorias.consultaHorarioTutoriasTotal();
+
+            return Json(listaHorariosTutorias, JsonRequestBehavior.AllowGet);
+        }
+
+        //tutorias por facultad
+        public ActionResult listaTutoriasFacultad(string CodigoFacultad)
+        {
+
+            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
+            List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
+
+
+            listaHorariosTutorias = metodoHorarioTutorias.consultaHorarioTutoriasFacultad(CodigoFacultad);
+
+            return Json(listaHorariosTutorias, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        //tutorias por asistencia
+
+        public ActionResult listaTutoriasAsistencia()
+        {
+
+            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
+            List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
+
+
+            listaHorariosTutorias = metodoHorarioTutorias.consultaHorarioTutoriasAsistencia("SI");
+
+            return Json(listaHorariosTutorias, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult listaTutoriasMateria(string CodigoMateria)
+        {
+
+            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
+            List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
+
+
+            listaHorariosTutorias = metodoHorarioTutorias.consultaHorarioTutoriasMateria(CodigoMateria);
+
+            return Json(listaHorariosTutorias, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult listaTutoriasRepitencia(string CodigoMateria)
+        {
+
+            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
+            List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
+
+
+            listaHorariosTutorias = metodoHorarioTutorias.consultaHorarioTutoriasRepitenciaMateria(CodigoMateria, "3");
+
+            return Json(listaHorariosTutorias, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult datosTutorias()
+        {
+
+            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
+            List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
+
+
+            listaHorariosTutorias = metodoHorarioTutorias.consultaHorarioTutoriasAsistencia("SI");
+
+            var data = new
+            {
+                Asistidas = metodoHorarioTutorias.consultaHorarioTutoriasAsistencia("SI").Count,
+                NoAsistidas = metodoHorarioTutorias.consultaHorarioTutoriasAsistencia("NO").Count,
+                Total = metodoHorarioTutorias.consultaHorarioTutoriasTotal().Count
+            };
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        //DATOS PARA REALIZAR ESTADISITICAS DE REPORTES
+
+        int semanas = 16;
+
+
+        //TUTORAS DADAS POR DOCENTE
+
+        public ActionResult barrasDocente(string Cedula, string CodigoPeriodo)
+        {
+            metodoModulo metodoModulo = new metodoModulo();
+            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
+            metodoDocente metodoDocente = new metodoDocente();
+            docente docente = new docente();
+
+            docente = metodoDocente.consultaDocente(Cedula);
+
+            int horasLibre = metodoModulo.consultaHorasLibres(Cedula).ToList().Count * semanas;
+
+            int horasObligatorias = metodoModulo.consultaHorasObligatorias(Cedula).ToList().Count * semanas;
+
+            int horasPlanificadas = horasLibre + horasObligatorias;
+
+            int horasDadas = metodoHorarioTutorias.consultaHorarioTutoriasAsistencia("SI").Where(x=>x.CedulaDocente==Cedula &&x.CodigoPeriodo == CodigoPeriodo).ToList().Count;
+
+            var data = new
+            {
+                HorasPlanificadas = horasPlanificadas,
+                HorasDadas = horasDadas,
+                Docente = docente
+            };
+
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        //TUTORAS DADAS POR DOCENTE POR CARRERA
+        public ActionResult barrasDocentesFacultad(string Periodo,string CodigoCarrera)
+        {
+       
+            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
+            List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
+            metodoDocente metodoDocente = new metodoDocente();
+            metodoModulo metodoModulo = new metodoModulo();
+
+            var cedulas = (from x in metodoHorarioTutorias.consultaHorarioTutoriasTotal().Where(x => x.CodigoPeriodo == Periodo && x.CodigoCarrera==CodigoCarrera).ToList()
+                                     select new
+                                     {
+                                         x.CedulaDocente
+                                     }).Distinct().ToList();
+
+            List<estadisticaTutoria> data = new List<estadisticaTutoria>();
+
+            foreach (var x in cedulas)
+            {
+                estadisticaTutoria estadisticaTutoria = new estadisticaTutoria();
+
+         
+                estadisticaTutoria.Docente = metodoDocente.consultaDocente(x.CedulaDocente);
+
+
+                estadisticaTutoria.HorasLibres = metodoModulo.consultaHorasLibres(x.CedulaDocente).ToList().Count * semanas;
+
+                estadisticaTutoria.horasObligatorias = metodoModulo.consultaHorasObligatorias(x.CedulaDocente).ToList().Count * semanas;
+
+                estadisticaTutoria.HorasPlanificadas = estadisticaTutoria.horasObligatorias;
+
+                estadisticaTutoria.HorasDadas = metodoHorarioTutorias.consultaHorarioTutoriasAsistencia("SI").Where(y => y.CedulaDocente == x.CedulaDocente ).ToList().Count;
+                estadisticaTutoria.horasCarrera = metodoHorarioTutorias.consultaHorarioTutoriasAsistencia("SI").Where(y => y.CedulaDocente == x.CedulaDocente && y.CodigoCarrera == CodigoCarrera).ToList().Count;
+                estadisticaTutoria.horasOtrasCarreras = metodoHorarioTutorias.consultaHorarioTutoriasAsistencia("SI").Where(y => y.CedulaDocente == x.CedulaDocente  && y.CodigoCarrera != CodigoCarrera).ToList().Count;
+
+                var estudiantes = metodoHorarioTutorias.consultaHorarioTutoriasAsistencia("SI").Where(y => y.CedulaDocente == x.CedulaDocente && y.CodigoCarrera == CodigoCarrera);
+                estadisticaTutoria.numeroEstudiantes = (from e in estudiantes select new { e.Matricula }).Distinct().ToList().Count();
+
+                data.Add(estadisticaTutoria);
+            }
+
+
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        //
+
+        //TUTORAS DADAS POR DOCENTE POR CARRERA
+        public ActionResult barrasNumMatricula(string Periodo, string CodigoCarrera, string NumMatricula)
+        {
+            conexionDataContext dbs = new conexionDataContext();
+
+            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
+            List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
+            metodoEstudiante metodoEstudiante = new metodoEstudiante();
+            metodoModulo metodoModulo = new metodoModulo();
+
+            var matriculas = (from x in dbs.horarioTutoriasFull().Where(x => x.CodigoPeriodo == Periodo && x.CodigoCarrera == CodigoCarrera && x.Repitencia == char.Parse(NumMatricula)).ToList()
+                           select new
+                           {
+                               x.Matricula,
+                               x.CodigoMeteria
+                           }).Distinct().ToList();
+
+            List<estadisticaTutoria> data = new List<estadisticaTutoria>();
+
+
+
+            foreach (var x in matriculas)
+            {
+                estadisticaTutoria estadisticaTutoria = new estadisticaTutoria();
+
+
+                estadisticaTutoria.Estudiante = metodoEstudiante.consultaEstudiante(x.Matricula);
+
+
+                estadisticaTutoria.HorasPlanificadas = dbs.horarioTutoriasFull().Where(y => y.Matricula == x.Matricula && y.CodigoCarrera == CodigoCarrera && y.Repitencia == char.Parse(NumMatricula) && y.CodigoMeteria==x.CodigoMeteria).ToList().Count;
+                
+                estadisticaTutoria.HorasDadas = metodoHorarioTutorias.consultaHorarioTutoriasAsistencia("SI").Where(y => y.Matricula == x.Matricula.ToString() && y.CodigoCarrera == CodigoCarrera && y.Repitencia == NumMatricula && y.CodigoMateria == x.CodigoMeteria).ToList().Count;
+
+                var codigoMateria = (from materia in dbs.horarioTutoriasFull().ToList()
+                                                    where materia.Matricula == x.Matricula
+                                                    where materia.CodigoCarrera == CodigoCarrera
+                                                    where materia.CodigoPeriodo == Periodo
+                                                    where materia.Repitencia == char.Parse(NumMatricula)
+                                     where materia.CodigoMeteria == x.CodigoMeteria
+                                                    select new
+                                                    {
+                                                        materia.CodigoMeteria
+                                                    });
+
+                estadisticaTutoria.CodigoMateria = codigoMateria.ToList().First().CodigoMeteria.ToString();
+
+                data.Add(estadisticaTutoria);
+            }
+
+
+
+            return Json(data.OrderBy(z=>z.Estudiante.Nombre), JsonRequestBehavior.AllowGet);
+        }
+
+        //BARRAS REPITENIA POR NUMERO DE MATRICULA Y CARRERA
+
+        //TUTORAS DADAS POR DOCENTE POR CARRERA
+        public ActionResult barrasRepitencia (string Periodo, string CodigoCarrera)
+        {
+
+            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
+            List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
+            metodoDocente metodoDocente = new metodoDocente();
+            metodoModulo metodoModulo = new metodoModulo();
+
+            var repitencia = (from x in metodoHorarioTutorias.consultaHorarioTutoriasTotal().Where(x => x.CodigoPeriodo == Periodo && x.CodigoCarrera == CodigoCarrera).ToList()
+                           select new
+                           {
+                               x.Repitencia
+                           }).Distinct().ToList();
+
+            List<estadisticaTutoria> data = new List<estadisticaTutoria>();
+
+            foreach (var x in repitencia)
+            {
+                estadisticaTutoria estadisticaTutoria = new estadisticaTutoria();
+
+
+                estadisticaTutoria.HorasDadas = metodoHorarioTutorias.consultaHorarioTutoriasAsistencia("SI").Where(y =>  y.CodigoCarrera == CodigoCarrera && y.CodigoPeriodo == Periodo && y.Repitencia == x.Repitencia).ToList().Count;
+                estadisticaTutoria.repitencia = x.Repitencia;
+
+                data.Add(estadisticaTutoria);
+            }
+
+
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        //BARRAS REPITENIA POR NUMERO DE MATRICULA Y MATERIA
+
+        //TUTORAS DADAS POR DOCENTE POR MATERIA
+        public ActionResult barrasMateria(string Periodo, string CodigoCarrera,string CodigoMateria)
+        {
+
+            metodoHorarioTutorias metodoHorarioTutorias = new metodoHorarioTutorias();
+            List<horarioTutorias> listaHorariosTutorias = new List<horarioTutorias>();
+            metodoDocente metodoDocente = new metodoDocente();
+            metodoModulo metodoModulo = new metodoModulo();
+
+            var repitencia = (from x in metodoHorarioTutorias.consultaHorarioTutoriasTotal().Where(x => x.CodigoPeriodo == Periodo && x.CodigoCarrera == CodigoCarrera && x.CodigoMateria == CodigoMateria).ToList()
+                              select new
+                              {
+                                  x.Repitencia
+                              }).Distinct().ToList();
+
+            List<estadisticaTutoria> data = new List<estadisticaTutoria>();
+
+            foreach (var x in repitencia)
+            {
+                estadisticaTutoria estadisticaTutoria = new estadisticaTutoria();
+
+
+                estadisticaTutoria.HorasDadas = metodoHorarioTutorias.consultaHorarioTutoriasAsistencia("SI").Where(y => y.CodigoCarrera == CodigoCarrera && y.CodigoPeriodo == Periodo && y.Repitencia == x.Repitencia && y.CodigoMateria ==CodigoMateria).ToList().Count;
+                estadisticaTutoria.repitencia = x.Repitencia;
+
+                data.Add(estadisticaTutoria);
+            }
+
+
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }

@@ -17,16 +17,15 @@
 		<ul class="list-inline">
 			<li>
 				<label for="">Facultad</label><br />
-				<select name="facultad" id="codigoFacultadCarrera">
-					<option name="facultad" value="FICA">FICA</option>
-				</select>
+				<select name="facultad" id="codigoFacultadCarrera" onchange="listaCarreras()"></select>
 			</li>
 			<li>
 				<label for="">Carrera</label><br />
-				<select name="carrera" id="listaCarreras"></select>
+				<select id="listaCarreras"></select>
 			</li>
+
 			<li>
-				<label for="">Codigo Materia</label><br />
+				<label for="">Código Materia</label><br />
 				<input type="text" id="codigoMateria">
 			</li>
 			<li>
@@ -41,31 +40,70 @@
 			</li>
 		</ul>
 	</div>
+	<br />
+	<div style="padding:15px;">
+		<form enctype="multipart/form-data" method="post" id="excelData">
+
+
+			<h4>Cargar Materias desde Excel</h4>
+			<input type="file" name="excelFile" id="excelFile" />
+			<input type="submit" value="Cargar Lista" class="success" />
+		</form>
+	</div>
+	<br />
+
+	<div style="padding-left:15px">
+		<h4>Selecciona la Facultad y Carrera para mostrar las materias</h4>
+		<ul class="list-inline">
+			<li>
+
+			</li>
+			<br />
+			<br />
+			<li>
+				<label for="">Facultad</label><br />
+				<select name="facultad" id="codigoFacultad" onchange="listaCarreras1();"></select>
+			</li>
+			<li>
+				<label for="">Carrera</label><br />
+					<select id="listaCarreras1" ></select>
+				</li>
+			
+
+			<li>
+				<input onclick="listaMateriasCarrera();" type="button" class="success" value="Consultar" />
+			</li>
+		</ul>
+
+	</div>
+
+
+
 	<div class="table-carrera">
 		<br />
 		<h4>Tabla de Materias Actuales</h4>
 		<table>
 			<thead>
 				<tr>
-					<th>Cod Facultad</th>
-					<th>Cod Carrera</th>
-					<th>Cod Materia</th>
+					<th>Cod. Facultad</th>
+					<th>Cod. Carrera</th>
+					<th>Cod. Materia</th>
 					<th>Nombre Materia</th>
-					<th>Accion</th>
+					<th>Acción</th>
 				</tr>
 			</thead>
 			<tbody id="tablaMateria">
-				@foreach (var consulta in Model)
+				@*@foreach (var consulta in Model)
 				{
 					<tr>
-						<td>FICA</td>
+						<td>@consulta.CodigoFacultad</td>
 						<td>@consulta.CodigoCarrera</td>
-						<td>@consulta.NombreMateria</td>
 						<td>@consulta.CodigoMateria</td>
+						<td>@consulta.NombreMateria</td>
 						<td><a onclick="confEliminarMateria(this)" id="@consulta.CodigoMateria">Eliminar</a></td>
 						<td><a onclick="editarMateria(this)" id="@consulta.CodigoMateria">Actualizar</a></td>
 					</tr>
-				}
+				}*@
 
 			</tbody>
 		</table>
@@ -74,308 +112,610 @@
 </div>
 
 
-<!-- PANEL EDICION DE CAMPOS -->
-<div class="panel-edit" id="editMateria">
-	<h3><i class="fas fa-pen-square"></i> Editar Materia</h3>
-	<ul>
+	<!-- PANEL EDICION DE CAMPOS -->
+	<div class="panel-edit" id="editMateria">
+		<h3><i class="fas fa-pen-square"></i> Editar Materia</h3>
+		<ul>
 
-		<li>
-			<label>Codigo Materia</label><br />
-			<input type="text" id="codigoMateriaEdit">
-		</li>
-		<li>
-			<label>Nombre Materia</label><br />
-			<input type="text" id="nombreMateriaEdit">
-		</li>
-	</ul>
-	<ul class="list-inline  ">
-		<li><button onclick="ingresarEditMateria()">Aceptar <i class="fas fa-check"></i></button></li>
-		<li><button onclick="btnCerrarEditMateria()">Cancelar <i class="fas fa-times-circle"></i></button></li>
-	</ul>
-	<br />
-	<div id="loadUpdateMateria" class="loadUpdate">
-		<span><i class="fas fa-spinner fa-spin"></i> Actualizando...</span>
-	</div>
-</div>
-
-
-
-<div id="btnConfirmarMateria" class="container-confirmacion">
-	<div>
-		<h4>¿Está seguro que desea eliminar La Materia seleccionada?</h4>
+			<li>
+				<label>Codigo Materia: </label><br />
+				<label id="codigoMateriaEdit"></label>
+			</li>
+			<li>
+				<label>Nombre Materia</label><br />
+				<input type="text" id="nombreMateriaEdit">
+			</li>
+		</ul>
+		<ul class="list-inline  ">
+			<li><button onclick="ingresarEditMateria()">Aceptar <i class="fas fa-check"></i></button></li>
+			<li><button onclick="btnCerrarEditMateria()">Cancelar <i class="fas fa-times-circle"></i></button></li>
+		</ul>
 		<br />
-		<button class="btnSi" id="btnSiMateria">SI</button>
-		<button class="btnNo" id="btnNoMateria">NO</button>
-		<br />
-		<span id="loadDeleteMateria" class="loadUpdate"><i class="fas fa-spinner fa-spin"></i> Eliminando...</span>
-
+		<div id="loadUpdateMateria" class="loadUpdate">
+			<span><i class="fas fa-spinner fa-spin"></i> Actualizando...</span>
+		</div>
 	</div>
 
 
-</div>
+
+
+	<div id="btnConfirmarMateria" class="container-confirmacion">
+		<div>
+			<h4>¿Está seguro que desea eliminar La Materia seleccionada?</h4>
+			<br />
+			<button class="btnSi" id="btnSiMateria">SI</button>
+			<button class="btnNo" id="btnNoMateria">NO</button>
+			<br />
+			<span id="loadDeleteMateria" class="loadUpdate"><i class="fas fa-spinner fa-spin"></i> Eliminando...</span>
+
+		</div>
+
+
+	</div>
+
+	<script>
+		$(function () {
+
+
+			$.ajax({
+				url: "/SuperAdmin/listaFacultad",
+				type: 'post',
+				datatype: 'application/json',
+				//data: form.serialize(),
+				success: function (listaFacultad) {
+
+					$("#codigoFacultadCarrera").empty();
+
+
+					var d;
+					var a = 0;
+					for (var i = 0; i < listaFacultad.length; i++) {
+
+
+						d += '<option ' +
+							'value="' + listaFacultad[i].CodigoFacultad + '" ' +
+							'>' + listaFacultad[i].NombreFacultad + '</option>';
+
+						a++;
+					}
+
+					$("#codigoFacultadCarrera").append(d);
+					$("#codigoFacultad").append(d);
+
+					listaCarreras();
+					listaCarreras1();
+
+				},
+				error: function () {
+
+				}
+			});
+
+		});
+
+
+		function listaMateriasFacultad() {
 
 
 
-<script>
-	$(function listaCarreras() {
+			$.ajax({
+				url: "/SuperAdmin/listaMateriasFacultad",
+				type: 'post',
+				datatype: 'application/json',
+				data: { CodigoFacultad: $('#codigoFacultad').val() },
+				success: function (listaMateria) {
+
+					$("#tablaMateria").empty();
 
 
-		$.ajax({
-			url: "/SuperAdmin/listaCarreras",
-			type: 'post',
-			datatype: 'application/json',
-			//data: form.serialize(),
-			success: function (listaCarrera) {
-
-				$("#listaCarreras").empty();
+					var d;
+					var a = 0;
+					for (var i = 0; i < listaMateria.length; i++) {
 
 
-				var d;
-				var a = 0;
-				for (var i = 0; i < listaCarrera.length; i++) {
+						d += '<tr>' +
+							'<td>' + listaMateria[i].CodigoFacultad + '</td>' +
+							'<td>' + listaMateria[i].CodigoCarrera + '</td>' +
+							'<td>' + listaMateria[i].CodigoMateria + '</td>' +
+							'<td>' + listaMateria[i].NombreMateria + '</td>' +
+							'<td>' + '<a type="button"  onclick="confEliminarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Eliminar</a>' + '</td>' +
+							'<td>' + '<a type="button"  onclick="editarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Actualizar</a>' + '</td>' +
+							'</tr>';
+
+						a++;
+					}
+
+					$("#tablaMateria").append(d);
+
+				},
+				error: function () {
+
+				}
+			});
+
+		}
 
 
-					d += '<option ' +
-						'value="' + listaCarrera[i].CodigoCarrera + '" ' +
-						'>' + listaCarrera[i].NombreCarrera + '</option>';
+		function listaMateriasCarrera() {
 
-					a++;
+
+
+			$.ajax({
+				url: "/SuperAdmin/listaMaterias",
+				type: 'post',
+				datatype: 'application/json',
+				data: { CodigoCarrera: $('#listaCarreras1').val() },
+				success: function (listaMateria) {
+
+					$("#tablaMateria").empty();
+
+
+					var d;
+					var a = 0;
+					for (var i = 0; i < listaMateria.length; i++) {
+
+
+						d += '<tr>' +
+							'<td>' + listaMateria[i].CodigoFacultad + '</td>' +
+							'<td>' + listaMateria[i].CodigoCarrera + '</td>' +
+							'<td>' + listaMateria[i].CodigoMateria + '</td>' +
+							'<td>' + listaMateria[i].NombreMateria + '</td>' +
+							'<td>' + '<a type="button"  onclick="confEliminarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Eliminar</a>' + '</td>' +
+							'<td>' + '<a type="button"  onclick="editarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Actualizar</a>' + '</td>' +
+							'</tr>';
+
+						a++;
+					}
+
+					$("#tablaMateria").append(d);
+
+				},
+				error: function () {
+
+				}
+			});
+
+		}
+
+	</script>
+
+
+	<script>
+		function listaCarreras() {
+
+
+			$.ajax({
+				url: "/SuperAdmin/listaCarrerasFacultad",
+				type: 'post',
+				data: { CodigoFacultad: $('#codigoFacultadCarrera').val() },
+				success: function (listaCarrera) {
+
+					$("#listaCarreras").empty();
+
+
+					var d;
+					var a = 0;
+					for (var i = 0; i < listaCarrera.length; i++) {
+
+
+						d += '<option ' +
+							'value="' + listaCarrera[i].CodigoCarrera + '" ' +
+							'>' + listaCarrera[i].NombreCarrera + '</option>';
+
+						a++;
+					}
+
+					$("#listaCarreras").append(d);
+
+					listaMaterias();
+
+
+				},
+				error: function () {
+
+				}
+			});
+
+		}
+
+		function listaCarreras1() {
+
+
+			$.ajax({
+				url: "/SuperAdmin/listaCarrerasFacultad",
+				type: 'post',
+				data: { CodigoFacultad: $('#codigoFacultad').val() },
+				success: function (listaCarrera) {
+
+					$("#listaCarreras1").empty();
+
+
+					var d;
+					var a = 0;
+					for (var i = 0; i < listaCarrera.length; i++) {
+
+
+						d += '<option ' +
+							'value="' + listaCarrera[i].CodigoCarrera + '" ' +
+							'>' + listaCarrera[i].NombreCarrera + '</option>';
+
+						a++;
+					}
+
+					$("#listaCarreras1").append(d);
+
+					listaMaterias1();
+
+
+				},
+				error: function () {
+
+				}
+			});
+
+		}
+
+
+	
+
+		function listaMaterias() {
+			$.ajax({
+				url: "/SuperAdmin/listaMaterias",
+				type: 'post',
+				datatype: 'application/json',
+				data: { CodigoCarrera: $("#listaCarreras").val() },
+				success: function (listaMaterias) {
+
+
+					$("#listaMaterias").empty();
+
+
+					var d;
+					var a = 0;
+					for (var i = 0; i < listaMaterias.length; i++) {
+
+
+						d += '<option ' +
+							'value="' + listaMaterias[i].CodigoMateria + '" ' +
+							'>' + listaMaterias[i].NombreMateria + '</option>';
+
+						a++;
+					}
+
+					$("#listaMaterias").append(d);
+
+
+
+				},
+				error: function () {
+
+				}
+			});
+		}
+
+			function listaMaterias1() {
+				$.ajax({
+					url: "/SuperAdmin/listaMaterias",
+					type: 'post',
+					datatype: 'application/json',
+					data: { CodigoCarrera: $("#listaCarreras1").val() },
+					success: function (listaMaterias) {
+
+
+						$("#listaMaterias1").empty();
+
+
+						var d;
+						var a = 0;
+						for (var i = 0; i < listaMaterias.length; i++) {
+
+
+							d += '<option ' +
+								'value="' + listaMaterias[i].CodigoMateria + '" ' +
+								'>' + listaMaterias[i].NombreMateria + '</option>';
+
+							a++;
+						}
+
+						$("#listaMaterias1").append(d);
+
+
+
+
+					},
+					error: function () {
+
+					}
+				});
+			}
+	</script>
+
+
+	<script>
+
+				///CONFIRMACIONES
+				var cod = "";
+				function confEliminarMateria(codigo) {
+
+					$('#loadDeleteMateria').css('display', 'none');
+					$('#btnConfirmarMateria').css('display', 'flex');
+
+					cod = codigo.id;
+
+
 				}
 
-				$("#listaCarreras").append(d)
+				$('#btnSiMateria').on('click', function () {
+
+					eliminarMateria(cod);
+
+					cod = "";
+				});
+
+				$('#btnNoMateria').on('click', function () {
 
 
-			},
-			error: function () {
-
-			}
-		});
-
-	});
-</script>
+					$('#btnConfirmarMateria').css('display', 'none');
+					cod = "";
+				});
 
 
-<script>
+				//MATERIA
 
-	///CONFIRMACIONES
-	var cod = "";
-	function confEliminarMateria(codigo) {
+				function ingresarMateria() {
 
-		$('#loadDeleteMateria').css('display', 'none');
-		$('#btnConfirmarMateria').css('display', 'flex');
+					$('#loadInsertMateria').css('display', 'flex');
 
-		cod = codigo.id;
-
-
-	}
-
-	$('#btnSiMateria').on('click', function () {
-
-		eliminarMateria(cod);
-
-		cod = "";
-	});
-
-	$('#btnNoMateria').on('click', function () {
+					var materia = {
+						CodigoCarrera: $('#listaCarreras').val(),
+						NombreMateria: $("#nombreMateria").val(),
+						CodigoMateria: $("#codigoMateria").val()
+					};
 
 
-		$('#btnConfirmarMateria').css('display', 'none');
-		cod = "";
-	});
+					$.ajax({
+						url: "/SuperAdmin/ingresarMateria",
+						data: JSON.stringify(materia),
+						type: "POST",
+						contentType: "application/json;charset=utf-8",
+						dataType: "json",
+						success: function (listaMateria) {
+
+							$("#tablaMateria").empty();
 
 
-	//MATERIA
-
-	function ingresarMateria() {
-
-		$('#loadInsertMateria').css('display', 'flex');
-
-		var materia = {
-			CodigoCarrera: $("#listaCarreras").val(),
-			NombreMateria: $("#nombreMateria").val(),
-			CodigoMateria: $("#codigoMateria").val()
-		};
+							var d;
+							var a = 0;
+							for (var i = 0; i < listaMateria.length; i++) {
 
 
-		$.ajax({
-			url: "/SuperAdmin/ingresarMateria",
-			data: JSON.stringify(materia),
-			type: "POST",
-			contentType: "application/json;charset=utf-8",
-			dataType: "json",
-			success: function (listaMateria) {
+								d += '<tr>' +
+									'<td>' + listaMateria[i].CodigoFacultad + '</td>' +
+									'<td>' + listaMateria[i].CodigoCarrera + '</td>' +
+									'<td>' + listaMateria[i].CodigoMateria + '</td>' +
+									'<td>' + listaMateria[i].NombreMateria + '</td>' +
+									'<td>' + '<a type="button"  onclick="confEliminarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Eliminar</a>' + '</td>' +
+									'<td>' + '<a type="button"  onclick="editarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Actualizar</a>' + '</td>' +
+									'</tr>';
 
-				$("#tablaMateria").empty();
+								a++;
+							}
 
+							$("#tablaMateria").append(d);
 
-				var d;
-				var a = 0;
-				for (var i = 0; i < listaMateria.length; i++) {
+							$("#nombreMateria").val("");
+							$("#codigoMateria").val("");
 
+							$('#loadInsertMateria').css('display', 'none');
 
-					d += '<tr>' +
-						'<td>' + listaMateria[i].CodigoFacultad + '</td>' +
-						'<td>' + listaMateria[i].CodigoCarrera + '</td>' +
-						'<td>' + listaMateria[i].CodigoMateria + '</td>' +
-						'<td>' + listaMateria[i].NombreMateria + '</td>' +
-						'<td>' + '<a type="button"  onclick="confEliminarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Eliminar</a>' + '</td>' +
-						'<td>' + '<a type="button"  onclick="editarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Actualizar</a>' + '</td>' +
-						'</tr>';
+						},
+						error: function () {
 
-					a++;
+						}
+					});
 				}
 
-				$("#tablaMateria").append(d);
-
-				$("#nombreMateria").val("");
-				$("#codigoMateria").val("");
-
-				$('#loadInsertMateria').css('display', 'none');
-
-			},
-			error: function () {
-
-			}
-		});
-	}
 
 
+				function eliminarMateria(codigo) {
 
-	function eliminarMateria(codigo) {
+					$('#loadDeleteMateria').css('display', 'flex');
 
-		$('#loadDeleteMateria').css('display', 'flex');
+					$.ajax({
+						url: "/SuperAdmin/eliminarMateria",
+						data: JSON.stringify({ CodigoMateria: codigo }),
+						type: "POST",
+						contentType: "application/json;charset=utf-8",
+						dataType: "json",
+						success: function (listaMateria) {
 
-		$.ajax({
-			url: "/SuperAdmin/eliminarMateria",
-			data: JSON.stringify({ CodigoMateria: codigo }),
-			type: "POST",
-			contentType: "application/json;charset=utf-8",
-			dataType: "json",
-			success: function (listaMateria) {
-
-				$("#tablaMateria").empty();
-
-
-				var d;
-				var a = 0;
-				for (var i = 0; i < listaMateria.length; i++) {
+							$("#tablaMateria").empty();
 
 
-					d += '<tr>' +
-						'<td>' + listaMateria[i].CodigoFacultad + '</td>' +
-						'<td>' + listaMateria[i].CodigoCarrera + '</td>' +
-						'<td>' + listaMateria[i].CodigoMateria + '</td>' +
-						'<td>' + listaMateria[i].NombreMateria + '</td>' +
-						'<td>' + '<a type="button"  onclick="confEliminarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Eliminar</a>' + '</td>' +
-						'<td>' + '<a type="button"  onclick="editarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Actualizar</a>' + '</td>' +
-						'</tr>';
+							var d;
+							var a = 0;
+							for (var i = 0; i < listaMateria.length; i++) {
 
-					a++;
+
+								d += '<tr>' +
+									'<td>' + listaMateria[i].CodigoFacultad + '</td>' +
+									'<td>' + listaMateria[i].CodigoCarrera + '</td>' +
+									'<td>' + listaMateria[i].CodigoMateria + '</td>' +
+									'<td>' + listaMateria[i].NombreMateria + '</td>' +
+									'<td>' + '<a type="button"  onclick="confEliminarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Eliminar</a>' + '</td>' +
+									'<td>' + '<a type="button"  onclick="editarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Actualizar</a>' + '</td>' +
+									'</tr>';
+
+								a++;
+							}
+
+							$("#tablaMateria").append(d);
+
+
+
+							$('#loadDeleteMateria').css('display', 'none');
+							$('#btnConfirmarMateria').css('display', 'none');
+
+
+						},
+						error: function () {
+
+						}
+					});
 				}
 
-				$("#tablaMateria").append(d);
+
+				function editarMateria(codigo) {
+
+					$("#editMateria").css("display", "block");
+
+					$.ajax({
+						url: "/SuperAdmin/editarMateria",
+						data: JSON.stringify({ CodigoMateria: codigo.id }),
+						type: "POST",
+						contentType: "application/json;charset=utf-8",
+						dataType: "json",
+						success: function (materia) {
+
+							$("#nombreMateriaEdit").val(materia.NombreMateria);
+							$("#codigoMateriaEdit").text(materia.CodigoMateria);
+
+						},
+						error: function () {
+
+						}
+					});
 
 
 
-				$('#loadDeleteMateria').css('display', 'none');
-				$('#btnConfirmarMateria').css('display', 'none');
-
-
-			},
-			error: function () {
-
-			}
-		});
-	}
-
-
-	function editarMateria(codigo) {
-
-		$("#editMateria").css("display", "block");
-
-		$.ajax({
-			url: "/SuperAdmin/editarMateria",
-			data: JSON.stringify({ CodigoMateria: codigo.id }),
-			type: "POST",
-			contentType: "application/json;charset=utf-8",
-			dataType: "json",
-			success: function (materia) {
-
-				$("#nombreMateriaEdit").val(materia.NombreMateria);
-				$("#codigoMateriaEdit").val(materia.CodigoMateria);
-
-			},
-			error: function () {
-
-			}
-		});
-
-
-
-	}
-
-
-	function btnCerrarEditMateria() {
-		$("#editMateria").css("display", "none");
-		$("#nombreMateriaEdit").val("");
-		$("#codigoMateriaEdit").val("");
-	}
-
-
-
-
-	//ingreso edit Materia
-	function ingresarEditMateria() {
-
-		$('#loadUpdateMateria').css('display', 'flex');
-
-		var materia = {
-			NombreMateria: $("#nombreMateriaEdit").val(),
-			CodigoMateria: $("#codigoMateriaEdit").val()
-		};
-
-
-		$.ajax({
-			url: "/SuperAdmin/ingresarMateria",
-			data: JSON.stringify(materia),
-			type: "POST",
-			contentType: "application/json;charset=utf-8",
-			dataType: "json",
-			success: function (listaMateria) {
-
-				$("#tablaMateria").empty();
-
-
-				var d;
-				var a = 0;
-				for (var i = 0; i < listaMateria.length; i++) {
-
-
-					d += '<tr>' +
-						'<td>' + listaMateria[i].CodigoFacultad + '</td>' +
-						'<td>' + listaMateria[i].CodigoCarrera + '</td>' +
-						'<td>' + listaMateria[i].CodigoMateria + '</td>' +
-						'<td>' + listaMateria[i].NombreMateria + '</td>' +
-						'<td>' + '<a type="button"  onclick="confEliminarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Eliminar</a>' + '</td>' +
-						'<td>' + '<a type="button"  onclick="editarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Actualizar</a>' + '</td>' +
-						'</tr>';
-
-					a++;
 				}
 
-				$("#tablaMateria").append(d);
-				$("#editMateria").css("display", "none");
 
-				$("#nombreMateriaEdit").val("");
-				$("#codigoMateriaEdit").val("");
-
-				$('#loadUpdateMateria').css('display', 'none');
-			},
-			error: function () {
-
-			}
-		});
-	}
+				function btnCerrarEditMateria() {
+					$("#editMateria").css("display", "none");
+					$("#nombreMateriaEdit").val("");
+					$("#codigoMateriaEdit").text("");
+				}
 
 
-</script>
+				//ingreso edit Materia
+				function ingresarEditMateria() {
+
+					$('#loadUpdateMateria').css('display', 'flex');
+
+					var materia = {
+						NombreMateria: $("#nombreMateriaEdit").val(),
+						CodigoMateria: $("#codigoMateriaEdit").text()
+					};
+
+
+					$.ajax({
+						url: "/SuperAdmin/ingresarMateria",
+						data: JSON.stringify(materia),
+						type: "POST",
+						contentType: "application/json;charset=utf-8",
+						dataType: "json",
+						success: function (listaMateria) {
+
+							$("#tablaMateria").empty();
+
+
+							var d;
+							var a = 0;
+							for (var i = 0; i < listaMateria.length; i++) {
+
+
+								d += '<tr>' +
+									'<td>' + listaMateria[i].CodigoFacultad + '</td>' +
+									'<td>' + listaMateria[i].CodigoCarrera + '</td>' +
+									'<td>' + listaMateria[i].CodigoMateria + '</td>' +
+									'<td>' + listaMateria[i].NombreMateria + '</td>' +
+									'<td>' + '<a type="button"  onclick="confEliminarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Eliminar</a>' + '</td>' +
+									'<td>' + '<a type="button"  onclick="editarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Actualizar</a>' + '</td>' +
+									'</tr>';
+
+								a++;
+							}
+
+							$("#tablaMateria").append(d);
+							$("#editMateria").css("display", "none");
+
+							$("#nombreMateriaEdit").val("");
+							$("#codigoMateriaEdit").val("");
+
+							$('#loadUpdateMateria').css('display', 'none');
+						},
+						error: function () {
+
+						}
+					});
+				}
+
+				//INGRESAR DOCENTES DESDE EXCEL
+				//enviar form data
+
+				$("#excelData").on("submit", function (e) {
+					e.preventDefault();
+					var f = $(this);
+					var formData = new FormData(document.getElementById("excelData"));
+					formData.append("dato", "valor");
+
+					$('#tablaMateria').html(
+						'<tr id="modalLoad" class="loadingTable"><td><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></td></tr>'
+					);
+
+					//formData.append(f.attr("name"), $(this)[0].files[0]);
+					$.ajax({
+						url: "/SuperAdmin/ingresoMateriaExcel",
+						type: "post",
+						dataType: "json",
+						data: formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function (listaMateria) {
+
+
+							$("#tablaMateria").empty();
+
+
+							var d;
+							var a = 0;
+							for (var i = 0; i < listaMateria.length; i++) {
+
+
+								d += '<tr>' +
+									'<td>' + listaMateria[i].CodigoFacultad + '</td>' +
+									'<td>' + listaMateria[i].CodigoCarrera + '</td>' +
+									'<td>' + listaMateria[i].CodigoMateria + '</td>' +
+									'<td>' + listaMateria[i].NombreMateria + '</td>' +
+									'<td>' + '<a type="button"  onclick="confEliminarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Eliminar</a>' + '</td>' +
+									'<td>' + '<a type="button"  onclick="editarMateria(this)" id="' + listaMateria[i].CodigoMateria + '"></i> Actualizar</a>' + '</td>' +
+									'</tr>';
+
+								a++;
+							}
+
+							$("#tablaMateria").append(d);
+
+
+							$("#nombreMateria").val("");
+							$("#codigoMateria").val("");
+
+							$('#excelFile').val('');
+
+							formData = null;
+
+						},
+						error: function () {
+
+						}
+					})
+						.done(function (res) {
+
+
+						});
+
+				});
+			
+	</script>

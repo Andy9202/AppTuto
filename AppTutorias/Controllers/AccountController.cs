@@ -81,7 +81,7 @@ namespace AppTutorias.Controllers
 
                 if (masterSuperAdmin.rol.nombreRol == "SUPERADMIN")
                 {
-
+                    Session["superAdmin"] = masterSuperAdmin;
                     User.IsInRole("SUPERADMIN");
 
                     return RedirectToAction("Index", "SuperAdmin");

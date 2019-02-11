@@ -23,24 +23,6 @@
       <Association Name="FACULTAD_CARRERA" Member="FACULTAD" ThisKey="Id_Facultad" OtherKey="Id_Facultad" Type="FACULTAD" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.DOCENTE" Member="DOCENTE">
-    <Type Name="DOCENTE">
-      <Column Name="Id_Docente" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Id_Rol" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NombreDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ApellidoDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Celular" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="Cedula" Type="System.String" DbType="Char(10)" CanBeNull="true" />
-      <Association Name="DOCENTE_HORARIO_CLASES" Member="HORARIO_CLASES" ThisKey="Id_Docente" OtherKey="Id_Docente" Type="HORARIO_CLASES" />
-      <Association Name="DOCENTE_HORARIO_LIBRE_DOCENTE" Member="HORARIO_LIBRE_DOCENTE" ThisKey="Id_Docente" OtherKey="Id_Docente" Type="HORARIO_LIBRE_DOCENTE" />
-      <Association Name="DOCENTE_HORARIO_OBLIGATORIO_DOCENTE" Member="HORARIO_OBLIGATORIO_DOCENTE" ThisKey="Id_Docente" OtherKey="Id_Docente" Type="HORARIO_OBLIGATORIO_DOCENTE" />
-      <Association Name="DOCENTE_HORIO_TUTORIAS" Member="HORIO_TUTORIAS" ThisKey="Id_Docente" OtherKey="Id_Docente" Type="HORIO_TUTORIAS" />
-      <Association Name="ROL_DOCENTE" Member="ROL" ThisKey="Id_Rol" OtherKey="Id_Rol" Type="ROL" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.ESTUDIANTE" Member="ESTUDIANTE">
     <Type Name="ESTUDIANTE">
       <Column Name="Id_Estudiante" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -68,70 +50,6 @@
       <Association Name="FACULTAD_CARRERA" Member="CARRERA" ThisKey="Id_Facultad" OtherKey="Id_Facultad" Type="CARRERA" />
     </Type>
   </Table>
-  <Table Name="dbo.HORARIO_CLASES" Member="HORARIO_CLASES">
-    <Type Name="HORARIO_CLASES">
-      <Column Name="Id_HorarioClases" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Id_Materia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Id_Docente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Id_Modulo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Id_Periodo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Aula" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="Paralelo" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
-      <Association Name="HORARIO_CLASES_HORARIO_ESTUDIANTE" Member="HORARIO_ESTUDIANTE" ThisKey="Id_HorarioClases" OtherKey="Id_HorarioClases" Type="HORARIO_ESTUDIANTE" />
-      <Association Name="DOCENTE_HORARIO_CLASES" Member="DOCENTE" ThisKey="Id_Docente" OtherKey="Id_Docente" Type="DOCENTE" IsForeignKey="true" />
-      <Association Name="MATERIA_HORARIO_CLASES" Member="MATERIA" ThisKey="Id_Materia" OtherKey="Id_Materia" Type="MATERIA" IsForeignKey="true" />
-      <Association Name="MODULO_HORARIO_CLASES" Member="MODULO" ThisKey="Id_Modulo" OtherKey="Id_Modulo" Type="MODULO" IsForeignKey="true" />
-      <Association Name="PERIODO_ACADEMICO_HORARIO_CLASES" Member="PERIODO_ACADEMICO" ThisKey="Id_Periodo" OtherKey="Id_Periodo" Type="PERIODO_ACADEMICO" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.HORARIO_ESTUDIANTE" Member="HORARIO_ESTUDIANTE">
-    <Type Name="HORARIO_ESTUDIANTE">
-      <Column Name="Id_HoraioEstudiante" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Id_Estudiante" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Id_HorarioClases" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="ESTUDIANTE_HORARIO_ESTUDIANTE" Member="ESTUDIANTE" ThisKey="Id_Estudiante" OtherKey="Id_Estudiante" Type="ESTUDIANTE" IsForeignKey="true" />
-      <Association Name="HORARIO_CLASES_HORARIO_ESTUDIANTE" Member="HORARIO_CLASES" ThisKey="Id_HorarioClases" OtherKey="Id_HorarioClases" Type="HORARIO_CLASES" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.HORARIO_LIBRE_DOCENTE" Member="HORARIO_LIBRE_DOCENTE">
-    <Type Name="HORARIO_LIBRE_DOCENTE">
-      <Column Name="Id_HorioLibre" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Id_Docente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Id_Modulo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="DOCENTE_HORARIO_LIBRE_DOCENTE" Member="DOCENTE" ThisKey="Id_Docente" OtherKey="Id_Docente" Type="DOCENTE" IsForeignKey="true" />
-      <Association Name="MODULO_HORARIO_LIBRE_DOCENTE" Member="MODULO" ThisKey="Id_Modulo" OtherKey="Id_Modulo" Type="MODULO" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.HORARIO_OBLIGATORIO_DOCENTE" Member="HORARIO_OBLIGATORIO_DOCENTE">
-    <Type Name="HORARIO_OBLIGATORIO_DOCENTE">
-      <Column Name="Id_HorioObligatorio" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Id_Docente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Id_Modulo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="DOCENTE_HORARIO_OBLIGATORIO_DOCENTE" Member="DOCENTE" ThisKey="Id_Docente" OtherKey="Id_Docente" Type="DOCENTE" IsForeignKey="true" />
-      <Association Name="MODULO_HORARIO_OBLIGATORIO_DOCENTE" Member="MODULO" ThisKey="Id_Modulo" OtherKey="Id_Modulo" Type="MODULO" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.HORIO_TUTORIAS" Member="HORIO_TUTORIAS">
-    <Type Name="HORIO_TUTORIAS">
-      <Column Name="Id_HorioTutorias" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Id_Estudiante" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Id_Materia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Id_Docente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Id_Modulo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Id_Periodo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="EstadoObligatorio" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
-      <Column Name="Asistencia" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
-      <Column Name="Aula" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="ESTUDIANTE_HORIO_TUTORIAS" Member="ESTUDIANTE" ThisKey="Id_Estudiante" OtherKey="Id_Estudiante" Type="ESTUDIANTE" IsForeignKey="true" />
-      <Association Name="DOCENTE_HORIO_TUTORIAS" Member="DOCENTE" ThisKey="Id_Docente" OtherKey="Id_Docente" Type="DOCENTE" IsForeignKey="true" />
-      <Association Name="MATERIA_HORIO_TUTORIAS" Member="MATERIA" ThisKey="Id_Materia" OtherKey="Id_Materia" Type="MATERIA" IsForeignKey="true" />
-      <Association Name="MODULO_HORIO_TUTORIAS" Member="MODULO" ThisKey="Id_Modulo" OtherKey="Id_Modulo" Type="MODULO" IsForeignKey="true" />
-      <Association Name="PERIODO_ACADEMICO_HORIO_TUTORIAS" Member="PERIODO_ACADEMICO" ThisKey="Id_Periodo" OtherKey="Id_Periodo" Type="PERIODO_ACADEMICO" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.LOGIN_USUARIO" Member="LOGIN_USUARIO">
     <Type Name="LOGIN_USUARIO">
       <Column Name="Id_LoginUsuario" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -139,18 +57,6 @@
       <Column Name="Usuario" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Contrasena" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="ROL_LOGIN_USUARIO" Member="ROL" ThisKey="Id_Rol" OtherKey="Id_Rol" Type="ROL" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.MATERIA" Member="MATERIA">
-    <Type Name="MATERIA">
-      <Column Name="Id_Materia" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Id_Carrera" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="MATERIA_HORARIO_CLASES" Member="HORARIO_CLASES" ThisKey="Id_Materia" OtherKey="Id_Materia" Type="HORARIO_CLASES" />
-      <Association Name="MATERIA_HORIO_TUTORIAS" Member="HORIO_TUTORIAS" ThisKey="Id_Materia" OtherKey="Id_Materia" Type="HORIO_TUTORIAS" />
-      <Association Name="MATERIA_REPITENCIA" Member="REPITENCIA" ThisKey="Id_Materia" OtherKey="Id_Materia" Type="REPITENCIA" />
-      <Association Name="CARRERA_MATERIA" Member="CARRERA" ThisKey="Id_Carrera" OtherKey="Id_Carrera" Type="CARRERA" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.MODULO" Member="MODULO">
@@ -161,9 +67,9 @@
       <Column Name="CodigoModulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Dia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="MODULO_HORARIO_CLASES" Member="HORARIO_CLASES" ThisKey="Id_Modulo" OtherKey="Id_Modulo" Type="HORARIO_CLASES" />
-      <Association Name="MODULO_HORARIO_LIBRE_DOCENTE" Member="HORARIO_LIBRE_DOCENTE" ThisKey="Id_Modulo" OtherKey="Id_Modulo" Type="HORARIO_LIBRE_DOCENTE" />
-      <Association Name="MODULO_HORARIO_OBLIGATORIO_DOCENTE" Member="HORARIO_OBLIGATORIO_DOCENTE" ThisKey="Id_Modulo" OtherKey="Id_Modulo" Type="HORARIO_OBLIGATORIO_DOCENTE" />
       <Association Name="MODULO_HORIO_TUTORIAS" Member="HORIO_TUTORIAS" ThisKey="Id_Modulo" OtherKey="Id_Modulo" Type="HORIO_TUTORIAS" />
+      <Association Name="MODULO_HORARIO_OBLIGATORIO_DOCENTE" Member="HORARIO_OBLIGATORIO_DOCENTE" ThisKey="Id_Modulo" OtherKey="Id_Modulo" Type="HORARIO_OBLIGATORIO_DOCENTE" />
+      <Association Name="MODULO_HORARIO_LIBRE_DOCENTE" Member="HORARIO_LIBRE_DOCENTE" ThisKey="Id_Modulo" OtherKey="Id_Modulo" Type="HORARIO_LIBRE_DOCENTE" />
     </Type>
   </Table>
   <Table Name="dbo.NOTIF_ESTUDIANTE" Member="NOTIF_ESTUDIANTE">
@@ -185,16 +91,8 @@
       <Column Name="Periodo" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
       <Association Name="PERIODO_ACADEMICO_HORARIO_CLASES" Member="HORARIO_CLASES" ThisKey="Id_Periodo" OtherKey="Id_Periodo" Type="HORARIO_CLASES" />
       <Association Name="PERIODO_ACADEMICO_HORIO_TUTORIAS" Member="HORIO_TUTORIAS" ThisKey="Id_Periodo" OtherKey="Id_Periodo" Type="HORIO_TUTORIAS" />
-    </Type>
-  </Table>
-  <Table Name="dbo.REPITENCIA" Member="REPITENCIA">
-    <Type Name="REPITENCIA">
-      <Column Name="Id_Repitencia" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Id_Estudiante" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Id_Materia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Repitencia" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
-      <Association Name="MATERIA_REPITENCIA" Member="MATERIA" ThisKey="Id_Materia" OtherKey="Id_Materia" Type="MATERIA" IsForeignKey="true" />
-      <Association Name="ESTUDIANTE_REPITENCIA" Member="ESTUDIANTE" ThisKey="Id_Estudiante" OtherKey="Id_Estudiante" Type="ESTUDIANTE" IsForeignKey="true" />
+      <Association Name="PERIODO_ACADEMICO_HORARIO_OBLIGATORIO_DOCENTE" Member="HORARIO_OBLIGATORIO_DOCENTE" ThisKey="Id_Periodo" OtherKey="Id_Periodo" Type="HORARIO_OBLIGATORIO_DOCENTE" />
+      <Association Name="PERIODO_ACADEMICO_HORARIO_LIBRE_DOCENTE" Member="HORARIO_LIBRE_DOCENTE" ThisKey="Id_Periodo" OtherKey="Id_Periodo" Type="HORARIO_LIBRE_DOCENTE" />
     </Type>
   </Table>
   <Table Name="dbo.ROL" Member="ROL">
@@ -202,10 +100,10 @@
       <Column Name="Id_Rol" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Rol" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="ROL_ADMINIS" Member="ADMINIS" ThisKey="Id_Rol" OtherKey="Id_Rol" Type="ADMINIS" />
-      <Association Name="ROL_DOCENTE" Member="DOCENTE" ThisKey="Id_Rol" OtherKey="Id_Rol" Type="DOCENTE" />
       <Association Name="ROL_ESTUDIANTE" Member="ESTUDIANTE" ThisKey="Id_Rol" OtherKey="Id_Rol" Type="ESTUDIANTE" />
       <Association Name="ROL_LOGIN_USUARIO" Member="LOGIN_USUARIO" ThisKey="Id_Rol" OtherKey="Id_Rol" Type="LOGIN_USUARIO" />
       <Association Name="ROL_SUPERADMIN" Member="SUPERADMIN" ThisKey="Id_Rol" OtherKey="Id_Rol" Type="SUPERADMIN" />
+      <Association Name="ROL_DOCENTE" Member="DOCENTE" ThisKey="Id_Rol" OtherKey="Id_Rol" Type="DOCENTE" />
     </Type>
   </Table>
   <Table Name="dbo.SUPERADMIN" Member="SUPERADMIN">
@@ -220,42 +118,122 @@
       <Association Name="ROL_SUPERADMIN" Member="ROL" ThisKey="Id_Rol" OtherKey="Id_Rol" Type="ROL" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="TutoAdmin.HORARIO_CLASES" Member="HORARIO_CLASES">
+    <Type Name="HORARIO_CLASES">
+      <Column Name="Id_HorarioClases" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id_Materia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Docente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Modulo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Periodo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Aula" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Paralelo" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Association Name="HORARIO_CLASES_HORARIO_ESTUDIANTE" Member="HORARIO_ESTUDIANTE" ThisKey="Id_HorarioClases" OtherKey="Id_HorarioClases" Type="HORARIO_ESTUDIANTE" />
+      <Association Name="MODULO_HORARIO_CLASES" Member="MODULO" ThisKey="Id_Modulo" OtherKey="Id_Modulo" Type="MODULO" IsForeignKey="true" />
+      <Association Name="PERIODO_ACADEMICO_HORARIO_CLASES" Member="PERIODO_ACADEMICO" ThisKey="Id_Periodo" OtherKey="Id_Periodo" Type="PERIODO_ACADEMICO" IsForeignKey="true" />
+      <Association Name="MATERIA_HORARIO_CLASES" Member="MATERIA" ThisKey="Id_Materia" OtherKey="Id_Materia" Type="MATERIA" IsForeignKey="true" />
+      <Association Name="DOCENTE_HORARIO_CLASES" Member="DOCENTE" ThisKey="Id_Docente" OtherKey="Id_Docente" Type="DOCENTE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="TutoAdmin.HORARIO_ESTUDIANTE" Member="HORARIO_ESTUDIANTE">
+    <Type Name="HORARIO_ESTUDIANTE">
+      <Column Name="Id_HoraioEstudiante" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id_Estudiante" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_HorarioClases" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="ESTUDIANTE_HORARIO_ESTUDIANTE" Member="ESTUDIANTE" ThisKey="Id_Estudiante" OtherKey="Id_Estudiante" Type="ESTUDIANTE" IsForeignKey="true" />
+      <Association Name="HORARIO_CLASES_HORARIO_ESTUDIANTE" Member="HORARIO_CLASES" ThisKey="Id_HorarioClases" OtherKey="Id_HorarioClases" Type="HORARIO_CLASES" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="TutoAdmin.HORIO_TUTORIAS" Member="HORIO_TUTORIAS">
+    <Type Name="HORIO_TUTORIAS">
+      <Column Name="Id_HorioTutorias" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id_Estudiante" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Materia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Docente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Modulo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Periodo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EstadoObligatorio" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="Asistencia" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="Aula" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Association Name="MODULO_HORIO_TUTORIAS" Member="MODULO" ThisKey="Id_Modulo" OtherKey="Id_Modulo" Type="MODULO" IsForeignKey="true" />
+      <Association Name="PERIODO_ACADEMICO_HORIO_TUTORIAS" Member="PERIODO_ACADEMICO" ThisKey="Id_Periodo" OtherKey="Id_Periodo" Type="PERIODO_ACADEMICO" IsForeignKey="true" />
+      <Association Name="ESTUDIANTE_HORIO_TUTORIAS" Member="ESTUDIANTE" ThisKey="Id_Estudiante" OtherKey="Id_Estudiante" Type="ESTUDIANTE" IsForeignKey="true" />
+      <Association Name="MATERIA_HORIO_TUTORIAS" Member="MATERIA" ThisKey="Id_Materia" OtherKey="Id_Materia" Type="MATERIA" IsForeignKey="true" />
+      <Association Name="DOCENTE_HORIO_TUTORIAS" Member="DOCENTE" ThisKey="Id_Docente" OtherKey="Id_Docente" Type="DOCENTE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="TutoAdmin.MATERIA" Member="MATERIA">
+    <Type Name="MATERIA">
+      <Column Name="Id_Materia" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id_Carrera" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="MATERIA_HORARIO_CLASES" Member="HORARIO_CLASES" ThisKey="Id_Materia" OtherKey="Id_Materia" Type="HORARIO_CLASES" />
+      <Association Name="MATERIA_HORIO_TUTORIAS" Member="HORIO_TUTORIAS" ThisKey="Id_Materia" OtherKey="Id_Materia" Type="HORIO_TUTORIAS" />
+      <Association Name="MATERIA_REPITENCIA" Member="REPITENCIA" ThisKey="Id_Materia" OtherKey="Id_Materia" Type="REPITENCIA" />
+      <Association Name="CARRERA_MATERIA" Member="CARRERA" ThisKey="Id_Carrera" OtherKey="Id_Carrera" Type="CARRERA" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="TutoAdmin.REPITENCIA" Member="REPITENCIA">
+    <Type Name="REPITENCIA">
+      <Column Name="Id_Repitencia" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id_Estudiante" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Materia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Repitencia" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Association Name="MATERIA_REPITENCIA" Member="MATERIA" ThisKey="Id_Materia" OtherKey="Id_Materia" Type="MATERIA" IsForeignKey="true" />
+      <Association Name="ESTUDIANTE_REPITENCIA" Member="ESTUDIANTE" ThisKey="Id_Estudiante" OtherKey="Id_Estudiante" Type="ESTUDIANTE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DOCENTE" Member="DOCENTE">
+    <Type Name="DOCENTE">
+      <Column Name="Id_Docente" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id_Rol" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ApellidoDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Celular" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cedula" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Association Name="DOCENTE_HORARIO_CLASES" Member="HORARIO_CLASES" ThisKey="Id_Docente" OtherKey="Id_Docente" Type="HORARIO_CLASES" />
+      <Association Name="DOCENTE_HORIO_TUTORIAS" Member="HORIO_TUTORIAS" ThisKey="Id_Docente" OtherKey="Id_Docente" Type="HORIO_TUTORIAS" />
+      <Association Name="DOCENTE_HORARIO_OBLIGATORIO_DOCENTE" Member="HORARIO_OBLIGATORIO_DOCENTE" ThisKey="Id_Docente" OtherKey="Id_Docente" Type="HORARIO_OBLIGATORIO_DOCENTE" />
+      <Association Name="DOCENTE_HORARIO_LIBRE_DOCENTE" Member="HORARIO_LIBRE_DOCENTE" ThisKey="Id_Docente" OtherKey="Id_Docente" Type="HORARIO_LIBRE_DOCENTE" />
+      <Association Name="ROL_DOCENTE" Member="ROL" ThisKey="Id_Rol" OtherKey="Id_Rol" Type="ROL" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="TutoAdmin.HORARIO_OBLIGATORIO_DOCENTE" Member="HORARIO_OBLIGATORIO_DOCENTE">
+    <Type Name="HORARIO_OBLIGATORIO_DOCENTE">
+      <Column Name="Id_HorioObligatorio" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id_Periodo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Docente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Modulo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="DOCENTE_HORARIO_OBLIGATORIO_DOCENTE" Member="DOCENTE" ThisKey="Id_Docente" OtherKey="Id_Docente" Type="DOCENTE" IsForeignKey="true" />
+      <Association Name="MODULO_HORARIO_OBLIGATORIO_DOCENTE" Member="MODULO" ThisKey="Id_Modulo" OtherKey="Id_Modulo" Type="MODULO" IsForeignKey="true" />
+      <Association Name="PERIODO_ACADEMICO_HORARIO_OBLIGATORIO_DOCENTE" Member="PERIODO_ACADEMICO" ThisKey="Id_Periodo" OtherKey="Id_Periodo" Type="PERIODO_ACADEMICO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="TutoAdmin.HORARIO_LIBRE_DOCENTE" Member="HORARIO_LIBRE_DOCENTE">
+    <Type Name="HORARIO_LIBRE_DOCENTE">
+      <Column Name="Id_HorioLibre" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id_Periodo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Docente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Modulo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="DOCENTE_HORARIO_LIBRE_DOCENTE" Member="DOCENTE" ThisKey="Id_Docente" OtherKey="Id_Docente" Type="DOCENTE" IsForeignKey="true" />
+      <Association Name="MODULO_HORARIO_LIBRE_DOCENTE" Member="MODULO" ThisKey="Id_Modulo" OtherKey="Id_Modulo" Type="MODULO" IsForeignKey="true" />
+      <Association Name="PERIODO_ACADEMICO_HORARIO_LIBRE_DOCENTE" Member="PERIODO_ACADEMICO" ThisKey="Id_Periodo" OtherKey="Id_Periodo" Type="PERIODO_ACADEMICO" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.ActualizarCarrera" Method="ActualizarCarrera">
     <Parameter Name="CodigoCarrera" Parameter="codigoCarrera" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="NombreCarrera" Parameter="nombreCarrera" Type="System.String" DbType="VarChar(200)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.ActualizarDocente" Method="ActualizarDocente">
-    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="NombreDos" Parameter="nombreDos" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Apellido" Parameter="apellido" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="ApellidoDos" Parameter="apellidoDos" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Celular" Parameter="celular" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="Char(10)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.ActualizarEstudiante" Method="ActualizarEstudiante">
-    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="NombreDos" Parameter="nombreDos" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Apellido" Parameter="apellido" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="ApellidoDos" Parameter="apellidoDos" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Celular" Parameter="celular" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
   <Function Name="dbo.ActualizarFacultad" Method="ActualizarFacultad">
     <Parameter Name="CodigoFacultdad" Parameter="codigoFacultdad" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="NombreFacultad" Parameter="nombreFacultad" Type="System.String" DbType="VarChar(200)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.ActualizarMateria" Method="ActualizarMateria">
-    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="NombreMateria" Parameter="nombreMateria" Type="System.String" DbType="VarChar(200)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.confirmarAsistenciaTutoria" Method="confirmarAsistenciaTutoria">
-    <Parameter Name="Id_HorarioTutorias" Parameter="id_HorarioTutorias" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.confirmarTutoriaSolicitud" Method="confirmarTutoriaSolicitud">
@@ -275,13 +253,6 @@
       <Column Name="NombreCarrera" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.consultaDocentesPorMateria" Method="consultaDocentesPorMateria">
-    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
-    <ElementType Name="consultaDocentesPorMateriaResult">
-      <Column Name="Cedula" Type="System.String" DbType="Char(10)" CanBeNull="true" />
-      <Column Name="Docente" Type="System.String" DbType="VarChar(101) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.consultaDocentesPorMateriaFull" Method="consultaDocentesPorMateriaFull">
     <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
     <ElementType Name="consultaDocentesPorMateriaFullResult">
@@ -298,73 +269,6 @@
     <ElementType Name="consultaDocentesPorParaleloResult">
       <Column Name="Cedula" Type="System.String" DbType="Char(10)" CanBeNull="true" />
       <Column Name="Docente" Type="System.String" DbType="VarChar(101) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.consultaDocentesPorParaleloFull" Method="consultaDocentesPorParaleloFull">
-    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Paralelo" Parameter="paralelo" Type="System.String" DbType="VarChar(5)" />
-    <ElementType Name="consultaDocentesPorParaleloFullResult">
-      <Column Name="Cedula" Type="System.String" DbType="Char(10)" CanBeNull="true" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NombreDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ApellidoDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.consultaMensajesEstudiante" Method="consultaMensajesEstudiante">
-    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="Char(10)" />
-    <ElementType Name="consultaMensajesEstudianteResult">
-      <Column Name="Id_Notifacion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Estudiante" Type="System.String" DbType="VarChar(203)" CanBeNull="true" />
-      <Column Name="Matricula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="CodigoModulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="HoraInicio" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="HoraFin" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="Mensaje" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Confirmar" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
-      <Column Name="Fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.consultaParalelosMateria" Method="consultaParalelosMateria">
-    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
-    <ElementType Name="consultaParalelosMateriaResult">
-      <Column Name="Paralelo" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
-      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.conusltaHorarioLibreDocente" Method="conusltaHorarioLibreDocente">
-    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
-    <ElementType Name="conusltaHorarioLibreDocenteResult">
-      <Column Name="Id_HorioLibre" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NombreDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ApellidoDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Cedula" Type="System.String" DbType="Char(10)" CanBeNull="true" />
-      <Column Name="CodigoModulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="HoraInicio" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="HoraFin" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="Dia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.conusltaHorarioObligatorioDocente" Method="conusltaHorarioObligatorioDocente">
-    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
-    <ElementType Name="conusltaHorarioObligatorioDocenteResult">
-      <Column Name="Id_HorioObligatorio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NombreDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ApellidoDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Cedula" Type="System.String" DbType="Char(10)" CanBeNull="true" />
-      <Column Name="CodigoModulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="HoraInicio" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="HoraFin" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="Dia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.docentesEstudiante" Method="docentesEstudiante">
@@ -394,30 +298,6 @@
     <Parameter Name="CodigoFacultdad" Parameter="codigoFacultdad" Type="System.String" DbType="VarChar(50)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.EliminarHoraLibre" Method="EliminarHoraLibre">
-    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(50)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.EliminarHoraObligatoria" Method="EliminarHoraObligatoria">
-    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(50)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.EliminarHorarioClase" Method="EliminarHorarioClase">
-    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(200)" />
-    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(100)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.EliminarMateria" Method="EliminarMateria">
-    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.EliminarMateriaEstudiante" Method="EliminarMateriaEstudiante">
-    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
-    <Parameter Name="Id_HorarioClases" Parameter="id_HorarioClases" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
   <Function Name="dbo.EliminarModulo" Method="EliminarModulo">
     <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(50)" />
     <Return Type="System.Int32" />
@@ -426,26 +306,117 @@
     <Parameter Name="CodigoPeriodo" Parameter="codigoPeriodo" Type="System.String" DbType="VarChar(100)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.EliminarRepitencia" Method="EliminarRepitencia">
+  <Function Name="dbo.IngresarAdmin" Method="IngresarAdmin">
+    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="NombreDos" Parameter="nombreDos" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Apellido" Parameter="apellido" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ApellidoDos" Parameter="apellidoDos" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.IngresarCarrera" Method="IngresarCarrera">
+    <Parameter Name="CodigoFacultad" Parameter="codigoFacultad" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="NombreCarrera" Parameter="nombreCarrera" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="CodigoCarrera" Parameter="codigoCarrera" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.IngresarEstudiante" Method="IngresarEstudiante">
+    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="NombreDos" Parameter="nombreDos" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Apellido" Parameter="apellido" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ApellidoDos" Parameter="apellidoDos" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Celular" Parameter="celular" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="CodCarrera" Parameter="codCarrera" Type="System.String" DbType="VarChar(200)" />
     <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.IngresarFacultad" Method="IngresarFacultad">
+    <Parameter Name="NombreFacultad" Parameter="nombreFacultad" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="CodigoFacultdad" Parameter="codigoFacultdad" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.IngresarModulo" Method="IngresarModulo">
+    <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="HoraInicio" Parameter="horaInicio" Type="System.TimeSpan" DbType="Time" />
+    <Parameter Name="HoraFin" Parameter="horaFin" Type="System.TimeSpan" DbType="Time" />
+    <Parameter Name="Dia" Parameter="dia" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.IngresarPeriodoAcademico" Method="IngresarPeriodoAcademico">
+    <Parameter Name="CodigoPeriodo" Parameter="codigoPeriodo" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Periodo" Parameter="periodo" Type="System.String" DbType="VarChar(200)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.IngresarSuperAdmin" Method="IngresarSuperAdmin">
+    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="NombreDos" Parameter="nombreDos" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Apellido" Parameter="apellido" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ApellidoDos" Parameter="apellidoDos" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.[SqlQueryNotificationStoredProcedure-9f46e87c-82c9-4f28-ae1d-ab7112450e26]" Method="SqlQueryNotificationStoredProcedure_9f46e87c_82c9_4f28_ae1d_ab7112450e26">
+    <ElementType Name="SqlQueryNotificationStoredProcedure_9f46e87c_82c9_4f28_ae1d_ab7112450e26Result">
+      <Column Name="conversation_handle" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="TutoAdmin.EliminarMateria" Method="EliminarMateria">
     <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.estudiantesDocenteMateria" Method="estudiantesDocenteMateria">
-    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
+  <Function Name="TutoAdmin.IngresarMateria" Method="IngresarMateria">
+    <Parameter Name="CodigoCarrera" Parameter="codigoCarrera" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="NombreMateria" Parameter="nombreMateria" Type="System.String" DbType="VarChar(200)" />
     <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
-    <ElementType Name="estudiantesDocenteMateriaResult">
-      <Column Name="Estudiante" Type="System.String" DbType="VarChar(203)" CanBeNull="true" />
-      <Column Name="Matricula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Celular" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="TutoAdmin.ActualizarDocente" Method="ActualizarDocente">
+    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="NombreDos" Parameter="nombreDos" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Apellido" Parameter="apellido" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ApellidoDos" Parameter="apellidoDos" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Celular" Parameter="celular" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="TutoAdmin.ActualizarMateria" Method="ActualizarMateria">
+    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="NombreMateria" Parameter="nombreMateria" Type="System.String" DbType="VarChar(200)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="TutoAdmin.consultaParaleloMateriaDocente" Method="consultaParaleloMateriaDocente">
+    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="Char(10)" />
+    <ElementType Name="consultaParaleloMateriaDocenteResult">
+      <Column Name="Cedula" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ApellidoDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="Repitencia" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Paralelo" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.horarioClaseDocentes" Method="horarioClaseDocentes">
-    <ElementType Name="horarioClaseDocentesResult">
+  <Function Name="TutoAdmin.EliminarHorarioClase" Method="EliminarHorarioClase">
+    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Paralelo" Parameter="paralelo" Type="System.String" DbType="VarChar(5)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="TutoAdmin.IngresarHorarioClase" Method="IngresarHorarioClase">
+    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CodigoPeriodo" Parameter="codigoPeriodo" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Aula" Parameter="aula" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Paralelo" Parameter="paralelo" Type="System.String" DbType="VarChar(5)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="TutoAdmin.horarioClaseDocente" Method="horarioClaseDocente">
+    <ElementType Name="horarioClaseDocenteResult">
       <Column Name="Id_HorarioClases" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="NombreDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
@@ -466,8 +437,56 @@
       <Column Name="Paralelo" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.horarioClaseEstudiante" Method="horarioClaseEstudiante">
-    <ElementType Name="horarioClaseEstudianteResult">
+  <Function Name="TutoAdmin.materiasDocente" Method="materiasDocente">
+    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="materiasDocenteResult">
+      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="TutoAdmin.consultaParalelosMateria" Method="consultaParalelosMateria">
+    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="consultaParalelosMateriaResult">
+      <Column Name="Paralelo" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="TutoAdmin.consultaDocentesCoicidencias" Method="consultaDocentesCoicidencias">
+    <Parameter Name="Palabra" Parameter="palabra" Type="System.String" DbType="VarChar(200)" />
+    <ElementType Name="consultaDocentesCoicidenciasResult">
+      <Column Name="cedula" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="Docente" Type="System.String" DbType="VarChar(203)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="TutoAdmin.consultaDocentesPorParaleloFull" Method="consultaDocentesPorParaleloFull">
+    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Paralelo" Parameter="paralelo" Type="System.String" DbType="VarChar(5)" />
+    <ElementType Name="consultaDocentesPorParaleloFullResult">
+      <Column Name="Cedula" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ApellidoDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="TutoAdmin.materiasEstudiante" Method="materiasEstudiante">
+    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
+    <ElementType Name="materiasEstudianteResult">
+      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="TutoAdmin.IngresarHorarioClaseEstudiante" Method="IngresarHorarioClaseEstudiante">
+    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Paralelo" Parameter="paralelo" Type="System.String" DbType="VarChar(5)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="TutoAdmin.horarioClaseEstudiantes" Method="horarioClaseEstudiantes">
+    <ElementType Name="horarioClaseEstudiantesResult">
       <Column Name="Id_HoraioEstudiante" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Matricula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Estudiante" Type="System.String" DbType="VarChar(203)" CanBeNull="true" />
@@ -481,7 +500,30 @@
       <Column Name="CodigoPeriodo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.horarioClaseEstudianteMatricula" Method="horarioClaseEstudianteMatricula">
+  <Function Name="TutoAdmin.horarioDocenteCedula" Method="horarioDocenteCedula">
+    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="horarioDocenteCedulaResult">
+      <Column Name="CodigoFacultad" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreFacultad" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoCarrera" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreCarrera" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Aula" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Paralelo" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ApellidoDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CodigoModulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Dia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="HoraInicio" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="HoraFin" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="Periodo" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoPeriodo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="TutoAdmin.horarioClaseEstudianteMatricula" Method="horarioClaseEstudianteMatricula">
     <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
     <ElementType Name="horarioClaseEstudianteMatriculaResult">
       <Column Name="Id_HorarioClases" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -505,30 +547,64 @@
       <Column Name="CodigoPeriodo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.horarioDocenteCedula" Method="horarioDocenteCedula">
-    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
-    <ElementType Name="horarioDocenteCedulaResult">
-      <Column Name="CodigoFacultad" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NombreFacultad" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="CodigoCarrera" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NombreCarrera" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="Aula" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="Paralelo" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NombreDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ApellidoDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+  <Function Name="TutoAdmin.IngresarRepitencia" Method="IngresarRepitencia">
+    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Repitencia" Parameter="repitencia" Type="System.Char" DbType="Char(1)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="TutoAdmin.EliminarMateriaEstudiante" Method="EliminarMateriaEstudiante">
+    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Id_HorarioClases" Parameter="id_HorarioClases" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="TutoAdmin.EliminarRepitencia" Method="EliminarRepitencia">
+    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="TutoAdmin.modulosDocenteDisponibleAsignacion" Method="modulosDocenteDisponibleAsignacion">
+    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="modulosDocenteDisponibleAsignacionResult">
       <Column Name="CodigoModulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Dia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="HoraInicio" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
       <Column Name="HoraFin" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="Periodo" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="CodigoPeriodo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.horarioTutorias" Method="horarioTutorias">
+  <Function Name="TutoAdmin.materiasEstudianteDocente" Method="materiasEstudianteDocente">
+    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="materiasEstudianteDocenteResult">
+      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="TutoAdmin.estudiantesDocenteMateria" Method="estudiantesDocenteMateria">
+    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="estudiantesDocenteMateriaResult">
+      <Column Name="Estudiante" Type="System.String" DbType="VarChar(203)" CanBeNull="true" />
+      <Column Name="Matricula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Celular" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Repitencia" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="TutoAdmin.IngresarTutoria" Method="IngresarTutoria">
+    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="CodigoPeriodo" Parameter="codigoPeriodo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="EstadoObligatorio" Parameter="estadoObligatorio" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="Fecha" Parameter="fecha" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="Aula" Parameter="aula" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="TutoAdmin.horarioTutorias" Method="horarioTutorias">
     <ElementType Name="horarioTutoriasResult">
       <Column Name="Id_HorioTutorias" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Matricula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -544,33 +620,11 @@
       <Column Name="Periodo" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
       <Column Name="CodigoPeriodo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="EstadoObligatorio" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
-      <Column Name="Aula" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Aula" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
       <Column Name="Asistencia" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.horarioTutoriasDocente" Method="horarioTutoriasDocente">
-    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
-    <ElementType Name="horarioTutoriasDocenteResult">
-      <Column Name="Id_HorioTutorias" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Matricula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Estudiante" Type="System.String" DbType="VarChar(203)" CanBeNull="true" />
-      <Column Name="Docente" Type="System.String" DbType="VarChar(203)" CanBeNull="true" />
-      <Column Name="Cedula" Type="System.String" DbType="Char(10)" CanBeNull="true" />
-      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="CodigoModulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="HoraInicio" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="HoraFin" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="Dia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Periodo" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="CodigoPeriodo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="EstadoObligatorio" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
-      <Column Name="Fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="Aula" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Asistencia" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.horarioTutoriasEstudiante" Method="horarioTutoriasEstudiante">
+  <Function Name="TutoAdmin.horarioTutoriasEstudiante" Method="horarioTutoriasEstudiante">
     <Parameter Name="Matricula" Parameter="matricula" Type="System.String" DbType="VarChar(10)" />
     <ElementType Name="horarioTutoriasEstudianteResult">
       <Column Name="Id_HorioTutorias" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -588,25 +642,48 @@
       <Column Name="CodigoPeriodo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="EstadoObligatorio" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
       <Column Name="Fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="Aula" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Aula" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
       <Column Name="Asistencia" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.IngresarAdmin" Method="IngresarAdmin">
-    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="NombreDos" Parameter="nombreDos" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Apellido" Parameter="apellido" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="ApellidoDos" Parameter="apellidoDos" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(50)" />
+  <Function Name="TutoAdmin.consultaMensajesEstudiante" Method="consultaMensajesEstudiante">
+    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="Char(10)" />
+    <ElementType Name="consultaMensajesEstudianteResult">
+      <Column Name="Id_Notifacion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Estudiante" Type="System.String" DbType="VarChar(203)" CanBeNull="true" />
+      <Column Name="Matricula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoModulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="HoraInicio" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="HoraFin" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Confirmar" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="TutoAdmin.confirmarAsistenciaTutoria" Method="confirmarAsistenciaTutoria">
+    <Parameter Name="Id_HorarioTutorias" Parameter="id_HorarioTutorias" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Confirma" Parameter="confirma" Type="System.String" DbType="Char(2)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.IngresarCarrera" Method="IngresarCarrera">
-    <Parameter Name="CodigoFacultad" Parameter="codigoFacultad" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="NombreCarrera" Parameter="nombreCarrera" Type="System.String" DbType="VarChar(200)" />
-    <Parameter Name="CodigoCarrera" Parameter="codigoCarrera" Type="System.String" DbType="VarChar(50)" />
+  <Function Name="TutoAdmin.consultaDocentesPorMateria" Method="consultaDocentesPorMateria">
+    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="consultaDocentesPorMateriaResult">
+      <Column Name="Cedula" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="Docente" Type="System.String" DbType="VarChar(101) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="TutoAdmin.ingresarNotificacionEstudiante" Method="ingresarNotificacionEstudiante">
+    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Mensaje" Parameter="mensaje" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Fecha" Parameter="fecha" Type="System.DateTime" DbType="Date" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.IngresarDocente" Method="IngresarDocente">
+  <Function Name="TutoAdmin.IngresarDocente" Method="IngresarDocente">
     <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="NombreDos" Parameter="nombreDos" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="Apellido" Parameter="apellido" Type="System.String" DbType="VarChar(50)" />
@@ -616,144 +693,136 @@
     <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="Char(10)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.IngresarEstudiante" Method="IngresarEstudiante">
+  <Function Name="TutoAdmin.ActualizarEstudiante" Method="ActualizarEstudiante">
     <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="NombreDos" Parameter="nombreDos" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="Apellido" Parameter="apellido" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="ApellidoDos" Parameter="apellidoDos" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="Celular" Parameter="celular" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="CodCarrera" Parameter="codCarrera" Type="System.String" DbType="VarChar(200)" />
-    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.IngresarFacultad" Method="IngresarFacultad">
-    <Parameter Name="NombreFacultad" Parameter="nombreFacultad" Type="System.String" DbType="VarChar(200)" />
-    <Parameter Name="CodigoFacultdad" Parameter="codigoFacultdad" Type="System.String" DbType="VarChar(50)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.IngresarHoraLibre" Method="IngresarHoraLibre">
-    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(200)" />
-    <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(100)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.IngresarHoraObligatoria" Method="IngresarHoraObligatoria">
-    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(200)" />
-    <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(100)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.IngresarHorarioClase" Method="IngresarHorarioClase">
-    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(200)" />
-    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(200)" />
-    <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="CodigoPeriodo" Parameter="codigoPeriodo" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="Aula" Parameter="aula" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="Paralelo" Parameter="paralelo" Type="System.String" DbType="VarChar(5)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.IngresarHorarioClaseEstudiante" Method="IngresarHorarioClaseEstudiante">
-    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
-    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(200)" />
-    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="Paralelo" Parameter="paralelo" Type="System.String" DbType="VarChar(5)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.IngresarMateria" Method="IngresarMateria">
-    <Parameter Name="CodigoCarrera" Parameter="codigoCarrera" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="NombreMateria" Parameter="nombreMateria" Type="System.String" DbType="VarChar(200)" />
-    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.IngresarModulo" Method="IngresarModulo">
-    <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="HoraInicio" Parameter="horaInicio" Type="System.TimeSpan" DbType="Time" />
-    <Parameter Name="HoraFin" Parameter="horaFin" Type="System.TimeSpan" DbType="Time" />
-    <Parameter Name="Dia" Parameter="dia" Type="System.String" DbType="VarChar(50)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.ingresarNotificacionEstudiante" Method="ingresarNotificacionEstudiante">
-    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="Char(10)" />
-    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
-    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Mensaje" Parameter="mensaje" Type="System.String" DbType="VarChar(MAX)" />
-    <Parameter Name="Fecha" Parameter="fecha" Type="System.DateTime" DbType="Date" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.IngresarPeriodoAcademico" Method="IngresarPeriodoAcademico">
-    <Parameter Name="CodigoPeriodo" Parameter="codigoPeriodo" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="Periodo" Parameter="periodo" Type="System.String" DbType="VarChar(200)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.IngresarRepitencia" Method="IngresarRepitencia">
-    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
-    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Repitencia" Parameter="repitencia" Type="System.Char" DbType="Char(1)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.IngresarSuperAdmin" Method="IngresarSuperAdmin">
-    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="NombreDos" Parameter="nombreDos" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Apellido" Parameter="apellido" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="ApellidoDos" Parameter="apellidoDos" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.IngresarTutoria" Method="IngresarTutoria">
-    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
+  <Function Name="TutoAdmin.horarioTutoriasDocente" Method="horarioTutoriasDocente">
+    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="horarioTutoriasDocenteResult">
+      <Column Name="Id_HorioTutorias" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Matricula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Estudiante" Type="System.String" DbType="VarChar(203)" CanBeNull="true" />
+      <Column Name="Docente" Type="System.String" DbType="VarChar(203)" CanBeNull="true" />
+      <Column Name="Cedula" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoModulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="HoraInicio" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="HoraFin" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="Dia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Periodo" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoPeriodo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="EstadoObligatorio" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Aula" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Asistencia" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreFacultad" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoFacultad" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="TutoAdmin.horarioTutoriasFull" Method="horarioTutoriasFull">
+    <ElementType Name="horarioTutoriasFullResult">
+      <Column Name="Id_HorioTutorias" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Matricula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Estudiante" Type="System.String" DbType="VarChar(203)" CanBeNull="true" />
+      <Column Name="Docente" Type="System.String" DbType="VarChar(203)" CanBeNull="true" />
+      <Column Name="Cedula" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Repitencia" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoModulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="HoraInicio" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="HoraFin" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="Dia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Periodo" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoPeriodo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="EstadoObligatorio" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="Aula" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Asistencia" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="NombreCarrera" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoCarrera" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreFacultad" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoFacultad" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="TutoAdmin.IngresarHoraObligatoria" Method="IngresarHoraObligatoria">
     <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(200)" />
     <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="CodigoMateria" Parameter="codigoMateria" Type="System.String" DbType="VarChar(100)" />
     <Parameter Name="CodigoPeriodo" Parameter="codigoPeriodo" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="EstadoObligatorio" Parameter="estadoObligatorio" Type="System.String" DbType="Char(2)" />
-    <Parameter Name="Fecha" Parameter="fecha" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="Aula" Parameter="aula" Type="System.String" DbType="VarChar(20)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.materiasDocente" Method="materiasDocente">
+  <Function Name="TutoAdmin.IngresarHoraLibre" Method="IngresarHoraLibre">
+    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="CodigoPeriodo" Parameter="codigoPeriodo" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="TutoAdmin.conusltaHorarioLibreDocente" Method="conusltaHorarioLibreDocente">
     <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
-    <ElementType Name="materiasDocenteResult">
-      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    <ElementType Name="conusltaHorarioLibreDocenteResult">
+      <Column Name="Id_HorioLibre" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ApellidoDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cedula" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="CodigoModulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="HoraInicio" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="HoraFin" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="Dia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoPeriodo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Periodo" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.materiasEstudiante" Method="materiasEstudiante">
-    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
-    <ElementType Name="materiasEstudianteResult">
-      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.materiasEstudianteDocente" Method="materiasEstudianteDocente">
-    <Parameter Name="Matricula" Parameter="matricula" Type="System.Int32" DbType="Int" />
+  <Function Name="TutoAdmin.conusltaHorarioObligatorioDocente" Method="conusltaHorarioObligatorioDocente">
     <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
-    <ElementType Name="materiasEstudianteDocenteResult">
-      <Column Name="NombreMateria" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="CodigoMeteria" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    <ElementType Name="conusltaHorarioObligatorioDocenteResult">
+      <Column Name="Id_HorioObligatorio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ApellidoDos" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cedula" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="CodigoModulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="HoraInicio" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="HoraFin" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="Dia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoPeriodo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Periodo" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.modulosDocenteDisponible" Method="modulosDocenteDisponible">
+  <Function Name="TutoAdmin.EliminarHoraLibre" Method="EliminarHoraLibre">
     <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CodigoPeriodo" Parameter="codigoPeriodo" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="TutoAdmin.EliminarHoraObligatoria" Method="EliminarHoraObligatoria">
+    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="CodigoModulo" Parameter="codigoModulo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CodigoPeriodo" Parameter="codigoPeriodo" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="TutoAdmin.modulosDocenteDisponible" Method="modulosDocenteDisponible">
+    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="CodigoPeriodo" Parameter="codigoPeriodo" Type="System.String" DbType="VarChar(50)" />
     <ElementType Name="modulosDocenteDisponibleResult">
+      <Column Name="Id_modulo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CodigoModulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Dia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="HoraInicio" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
       <Column Name="HoraFin" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.modulosDocenteDisponibleAsignacion" Method="modulosDocenteDisponibleAsignacion">
-    <Parameter Name="CedulaDocente" Parameter="cedulaDocente" Type="System.String" DbType="VarChar(10)" />
-    <ElementType Name="modulosDocenteDisponibleAsignacionResult">
-      <Column Name="CodigoModulo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Dia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="HoraInicio" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="HoraFin" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.[SqlQueryNotificationStoredProcedure-9f46e87c-82c9-4f28-ae1d-ab7112450e26]" Method="SqlQueryNotificationStoredProcedure_9f46e87c_82c9_4f28_ae1d_ab7112450e26">
-    <ElementType Name="SqlQueryNotificationStoredProcedure_9f46e87c_82c9_4f28_ae1d_ab7112450e26Result">
-      <Column Name="conversation_handle" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>

@@ -19,8 +19,6 @@ namespace AppTutorias
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            SqlDependency.Start(@"Data Source=184.168.47.13;Initial Catalog=Tutoria_BDD;User ID=TutoAdmin;Password=Tuto@admin0;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False");
-
         }
 
 

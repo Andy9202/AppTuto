@@ -29,7 +29,7 @@ namespace AppTutorias.Metodos.SuperAdmin.Estudiante
         {
             try
             {
-                db.ActualizarEstudiante(estudiante.Nombre, estudiante.NombreDos, estudiante.Apellido, estudiante.ApellidoDos, estudiante.Celular, int.Parse(estudiante.Matricula));
+                db.ActualizarEstudiante(estudiante.Nombre, estudiante.NombreDos, estudiante.Apellido, estudiante.ApellidoDos, estudiante.Celular,estudiante.Email, int.Parse(estudiante.Matricula));
 
             }
             catch
@@ -191,7 +191,8 @@ namespace AppTutorias.Metodos.SuperAdmin.Estudiante
                            estu.Apellido,
                            estu.ApellidoDos,
                            estu.Celular,
-                           estu.Matricula
+                           estu.Matricula,
+                           estu.Email
                        };
 
             estudiante estudiante = new estudiante();
@@ -204,6 +205,7 @@ namespace AppTutorias.Metodos.SuperAdmin.Estudiante
                 estudiante.ApellidoDos = consulta.ApellidoDos;
                 estudiante.Celular = consulta.Celular;
                 estudiante.Matricula = consulta.Matricula.ToString();
+                estudiante.Email = consulta.Email;
 
             }
 

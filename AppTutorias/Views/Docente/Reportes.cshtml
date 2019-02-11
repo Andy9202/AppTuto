@@ -1,0 +1,355 @@
+﻿
+<style>
+
+	.container-select {
+		margin-top: 10px;
+		padding: 20px;
+	}
+
+		.container-select label {
+			font-size: 16px;
+			font-weight: bold;
+		}
+
+	select, input {
+		margin-top: 10px;
+		padding: 5px;
+		font-weight: bold;
+		background: #fff;
+	}
+
+	table {
+		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+		margin-top: 10px;
+	}
+
+	td, table {
+		border: 1px solid #ddd;
+		padding: 8px;
+	}
+
+		table tr:hover {
+			background-color: #ddd;
+		}
+
+		table th {
+			padding-top: 12px;
+			padding-bottom: 12px;
+			text-align: left;
+			background-color: #57090C;
+			color: white;
+		}
+
+	a {
+		cursor: pointer;
+		font-weight: bold;
+		color: #57090C;
+		margin-top: 20px;
+		margin-left: 10px;
+		border-bottom: 1px solid #57090C;
+	}
+
+		a:hover {
+			color: #333;
+		}
+
+	.container-estudiantes {
+		padding: 5px;
+	}
+
+	.container-scroll {
+		overflow-x: scroll;
+	}
+	button {
+		background-color: #57090C;
+		border: 1px solid #57090C;
+		color: white;
+		cursor: pointer;
+		padding: 7px;
+		margin-left:20px;
+	}
+
+		button:hover {
+			background-color: white;
+			color: #57090C;
+		}
+
+	@@media only screen and (min-width: 769px) {
+		#app {
+			display: flex;
+			justify-content: center;
+		}
+
+		.container-estudiantes {
+			margin-top: 20px;
+			width: 800px;
+			padding: 5px;
+			border: 1px solid #bababa;
+			box-shadow: 1px 1px 2px #e2e2e2;
+			margin-bottom: 50px;
+		}
+
+		.lista-tuto {
+			display: flex;
+			padding: 5px;
+		}
+			.lista-tuto li {
+				padding-left:15px;
+			}
+
+			.lista-tuto input, select {
+				width: 100%;
+			}
+	}
+</style>
+
+<div class="container-estudiantes">
+	<br />
+	<h4>Filtro de Reportes</h4><br />
+	<p>
+		Encuentra todos los reportes de tutorías que has tenido en los diferentes periódos o por asistencia.
+	</p>
+
+	<ul class="lista-tuto">
+
+
+		<li>
+			<label for="">Periódo Académico</label><br />
+			<select id="listaPeriodo" onchange="tablaHorarioTutoriasDocentePeriodo()"></select>
+		</li>
+		<li>
+			<label for="">Asistencia</label><br />
+			<select id="asistencia" onchange="tablaHorarioTutoriasDocenteAsistencia()">
+				<option>Seleccione</option>
+				<option>SI</option>
+				<option>NO</option>
+			</select>
+		</li>
+
+	</ul>
+	<button onclick="tablaHorarioTutoriasDocente()">Todos</button>
+
+
+	<div class="table-carrera container-scroll">
+		<br />
+		<h4>Tabla de tutorias general</h4>
+		<table>
+			<thead>
+				<tr>
+					<th>Matrícula</th>
+					<th>Estudiante</th>
+					<th>Cod Materia</th>
+					<th>Materia</th>
+					<th>Módulo</th>
+					<th>Periódo</th>
+					<th>Estado Obligatorio</th>
+					<th>Fecha</th>
+					<th>Aula</th>
+					<th>Asistencia</th>
+
+
+					@*<th>Accion</th>*@
+				</tr>
+			</thead>
+			<tbody id="tablaHorarioTutorias"></tbody>
+
+
+		</table>
+	</div>
+
+
+
+</div>
+
+
+
+<script>
+
+	$(function () {
+		//tablaHorarioTutoriasDocente();
+		listaPeriodo();
+	});
+
+
+	function tablaHorarioTutoriasDocente() {
+
+
+		$.ajax({
+			url: "/Docente/listaTutoriasDocenteTotal",
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (listaHorariosTutorias) {
+
+				$("#tablaHorarioTutorias").empty();
+
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaHorariosTutorias.length; i++) {
+
+
+					d += '<tr>' +
+						'<td>' + listaHorariosTutorias[i].Matricula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreEstudiante + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Modulo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoPeriodo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].EstadoObligatorio + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Fecha + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Aula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Asistencia + '</td>' +
+
+		
+						'</tr>';
+
+					a++;
+				}
+
+
+
+				$("#tablaHorarioTutorias").append(d);
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+
+	function listaPeriodo() {
+		$.ajax({
+			url: "/SuperAdmin/listaPeriodo",
+			type: 'post',
+			datatype: 'application/json',
+			success: function (listaPeriodo) {
+
+				$("#listaPeriodo").empty();
+
+				$("#listaPeriodo").append('<option>Seleccione</option>');
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaPeriodo.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaPeriodo[i].CodigoPeriodo + '" ' +
+						'>' + listaPeriodo[i].NombrePeriodo + '</option>';
+
+					a++;
+				}
+
+				$("#listaPeriodo").append(d);
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	function tablaHorarioTutoriasDocenteAsistencia() {
+
+
+		$.ajax({
+			url: "/Docente/listaTutoriasDocenteAsistencia",
+			type: "POST",
+			data: { Asistencia: $("#asistencia").val() },
+			success: function (listaHorariosTutorias) {
+
+				$("#tablaHorarioTutorias").empty();
+
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaHorariosTutorias.length; i++) {
+
+
+					d += '<tr>' +
+						'<td>' + listaHorariosTutorias[i].Matricula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreEstudiante + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Modulo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoPeriodo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].EstadoObligatorio + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Fecha + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Aula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Asistencia + '</td>' +
+
+
+						'</tr>';
+
+					a++;
+				}
+
+
+
+				$("#tablaHorarioTutorias").append(d);
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	function tablaHorarioTutoriasDocentePeriodo() {
+
+
+		$.ajax({
+			url: "/Docente/listaTutoriasDocentePeriodo",
+			type: "POST",
+			data: { CodigoPeriodo: $("#listaPeriodo").val() },
+			success: function (listaHorariosTutorias) {
+
+				$("#tablaHorarioTutorias").empty();
+
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaHorariosTutorias.length; i++) {
+
+
+					d += '<tr>' +
+						'<td>' + listaHorariosTutorias[i].Matricula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreEstudiante + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Modulo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoPeriodo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].EstadoObligatorio + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Fecha + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Aula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Asistencia + '</td>' +
+
+
+						'</tr>';
+
+					a++;
+				}
+
+
+
+				$("#tablaHorarioTutorias").append(d);
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+</script>

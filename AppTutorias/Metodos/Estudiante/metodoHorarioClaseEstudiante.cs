@@ -15,36 +15,43 @@ namespace AppTutorias.Metodos.Estudiante
 
         public List<horarioClaseEstudiante> consultaHorariosEstudianteMatricula(string Matricula)
         {
-            var horarioEstudiante = db.horarioClaseEstudianteMatricula(int.Parse(Matricula));
+                if (Matricula == "" || Matricula ==null)
+                {
+                    Matricula = "0";
+                }
 
-            List<horarioClaseEstudiante> listaHorarioEstudiante= new List<horarioClaseEstudiante>();
+                var horarioEstudiante = db.horarioClaseEstudianteMatricula(int.Parse(Matricula));
 
-            foreach (var consulta in horarioEstudiante)
-            {
-                horarioClaseEstudiante horarioClaseEstudiante = new horarioClaseEstudiante();
+                List<horarioClaseEstudiante> listaHorarioEstudiante = new List<horarioClaseEstudiante>();
 
-                horarioClaseEstudiante.CodigoFacultad = consulta.CodigoFacultad;
-                horarioClaseEstudiante.NombreFacultad = consulta.NombreFacultad;
-                horarioClaseEstudiante.CodigoCarrera = consulta.CodigoCarrera;
-                horarioClaseEstudiante.NombreCarrera = consulta.NombreCarrera;
-                horarioClaseEstudiante.CodigoMateria = consulta.CodigoMeteria;
-                horarioClaseEstudiante.NombreMateria = consulta.NombreMateria;
-                horarioClaseEstudiante.Aula = consulta.Aula;
-                horarioClaseEstudiante.Paralelo = consulta.Paralelo;
-                horarioClaseEstudiante.Estudiante = consulta.Estudiante;
-                horarioClaseEstudiante.CodigoModulo = consulta.CodigoModulo;
-                horarioClaseEstudiante.Dia = consulta.Dia;
-                horarioClaseEstudiante.HoraInicio = consulta.HoraInicio.ToString(@"h\:mm");
-                horarioClaseEstudiante.HoraFin = consulta.HoraFin.ToString(@"h\:mm");
-                horarioClaseEstudiante.CodigoPeriodo = consulta.CodigoPeriodo;
-                horarioClaseEstudiante.Periodo = consulta.Periodo;
+                foreach (var consulta in horarioEstudiante)
+                {
+                    horarioClaseEstudiante horarioClaseEstudiante = new horarioClaseEstudiante();
+
+                    horarioClaseEstudiante.CodigoFacultad = consulta.CodigoFacultad;
+                    horarioClaseEstudiante.NombreFacultad = consulta.NombreFacultad;
+                    horarioClaseEstudiante.CodigoCarrera = consulta.CodigoCarrera;
+                    horarioClaseEstudiante.NombreCarrera = consulta.NombreCarrera;
+                    horarioClaseEstudiante.CodigoMateria = consulta.CodigoMeteria;
+                    horarioClaseEstudiante.NombreMateria = consulta.NombreMateria;
+                    horarioClaseEstudiante.Aula = consulta.Aula;
+                    horarioClaseEstudiante.Paralelo = consulta.Paralelo;
+                    horarioClaseEstudiante.Estudiante = consulta.Estudiante;
+                    horarioClaseEstudiante.CodigoModulo = consulta.CodigoModulo;
+                    horarioClaseEstudiante.Dia = consulta.Dia;
+                    horarioClaseEstudiante.HoraInicio = consulta.HoraInicio.ToString(@"h\:mm");
+                    horarioClaseEstudiante.HoraFin = consulta.HoraFin.ToString(@"h\:mm");
+                    horarioClaseEstudiante.CodigoPeriodo = consulta.CodigoPeriodo;
+                    horarioClaseEstudiante.Periodo = consulta.Periodo;
 
 
-                listaHorarioEstudiante.Add(horarioClaseEstudiante);
+                    listaHorarioEstudiante.Add(horarioClaseEstudiante);
+                }
+
+                return listaHorarioEstudiante;
+
             }
 
-            return listaHorarioEstudiante;
-        }
-
+  
     }
 }

@@ -52,7 +52,7 @@
 
 <!-- TITULO DE BOTON -->
 <div class="title-perfil">
-	<h5>Informacion General</h5>
+	<h5>Información General</h5>
 </div>
 <br />
 
@@ -80,7 +80,7 @@
 			</div>
 			<div>
 				<h4>@Model.Cedula</h4>
-				<small>Cedula</small>
+				<small>Cédula</small>
 			</div>
 		</div>
 	</div>
@@ -93,6 +93,10 @@
 		<li>
 			<ul class="list-inline">
 				<li>
+					<label>Periódo</label><br />
+					<select id="listaPeriodo"></select>
+				</li>
+				<li>
 					<label>Horas Disponibles</label>
 					<br />
 					<select id="horasLibres"></select>
@@ -103,6 +107,7 @@
 		</li>
 		<li>
 			<ul class="list-inline">
+				
 				<li>
 					<label>Horas Disponibles</label>
 					<br />
@@ -113,10 +118,14 @@
 			</ul>
 		</li>
 	</ul><br />
-	<h4>Ingresar/Elim Horas Obligatorias</h4>
+	<h4>Ingresar/Eliminar Horas Obligatorias</h4>
 	<ul class="list-inline">
 		<li>
 			<ul>
+				<li>
+					<label>Periódo</label><br />
+					<select id="listaPeriodo1"></select>
+				</li>
 				<li>
 					<label>Horas Disponibles</label><br />
 					<select id="horaObligat"></select>
@@ -250,6 +259,7 @@
 		listaModulos();
 		listaHorasLibre();
 		listaHorasObligatorias();
+		listaPeriodo();
 	});
 	function listaModulos() {
 		$.ajax({
@@ -318,6 +328,39 @@
 		});
 	}
 
+	function listaPeriodo() {
+		$.ajax({
+			url: "/SuperAdmin/listaPeriodo",
+			type: 'post',
+			datatype: 'application/json',
+			success: function (listaPeriodo) {
+
+				$("#listaPeriodo").empty();
+				$("#listaPeriod1").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaPeriodo.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaPeriodo[i].CodigoPeriodo + '" ' +
+						'>' + listaPeriodo[i].NombrePeriodo + '</option>';
+
+					a++;
+				}
+
+				$("#listaPeriodo").append(d);
+				$("#listaPeriodo1").append(d);
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
 
 
 	function listaHorasObligatorias() {
@@ -369,7 +412,7 @@
 			url: "/Docente/ingresarHorasLibres",
 			type: 'post',
 			datatype: 'application/json',
-			data: { CodigoModulo: codigoModulo },
+			data: { CodigoModulo: codigoModulo, CodigoPeriodo:$('#listaPeriodo').val() },
 			success: function (data) {
 
 				$("#horario").html(data);
@@ -400,7 +443,7 @@
 			url: "/Docente/eliminarHorasLibres",
 			type: 'post',
 			datatype: 'application/json',
-			data: { CodigoModulo: codigoModulo },
+			data: { CodigoModulo: codigoModulo, CodigoPeriodo: $('#listaPeriodo').val() },
 			success: function (data) {
 
 				$("#horario").html(data);
@@ -434,7 +477,7 @@
 			url: "/Docente/ingresarHorasObligatorias",
 			type: 'post',
 			datatype: 'application/json',
-			data: { CodigoM: codigoModulo },
+			data: { CodigoM: codigoModulo, CodigoPeriodo: $('#listaPeriodo1').val() },
 			success: function (data) {
 
 
@@ -466,7 +509,7 @@
 			url: "/Docente/eliminarHorasObligatorias",
 			type: 'post',
 			datatype: 'application/json',
-			data: { CodigoModulo: codigoModulo },
+			data: { CodigoModulo: codigoModulo, CodigoPeriodo: $('#listaPeriodo1').val() },
 			success: function (data) {
 
 

@@ -1,0 +1,1836 @@
+﻿
+<style>
+	.container-datos {
+		display: flex;
+		flex-flow: row wrap;
+		padding: 15px;
+		border: 1px solid #cbcbcb;
+		width: 700px;
+	}
+
+		.container-datos div {
+			padding-left: 10px;
+			text-align: center;
+		}
+
+	ul h4 {
+		color: rgba(106, 12, 12, 1);
+		border-bottom: 1px solid #000000;
+	}
+
+	.menuReportes {
+		list-style:none;
+		display:flex;
+		background:#141414;
+		color:#fff;
+		width:100%;
+	}
+
+		.menuReportes li {
+			padding:10px 15px;
+			cursor:pointer;
+
+		}
+
+			.menuReportes li:hover {
+				background: #57090C;
+				color:#fff;
+			}
+
+	.active-menu-p {
+		background: #57090C;
+		color: #fff;
+	}
+	.active-menu {
+		display: block;
+		
+	}
+
+	.noactive-menu {
+		display: none;
+	}
+
+</style>
+<div class="container-admin">
+	<img src="~/Content/img/fondo_1.jpg" alt="" width="100%;">
+	<h3>Reportes de Tutorías</h3>
+	<p>Registro de reportes de tutorías de los estudiantes</p>
+	<br />
+	<!--<div style="padding:15px;">
+		<label>Datos Tutorias Actuales(horas)</label>
+		<div style="display:flex;justify-content:center">
+			<div class="container-datos">
+
+				<div>
+					<label>Total</label>
+					<h4><span id="total"></span> horas</h4>
+				</div>
+				<div>
+					<label>Asistidas</label>
+					<h4><span id="asistidas"></span> horas</h4>
+				</div>
+				<div>
+					<label>No Asistidas</label>
+					<h4><span id="noAsistidas"></span> horas</h4>
+				</div>
+				<div>
+					<label>Efectividad(Total Tutorias/Asisitidas)</label>
+					<h4><span id="efectividad"></span> %</h4>
+				</div>
+
+			</div>
+		</div>
+		<h4>Todas las tutorias</h4>
+		<button style="width:120px;" onclick="tablaHorarioTutoriasTotal()">Consultar</button><br />
+		<ul class="list-inline">
+			<h4 for="">Tutorias Por Carrera</h4>
+			<br />
+			<li>
+				<label for="">Facultad</label><br />
+				<select name="facultad" id="codigoFacultadCarrera" onchange="listaCarreras()">
+					<option name="facultad" value="FICA">FICA</option>
+				</select>
+			</li>
+			<li>
+				<label for="">Carrera</label><br />
+				<select id="listaCarreras" onchange="tablaHorarioTutorias()"></select>
+			</li>
+			<li>
+				<label></label>
+				<button onclick="tablaHorarioTutorias()">Buscar</button>
+			</li>
+		</ul><br />
+		<ul class="list-inline">
+			<h4 for="">Tutorias por Materia</h4>
+			<br />
+			<li>
+				<label for="">Facultad</label><br />
+				<select name="facultad" id="codigoFacultadCarrera2" onchange="listaCarreras1()">
+				</select>
+			</li>
+			<li>
+				<label for="">Carrera</label><br />
+				<select id="listaCarreras2" onchange="listaMaterias1()"></select>
+			</li>
+			<li>
+				<label for="">Materia</label><br />
+				<select id="listaMaterias2"></select>
+			</li>
+			<li>
+				<label></label>
+				<button onclick="tablaHorarioTutoriasMateria()">Buscar</button>
+			</li>
+
+		</ul><br />
+		<ul class="list-inline">
+			<h4 for="">Tutorias de 3(era) Matricula por Materia</h4>
+			<br />
+			<li>
+				<label for="">Facultad</label><br />
+				<select name="facultad" id="codigoFacultadCarrera3" onchange="listaCarreras2()">
+					<option name="facultad" value="FICA">FICA</option>
+				</select>
+			</li>
+			<li>
+				<label for="">Carrera</label><br />
+				<select id="listaCarreras3" onchange="listaMaterias2()"></select>
+			</li>
+			<li>
+				<label for="">Materia</label><br />
+				<select id="listaMaterias3"></select>
+			</li>
+			<li>
+				<label></label>
+				<button onclick="tablaHorarioTutoriasRepitencia()">Buscar</button>
+			</li>
+
+		</ul>
+
+		<div>
+			<label>Horas tutorias: </label>
+			<h4><span id="totalHoras"></span> horas</h4>
+		</div>
+
+		<div class="table-carrera container-scroll">
+			<br />
+			<h4>Tabla de tutorias general</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>Matricula</th>
+						<th>Estudiante</th>
+						<th>Cod Facultad</th>
+						<th>Facultad</th>
+						<th>Cod Materia</th>
+						<th>Materia</th>
+						<th>Modulo</th>
+						<th>Periodo</th>
+						<th>Estado Obligatorio</th>
+						<th>Fecha</th>
+						<th>Aula</th>
+						<th>Asistencia</th>
+						<th>Repitencia</th>
+
+
+					</tr>
+				</thead>
+				<tbody id="tablaHorarioTutorias"></tbody>
+
+
+			</table>
+		</div>
+	</div>-->
+	<div class="container-datos" style="width:auto;justify-content:center;">
+		<ul class="menuReportes" id="menuReportes">
+			<li id="m1" >Tutorías por docente</li>
+			<li id="m2">Tutorías por carrera</li>
+			<li id="m3">Tutorías por matrícula de estudiante</li>
+			<li id="m4">Tutorías por número de matrícula</li>
+			<li id="m5">Tutorías por materia</li>
+
+		</ul>
+	</div>
+	<div>
+		<div style="padding-left:15px;margin-bottom:30px;">
+			<h4>Analiza la efectividad de cada docente en su cronograma de tutorías</h4><br />
+			<ul class="list-inline active-menu" id="r1">
+				<h4>Estadísticas por docente</h4>
+				<br />
+				<li>
+					<label>Periódo</label><br />
+					<select id="listaPeriodoD"></select>
+				</li>
+				<li>
+					<label for="">Docente</label><br />
+
+					<input style="border:1px solid #cbcbcb" list="docentesList" id="listaDocentes" />
+					<datalist id="docentesList"></datalist>
+
+				</li>
+				<li>
+					<button class="success" onclick="barrasDocente()">Generar Reporte</button>
+				</li>
+
+
+			</ul><br />
+			<ul class="list-inline noactive-menu" id="r2">
+				<h4>Estadísticas de docentes por Carrer</h4>
+				<br />
+				<li>
+					<label>Periódo</label><br />
+					<select id="listaPeriodo"></select>
+				</li>
+				<li>
+					<label>Facultad</label><br />
+					<select id="facultadEstadistica" onchange="listaCarreras()"></select>
+				</li>
+				<li>
+					<label for="">Carrera</label><br />
+					<select id="listaCarreras"></select>
+				</li>
+				<li><button class="success" onclick="barrasDocenteFacultad()">Generar Reporte</button></li>
+			</ul><br />
+
+			<ul class="list-inline noactive-menu" id="r3">
+				<h4>Estadísticas de tutorías por repitencia de estudiante</h4>
+				<br />
+				<li>
+					<label>Periódo</label><br />
+					<select id="listaPeriodoE"></select>
+				</li>
+				<li>
+					<label>Facultad</label><br />
+					<select id="facultadEstadisticaE" onchange="listaCarrerasE()"></select>
+				</li>
+				<li>
+					<label for="">Carrera</label><br />
+					<select id="listaCarrerasE"></select>
+				</li>
+				<li>
+					<label for="">Nómero de Matrícula</label><br />
+					<select id="numMatricula">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+					</select>
+				</li>
+				<li><button class="success" onclick="barrasNumMatricula()">Generar Reporte</button></li>
+			</ul>
+			<br />
+
+			<ul class="list-inline noactive-menu" id="r4">
+				<h4>Estadística de repitencia por carrera</h4>
+				<br />
+				<li>
+					<label>Periódo</label><br />
+					<select id="listaPeriodoR"></select>
+				</li>
+				<li>
+					<label>Facultad</label><br />
+					<select id="facultadEstadisticaR" onchange="listaCarrerasR()"></select>
+				</li>
+				<li>
+					<label for="">Carrera</label><br />
+					<select id="listaCarrerasR"></select>
+				</li>
+
+				<li><button class="success" onclick="barrasRepitencia()">Generar Reporte</button></li>
+			</ul>
+			<!--ESTADISTICA POR MATERIA-->
+
+			<br />
+
+			<ul class="list-inline noactive-menu" id="r5">
+				<h4>Estadística de repitencia por Materia</h4>
+				<br />
+				<li>
+					<label>Periódo</label><br />
+					<select id="listaPeriodoM"></select>
+				</li>
+				<li>
+					<label>Facultad</label><br />
+					<select id="facultadEstadisticaM" onchange="listaCarrerasM()"></select>
+				</li>
+				<li>
+					<label for="">Carrera</label><br />
+					<select id="listaCarrerasM" onchange="listaMateriasM()"></select>
+				</li>
+				<li>
+					<label for="">Materia</label><br />
+					<select id="listaMateriasM"></select>
+				</li>
+
+				<li><button class="success" onclick="barrasMateria()">Generar Reporte</button></li>
+			</ul>
+		</div>
+
+		<div id="containerDatos">
+			<!--FILTRO PRO CARRERA-->
+			<div id="carreraData">
+				<div style="display:flex;align-content:center;flex-flow:column wrap;">
+
+					<div class="container-datos" style="width:auto;justify-content: center;display:none;" id="datosEstadisticaDocente">
+						<div>
+							<label>Docente</label>
+							<h4 id="docenteBarras"></h4>
+						</div>
+						<div>
+							<label>Horas Planificadas</label>
+							<h4><span id="planificadas"></span> horas</h4>
+						</div>
+						<div>
+							<label>Horas Dadas</label>
+							<h4><span id="dadas"></span> horas</h4>
+						</div>
+
+						<div>
+							<label>Efectividad(Total Tutorías/Asisitidas)</label>
+							<h4><span id="efect"></span> %</h4>
+						</div>
+
+					</div>
+					<!--TABLA DE FILTROS-->
+					<div class="container-datos" style="width:auto;justify-content: center;display:none;" id="datosEDocentes1">
+						<h3>Carrera: <span id="tituloCarreraDocente"></span></h3>
+						<table>
+							<thead>
+								<tr>
+									<th>Docentes</th>
+									<th>TutoríasPlanificadas</th>
+									<th>TutoríasDadas</th>
+									<th>Tutorías Carrera</th>
+									<th>Tutorías Otras Carreras</th>
+									<th>Número Estudiantes</th>
+									<th>Efectividad</th>
+								</tr>
+							</thead>
+							<tbody id="datosTutorias"></tbody>
+						</table>
+
+
+					</div>
+
+					<div style="display:flex;width:auto;justify-content: center;margin-top: 50px">
+						<div id="barrasE" style="height: auto"></div>
+
+					</div>
+					<div style="display:flex;width:auto;justify-content: center;margin-top: 50px">
+						<div id="barras" style="height: auto"></div>
+
+					</div>
+				</div>
+
+
+
+			</div>
+
+			<!--FILTRO POR MATRICULA-->
+			<div id="matriculaData" style="display:none;">
+				<div style="display:flex;align-content:center;flex-flow:column wrap;">
+
+					<h3>Carrera: <span id="tituloCarreraRepitencia"></span></h3>
+					<!--TABLA DE FILTROS-->
+					<div class="container-datos" style="width:auto;justify-content: center;display:none;" id="datosEDocentes">
+						<table>
+							<thead>
+								<tr>
+									<th>Estudiante</th>
+									<th>Materia</th>
+									<th>Número tutorías Planificadas</th>
+									<th>Número de tutorías Asistidas</th>
+								</tr>
+							</thead>
+							<tbody id="datosNumMatricula"></tbody>
+						</table>
+
+
+					</div>
+
+					<div style="display:flex;width:auto;justify-content: center">
+						<div id="barrasNumMatricula" style="height: auto"></div>
+
+					</div>
+
+				</div>
+
+
+
+			</div>
+
+
+			<!--FILTRO POR CARRERA Y REPITENCIAS 1 2 3-->
+			<div id="repitenciaData" style="display:none;">
+				<div style="display:flex;align-content:center;flex-flow:column wrap;">
+					<h3>Carrera: <span id="tituloCarrera"></span></h3>
+
+					<!--TABLA DE FILTROS-->
+					<div class="container-datos" style="width:auto;justify-content:center;" id="datosER">
+						<table>
+							<thead>
+								<tr>
+									<th>Número Matrícula(Repitencia)</th>
+									<th>Tutorías Asistidas(SI)</th>
+								</tr>
+							</thead>
+							<tbody id="datosRepitencia"></tbody>
+						</table>
+
+
+					</div>
+
+					<div style="display:flex;width:auto;justify-content: center">
+
+						<div id="barrasRepitencia" style="height: auto;margin-top:50px;"></div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<!--FILTRO POR CARRERA Y REPITENCIAS 1 2 3-->
+			<div id="materiaData" style="display:none;">
+				<div style="display:flex;align-content:center;flex-flow:column wrap;">
+					<h3>Carrera: <span id="tituloCarreraM"></span></h3>
+					<h3>Materia: <span id="tituloMateriaM"></span></h3>
+
+					<!--TABLA DE FILTROS-->
+					<div class="container-datos" style="width:auto;justify-content:center;" id="datosM">
+						<table>
+							<thead>
+								<tr>
+									<th>Número Matrícula(Repitencia)</th>
+									<th>Tutorías Asistidas(SI)</th>
+								</tr>
+							</thead>
+							<tbody id="datosMateria"></tbody>
+						</table>
+
+
+					</div>
+
+					<div style="display:flex;width:auto;justify-content: center">
+
+						<div id="barrasMateria" style="height: auto;margin-top:50px;"></div>
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<script>
+
+
+	$(function () {
+
+		datosTutorias();
+		listaPeriodo();
+		listaDocentes();
+	
+
+		$.ajax({
+			url: "/SuperAdmin/listaFacultad",
+			type: 'post',
+			datatype: 'application/json',
+			//data: form.serialize(),
+			success: function (listaFacultad) {
+
+				$("#codigoFacultadCarrera").empty();
+				$("#codigoFacultadCarrera1").empty();
+				$("#codigoFacultadCarrera2").empty();
+				$("#codigoFacultadCarrera3").empty();
+				$("#facultadEstadistica").empty();
+				$("#facultadEstadisticaE").empty();
+				$("#facultadEstadisticaR").empty();
+				$("#facultadEstadisticaM").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaFacultad.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaFacultad[i].CodigoFacultad + '" ' +
+						'>' + listaFacultad[i].NombreFacultad + '</option>';
+
+					a++;
+				}
+
+				$("#codigoFacultadCarrera").append(d);
+				$("#codigoFacultadCarrera1").append(d);
+				$("#codigoFacultadCarrera2").append(d);
+				$("#codigoFacultadCarrera3").append(d);
+				$("#facultadEstadistica").append(d);
+				$("#facultadEstadisticaE").append(d);
+				$("#facultadEstadisticaR").append(d);
+				$("#facultadEstadisticaM").append(d);
+
+				listaCarreras();
+				listaCarrerasE();
+				listaCarrerasR();
+				listaCarrerasM();
+				////listaCarreras1();
+				////listaCarreras2();
+
+
+			},
+			error: function () {
+
+			}
+		});
+
+	});
+	function listaCarreras() {
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaCarrerasFacultad",
+			type: 'post',
+			data: { CodigoFacultad: $('#facultadEstadistica').val() },
+			success: function (listaCarrera) {
+
+				$("#listaCarreras").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaCarrera.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaCarrera[i].CodigoCarrera + '" ' +
+						'>' + listaCarrera[i].NombreCarrera + '</option>';
+
+					a++;
+				}
+
+				$("#listaCarreras").append(d);
+
+			},
+			error: function () {
+
+			}
+		});
+
+	}
+
+	function listaCarrerasE() {
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaCarrerasFacultad",
+			type: 'post',
+			data: { CodigoFacultad: $('#facultadEstadisticaE').val() },
+			success: function (listaCarrera) {
+
+				$("#listaCarrerasE").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaCarrera.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaCarrera[i].CodigoCarrera + '" ' +
+						'>' + listaCarrera[i].NombreCarrera + '</option>';
+
+					a++;
+				}
+
+				$("#listaCarrerasE").append(d);
+
+		
+			},
+			error: function () {
+
+			}
+		});
+
+	}
+
+	function listaCarrerasR() {
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaCarrerasFacultad",
+			type: 'post',
+			data: { CodigoFacultad: $('#facultadEstadisticaR').val() },
+			success: function (listaCarrera) {
+
+				$("#listaCarrerasR").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaCarrera.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaCarrera[i].CodigoCarrera + '" ' +
+						'>' + listaCarrera[i].NombreCarrera + '</option>';
+
+					a++;
+				}
+
+				$("#listaCarrerasR").append(d);
+
+
+			},
+			error: function () {
+
+			}
+		});
+
+	}
+
+
+	function listaCarrerasM() {
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaCarrerasFacultad",
+			type: 'post',
+			data: { CodigoFacultad: $('#facultadEstadisticaM').val() },
+			success: function (listaCarrera) {
+
+				$("#listaCarrerasM").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaCarrera.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaCarrera[i].CodigoCarrera + '" ' +
+						'>' + listaCarrera[i].NombreCarrera + '</option>';
+
+					a++;
+				}
+
+				$("#listaCarrerasM").append(d);
+				listaMateriasM();
+
+			},
+			error: function () {
+
+			}
+		});
+
+	}
+
+
+	function listaPeriodo() {
+		$.ajax({
+			url: "/SuperAdmin/listaPeriodo",
+			type: 'post',
+			datatype: 'application/json',
+			success: function (listaPeriodo) {
+
+				$("#listaPeriodoD").empty();
+				$("#listaPeriodo").empty();
+				$("#listaPeriodoE").empty();
+				$("#listaPeriodoR").empty();
+				$("#listaPeriodoM").empty();
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaPeriodo.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaPeriodo[i].CodigoPeriodo + '" ' +
+						'>' + listaPeriodo[i].NombrePeriodo + '</option>';
+
+					a++;
+				}
+
+
+				$("#listaPeriodoD").append(d);
+				$("#listaPeriodo").append(d);
+				$("#listaPeriodoE").append(d);
+				$("#listaPeriodoR").append(d);
+				$("#listaPeriodoM").append(d);
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+	
+
+	function listaCarreras1() {
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaCarrerasFacultad",
+			type: 'post',
+			data: { CodigoFacultad: $('#codigoFacultadCarrera2').val() },
+			success: function (listaCarrera) {
+
+
+				$("#listaCarreras2").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaCarrera.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaCarrera[i].CodigoCarrera + '" ' +
+						'>' + listaCarrera[i].NombreCarrera + '</option>';
+
+					a++;
+				}
+
+
+				$("#listaCarreras2").append(d);
+
+
+				listaMaterias1();
+
+
+
+
+			},
+			error: function () {
+
+			}
+		});
+
+	}
+	function listaCarreras2() {
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaCarrerasFacultad",
+			type: 'post',
+			data: { CodigoFacultad: $('#codigoFacultadCarrera3').val() },
+			success: function (listaCarrera) {
+
+				$("#listaCarreras3").empty();
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaCarrera.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaCarrera[i].CodigoCarrera + '" ' +
+						'>' + listaCarrera[i].NombreCarrera + '</option>';
+
+					a++;
+				}
+
+
+				$("#listaCarreras3").append(d);
+
+				listaMaterias2();
+
+
+
+			},
+			error: function () {
+
+			}
+		});
+
+	}
+
+
+
+	function tablaHorarioTutorias() {
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaTutorias",
+			type: "POST",
+			data: { CodigoCarrera: $('#listaCarreras').val() },
+			success: function (listaHorariosTutorias) {
+
+				$("#tablaHorarioTutorias").empty();
+
+
+				var contadorTutorias = 0;
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaHorariosTutorias.length; i++) {
+
+
+					d += '<tr>' +
+						'<td>' + listaHorariosTutorias[i].Matricula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreEstudiante + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoFacultad + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreFacultad + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Modulo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoPeriodo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].EstadoObligatorio + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Fecha + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Aula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Asistencia + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Repitencia + '</td>' +
+
+
+						'</tr>';
+
+					a++;
+
+					contadorTutorias += 1;
+				}
+
+
+
+				$("#tablaHorarioTutorias").append(d);
+				$("#totalHoras").text(contadorTutorias);
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+	function tablaHorarioTutoriasTotal() {
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaTutoriasTotal",
+			type: "POST",
+			success: function (listaHorariosTutorias) {
+
+				$("#tablaHorarioTutorias").empty();
+
+
+				var contadorTutorias = 0;
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaHorariosTutorias.length; i++) {
+
+
+					d += '<tr>' +
+						'<td>' + listaHorariosTutorias[i].Matricula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreEstudiante + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoFacultad + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreFacultad + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Modulo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoPeriodo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].EstadoObligatorio + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Fecha + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Aula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Asistencia + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Repitencia + '</td>' +
+
+
+						'</tr>';
+
+					a++;
+
+					contadorTutorias += 1;
+				}
+
+
+
+				$("#tablaHorarioTutorias").append(d);
+				$("#totalHoras").text(contadorTutorias);
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+	function tablaHorarioTutoriasMateria() {
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaTutoriasMateria",
+			type: "POST",
+			data: { CodigoMateria: $('#listaMaterias2').val() },
+			success: function (listaHorariosTutorias) {
+
+				$("#tablaHorarioTutorias").empty();
+
+
+				var contadorTutorias = 0;
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaHorariosTutorias.length; i++) {
+
+
+					d += '<tr>' +
+						'<td>' + listaHorariosTutorias[i].Matricula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreEstudiante + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoFacultad + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreFacultad + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Modulo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoPeriodo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].EstadoObligatorio + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Fecha + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Aula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Asistencia + '</td>' +
+
+
+						'</tr>';
+
+					a++;
+
+					contadorTutorias += 1;
+				}
+
+
+
+				$("#tablaHorarioTutorias").append(d);
+				$("#totalHoras").text(contadorTutorias);
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+	function tablaHorarioTutoriasRepitencia() {
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaTutoriasRepitencia",
+			type: "POST",
+			data: { CodigoMateria: $('#listaMaterias3').val() },
+			success: function (listaHorariosTutorias) {
+
+				$("#tablaHorarioTutorias").empty();
+
+
+				var contadorTutorias = 0;
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaHorariosTutorias.length; i++) {
+
+
+					d += '<tr>' +
+						'<td>' + listaHorariosTutorias[i].Matricula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreEstudiante + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoFacultad + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreFacultad + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].NombreMateria + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Modulo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].CodigoPeriodo + '</td>' +
+						'<td>' + listaHorariosTutorias[i].EstadoObligatorio + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Fecha + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Aula + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Asistencia + '</td>' +
+						'<td>' + listaHorariosTutorias[i].Repitencia + '</td>' +
+
+
+						'</tr>';
+
+					a++;
+
+					contadorTutorias += 1;
+				}
+
+
+
+				$("#tablaHorarioTutorias").append(d);
+				$("#totalHoras").text(contadorTutorias);
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	function datosTutorias() {
+
+		$.ajax({
+			url: "/SuperAdmin/datosTutorias",
+			type: "POST",
+			success: function (data) {
+
+
+				$("#total").text(data.Total);
+				$("#asistidas").text(data.Asistidas);
+				$("#noAsistidas").text(data.NoAsistidas);
+				$("#efectividad").text((parseFloat(data.Asistidas) / parseFloat(data.Total)) * 100);
+
+			},
+			error: function () {
+
+			}
+		});
+
+	}
+	function listaMateriasM() {
+		$.ajax({
+			url: "/SuperAdmin/listaMaterias",
+			type: 'post',
+			datatype: 'application/json',
+			data: { CodigoCarrera: $("#listaCarrerasM").val() },
+			success: function (listaMaterias) {
+
+				$("#listaMateriasM").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaMaterias.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaMaterias[i].CodigoMateria + '" ' +
+						'>' + listaMaterias[i].NombreMateria + '</option>';
+
+					a++;
+				}
+
+				$("#listaMateriasM").append(d);
+
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+	function listaMaterias1() {
+		$.ajax({
+			url: "/SuperAdmin/listaMaterias",
+			type: 'post',
+			datatype: 'application/json',
+			data: { CodigoCarrera: $("#listaCarreras2").val() },
+			success: function (listaMaterias) {
+
+
+
+				$("#listaMaterias2").empty();
+
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaMaterias.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaMaterias[i].CodigoMateria + '" ' +
+						'>' + listaMaterias[i].NombreMateria + '</option>';
+
+					a++;
+				}
+
+				$("#listaMaterias2").append(d);
+
+
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	function listaMaterias2() {
+		$.ajax({
+			url: "/SuperAdmin/listaMaterias",
+			type: 'post',
+			datatype: 'application/json',
+			data: { CodigoCarrera: $("#listaCarreras3").val() },
+			success: function (listaMaterias) {
+
+
+
+				$("#listaMaterias3").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaMaterias.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaMaterias[i].CodigoMateria + '" ' +
+						'>' + listaMaterias[i].NombreMateria + '</option>';
+
+					a++;
+				}
+
+				$("#listaMaterias3").append(d);
+
+
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+	//lista de docentes
+
+	function listaDocentes() {
+		$.ajax({
+			url: "/SuperAdmin/listaDocentes",
+			type: 'post',
+			datatype: 'application/json',
+			success: function (listaDocentes) {
+
+				$("#docentesList").empty();
+				$("#docentes").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaDocentes.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaDocentes[i].Cedula + '" ' +
+						'>' + listaDocentes[i].Nombre + " " + listaDocentes[i].NombreDos + " " + listaDocentes[i].Apellido + " " + listaDocentes[i].ApellidoDos + '</option>';
+
+					a++;
+				}
+
+				$("#docentes").append(d);
+				$("#docentesList").append(d);
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+</script>
+<script type="text/javascript">
+	//REPORTES GRAFICOS
+
+	
+	function listaEstudiantesCarreraE() {
+		$.ajax({
+			url: "/SuperAdmin/listaEstudiantesCarrera",
+			type: 'post',
+			datatype: 'application/json',
+			data: { CodigoCarrera: $("#listaCarrerasE").val() },
+			success: function (listaEstudiantes) {
+
+
+				$("#estudiantes").empty();
+				$("#estudiantes1").empty();
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaEstudiantes.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaEstudiantes[i].Matricula + '" ' +
+						'>' + listaEstudiantes[i].Nombre + ' ' + listaEstudiantes[i].NombreDos + ' ' + listaEstudiantes[i].Apellido + ' ' + listaEstudiantes[i].ApellidoDos + '</option>';
+
+					a++;
+				}
+
+
+				$("#estudiantes").append(d);
+				$("#estudiantes1").append(d);
+
+		
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+
+
+	//consulta por docente la barra
+	function barrasDocente() {
+		$('#carreraData').css('display', 'flex');
+		$('#materiaData').css('display', 'none');
+		$('#repitenciaData').css('display', 'none');
+		$('#matriculaData').css('display', 'none');
+		$('#datosEDocentes1').css('display', 'none');
+		$("#datosEstadisticaDocente").css('display', 'flex');
+		$("#datosTutorias").empty();
+		$('#barrasE').empty();
+		$('#barrasE').css('display','flex');
+		$('#barras').html(
+			'<div id="modalLoad" class="loadingTable"><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></div>'
+		);
+
+		$.ajax({
+			url: "/SuperAdmin/barrasDocente",
+			type: 'post',
+			data: { Cedula: $("#listaDocentes").val(), CodigoPeriodo: $('#listaPeriodoD').val() },
+			success: function (data) {
+
+				var horasPlanificadas = data.HorasPlanificadas;
+				var horasDadas = data.HorasDadas;
+				var Docente = data.Docente;
+				var Efectividad = (parseFloat(horasDadas) / parseFloat(horasPlanificadas)) * 100;
+
+				if (Docente.Nombre === null) {
+					horasPlanificadas = 0;
+					horasDadas = 0;
+					Efectividad = 0;
+
+					$('#docenteBarras').text('');
+					$('#planificadas').text(horasPlanificadas);
+					$('#dadas').text(horasDadas);
+					$('#efect').text(Efectividad);
+					$('#barras').empty();
+				}
+
+				if (horasDadas === 0) {
+					Efectividad = 0;
+				}
+
+			
+
+				
+
+				if (Docente.Nombre !== null) {
+
+					$('#docenteBarras').text(Docente.Nombre + ' ' + Docente.Apellido);
+					$('#planificadas').text(horasPlanificadas);
+					$('#dadas').text(horasDadas);
+					$('#efect').text(Efectividad);
+
+					var datos = [
+						["Docente", "Efectividad", { role: "style" }],
+						[Docente.Nombre + ' ' + Docente.Apellido, Efectividad, "blue"]
+								];
+
+					var barras = google.visualization.arrayToDataTable(datos);
+
+
+				var view = new google.visualization.DataView(barras);
+				view.setColumns([0, 1,
+					{
+						calc: "stringify",
+						sourceColumn: 1,
+						type: "string",
+						role: "annotation"
+					},
+					2]);
+
+				var options = {
+					title: "Efectividad por Carrera (Tutorías Dadas/Planificadas)",
+					width: 600,
+					height: 400,
+					bar: { groupWidth: "60%" },
+					legend: { position: "none" },
+
+					vAxis: {
+						format: "#.#'%'",
+						viewWindow: {
+							min: 0,
+							max: 100
+						}
+					}
+
+				};
+				var chart = new google.visualization.ColumnChart(document.getElementById("barras"));
+				chart.draw(view, options);
+
+					$('#datosEstadisticaDocente').css('display', 'flex');
+			
+			  }
+
+			},
+			error: function () {
+
+			}
+		});
+
+	}
+
+
+	//consulta las tutorias de docentes por facultad
+
+	function barrasDocenteFacultad() {
+		$('#materiaData').css('display', 'none');
+		$('#repitenciaData').css('display', 'none');
+		$('#carreraData').css('display', 'block');
+		$('#matriculaData').css('display', 'none');
+		$('#barrasE').empty();
+	
+		$('#datosEstadisticaDocente').css('display', 'none');
+
+		$('#tituloCarreraDocente').text($('#listaCarreras option:selected').text());
+
+		$('#barras').html(
+			'<div id="modalLoad" class="loadingTable"><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></div>'
+		);
+
+		$.ajax({
+			url: "/SuperAdmin/barrasDocentesFacultad",
+			type: 'post',
+			data: { Periodo: $('#listaPeriodo').val(), CodigoCarrera: $('#listaCarreras').val() },
+			success: function (data) {
+
+
+				$("#datosTutorias").empty();
+				$("#datosEDocentes1").css('display', 'flex');
+			
+
+				var datos = [];
+				var datosE = [];
+
+				datos.push(["Docentes", "Planificadas", "Dadas"]);
+				datosE.push(["Docentes", "Efectividad"]);
+
+					var count = 0;
+					for (var i = 0; i < data.length; i++) {
+
+						datos.push([data[i].Docente.Nombre + ' ' + data[i].Docente.Apellido, data[i].HorasPlanificadas, data[i].HorasDadas]);
+						datosE.push([data[i].Docente.Nombre + ' ' + data[i].Docente.Apellido, ((parseFloat(data[i].HorasDadas).toFixed(2) / parseFloat(data[i].HorasPlanificadas).toFixed(2)) * 100)]);
+
+						count += 1;
+					}
+
+		
+
+				if (count > 0) {
+
+
+									////
+
+								
+
+									var d;
+			
+									for (var x = 0; x < data.length; x++) {
+
+										var efectividad = ((parseFloat(data[x].HorasDadas) / parseFloat(data[x].HorasPlanificadas)) * 100).toFixed(2);
+
+										d += '<tr>' +
+											'<td>' + data[x].Docente.Nombre + " " + data[x].Docente.Apellido + '</td>' +
+											'<td>' + data[x].HorasPlanificadas + '</td>' +
+											'<td>' + data[x].HorasDadas + '</td>' +
+											'<td>' + data[x].horasCarrera + '</td>' +
+											'<td>' + data[x].horasOtrasCarreras + '</td>' +
+											'<td>' + data[x].numeroEstudiantes+ '</td>' +
+											'<td>' + efectividad+'%' + '</td>' +
+											'</tr>';
+
+											
+									}
+
+								$("#datosTutorias").append(d);
+
+
+				//////
+
+
+					////////
+
+					var barras = google.visualization.arrayToDataTable(datos);
+
+					var barrasE = google.visualization.arrayToDataTable(datosE);
+
+
+					var view = new google.visualization.DataView(barras);
+					view.setColumns([0, 1, 2]);
+
+					var options = {
+						title: "Horas Planificadas vs Horas Dadas",
+						width: 600,
+						height: 400,
+						bar: { groupWidth: "60%" },
+						colors: ['#0dbb6f', '#ffed00'],
+						series: {
+							0: { targetAxisIndex: 0 }
+						},
+						vAxes: {
+				
+							0: { title: 'Horas' }
+						}
+					
+					};
+
+					var optionsE = {
+						title: "Efectividad Tutorías Dadas/Planificadas",
+						width: 600,
+						height: 400,
+						bar: { groupWidth: "60%" },
+						colors: ['#5564eb'],
+						series: {
+							0: { targetAxisIndex: 0 }
+						},
+						vAxes: {
+
+							0: {
+								title: 'Efectividad',
+								format: "#.#'%'",
+								viewWindow: {
+									min: 0,
+									max: 100
+								}
+							}
+						}
+
+					};
+
+					var chart = new google.charts.Bar(document.getElementById("barras"));
+					chart.draw(barras, google.charts.Bar.convertOptions(options));
+					$('#barras').css('display', 'flex');
+
+					var chartE = new google.charts.Bar(document.getElementById("barrasE"));
+					chartE.draw(barrasE, google.charts.Bar.convertOptions(optionsE));
+					$('#barrasE').css('display', 'flex');
+
+				} else {
+					$('#barras').empty();
+					$('#barrasE').empty();
+					$("#datosEDocentes1").css('display', 'none');
+					$("#datosTutorias").empty();
+					$('#carreraData').css('display', 'none');
+				}
+
+			},
+			error: function () {
+
+			}
+		});
+
+	}
+
+
+	//CONSULTAS POR NUMERO DE MATRICULA
+
+	//consulta las tutorias de docentes por facultad
+
+	function barrasNumMatricula() {
+		$('#materiaData').css('display', 'none');
+		$('#repitenciaData').css('display', 'none');
+		$('#carreraData').css('display', 'none');
+		$('#matriculaData').css('display', 'block');
+		$('#datosEDocentes').css('display', 'block');
+
+		$('#tituloCarreraRepitencia').text($('#listaCarrerasE option:selected').text());
+
+		$('#datosNumMatricula').html(
+			'<div id="modalLoad" class="loadingTable"><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></div>'
+		);
+
+		$.ajax({
+			url: "/SuperAdmin/barrasNumMatricula",
+			type: 'post',
+			data: { Periodo: $('#listaPeriodoE').val(), CodigoCarrera: $('#listaCarrerasE').val(), NumMatricula: $('#numMatricula').val() },
+			success: function (data) {
+
+
+				$("#datosNumMatricula").empty();
+
+			
+
+						var d;
+
+						for (var x = 0; x < data.length; x++) {
+
+
+
+							d += '<tr>' +
+								'<td>' + data[x].Estudiante.Nombre + " " + data[x].Estudiante.Apellido + '</td>' +
+								'<td>' + data[x].CodigoMateria + '</td>' +
+								'<td>' + data[x].HorasPlanificadas + '</td>' +
+								'<td>' + data[x].HorasDadas + '</td>' +
+								'</tr>';
+
+
+						}
+
+						$("#datosNumMatricula").append(d);
+
+
+					
+
+
+
+				
+				
+
+			},
+			error: function () {
+
+			}
+		});
+
+	}
+
+
+
+	///GRAFICO DE BARRAS POR CARRERA MOSTRANDO MATRICULAS DE 1 2 3
+
+	//consulta por docente la barra
+	function barrasRepitencia() {
+
+
+		$('#materiaData').css('display', 'none');
+		$('#carreraData').css('display', 'none');
+		$('#matriculaData').css('display', 'none');
+		$('#repitenciaData').css('display', 'block');
+		$("#datosER").css('display', 'block');
+		$('#barrasRepitencia').empty();
+
+		$('#barrasRepitencia').html(
+			'<div id="modalLoad" class="loadingTable"><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></div>'
+		);
+
+		$('#tituloCarrera').text($('#listaCarrerasR option:selected').text());
+
+		$.ajax({
+			url: "/SuperAdmin/barrasRepitencia",
+			type: 'post',
+			data: { Periodo: $('#listaPeriodoR').val(), CodigoCarrera: $('#listaCarrerasR').val() },
+			success: function (data) {
+
+
+
+				$("#datosRepitencia").empty();
+	
+
+
+				var datos = [];
+		
+
+				datos.push(["Numero de Matrícula", "Tutorías Asisitidas"]);
+			
+
+				var count = 0;
+				for (var i = 0; i < data.length; i++) {
+
+					datos.push([data[i].repitencia, data[i].HorasDadas]);
+				
+
+					count += 1;
+				}
+
+
+
+				if (count > 0) {
+
+
+					////
+
+
+
+					var d;
+
+					for (var x = 0; x < data.length; x++) {
+
+
+
+						d += '<tr>' +
+							'<td>' + data[x].repitencia + '</td>' +
+							'<td>' + data[x].HorasDadas + '</td>' +
+
+							'</tr>';
+
+
+					}
+
+					$("#datosRepitencia").append(d);
+
+					$('#repitenciaData').css('display', 'bock');
+					//////
+
+
+					////////
+
+					var barras = google.visualization.arrayToDataTable(datos);
+
+
+
+					var view = new google.visualization.DataView(barras);
+					view.setColumns([0, 1]);
+
+					var options = {
+						title: "Tutorías por tipo de Matrículas",
+						width: 600,
+						height: 400,
+						bar: { groupWidth: "60%" },
+						colors: ['#0dbb6f', '#ffed00'],
+						series: {
+							0: { targetAxisIndex: 0 }
+						},
+						vAxes: {
+
+							0: { title: 'Asisitidas' }
+						}
+
+					};
+
+				
+
+					var chart = new google.charts.Bar(document.getElementById("barrasRepitencia"));
+					chart.draw(barras, google.charts.Bar.convertOptions(options));
+		
+
+				} else {
+					$('#barrasRepitencia').empty();
+					$("#datosER").css('display', 'none');
+					$('#repitenciaData').css('display', 'none');
+				}
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+
+	///GRAFICO DE BARRAS MOSTRANDO MATRICULAS DE 1 2 3 POR MATERIA
+
+	//consulta por docente la barra
+	function barrasMateria() {
+
+	
+		$('#carreraData').css('display', 'none');
+		$('#matriculaData').css('display', 'none');
+		$('#repitenciaData').css('display', 'none');
+		$('#materiaData').css('display', 'block');
+		$("#datosM").css('display', 'block');
+		$('#barrasMateria').empty();
+
+		$('#barrasMateria').html(
+			'<div id="modalLoad" class="loadingTable"><span><i class="fas fa-spinner fa-spin"></i> Cargando...</span></div>'
+		);
+
+		$('#tituloCarreraM').text($('#listaCarrerasM option:selected').text());
+		$('#tituloMateriaM').text($('#listaMateriasM option:selected').text());
+
+		$.ajax({
+			url: "/SuperAdmin/barrasMateria",
+			type: 'post',
+			data: { Periodo: $('#listaPeriodoM').val(), CodigoCarrera: $('#listaCarrerasM').val(), CodigoMateria: $('#listaMateriasM').val() },
+			success: function (data) {
+
+
+
+				$("#datosMateria").empty();
+
+
+
+				var datos = [];
+
+
+				datos.push(["Número de Matrícula", "Tutorías Asisitidas"]);
+
+
+				var count = 0;
+				for (var i = 0; i < data.length; i++) {
+
+					datos.push([data[i].repitencia, data[i].HorasDadas]);
+
+
+					count += 1;
+				}
+
+
+
+				if (count > 0) {
+
+
+					////
+
+
+
+					var d;
+
+					for (var x = 0; x < data.length; x++) {
+
+
+
+						d += '<tr>' +
+							'<td>' + data[x].repitencia + '</td>' +
+							'<td>' + data[x].HorasDadas + '</td>' +
+
+							'</tr>';
+
+
+					}
+
+					$("#datosMateria").append(d);
+
+					$('#materiaData').css('display', 'bock');
+					//////
+
+
+					////////
+
+					var barras = google.visualization.arrayToDataTable(datos);
+
+
+
+					var view = new google.visualization.DataView(barras);
+					view.setColumns([0, 1]);
+
+					var options = {
+						title: "Tutorías por Materia",
+						width: 600,
+						height: 400,
+						bar: { groupWidth: "60%" },
+						colors: ['#0dbb6f', '#ffed00'],
+						series: {
+							0: { targetAxisIndex: 0 }
+						},
+						vAxes: {
+
+							0: { title: 'Asisitidas' }
+						}
+
+					};
+
+
+
+					var chart = new google.charts.Bar(document.getElementById("barrasMateria"));
+					chart.draw(barras, google.charts.Bar.convertOptions(options));
+
+
+				} else {
+					$('#barrasMateria').empty();
+					$("#datosM").css('display', 'none');
+					$('#materiaData').css('display', 'none');
+				}
+
+			},
+			error: function () {
+
+			}
+		});
+	}
+	
+</script>
+
+
+
+<script>
+
+	$('#menuReportes li').on('click', function () {
+		var pulsado = $(this).attr('id');
+		var botton = $(this);
+
+		$('#containerDatos').children('div').each(function (i, e) {
+
+		
+			if ($(e).css('display') === 'block' || $(e).css('display') === 'flex' ) {
+
+				$(e).css('display', 'none');
+			}
+		});
+
+		$('#menuReportes li').each(function (i,e) {
+
+
+			if (e.id === pulsado) {
+				
+				i = i + 1;
+
+				
+
+			
+
+				if ($('#r' + i).hasClass('active-menu')) {
+
+					$('#' + pulsado).removeClass('active-menu-p');
+					$('#r' + i).removeClass('active-menu');
+					$('#r' + i).addClass('noactive-menu');
+				} else {
+					$('#' + pulsado).addClass('active-menu-p');
+
+					$('#r'+i).removeClass('noactive-menu');
+					$('#r'+i).addClass('active-menu');
+				}
+		
+
+			} if (e.id !== pulsado) {
+
+
+			
+				i = i + 1;
+			
+					$('#m' + i).removeClass('active-menu-p');
+
+				if ($('#r' + i).hasClass('active-menu')) {
+
+					
+					$('#r' + i).removeClass('active-menu');
+					$('#r' + i).addClass('noactive-menu');
+				}
+				
+			}
+		
+		});
+
+	
+	});
+
+
+</script>

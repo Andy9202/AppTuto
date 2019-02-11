@@ -55,7 +55,8 @@ namespace AppTutorias.Metodos.SuperAdmin.Docente
 
         public List<docente> consultarDocentes()
         {
-            var docentes = from docen in db.DOCENTE
+            var docentes = (from docen in db.DOCENTE
+                      
                              select new
                              {
                                  docen.Nombre,
@@ -64,8 +65,9 @@ namespace AppTutorias.Metodos.SuperAdmin.Docente
                                  docen.ApellidoDos,
                                  docen.Email,
                                  docen.Celular,
-                                 docen.Cedula
-                             };
+                                 docen.Cedula,
+                                 docen.Id_Docente
+                             }).ToList();
 
             List<docente> listaDocente = new List<docente>();
 
@@ -81,6 +83,7 @@ namespace AppTutorias.Metodos.SuperAdmin.Docente
                 docente.Email = consulta.Email;
                 docente.Celular = consulta.Celular;
                 docente.Cedula = consulta.Cedula;
+                docente.Id_Docente = consulta.Id_Docente;
 
                 listaDocente.Add(docente);
             }
@@ -137,13 +140,15 @@ namespace AppTutorias.Metodos.SuperAdmin.Docente
                            docen.ApellidoDos,
                            docen.Email,
                            docen.Celular,
-                           docen.Cedula
+                           docen.Cedula,
+                           docen.Id_Docente
                        };
 
             docente docente = new docente();
 
             foreach (var consulta in doce)
             {
+                docente.Id_Docente = consulta.Id_Docente;
                 docente.Nombre = consulta.Nombre;
                 docente.NombreDos = consulta.NombreDos;
                 docente.Apellido = consulta.Apellido;
@@ -324,6 +329,49 @@ namespace AppTutorias.Metodos.SuperAdmin.Docente
                 docente.Apellido = consulta.Apellido;
                 docente.ApellidoDos = consulta.ApellidoDos;
                 docente.Cedula = consulta.Cedula;
+
+                listaDocente.Add(docente);
+            }
+
+            return listaDocente;
+
+        }
+
+
+        public List<horarioClaseDocente> consultaParaleloMateriaDocente(string CodigoMateria, string CedulaDocente)
+        {
+            var horarioDocente = db.consultaParaleloMateriaDocente(CodigoMateria,CedulaDocente);
+
+            List<horarioClaseDocente> listaParalelo = new List<horarioClaseDocente>();
+
+            foreach (var consulta in horarioDocente)
+            {
+                horarioClaseDocente horarioClaseDocente= new horarioClaseDocente();
+
+                horarioClaseDocente.Docente = consulta.Nombre+' '+consulta.NombreDos+' '+  consulta.Apellido + ' ' + consulta.ApellidoDos;
+                horarioClaseDocente.Paralelo = consulta.Paralelo;
+                horarioClaseDocente.CodigoMateria = consulta.CodigoMeteria;
+                horarioClaseDocente.NombreMateria = consulta.NombreMateria;
+
+                listaParalelo.Add(horarioClaseDocente);
+            }
+
+            return listaParalelo;
+
+        }
+
+        public List<docente> consultaDocenteCoincidencia(string Palabra)
+        {
+            var horarioDocente = db.consultaDocentesCoicidencias(Palabra);
+
+            List<docente> listaDocente = new List<docente>();
+
+            foreach (var consulta in horarioDocente)
+            {
+                docente docente = new docente();
+
+                docente.Nombre = consulta.Docente; 
+                docente.Cedula = consulta.cedula;
 
                 listaDocente.Add(docente);
             }

@@ -25,7 +25,7 @@ namespace AppTutorias.Metodos.SuperAdmin.Estudiante
 
         public List<horarioClaseEstudiante> consultaHorariosEstudainte()
         {
-             var horarioEstudiante = db.horarioClaseEstudiante();
+             var horarioEstudiante = db.horarioClaseEstudiantes();
 
             List<horarioClaseEstudiante> listaHorarioEstudiante = new List<horarioClaseEstudiante>();
 

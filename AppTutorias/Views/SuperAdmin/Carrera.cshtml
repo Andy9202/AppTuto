@@ -18,12 +18,10 @@
 		<ul class="list-inline">
 			<li>
 				<label for="">Facultad</label><br />
-				<select name="facultad" id="codigoFacultadCarrera">
-					<option name="facultad" value="FICA">FICA</option>
-				</select>
+				<select name="facultad" id="codigoFacultadCarrera" onchange="listaCarreras()"></select>
 			</li>
 			<li>
-				<label for="">Codigo Carrera</label><br />
+				<label for="">Código Carrera</label><br />
 				<input type="text" id="codigoCarrera">
 			</li>
 			<li>
@@ -38,6 +36,26 @@
 			</li>
 		</ul>
 	</div>
+	<br />
+	<div style="padding-left:15px">
+		<h4>Selecciona la Facultad para mostrar las carreras</h4>
+		<ul class="list-inline">
+			<li>
+
+			</li>
+			<br />
+			<br />
+			<li>
+				<label for="">Facultad</label><br />
+				<select name="facultad" id="codigoFacultad"></select>
+			</li>
+
+			<li>
+				<input onclick="listaCarreras()" type="button" class="success" value="Consultar" />
+			</li>
+		</ul>
+
+	</div>
 	<div class="table-carrera">
 		<br />
 		<h4>Tabla de Carreras Actuales</h4>
@@ -45,13 +63,13 @@
 			<thead>
 				<tr>
 					<th>Nombre Facultad</th>
-					<th>Cod Carrera</th>
+					<th>Cod. Carrera</th>
 					<th>Nombre Carrera</th>
-					<th>Accion</th>
+					<th>Acción</th>
 				</tr>
 			</thead>
 			<tbody id="tablaCarrera">
-				@foreach (var consulta in Model)
+				@*@foreach (var consulta in Model)
 				{
 					<tr>
 						<td>@consulta.CodigoFacultad</td>
@@ -60,7 +78,7 @@
 						<td><a onclick="confEliminarCarrera(this)" id="@consulta.CodigoCarrera">Eliminar</a></td>
 						<td><a onclick="editarCarrera(this)" id="@consulta.CodigoCarrera">Actualizar</a></td>
 					</tr>
-				}
+				}*@
 
 			</tbody>
 
@@ -74,8 +92,8 @@
 	<ul>
 
 		<li>
-			<label>Codigo Carrera</label>
-			<input type="text" id="codigoCarreraEdit">
+			<label>Codigo Carrera: </label>
+			<label id="codigoCarreraEdit"></label>
 		</li>
 		<li>
 			<label>Nombre Carrera</label>
@@ -107,7 +125,92 @@
 
 </div>
 
+<script>
+	$(function listaFacultad() {
 
+
+		$.ajax({
+			url: "/SuperAdmin/listaFacultad",
+			type: 'post',
+			datatype: 'application/json',
+			//data: form.serialize(),
+			success: function (listaFacultad) {
+
+				$("#codigoFacultadCarrera").empty();
+				$("#codigoFacultad").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaFacultad.length; i++) {
+
+
+					d += '<option ' +
+						'value="' + listaFacultad[i].CodigoFacultad + '" ' +
+						'>' + listaFacultad[i].NombreFacultad + '</option>';
+
+					a++;
+				}
+
+				$("#codigoFacultadCarrera").append(d);
+				$("#codigoFacultad").append(d);
+
+
+			},
+			error: function () {
+
+			}
+		});
+
+	});
+
+
+	function listaCarreras() {
+
+
+		$.ajax({
+			url: "/SuperAdmin/listaCarreraFacultad",
+			type: 'post',
+			data: { CodigoFacultad: $('#codigoFacultad').val() },
+			success: function (listaCarrera) {
+
+
+				$("#tablaCarrera").empty();
+
+
+				var d;
+				var a = 0;
+				for (var i = 0; i < listaCarrera.length; i++) {
+
+
+					d += '<tr>' +
+						'<td>' + listaCarrera[i].CodigoFacultad + '</td>' +
+						'<td>' + listaCarrera[i].CodigoCarrera + '</td>' +
+						'<td>' + listaCarrera[i].NombreCarrera + '</td>' +
+						'<td>' + '<a type="button"  onclick="confEliminarCarrera(this)" id="' + listaCarrera[i].CodigoCarrera + '"></i> Eliminar</a>' + '</td>' +
+						'<td>' + '<a type="button"  onclick="editarCarrera(this)" id="' + listaCarrera[i].CodigoCarrera + '"></i> Actualizar</a>' + '</td>' +
+						'</tr>';
+
+					a++;
+				}
+
+				$("#tablaCarrera").append(d);
+
+	
+
+
+			},
+			error: function () {
+
+			}
+		});
+
+	}
+
+
+
+
+</script>
 <script>
 
 	///CONFIRMACIONES
@@ -251,7 +354,7 @@
 			success: function (carrera) {
 
 				$("#nombreCarreraEdit").val(carrera.NombreCarrera);
-				$("#codigoCarreraEdit").val(carrera.CodigoCarrera);
+				$("#codigoCarreraEdit").text(carrera.CodigoCarrera);
 
 			},
 			error: function () {
@@ -267,7 +370,7 @@
 	function btnCerrarEditCarrera() {
 		$("#editCarrera").css("display", "none");
 		$("#nombreCarreraEdit").val("");
-		$("#codigoCarreraEdit").val("");
+		$("#codigoCarreraEdit").text("");
 	}
 
 
@@ -278,7 +381,7 @@
 
 		var carrera = {
 			NombreCarrera: $("#nombreCarreraEdit").val(),
-			CodigoCarrera: $("#codigoCarreraEdit").val()
+			CodigoCarrera: $("#codigoCarreraEdit").text()
 		};
 
 

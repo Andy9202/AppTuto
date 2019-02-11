@@ -29,18 +29,21 @@ namespace AppTutorias.Metodos.SuperAdmin.Estudiante
         {
             var repiten = from rep in db.REPITENCIA
                              from mate in db.MATERIA
+                             from materia in db.MATERIA
                              from estu in db.ESTUDIANTE
                              where rep.Id_Estudiante == estu.Id_Estudiante
-                             where rep.Id_Materia == mate.Id_Materia
-                             select new
+                             where rep.Id_Materia== mate.Id_Materia
+                              where rep.Id_Materia== mate.Id_Materia
+                          where materia.Id_Materia == mate.Id_Materia
+                          select new
                              {
                                  estu.Nombre,
                                  estu.NombreDos,
                                  estu.Apellido,
                                  estu.ApellidoDos,
                                  estu.Matricula,
-                                 mate.CodigoMeteria,
-                                 mate.NombreMateria,
+                                 materia.CodigoMeteria,
+                                 materia.NombreMateria,
                                  rep.Repitencia
                              };
 

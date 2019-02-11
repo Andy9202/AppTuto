@@ -59,6 +59,8 @@ namespace AppTutorias.Metodos.Docente
                 horarioClaseDocente.Aula = consulta.Descripcion;
                 horarioClaseDocente.Docente = consulta.Nombre + " " + consulta.NombreDos + " " + consulta.Apellido + " " + consulta.ApellidoDos;
                 horarioClaseDocente.Dia = consulta.Dia;
+                horarioClaseDocente.CodigoPeriodo = consulta.CodigoPeriodo;
+                horarioClaseDocente.Periodo = consulta.Periodo;
                 horarioClaseDocente.CodigoModulo = consulta.CodigoModulo;
                 horarioClaseDocente.HoraInicio = consulta.HoraInicio.ToString(@"h\:mm");
                 horarioClaseDocente.HoraFin = consulta.HoraFin.ToString(@"h\:mm");
@@ -85,6 +87,8 @@ namespace AppTutorias.Metodos.Docente
                 horarioClaseDocente.Aula = consulta.Descripcion;
                 horarioClaseDocente.Docente = consulta.Nombre + " " + consulta.NombreDos + " " + consulta.Apellido + " " + consulta.ApellidoDos;
                 horarioClaseDocente.Dia = consulta.Dia;
+                horarioClaseDocente.CodigoPeriodo = consulta.CodigoPeriodo;
+                horarioClaseDocente.Periodo = consulta.Periodo;
                 horarioClaseDocente.CodigoModulo = consulta.CodigoModulo;
                 horarioClaseDocente.HoraInicio = consulta.HoraInicio.ToString(@"h\:mm");
                 horarioClaseDocente.HoraFin = consulta.HoraFin.ToString(@"h\:mm");

@@ -138,7 +138,7 @@
 
 
 
-	
+
 
 		.mensajes {
 			padding: 10px 10px;
@@ -154,9 +154,7 @@
 			}
 
 		.body-modal {
-		
 			height: 600px;
-
 		}
 	}
 
@@ -165,6 +163,7 @@
 			display: flex;
 			justify-content: center;
 		}
+
 		.container-mensajes {
 			margin-top: 20px;
 			width: 800px;
@@ -183,10 +182,10 @@
 		<br />
 		<p>=>Revisa las nuevas solicitudes de estudiantes que necesitan tu ayuda.</p>
 		<p>
-			=>Activa las tutorias la cual crees que estarás disponible,así el estudiante
-			pueda observar en su cronograma y asistir.
+			=>Activa la tutoría que creas que estarás disponible,así el estudiante
+			pueda observar en su cronograma, y asistir.
 		</p>
-		<p>=>Si no dispones de tiempo a la solicitu enviada, envia un mensaje al estudiante.</p>
+		<p>=>Si no dispones de tiempo a la solicitu enviada, envía un mensaje al estudiante respondiendo a su correo.</p>
 	</div>
 	<div class="mensajes">
 		<table>
@@ -216,7 +215,7 @@
 
 	<div class="modal" id="modal">
 		<div class="body-modal">
-			<h4>¿Deseas confirmar la tutoria solicitada?, selecciona una fecha y presiona en confirmar, o cancela.</h4>
+			<h4>¿Deseas confirmar la tutoría solicitada?, selecciona una fecha y presiona en confirmar, o cancelar.</h4>
 			<small style="color:#fff;" id="sId"></small>
 			<div>
 				<ul class="datos-solicitud">
@@ -227,7 +226,7 @@
 						<small id="sMateria"></small>
 					</li>
 					<li>
-						<label>Codigo Materia</label><br />
+						<label>Código Materia</label><br />
 						<small id="sCodigoMateria"></small>
 					</li>
 
@@ -236,11 +235,11 @@
 						<small id="sEstudiante"></small>
 					</li>
 					<li>
-						<label>Matricula</label><br />
+						<label>Matrícula</label><br />
 						<small id="sMatricula"></small>
 					</li>
 					<li>
-						<label>Codigo Perido</label><br />
+						<label>Código Periódo</label><br />
 						<small id="sCodigoPeriodo"></small>
 
 					</li>
@@ -248,13 +247,13 @@
 				</ul>
 				<ul class="datos-solicitud">
 					<li>
-						<label>Periodo</label><br />
+						<label>Periódo</label><br />
 						<small id="sPeriodo"></small>
 
 					</li>
 
 					<li>
-						<label>Modulo</label><br />
+						<label>Módulo</label><br />
 						<small id="sModulo"></small>
 					</li>
 
@@ -264,7 +263,7 @@
 					</li>
 					<li>
 						<label>Aula/Oficina</label><br />
-						<input id="aulaConf" placeholder="Lugar"/>
+						<input id="aulaConf" placeholder="Lugar" />
 					</li>
 					<li>
 						<label>Fecha</label><br />
@@ -286,13 +285,17 @@
 
 </div>
 
+
 <script>
+
+
+	
 
 	function confirmaTutoria(id_notificacion, materia, codigoMateria, estudiante, matricula, modulo, hora, fecha) {
 
 
 
-		if ($("#"+id_notificacion).text() === "NO") {
+		if ($("#" + id_notificacion).text() === "NO") {
 			$('#modal').addClass('active-modal');
 
 			$('#sMateria').text(materia);
@@ -359,7 +362,7 @@
 			CodigoPeriodo: $("#sPeriodo").text(),
 			Aula: $("#aulaConf").val(),
 			EstadoObligatorio: confirma
-			
+
 
 
 		};
@@ -375,15 +378,19 @@
 			url: "/Docente/confirmaSolicitud",
 			data: objeto,
 			type: "POST",
-			success: function (listaSolicitudes) {
+			success: function (data) {
 
+
+				var listaSolicitudes = data.ListaSolicitudes;
+
+		
 				$("#tablaNoti").empty();
 
 				var d;
 
 				for (var i = 0; i < listaSolicitudes.length; i++) {
 
-					var datos = "'" + listaSolicitudes[i].Id_Solicitud + "','" + listaSolicitudes[i].NombreMateria + "','" + listaSolicitudes[i].CodigoMateria + "','" + listaSolicitudes[i].Estudiante + "','" + listaSolicitudes[i].Matricula + "','" + listaSolicitudes[i].CodigoModulo + "','" + listaSolicitudes[i].Hora + "'";
+					var datos = "'" + listaSolicitudes[i].Id_Solicitud + "','" + listaSolicitudes[i].NombreMateria + "','" + listaSolicitudes[i].CodigoMateria + "','" + listaSolicitudes[i].Estudiante + "','" + listaSolicitudes[i].Matricula + "','" + listaSolicitudes[i].CodigoModulo + "','" + listaSolicitudes[i].Hora  + "','" + listaSolicitudes[i].Fecha + "'";
 
 					d += '<tr onclick="confirmaTutoria(' + datos + ')">' +
 						'<td></td>' +
@@ -394,6 +401,9 @@
 				}
 
 				$("#tablaNoti").append(d);
+
+				MensajesDocente();
+		
 			},
 			error: function () {
 

@@ -105,6 +105,31 @@ $("#horarioEstudiante").on('click', () => {
 	});
 });
 
+//reportes
+$("#reportes").on('click', () => {
+	mostrarLoading();
+
+	$.ajax({
+		url: "/Estudiante/Reportes",
+		type: 'post',
+		data: {},
+		success: function (data) {
+
+
+
+			$("#app").html(data);
+
+			$("#menu").removeClass("active-menu");
+			$("#menu").addClass("inactive-menu");
+
+
+
+		},
+		error: function () {
+
+		}
+	});
+});
 
 
 //modal de carga
